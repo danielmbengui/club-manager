@@ -2,7 +2,16 @@
 import React from "react";
 import * as _Builtin from "./_Builtin";
 
-export function HomePage({ as: _Component = _Builtin.Block }) {
+export function LoginPage({
+  as: _Component = _Builtin.Block,
+  buttonConnectProps = {},
+  inputEmailProps = {},
+  inputPasswordProps = {},
+  errorMessage = "Le nom d'utilisateur et/ou le mot de passe est incorrect !",
+  copyrightPlayPad = "© 2024 PlayPad Sàrl",
+  showError = false,
+  onSubmitForm = {},
+}) {
   return (
     <_Component className="page-wrapper home" tag="div">
       <_Builtin.HtmlEmbed
@@ -52,9 +61,10 @@ export function HomePage({ as: _Component = _Builtin.Block }) {
                     className="login7_form"
                     name="wf-form-login"
                     data-name="login"
-                    method="get"
+                    method="post"
                     wized="login"
                     id="wf-form-login"
+                    {...onSubmitForm}
                   >
                     <_Builtin.Block className="form_field-wrapper" tag="div">
                       <_Builtin.Block className="form_field-label" tag="div">
@@ -62,15 +72,16 @@ export function HomePage({ as: _Component = _Builtin.Block }) {
                       </_Builtin.Block>
                       <_Builtin.FormTextInput
                         className="form_input"
-                        autoFocus={false}
-                        maxLength={256}
                         name="email-2"
+                        maxLength={256}
                         data-name="Email 2"
-                        type="email"
                         disabled={false}
+                        type="email"
                         required={true}
+                        autoFocus={false}
                         wized="email"
                         id="email-2"
+                        {...inputEmailProps}
                       />
                     </_Builtin.Block>
                     <_Builtin.Block className="form_field-wrapper" tag="div">
@@ -81,50 +92,43 @@ export function HomePage({ as: _Component = _Builtin.Block }) {
                       </_Builtin.Block>
                       <_Builtin.FormTextInput
                         className="form_input"
-                        autoFocus={false}
-                        maxLength={256}
                         name="password-2"
+                        maxLength={256}
                         data-name="Password 2"
-                        type="password"
                         disabled={false}
+                        type="password"
                         required={true}
+                        autoFocus={false}
                         wized="password"
                         id="password-2"
+                        {...inputPasswordProps}
                       />
                     </_Builtin.Block>
-                    <_Builtin.Block
-                      className="error_message"
-                      tag="div"
-                      wized="login_error_box"
-                      wized-cloak=""
-                    >
-                      <_Builtin.Block tag="div" wized="error_message">
-                        {"error_message"}
+                    {showError ? (
+                      <_Builtin.Block
+                        className="error_message"
+                        tag="div"
+                        wized="login_error_box"
+                        wized-cloak=""
+                      >
+                        <_Builtin.Block tag="div" wized="error_message">
+                          {errorMessage}
+                        </_Builtin.Block>
                       </_Builtin.Block>
-                    </_Builtin.Block>
-                    <_Builtin.Block
-                      className="form_flex loader"
-                      tag="div"
-                      wized="login_loader"
-                      wized-cloak=""
-                    >
-                      <_Builtin.NotSupported _atom="Animation" />
-                      <_Builtin.Block tag="div">
-                        {"patientez svp"}
-                      </_Builtin.Block>
-                    </_Builtin.Block>
+                    ) : null}
                     <_Builtin.Grid
                       className="form-button-wrapper"
                       id="w-node-be3c4912-108d-279b-ad6d-427042a3184e-42a3182d"
                       tag="div"
                     >
                       <_Builtin.FormButton
-                        className="button max-width-full login"
-                        id="w-node-be3c4912-108d-279b-ad6d-427042a3184f-42a3182d"
+                        className="button max-width-full login w-node-be3c4912-108d-279b-ad6d-427042a3184f-42a3182d"
+                        id="button-connect"
                         type="submit"
                         value="Se Connecter"
                         data-wait="Patientez svp..."
                         wized="login_submit_btn"
+                        {...buttonConnectProps}
                       />
                     </_Builtin.Grid>
                   </_Builtin.FormForm>
@@ -143,7 +147,7 @@ export function HomePage({ as: _Component = _Builtin.Block }) {
             </_Builtin.Block>
             <_Builtin.Block className="login7_footer" tag="div">
               <_Builtin.Block className="text-size-small" tag="div">
-                {"© 2024 PlayPad Sàrl"}
+                {copyrightPlayPad}
               </_Builtin.Block>
             </_Builtin.Block>
           </_Builtin.Block>

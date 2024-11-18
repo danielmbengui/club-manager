@@ -3,17 +3,58 @@ import React from "react";
 import * as _Builtin from "./_Builtin";
 import * as _interactions from "./interactions";
 import { GlobalStyles } from "./GlobalStyles";
-import { Sidebar } from "./Sidebar";
+import { SidebarDevlink } from "./SidebarDevlink";
 import { TopBarRightContent } from "./TopBarRightContent";
 
 const _interactionsData = JSON.parse(
-  '{"events":{"e-9":{"id":"e-9","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"1bf7d8b1-45bf-7ee7-4978-3821b784e19b","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"1bf7d8b1-45bf-7ee7-4978-3821b784e19b","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1684414757890},"e-7":{"id":"e-7","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-6"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"1bf7d8b1-45bf-7ee7-4978-3821b784e19d","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"1bf7d8b1-45bf-7ee7-4978-3821b784e19d","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1684414757890},"e-16":{"id":"e-16","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-17"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"65edcb06e424209e95092c7e|1fc86f64-e14b-b0d7-6c3f-bb9669afcfbf","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"65edcb06e424209e95092c7e|1fc86f64-e14b-b0d7-6c3f-bb9669afcfbf","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1706887097380},"e-18":{"id":"e-18","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-19"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"65edcb06e424209e95092c7e|1fc86f64-e14b-b0d7-6c3f-bb9669afcfc1","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"65edcb06e424209e95092c7e|1fc86f64-e14b-b0d7-6c3f-bb9669afcfc1","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1706887097380},"e-20":{"id":"e-20","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-21"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"65edcb06e424209e95092c82|1fc86f64-e14b-b0d7-6c3f-bb9669afcfbf","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"65edcb06e424209e95092c82|1fc86f64-e14b-b0d7-6c3f-bb9669afcfbf","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1708104615453},"e-22":{"id":"e-22","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-23"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"65edcb06e424209e95092c82|1fc86f64-e14b-b0d7-6c3f-bb9669afcfc1","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"65edcb06e424209e95092c82|1fc86f64-e14b-b0d7-6c3f-bb9669afcfc1","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1708104615453},"e-24":{"id":"e-24","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-25"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"65edcb06e424209e95092c83|1fc86f64-e14b-b0d7-6c3f-bb9669afcfbf","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"65edcb06e424209e95092c83|1fc86f64-e14b-b0d7-6c3f-bb9669afcfbf","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1708104787165},"e-26":{"id":"e-26","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-27"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"65edcb06e424209e95092c83|1fc86f64-e14b-b0d7-6c3f-bb9669afcfc1","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"65edcb06e424209e95092c83|1fc86f64-e14b-b0d7-6c3f-bb9669afcfc1","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1708104787165},"e-160":{"id":"e-160","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-161"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"6650fca0bdd809151a219ff1|1fc86f64-e14b-b0d7-6c3f-bb9669afcfbf","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"6650fca0bdd809151a219ff1|1fc86f64-e14b-b0d7-6c3f-bb9669afcfbf","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1716583585383},"e-162":{"id":"e-162","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-163"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"6650fca0bdd809151a219ff1|1fc86f64-e14b-b0d7-6c3f-bb9669afcfc1","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"6650fca0bdd809151a219ff1|1fc86f64-e14b-b0d7-6c3f-bb9669afcfc1","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1716583585383}},"actionLists":{"a-8":{"id":"a-8","title":"Topbar 3 Search [Close]","actionItemGroups":[{"actionItems":[{"id":"a-8-n","actionTypeId":"STYLE_OPACITY","config":{"delay":0,"easing":"outQuad","duration":200,"target":{"selector":".topbar3_search-tablet","selectorGuids":["46f22993-c095-a3c8-9aa4-d6a267c87fcd"]},"value":0,"unit":""}}]},{"actionItems":[{"id":"a-8-n-2","actionTypeId":"GENERAL_DISPLAY","config":{"delay":0,"easing":"","duration":0,"target":{"selector":".topbar3_search-tablet","selectorGuids":["46f22993-c095-a3c8-9aa4-d6a267c87fcd"]},"value":"none"}}]}],"useFirstGroupAsInitialState":false,"createdOn":1684414258357}},"site":{"mediaQueries":[{"key":"main","min":992,"max":10000},{"key":"medium","min":768,"max":991},{"key":"small","min":480,"max":767},{"key":"tiny","min":0,"max":479}]}}'
+  '{"events":{"e-9":{"id":"e-9","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-304"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"1bf7d8b1-45bf-7ee7-4978-3821b784e19b","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"1bf7d8b1-45bf-7ee7-4978-3821b784e19b","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1684414757890},"e-7":{"id":"e-7","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-306"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"1bf7d8b1-45bf-7ee7-4978-3821b784e19d","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"1bf7d8b1-45bf-7ee7-4978-3821b784e19d","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1684414757890},"e-16":{"id":"e-16","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-17"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"65edcb06e424209e95092c7e|1fc86f64-e14b-b0d7-6c3f-bb9669afcfbf","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"65edcb06e424209e95092c7e|1fc86f64-e14b-b0d7-6c3f-bb9669afcfbf","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1706887097380},"e-18":{"id":"e-18","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-19"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"65edcb06e424209e95092c7e|1fc86f64-e14b-b0d7-6c3f-bb9669afcfc1","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"65edcb06e424209e95092c7e|1fc86f64-e14b-b0d7-6c3f-bb9669afcfc1","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1706887097380},"e-20":{"id":"e-20","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-21"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"65edcb06e424209e95092c82|1fc86f64-e14b-b0d7-6c3f-bb9669afcfbf","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"65edcb06e424209e95092c82|1fc86f64-e14b-b0d7-6c3f-bb9669afcfbf","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1708104615453},"e-22":{"id":"e-22","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-23"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"65edcb06e424209e95092c82|1fc86f64-e14b-b0d7-6c3f-bb9669afcfc1","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"65edcb06e424209e95092c82|1fc86f64-e14b-b0d7-6c3f-bb9669afcfc1","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1708104615453},"e-24":{"id":"e-24","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-25"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"65edcb06e424209e95092c83|1fc86f64-e14b-b0d7-6c3f-bb9669afcfbf","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"65edcb06e424209e95092c83|1fc86f64-e14b-b0d7-6c3f-bb9669afcfbf","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1708104787165},"e-26":{"id":"e-26","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-27"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"65edcb06e424209e95092c83|1fc86f64-e14b-b0d7-6c3f-bb9669afcfc1","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"65edcb06e424209e95092c83|1fc86f64-e14b-b0d7-6c3f-bb9669afcfc1","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1708104787165},"e-160":{"id":"e-160","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-161"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"6650fca0bdd809151a219ff1|1fc86f64-e14b-b0d7-6c3f-bb9669afcfbf","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"6650fca0bdd809151a219ff1|1fc86f64-e14b-b0d7-6c3f-bb9669afcfbf","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1716583585383},"e-162":{"id":"e-162","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-163"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"6650fca0bdd809151a219ff1|1fc86f64-e14b-b0d7-6c3f-bb9669afcfc1","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"6650fca0bdd809151a219ff1|1fc86f64-e14b-b0d7-6c3f-bb9669afcfc1","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1716583585383},"e-204":{"id":"e-204","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-36","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-205"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"65edcb06e424209e95092c80|4d7cab3d-9000-1d9f-aefe-022edc3ae44f","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"65edcb06e424209e95092c80|4d7cab3d-9000-1d9f-aefe-022edc3ae44f","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1727470895089},"e-206":{"id":"e-206","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-36","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-207"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"65edcb06e424209e95092c80|4d7cab3d-9000-1d9f-aefe-022edc3ae451","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"65edcb06e424209e95092c80|4d7cab3d-9000-1d9f-aefe-022edc3ae451","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1727470895089},"e-258":{"id":"e-258","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-305"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"3bf6ef48-906c-6954-3b84-47cb5cf21b00","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"3bf6ef48-906c-6954-3b84-47cb5cf21b00","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1727734053325},"e-260":{"id":"e-260","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-307"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"3bf6ef48-906c-6954-3b84-47cb5cf21b02","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"3bf6ef48-906c-6954-3b84-47cb5cf21b02","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1727734053325},"e-274":{"id":"e-274","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-275"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"cd5dc5ca-f5d4-aeec-6107-f3c88afbc67c","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"cd5dc5ca-f5d4-aeec-6107-f3c88afbc67c","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1727736126886},"e-276":{"id":"e-276","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-277"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"cd5dc5ca-f5d4-aeec-6107-f3c88afbc67e","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"cd5dc5ca-f5d4-aeec-6107-f3c88afbc67e","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1727736126886},"e-298":{"id":"e-298","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-305"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"0f103e9a-02fc-bbae-2ea7-466330996187","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"0f103e9a-02fc-bbae-2ea7-466330996187","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1727736965141},"e-300":{"id":"e-300","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-307"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"0f103e9a-02fc-bbae-2ea7-466330996189","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"0f103e9a-02fc-bbae-2ea7-466330996189","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1727736965141},"e-308":{"id":"e-308","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-309"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"56d276ce-6ef8-b699-75b4-3571b6bf318f","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"56d276ce-6ef8-b699-75b4-3571b6bf318f","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1727737404364},"e-310":{"id":"e-310","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-8","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-311"}},"mediaQueries":["medium","small","tiny"],"target":{"id":"56d276ce-6ef8-b699-75b4-3571b6bf3191","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"56d276ce-6ef8-b699-75b4-3571b6bf3191","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1727737404364}},"actionLists":{"a-8":{"id":"a-8","title":"Topbar 3 Search [Close]","actionItemGroups":[{"actionItems":[{"id":"a-8-n","actionTypeId":"STYLE_OPACITY","config":{"delay":0,"easing":"outQuad","duration":200,"target":{"selector":".topbar3_search-tablet","selectorGuids":["46f22993-c095-a3c8-9aa4-d6a267c87fcd"]},"value":0,"unit":""}}]},{"actionItems":[{"id":"a-8-n-2","actionTypeId":"GENERAL_DISPLAY","config":{"delay":0,"easing":"","duration":0,"target":{"selector":".topbar3_search-tablet","selectorGuids":["46f22993-c095-a3c8-9aa4-d6a267c87fcd"]},"value":"none"}}]}],"useFirstGroupAsInitialState":false,"createdOn":1684414258357},"a-36":{"id":"a-36","title":"Topbar 3 Search [Close] 2","actionItemGroups":[{"actionItems":[{"id":"a-36-n","actionTypeId":"STYLE_OPACITY","config":{"delay":0,"easing":"outQuad","duration":200,"target":{"selector":".topbar3_search-tablet","selectorGuids":["46f22993-c095-a3c8-9aa4-d6a267c87fcd"]},"value":0,"unit":""}}]},{"actionItems":[{"id":"a-36-n-2","actionTypeId":"GENERAL_DISPLAY","config":{"delay":0,"easing":"","duration":0,"target":{"selector":".topbar3_search-tablet","selectorGuids":["46f22993-c095-a3c8-9aa4-d6a267c87fcd"]},"value":"none"}}]}],"useFirstGroupAsInitialState":false,"createdOn":1684414258357}},"site":{"mediaQueries":[{"key":"main","min":992,"max":10000},{"key":"medium","min":768,"max":991},{"key":"small","min":480,"max":767},{"key":"tiny","min":0,"max":479}]}}'
 );
 
 export function DashboardPage({
   as: _Component = _Builtin.Block,
-  name,
   titlePage = "Tableau de Bord",
+  clubName = "PlayPad Test",
+  clubLogo = "https://cdn.prod.website-files.com/64ad6274d8c64f92f123999e/65da7ead8c280d989d9bd5d3_ball-logo.png",
+  disconnectButtonProps,
+  styleDashboard = {},
+
+  linkDashboard = {
+    href: "/dashboard",
+  },
+
+  linkManage = {
+    href: "/manage",
+  },
+
+  linkCalendar = {
+    href: "/calendar",
+  },
+
+  linkBilling = {
+    href: "/billing",
+  },
+
+  linkClub = {
+    href: "/club",
+  },
+
+  linkSettings = {
+    href: "/settings",
+  },
+
+  loader,
+  componentMonth,
+  componentYear,
+  nBookingsPlayPad = "0",
+  nBookingsTotal = "0",
+  revenuesTotal = "0",
+  rateBookingPlayPad = "0 %",
+  componentProgress,
+  isLoading = true,
+  isNotLoading = true,
+  nBookingslub = "0",
+  revenuesClub = "0",
+  revenuesPlayPad = "0",
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -28,7 +69,16 @@ export function DashboardPage({
           />
           <_Builtin.Block className="shell3_wrapper" tag="div">
             <_Builtin.Block className="shell3_sidebar-wrapper" tag="div">
-              <Sidebar />
+              <SidebarDevlink
+                disconnectButtonProps={disconnectButtonProps}
+                linkDashboard={linkDashboard}
+                styleDashboard={styleDashboard}
+                linkManage={linkManage}
+                linkCalendar={linkCalendar}
+                linkBilling={linkBilling}
+                linkClub={linkClub}
+                linkSettings={linkSettings}
+              />
             </_Builtin.Block>
             <_Builtin.Block className="shell3_main-wrapper" tag="main">
               <_Builtin.Block
@@ -47,7 +97,7 @@ export function DashboardPage({
                     />
                     <_Builtin.Block tag="div">{titlePage}</_Builtin.Block>
                   </_Builtin.Block>
-                  <TopBarRightContent />
+                  <TopBarRightContent clubName={clubName} clubLogo={clubLogo} />
                 </_Builtin.Block>
                 <_Builtin.Block className="topbar3_search-tablet" tag="div">
                   <_Builtin.Block className="topbar3_search-wrapper" tag="div">
@@ -143,188 +193,30 @@ export function DashboardPage({
                                 <_Builtin.Block className="subheader" tag="div">
                                   {"Mois :"}
                                 </_Builtin.Block>
-                                <_Builtin.FormWrapper className="form_dashboard">
-                                  <_Builtin.FormForm
-                                    className="dashboard_form"
-                                    name="wf-form-"
-                                    method="get"
-                                  >
-                                    <_Builtin.FormSelect
-                                      className="form_input is-select-input is-dashboard"
-                                      name="revenue_month-2"
-                                      data-name="Revenue Month 2"
-                                      required={false}
-                                      multiple={false}
-                                      wized="stats_select_month"
-                                      options={[
-                                        {
-                                          t: "Tous",
-                                          v: "--",
-                                        },
-                                        {
-                                          t: "Janvier",
-                                          v: "1",
-                                        },
-                                        {
-                                          t: "Février",
-                                          v: "2",
-                                        },
-                                        {
-                                          t: "Mars",
-                                          v: "3",
-                                        },
-                                        {
-                                          t: "Avril",
-                                          v: "4",
-                                        },
-                                        {
-                                          t: "Mai",
-                                          v: "5",
-                                        },
-                                        {
-                                          t: "Juin",
-                                          v: "6",
-                                        },
-                                        {
-                                          t: "Juillet",
-                                          v: "7",
-                                        },
-                                        {
-                                          t: "Août",
-                                          v: "8",
-                                        },
-                                        {
-                                          t: "Septembre",
-                                          v: "9",
-                                        },
-                                        {
-                                          t: "Octobre",
-                                          v: "10",
-                                        },
-                                        {
-                                          t: "Novembre",
-                                          v: "11",
-                                        },
-                                        {
-                                          t: "Décembre",
-                                          v: "Another option",
-                                        },
-                                      ]}
-                                    />
-                                    <_Builtin.NotSupported _atom="DOM" />
-                                  </_Builtin.FormForm>
-                                  <_Builtin.FormSuccessMessage>
-                                    <_Builtin.Block tag="div">
-                                      {
-                                        "Thank you! Your submission has been received!"
-                                      }
-                                    </_Builtin.Block>
-                                  </_Builtin.FormSuccessMessage>
-                                  <_Builtin.FormErrorMessage>
-                                    <_Builtin.Block tag="div">
-                                      {
-                                        "Oops! Something went wrong while submitting the form."
-                                      }
-                                    </_Builtin.Block>
-                                  </_Builtin.FormErrorMessage>
-                                </_Builtin.FormWrapper>
+                                <_Builtin.Block
+                                  className="form_dashboard devlink"
+                                  tag="div"
+                                >
+                                  <_Builtin.Block tag="div">
+                                    {componentMonth}
+                                  </_Builtin.Block>
+                                </_Builtin.Block>
                               </_Builtin.Block>
                               <_Builtin.Block className="header-flex" tag="div">
                                 <_Builtin.Block className="subheader" tag="div">
                                   {"Année :"}
                                 </_Builtin.Block>
-                                <_Builtin.FormWrapper className="form_dashboard">
-                                  <_Builtin.FormForm
-                                    className="dashboard_form"
-                                    name="wf-form-"
-                                    method="get"
-                                  >
-                                    <_Builtin.FormSelect
-                                      className="form_input is-select-input is-dashboard"
-                                      name="year-2"
-                                      data-name="Year 2"
-                                      required={false}
-                                      multiple={false}
-                                      wized="stats_select_year"
-                                      options={[
-                                        {
-                                          t: "2024",
-                                          v: "2024",
-                                        },
-                                        {
-                                          t: "2023",
-                                          v: "2023",
-                                        },
-                                      ]}
-                                    />
-                                    <_Builtin.NotSupported _atom="DOM" />
-                                  </_Builtin.FormForm>
-                                  <_Builtin.FormSuccessMessage>
-                                    <_Builtin.Block tag="div">
-                                      {
-                                        "Thank you! Your submission has been received!"
-                                      }
-                                    </_Builtin.Block>
-                                  </_Builtin.FormSuccessMessage>
-                                  <_Builtin.FormErrorMessage>
-                                    <_Builtin.Block tag="div">
-                                      {
-                                        "Oops! Something went wrong while submitting the form."
-                                      }
-                                    </_Builtin.Block>
-                                  </_Builtin.FormErrorMessage>
-                                </_Builtin.FormWrapper>
-                              </_Builtin.Block>
-                              <_Builtin.Block
-                                className="subheader sites"
-                                tag="div"
-                              >
-                                {"Choisissez un sites :"}
-                              </_Builtin.Block>
-                              <_Builtin.FormWrapper className="form_dashboard sites">
-                                <_Builtin.FormForm
-                                  className="dashboard_form"
-                                  name="wf-form-"
-                                  method="get"
+                                <_Builtin.Block
+                                  className="form_dashboard devlink"
+                                  tag="div"
                                 >
-                                  <_Builtin.FormSelect
-                                    className="form_input is-select-input is-dashboard sites"
-                                    name="year-2"
-                                    data-name="Year 2"
-                                    required={false}
-                                    multiple={false}
-                                    wized="stats_select_sites"
-                                    id="year-2"
-                                    options={[
-                                      {
-                                        t: "2024",
-                                        v: "2024",
-                                      },
-                                      {
-                                        t: "2023",
-                                        v: "2023",
-                                      },
-                                    ]}
-                                  />
-                                  <_Builtin.NotSupported _atom="DOM" />
-                                </_Builtin.FormForm>
-                                <_Builtin.FormSuccessMessage>
                                   <_Builtin.Block tag="div">
-                                    {
-                                      "Thank you! Your submission has been received!"
-                                    }
+                                    {componentYear}
                                   </_Builtin.Block>
-                                </_Builtin.FormSuccessMessage>
-                                <_Builtin.FormErrorMessage>
-                                  <_Builtin.Block tag="div">
-                                    {
-                                      "Oops! Something went wrong while submitting the form."
-                                    }
-                                  </_Builtin.Block>
-                                </_Builtin.FormErrorMessage>
-                              </_Builtin.FormWrapper>
+                                </_Builtin.Block>
+                              </_Builtin.Block>
                               <_Builtin.Link
-                                className="button is-xsmall"
+                                className="button is-xsmall update"
                                 button={true}
                                 wized="getStats_btn"
                                 block=""
@@ -341,6 +233,7 @@ export function DashboardPage({
                             >
                               <_Builtin.Block
                                 className="stat1_item box-shadow"
+                                id="w-node-_1e6832ce-d2fa-b3fb-7320-66be712db2a7-b784e17d"
                                 tag="div"
                               >
                                 <_Builtin.Block
@@ -372,13 +265,28 @@ export function DashboardPage({
                                   className="stat1_item-content-bottom"
                                   tag="div"
                                 >
-                                  <_Builtin.Block
-                                    className="stats_box-number"
-                                    tag="div"
-                                    wized="dashboard_reservations"
-                                  >
-                                    {"0"}
-                                  </_Builtin.Block>
+                                  {isNotLoading ? (
+                                    <_Builtin.Block
+                                      className="stats_box-number"
+                                      tag="div"
+                                      wized="dashboard_reservations"
+                                    >
+                                      {nBookingsPlayPad}
+                                    </_Builtin.Block>
+                                  ) : null}
+                                  {isLoading ? (
+                                    <_Builtin.Block
+                                      className="div-block-5"
+                                      tag="div"
+                                    >
+                                      <_Builtin.Block
+                                        className="block-progress small"
+                                        tag="div"
+                                      >
+                                        {componentProgress}
+                                      </_Builtin.Block>
+                                    </_Builtin.Block>
+                                  ) : null}
                                   <_Builtin.Block
                                     className="stat1_item-badge"
                                     tag="div"
@@ -390,33 +298,34 @@ export function DashboardPage({
                                       {"0%"}
                                     </_Builtin.Block>
                                   </_Builtin.Block>
-                                  <_Builtin.NotSupported _atom="Animation" />
                                 </_Builtin.Block>
                               </_Builtin.Block>
                               <_Builtin.Block
                                 className="stat1_item box-shadow"
-                                id="w-node-_1bf7d8b1-45bf-7ee7-4978-3821b784e1de-b784e17d"
                                 tag="div"
                               >
-                                <_Builtin.Block tag="div">
+                                <_Builtin.Block
+                                  className="margin-bottom"
+                                  tag="div"
+                                >
                                   <_Builtin.Block
                                     className="stat1_item-content-top"
                                     tag="div"
                                   >
                                     <_Builtin.Block
-                                      className="stats_icon-box"
+                                      className="stats_icon-box playpad"
                                       tag="div"
                                     >
                                       <_Builtin.HtmlEmbed
                                         className="stats_icon"
-                                        value="%3Csvg%20width%3D%22auto%22%20height%3D%22auto%22%20viewBox%3D%220%200%2011%2010%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M1.78695%203.44484H1.91891C2.42693%203.44484%202.84258%203.8605%202.84258%204.36852V8.98688C2.84258%209.49489%202.42693%209.91055%201.91891%209.91055H1.78695C1.27893%209.91055%200.863281%209.49489%200.863281%208.98688V4.36852C0.863281%203.8605%201.27893%203.44484%201.78695%203.44484ZM5.48164%200.673828C5.98966%200.673828%206.40531%201.08948%206.40531%201.5975V8.98688C6.40531%209.49489%205.98966%209.91055%205.48164%209.91055C4.97362%209.91055%204.55797%209.49489%204.55797%208.98688V1.5975C4.55797%201.08948%204.97362%200.673828%205.48164%200.673828ZM9.17633%205.95195C9.68435%205.95195%2010.1%206.36761%2010.1%206.87563V8.98688C10.1%209.49489%209.68435%209.91055%209.17633%209.91055C8.66831%209.91055%208.25266%209.49489%208.25266%208.98688V6.87563C8.25266%206.36761%208.66831%205.95195%209.17633%205.95195Z%22%20fill%3D%22currentColor%22%2F%3E%0A%3C%2Fsvg%3E"
+                                        value="%3Csvg%20width%3D%22auto%22%20height%3D%22auto%22%20viewBox%3D%220%200%2013%2014%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M9.89688%205.78345H6.72246C6.47456%205.78345%206.26897%205.57786%206.26897%205.32996C6.26897%205.08205%206.47456%204.87647%206.72246%204.87647H9.89688C10.0172%204.87647%2010.1325%204.92425%2010.2175%205.00929C10.3026%205.09434%2010.3504%205.20968%2010.3504%205.32996C10.3504%205.45023%2010.3026%205.56558%2010.2175%205.65062C10.1325%205.73567%2010.0172%205.78345%209.89688%205.78345ZM3.54804%206.24298C3.43316%206.24298%203.31828%206.20066%203.22758%206.10996L2.77409%205.65647C2.59874%205.48112%202.59874%205.19089%202.77409%205.01554C2.94944%204.84019%203.23967%204.84019%203.41502%205.01554L3.54804%205.14856L4.58804%204.10856C4.76339%203.93321%205.05362%203.93321%205.22897%204.10856C5.40432%204.28391%205.40432%204.57414%205.22897%204.74949L3.86851%206.10996C3.78354%206.19503%203.66828%206.24288%203.54804%206.24298ZM9.89688%2010.016H6.72246C6.47456%2010.016%206.26897%209.81042%206.26897%209.56252C6.26897%209.31461%206.47456%209.10903%206.72246%209.10903H9.89688C10.0172%209.10903%2010.1325%209.15681%2010.2175%209.24185C10.3026%209.3269%2010.3504%209.44224%2010.3504%209.56252C10.3504%209.68279%2010.3026%209.79813%2010.2175%209.88318C10.1325%209.96823%2010.0172%2010.016%209.89688%2010.016ZM3.54804%2010.4755C3.43316%2010.4755%203.31828%2010.4332%203.22758%2010.3425L2.77409%209.88903C2.59874%209.71368%202.59874%209.42345%202.77409%209.2481C2.94944%209.07275%203.23967%209.07275%203.41502%209.2481L3.54804%209.38112L4.58804%208.34112C4.76339%208.16577%205.05362%208.16577%205.22897%208.34112C5.40432%208.51647%205.40432%208.8067%205.22897%208.98205L3.86851%2010.3425C3.78354%2010.4276%203.66828%2010.4754%203.54804%2010.4755Z%22%20fill%3D%22currentColor%22%2F%3E%0A%3Cpath%20d%3D%22M8.312%2013.7222H4.68409C1.40084%2013.7222%20-0.00195312%2012.3194%20-0.00195312%209.03612V5.40821C-0.00195312%202.12496%201.40084%200.722168%204.68409%200.722168H8.312C11.5953%200.722168%2012.998%202.12496%2012.998%205.40821V9.03612C12.998%2012.3194%2011.5953%2013.7222%208.312%2013.7222ZM4.68409%201.62914C1.89665%201.62914%200.905024%202.62077%200.905024%205.40821V9.03612C0.905024%2011.8236%201.89665%2012.8152%204.68409%2012.8152H8.312C11.0994%2012.8152%2012.0911%2011.8236%2012.0911%209.03612V5.40821C12.0911%202.62077%2011.0994%201.62914%208.312%201.62914H4.68409Z%22%20fill%3D%22currentColor%22%2F%3E%0A%3C%2Fsvg%3E"
                                       />
                                     </_Builtin.Block>
                                     <_Builtin.Block
                                       className=" stats_text-box"
                                       tag="div"
                                     >
-                                      {"Revenus totale"}
+                                      {"Réservations Club"}
                                     </_Builtin.Block>
                                   </_Builtin.Block>
                                 </_Builtin.Block>
@@ -424,6 +333,28 @@ export function DashboardPage({
                                   className="stat1_item-content-bottom"
                                   tag="div"
                                 >
+                                  {isNotLoading ? (
+                                    <_Builtin.Block
+                                      className="stats_box-number"
+                                      tag="div"
+                                      wized="dashboard_reservations"
+                                    >
+                                      {nBookingslub}
+                                    </_Builtin.Block>
+                                  ) : null}
+                                  {isLoading ? (
+                                    <_Builtin.Block
+                                      className="div-block-5"
+                                      tag="div"
+                                    >
+                                      <_Builtin.Block
+                                        className="block-progress small"
+                                        tag="div"
+                                      >
+                                        {componentProgress}
+                                      </_Builtin.Block>
+                                    </_Builtin.Block>
+                                  ) : null}
                                   <_Builtin.Block
                                     className="stat1_item-badge"
                                     tag="div"
@@ -435,18 +366,11 @@ export function DashboardPage({
                                       {"0%"}
                                     </_Builtin.Block>
                                   </_Builtin.Block>
-                                  <_Builtin.Block
-                                    className="stats_box-number"
-                                    tag="div"
-                                    wized="dashboard_revenue"
-                                  >
-                                    {"0"}
-                                  </_Builtin.Block>
-                                  <_Builtin.NotSupported _atom="Animation" />
                                 </_Builtin.Block>
                               </_Builtin.Block>
                               <_Builtin.Block
                                 className="stat1_item box-shadow"
+                                id="w-node-_834ef077-8613-3b45-8a13-5c0973218ecd-b784e17d"
                                 tag="div"
                               >
                                 <_Builtin.Block
@@ -463,7 +387,7 @@ export function DashboardPage({
                                     >
                                       <_Builtin.HtmlEmbed
                                         className="stats_icon"
-                                        value="%3Csvg%20width%3D%22auto%22%20height%3D%22auto%22%20viewBox%3D%220%200%2013%2014%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M9.89688%205.78345H6.72246C6.47456%205.78345%206.26897%205.57786%206.26897%205.32996C6.26897%205.08205%206.47456%204.87647%206.72246%204.87647H9.89688C10.0172%204.87647%2010.1325%204.92425%2010.2175%205.00929C10.3026%205.09434%2010.3504%205.20968%2010.3504%205.32996C10.3504%205.45023%2010.3026%205.56558%2010.2175%205.65062C10.1325%205.73567%2010.0172%205.78345%209.89688%205.78345ZM3.54804%206.24298C3.43316%206.24298%203.31828%206.20066%203.22758%206.10996L2.77409%205.65647C2.59874%205.48112%202.59874%205.19089%202.77409%205.01554C2.94944%204.84019%203.23967%204.84019%203.41502%205.01554L3.54804%205.14856L4.58804%204.10856C4.76339%203.93321%205.05362%203.93321%205.22897%204.10856C5.40432%204.28391%205.40432%204.57414%205.22897%204.74949L3.86851%206.10996C3.78354%206.19503%203.66828%206.24288%203.54804%206.24298ZM9.89688%2010.016H6.72246C6.47456%2010.016%206.26897%209.81042%206.26897%209.56252C6.26897%209.31461%206.47456%209.10903%206.72246%209.10903H9.89688C10.0172%209.10903%2010.1325%209.15681%2010.2175%209.24185C10.3026%209.3269%2010.3504%209.44224%2010.3504%209.56252C10.3504%209.68279%2010.3026%209.79813%2010.2175%209.88318C10.1325%209.96823%2010.0172%2010.016%209.89688%2010.016ZM3.54804%2010.4755C3.43316%2010.4755%203.31828%2010.4332%203.22758%2010.3425L2.77409%209.88903C2.59874%209.71368%202.59874%209.42345%202.77409%209.2481C2.94944%209.07275%203.23967%209.07275%203.41502%209.2481L3.54804%209.38112L4.58804%208.34112C4.76339%208.16577%205.05362%208.16577%205.22897%208.34112C5.40432%208.51647%205.40432%208.8067%205.22897%208.98205L3.86851%2010.3425C3.78354%2010.4276%203.66828%2010.4754%203.54804%2010.4755Z%22%20fill%3D%22currentColor%22%2F%3E%0A%3Cpath%20d%3D%22M8.312%2013.7222H4.68409C1.40084%2013.7222%20-0.00195312%2012.3194%20-0.00195312%209.03612V5.40821C-0.00195312%202.12496%201.40084%200.722168%204.68409%200.722168H8.312C11.5953%200.722168%2012.998%202.12496%2012.998%205.40821V9.03612C12.998%2012.3194%2011.5953%2013.7222%208.312%2013.7222ZM4.68409%201.62914C1.89665%201.62914%200.905024%202.62077%200.905024%205.40821V9.03612C0.905024%2011.8236%201.89665%2012.8152%204.68409%2012.8152H8.312C11.0994%2012.8152%2012.0911%2011.8236%2012.0911%209.03612V5.40821C12.0911%202.62077%2011.0994%201.62914%208.312%201.62914H4.68409Z%22%20fill%3D%22currentColor%22%2F%3E%0A%3C%2Fsvg%3E"
+                                        value="%3Csvg%20width%3D%22auto%22%20height%3D%22auto%22%20viewBox%3D%220%200%2011%2010%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M1.78695%203.44484H1.91891C2.42693%203.44484%202.84258%203.8605%202.84258%204.36852V8.98688C2.84258%209.49489%202.42693%209.91055%201.91891%209.91055H1.78695C1.27893%209.91055%200.863281%209.49489%200.863281%208.98688V4.36852C0.863281%203.8605%201.27893%203.44484%201.78695%203.44484ZM5.48164%200.673828C5.98966%200.673828%206.40531%201.08948%206.40531%201.5975V8.98688C6.40531%209.49489%205.98966%209.91055%205.48164%209.91055C4.97362%209.91055%204.55797%209.49489%204.55797%208.98688V1.5975C4.55797%201.08948%204.97362%200.673828%205.48164%200.673828ZM9.17633%205.95195C9.68435%205.95195%2010.1%206.36761%2010.1%206.87563V8.98688C10.1%209.49489%209.68435%209.91055%209.17633%209.91055C8.66831%209.91055%208.25266%209.49489%208.25266%208.98688V6.87563C8.25266%206.36761%208.66831%205.95195%209.17633%205.95195Z%22%20fill%3D%22currentColor%22%2F%3E%0A%3C%2Fsvg%3E"
                                       />
                                     </_Builtin.Block>
                                     <_Builtin.Block
@@ -489,14 +413,144 @@ export function DashboardPage({
                                       {"0%"}
                                     </_Builtin.Block>
                                   </_Builtin.Block>
+                                  {isNotLoading ? (
+                                    <_Builtin.Block
+                                      className="stats_box-number"
+                                      tag="div"
+                                      wized="total_reservations"
+                                    >
+                                      {nBookingsTotal}
+                                    </_Builtin.Block>
+                                  ) : null}
+                                  {isLoading ? (
+                                    <_Builtin.Block
+                                      className="div-block-5"
+                                      tag="div"
+                                    >
+                                      <_Builtin.Block
+                                        className="block-progress small"
+                                        tag="div"
+                                      >
+                                        {componentProgress}
+                                      </_Builtin.Block>
+                                    </_Builtin.Block>
+                                  ) : null}
+                                </_Builtin.Block>
+                              </_Builtin.Block>
+                              <_Builtin.Block
+                                className="stat1_item box-shadow"
+                                tag="div"
+                              >
+                                <_Builtin.Block
+                                  className="margin-bottom"
+                                  tag="div"
+                                >
                                   <_Builtin.Block
-                                    className="stats_box-number"
+                                    className="stat1_item-content-top"
                                     tag="div"
-                                    wized="total_reservations"
                                   >
-                                    {"0"}
+                                    <_Builtin.Block
+                                      className=" stats_text-box"
+                                      tag="div"
+                                    >
+                                      {"Revenus PlayPad"}
+                                    </_Builtin.Block>
                                   </_Builtin.Block>
-                                  <_Builtin.NotSupported _atom="Animation" />
+                                </_Builtin.Block>
+                                <_Builtin.Block
+                                  className="stat1_item-content-bottom"
+                                  tag="div"
+                                >
+                                  <_Builtin.Block
+                                    className="stat1_item-badge"
+                                    tag="div"
+                                  >
+                                    <_Builtin.Block
+                                      className="text-size-small"
+                                      tag="div"
+                                    >
+                                      {"0%"}
+                                    </_Builtin.Block>
+                                  </_Builtin.Block>
+                                  {isNotLoading ? (
+                                    <_Builtin.Block
+                                      className="stats_box-number"
+                                      tag="div"
+                                      wized="total_reservations"
+                                    >
+                                      {revenuesPlayPad}
+                                    </_Builtin.Block>
+                                  ) : null}
+                                  {isLoading ? (
+                                    <_Builtin.Block
+                                      className="div-block-5"
+                                      tag="div"
+                                    >
+                                      <_Builtin.Block
+                                        className="block-progress small"
+                                        tag="div"
+                                      >
+                                        {componentProgress}
+                                      </_Builtin.Block>
+                                    </_Builtin.Block>
+                                  ) : null}
+                                </_Builtin.Block>
+                              </_Builtin.Block>
+                              <_Builtin.Block
+                                className="stat1_item box-shadow"
+                                id="w-node-_1bf7d8b1-45bf-7ee7-4978-3821b784e1de-b784e17d"
+                                tag="div"
+                              >
+                                <_Builtin.Block tag="div">
+                                  <_Builtin.Block
+                                    className="stat1_item-content-top"
+                                    tag="div"
+                                  >
+                                    <_Builtin.Block
+                                      className=" stats_text-box"
+                                      tag="div"
+                                    >
+                                      {"Revenus Club"}
+                                    </_Builtin.Block>
+                                  </_Builtin.Block>
+                                </_Builtin.Block>
+                                <_Builtin.Block
+                                  className="stat1_item-content-bottom"
+                                  tag="div"
+                                >
+                                  <_Builtin.Block
+                                    className="stat1_item-badge"
+                                    tag="div"
+                                  >
+                                    <_Builtin.Block
+                                      className="text-size-small"
+                                      tag="div"
+                                    >
+                                      {"0%"}
+                                    </_Builtin.Block>
+                                  </_Builtin.Block>
+                                  {isNotLoading ? (
+                                    <_Builtin.Block
+                                      className="stats_box-number"
+                                      tag="div"
+                                      wized="dashboard_revenue"
+                                    >
+                                      {revenuesClub}
+                                    </_Builtin.Block>
+                                  ) : null}
+                                  {isLoading ? (
+                                    <_Builtin.Block
+                                      className="div-block-5"
+                                      tag="div"
+                                    >
+                                      <_Builtin.Block
+                                        className="block-progress small"
+                                        tag="div"
+                                      >
+                                        {componentProgress}
+                                      </_Builtin.Block>
+                                    </_Builtin.Block>
+                                  ) : null}
                                 </_Builtin.Block>
                               </_Builtin.Block>
                               <_Builtin.Block
@@ -524,7 +578,7 @@ export function DashboardPage({
                                       className="stats_text-box"
                                       tag="div"
                                     >
-                                      {"Taux d'occupations totale"}
+                                      {"Taux d'occupation PlayPad"}
                                     </_Builtin.Block>
                                   </_Builtin.Block>
                                 </_Builtin.Block>
@@ -532,13 +586,15 @@ export function DashboardPage({
                                   className="stat1_item-content-bottom"
                                   tag="div"
                                 >
-                                  <_Builtin.Block
-                                    className="stats_box-number"
-                                    tag="div"
-                                    wized="dashboard_occupations"
-                                  >
-                                    {"0 %"}
-                                  </_Builtin.Block>
+                                  {isNotLoading ? (
+                                    <_Builtin.Block
+                                      className="stats_box-number"
+                                      tag="div"
+                                      wized="dashboard_occupations"
+                                    >
+                                      {rateBookingPlayPad}
+                                    </_Builtin.Block>
+                                  ) : null}
                                   <_Builtin.Block
                                     className="stat1_item-badge"
                                     tag="div"
@@ -550,7 +606,19 @@ export function DashboardPage({
                                       {"0%"}
                                     </_Builtin.Block>
                                   </_Builtin.Block>
-                                  <_Builtin.NotSupported _atom="Animation" />
+                                  {isLoading ? (
+                                    <_Builtin.Block
+                                      className="div-block-5"
+                                      tag="div"
+                                    >
+                                      <_Builtin.Block
+                                        className="block-progress small"
+                                        tag="div"
+                                      >
+                                        {componentProgress}
+                                      </_Builtin.Block>
+                                    </_Builtin.Block>
+                                  ) : null}
                                 </_Builtin.Block>
                               </_Builtin.Block>
                             </_Builtin.Block>
