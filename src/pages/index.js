@@ -440,6 +440,9 @@ DAYS.push({ value: element, text: ""+element },);
     //initDays(event.target.value, currentYear);
     //setMonth(event.target.value);
     //setYear(currentYear);
+    if(event.target.value==0) {
+      setDisabledAllMonth(false);
+    }
     setDay(event.target.value);
     getBookings(club, selectedSite, selectedCourt, event.target.value, month, year);
   };
