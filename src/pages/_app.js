@@ -6,5 +6,9 @@ import { AuthProvider } from "@/providers/AuthProvider";
 
 export default function App({ Component, pageProps }) {
   
-  return <DevLinkProvider><AuthProvider><Component {...pageProps} /></AuthProvider></DevLinkProvider>;
+  return (
+  <>
+  <head> <script src="https://cdn.jsdelivr.net/npm/chart.js"></script></head>
+  <DevLinkProvider><AuthProvider><Component {...pageProps} /></AuthProvider></DevLinkProvider>
+  </>);
 }
