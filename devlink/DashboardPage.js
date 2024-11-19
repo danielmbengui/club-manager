@@ -19,7 +19,7 @@ export function DashboardPage({
   styleDashboard = {},
 
   linkDashboard = {
-    href: "/dashboard",
+    href: "/",
   },
 
   linkManage = {
@@ -55,6 +55,15 @@ export function DashboardPage({
   nBookingslub = "0",
   revenuesClub = "0",
   revenuesPlayPad = "0",
+  componentSite,
+  componentCourts,
+  revenuesTotalSite = "0",
+  revenuesTotalCourt = "0",
+  componentChartRateBooking,
+  componentChartRateHour,
+  componentChartRateTotal,
+  componentDays,
+  componentChartRevenues,
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -191,7 +200,62 @@ export function DashboardPage({
                             >
                               <_Builtin.Block className="header-flex" tag="div">
                                 <_Builtin.Block className="subheader" tag="div">
-                                  {"Mois :"}
+                                  {"Site"}
+                                </_Builtin.Block>
+                                <_Builtin.Block
+                                  className="form_dashboard devlink site"
+                                  tag="div"
+                                >
+                                  <_Builtin.Block tag="div">
+                                    {componentSite}
+                                  </_Builtin.Block>
+                                </_Builtin.Block>
+                              </_Builtin.Block>
+                              <_Builtin.Block className="header-flex" tag="div">
+                                <_Builtin.Block className="subheader" tag="div">
+                                  {"Terrain"}
+                                </_Builtin.Block>
+                                <_Builtin.Block
+                                  className="form_dashboard devlink site"
+                                  tag="div"
+                                >
+                                  <_Builtin.Block tag="div">
+                                    {componentCourts}
+                                  </_Builtin.Block>
+                                </_Builtin.Block>
+                              </_Builtin.Block>
+                              <_Builtin.Link
+                                className="button is-xsmall update"
+                                button={true}
+                                wized="getStats_btn"
+                                block=""
+                                options={{
+                                  href: "#",
+                                }}
+                              >
+                                {"Actualiser"}
+                              </_Builtin.Link>
+                            </_Builtin.Block>
+                            <_Builtin.Block
+                              className="header_subtext"
+                              tag="div"
+                            >
+                              <_Builtin.Block className="header-flex" tag="div">
+                                <_Builtin.Block className="subheader" tag="div">
+                                  {"Jour"}
+                                </_Builtin.Block>
+                                <_Builtin.Block
+                                  className="form_dashboard devlink site"
+                                  tag="div"
+                                >
+                                  <_Builtin.Block tag="div">
+                                    {componentDays}
+                                  </_Builtin.Block>
+                                </_Builtin.Block>
+                              </_Builtin.Block>
+                              <_Builtin.Block className="header-flex" tag="div">
+                                <_Builtin.Block className="subheader" tag="div">
+                                  {"Mois"}
                                 </_Builtin.Block>
                                 <_Builtin.Block
                                   className="form_dashboard devlink"
@@ -204,7 +268,7 @@ export function DashboardPage({
                               </_Builtin.Block>
                               <_Builtin.Block className="header-flex" tag="div">
                                 <_Builtin.Block className="subheader" tag="div">
-                                  {"Année :"}
+                                  {"Année"}
                                 </_Builtin.Block>
                                 <_Builtin.Block
                                   className="form_dashboard devlink"
@@ -394,7 +458,7 @@ export function DashboardPage({
                                       className=" stats_text-box"
                                       tag="div"
                                     >
-                                      {"Réservations totale"}
+                                      {"Réservations Total"}
                                     </_Builtin.Block>
                                   </_Builtin.Block>
                                 </_Builtin.Block>
@@ -555,30 +619,19 @@ export function DashboardPage({
                               </_Builtin.Block>
                               <_Builtin.Block
                                 className="stat1_item box-shadow"
+                                id="w-node-_6c309289-9b83-1214-5b45-5c6ec532405d-b784e17d"
                                 tag="div"
                               >
-                                <_Builtin.Block
-                                  className="margin-bottom margin-xsmall"
-                                  tag="div"
-                                >
+                                <_Builtin.Block tag="div">
                                   <_Builtin.Block
                                     className="stat1_item-content-top"
                                     tag="div"
                                   >
                                     <_Builtin.Block
-                                      className="stats_icon-box"
+                                      className=" stats_text-box"
                                       tag="div"
                                     >
-                                      <_Builtin.HtmlEmbed
-                                        className="stats_icon"
-                                        value="%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20x%3D%220%22%20y%3D%220%22%20viewBox%3D%220%200%20512%20512%22%20style%3D%22enable-background%3A%20new%200%200%20512%20512%22%20xml%3Aspace%3D%22preserve%22%20class%3D%22%22%3E%0A%20%20%3Cg%3E%0A%20%20%20%20%3Cpath%20d%3D%22M397.5%20356.881V457h-283V356.881h-44V501h371V356.881zM70.5%2011v144.119h44V55h283v100.119h44V11z%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M256%20125.119v261.762M114.5%20125.119v261.762M397.5%20125.119v261.762%22%20style%3D%22stroke-width%3A%2022%3B%20stroke-linejoin%3A%20round%3B%20stroke-miterlimit%3A%2010%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M397.5%20386.881h-283M114.5%20125.119h283%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M439.969%20256H72.031%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22%2333cccc%22%20opacity%3D%221%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E"
-                                      />
-                                    </_Builtin.Block>
-                                    <_Builtin.Block
-                                      className="stats_text-box"
-                                      tag="div"
-                                    >
-                                      {"Taux d'occupation PlayPad"}
+                                      {"Revenus Total"}
                                     </_Builtin.Block>
                                   </_Builtin.Block>
                                 </_Builtin.Block>
@@ -586,15 +639,6 @@ export function DashboardPage({
                                   className="stat1_item-content-bottom"
                                   tag="div"
                                 >
-                                  {isNotLoading ? (
-                                    <_Builtin.Block
-                                      className="stats_box-number"
-                                      tag="div"
-                                      wized="dashboard_occupations"
-                                    >
-                                      {rateBookingPlayPad}
-                                    </_Builtin.Block>
-                                  ) : null}
                                   <_Builtin.Block
                                     className="stat1_item-badge"
                                     tag="div"
@@ -606,6 +650,15 @@ export function DashboardPage({
                                       {"0%"}
                                     </_Builtin.Block>
                                   </_Builtin.Block>
+                                  {isNotLoading ? (
+                                    <_Builtin.Block
+                                      className="stats_box-number"
+                                      tag="div"
+                                      wized="dashboard_revenue"
+                                    >
+                                      {revenuesTotal}
+                                    </_Builtin.Block>
+                                  ) : null}
                                   {isLoading ? (
                                     <_Builtin.Block
                                       className="div-block-5"
@@ -622,331 +675,221 @@ export function DashboardPage({
                                 </_Builtin.Block>
                               </_Builtin.Block>
                             </_Builtin.Block>
+                            <_Builtin.Block
+                              className="card chart_line _1"
+                              id="w-node-fd0f5c39-e11d-81ff-98b9-8875a849291a-b784e17d"
+                              tag="div"
+                            >
+                              <_Builtin.Block
+                                className="card_header chart_line"
+                                tag="div"
+                              >
+                                <_Builtin.Block
+                                  className="card_header_content"
+                                  tag="div"
+                                >
+                                  <_Builtin.Block
+                                    className="heading-style-h5"
+                                    tag="div"
+                                  >
+                                    {"Revenu Total"}
+                                  </_Builtin.Block>
+                                </_Builtin.Block>
+                                <_Builtin.Block
+                                  className="timeline-button-group"
+                                  tag="div"
+                                >
+                                  <_Builtin.Link
+                                    className="button is-icon is-tiny timeline"
+                                    button={false}
+                                    wized="yearly_line_btn"
+                                    block="inline"
+                                    options={{
+                                      href: "#",
+                                    }}
+                                  >
+                                    <_Builtin.Block tag="div">
+                                      {"1A"}
+                                    </_Builtin.Block>
+                                  </_Builtin.Link>
+                                  <_Builtin.Link
+                                    className="button is-icon is-tiny timeline"
+                                    button={false}
+                                    wized="monthly_line_btn"
+                                    block="inline"
+                                    options={{
+                                      href: "#",
+                                    }}
+                                  >
+                                    <_Builtin.Block tag="div">
+                                      {"1M"}
+                                    </_Builtin.Block>
+                                  </_Builtin.Link>
+                                  <_Builtin.Link
+                                    className="button is-icon is-tiny timeline"
+                                    button={false}
+                                    wized="weekly_line_btn"
+                                    block="inline"
+                                    options={{
+                                      href: "#",
+                                    }}
+                                  >
+                                    <_Builtin.Block tag="div">
+                                      {"1S"}
+                                    </_Builtin.Block>
+                                  </_Builtin.Link>
+                                </_Builtin.Block>
+                              </_Builtin.Block>
+                              <_Builtin.Block
+                                className="revenue_chart"
+                                tag="div"
+                              >
+                                <_Builtin.HtmlEmbed
+                                  className="chart_embed"
+                                  wized="revenue_chart"
+                                  value="%3Ccanvas%20id%3D%22revenueChart%22%20height%3D%22100%25%22%20width%3D%22100%25%22%20max-width%3D%22100%25%22%3E%3C%2Fcanvas%3E"
+                                />
+                                <_Builtin.NotSupported _atom="Animation" />
+                              </_Builtin.Block>
+                            </_Builtin.Block>
                           </_Builtin.Block>
                           <_Builtin.Block
                             className="stats_big-grid_right"
                             tag="div"
                           >
                             <_Builtin.Block
-                              className="stats_court"
-                              id="w-node-_1bf7d8b1-45bf-7ee7-4978-3821b784e209-b784e17d"
+                              className="div-block-7"
+                              id="w-node-e7636227-2c5b-8d03-60ac-eb0f6fc8a28f-b784e17d"
                               tag="div"
                             >
                               <_Builtin.Block
-                                className=" stats_text-box big"
-                                tag="div"
-                              >
-                                {"Revenus Sites"}
-                              </_Builtin.Block>
-                              <_Builtin.Block
-                                className="stat1_item-content-bottom court"
-                                tag="div"
-                              >
-                                <_Builtin.FormWrapper className="form_court_chart">
-                                  <_Builtin.FormForm
-                                    className="stats_form"
-                                    name="email-form-2"
-                                    data-name="Email Form 2"
-                                    method="get"
-                                    id="email-form-2"
-                                  >
-                                    <_Builtin.FormSelect
-                                      className="form_input is-select-input is-court-site"
-                                      name="field"
-                                      required={false}
-                                      multiple={false}
-                                      wized="select_site"
-                                      id="select-site"
-                                      options={[
-                                        {
-                                          t: "Choisissez un site",
-                                          v: "null",
-                                        },
-                                        {
-                                          t: "AIRLOOP",
-                                          v: "YxtsX5EwtTjLdLV0qvte",
-                                        },
-                                        {
-                                          t: "Meyrin",
-                                          v: "skUpi9lx94pVvJlyAWrS",
-                                        },
-                                        {
-                                          t: "Acacias",
-                                          v: "G7myDqtwqgXbdcPcEl3P",
-                                        },
-                                      ]}
-                                    />
-                                    <_Builtin.FormSelect
-                                      className="form_input is-select-input is-dashboard"
-                                      name="field-6"
-                                      data-name="Field 6"
-                                      required={false}
-                                      multiple={false}
-                                      wized="select_month_site"
-                                      id="field-6"
-                                      options={[
-                                        {
-                                          t: "Mois",
-                                          v: "--",
-                                        },
-                                        {
-                                          t: "Janvier",
-                                          v: "1",
-                                        },
-                                        {
-                                          t: "Février",
-                                          v: "2",
-                                        },
-                                        {
-                                          t: "Mars",
-                                          v: "3",
-                                        },
-                                        {
-                                          t: "Avril",
-                                          v: "4",
-                                        },
-                                        {
-                                          t: "Mai",
-                                          v: "5",
-                                        },
-                                        {
-                                          t: "Juin",
-                                          v: "6",
-                                        },
-                                        {
-                                          t: "Juillet",
-                                          v: "7",
-                                        },
-                                        {
-                                          t: "Août",
-                                          v: "8",
-                                        },
-                                        {
-                                          t: "Septembre",
-                                          v: "9",
-                                        },
-                                        {
-                                          t: "Octobre",
-                                          v: "10",
-                                        },
-                                        {
-                                          t: "Novembre",
-                                          v: "11",
-                                        },
-                                        {
-                                          t: "Décembre",
-                                          v: "Another option",
-                                        },
-                                      ]}
-                                    />
-                                    <_Builtin.Link
-                                      className="button is-xsmall"
-                                      button={true}
-                                      wized="getSitesRevenu_btn"
-                                      block=""
-                                      options={{
-                                        href: "#",
-                                      }}
-                                    >
-                                      {"Actualiser"}
-                                    </_Builtin.Link>
-                                  </_Builtin.FormForm>
-                                  <_Builtin.FormSuccessMessage>
-                                    <_Builtin.Block tag="div">
-                                      {
-                                        "Thank you! Your submission has been received!"
-                                      }
-                                    </_Builtin.Block>
-                                  </_Builtin.FormSuccessMessage>
-                                  <_Builtin.FormErrorMessage>
-                                    <_Builtin.Block tag="div">
-                                      {
-                                        "Oops! Something went wrong while submitting the form."
-                                      }
-                                    </_Builtin.Block>
-                                  </_Builtin.FormErrorMessage>
-                                </_Builtin.FormWrapper>
-                              </_Builtin.Block>
-                              <_Builtin.Block
-                                className="stats_icon-box rotate"
-                                tag="div"
-                              >
-                                <_Builtin.HtmlEmbed
-                                  className="stats_icon big"
-                                  value="%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20x%3D%220%22%20y%3D%220%22%20viewBox%3D%220%200%20512%20512%22%20style%3D%22enable-background%3A%20new%200%200%20512%20512%22%20xml%3Aspace%3D%22preserve%22%20class%3D%22%22%3E%0A%20%20%3Cg%3E%0A%20%20%20%20%3Cpath%20d%3D%22M397.5%20356.881V457h-283V356.881h-44V501h371V356.881zM70.5%2011v144.119h44V55h283v100.119h44V11z%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M256%20125.119v261.762M114.5%20125.119v261.762M397.5%20125.119v261.762%22%20style%3D%22stroke-width%3A%2022%3B%20stroke-linejoin%3A%20round%3B%20stroke-miterlimit%3A%2010%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M397.5%20386.881h-283M114.5%20125.119h283%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M439.969%20256H72.031%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22%2333cccc%22%20opacity%3D%221%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E"
-                                />
-                              </_Builtin.Block>
-                              <_Builtin.Block
-                                className="stats_icon-box site"
-                                tag="div"
-                              >
-                                <_Builtin.Image
-                                  className="stats_icon img"
-                                  loading="lazy"
-                                  width="auto"
-                                  height="auto"
-                                  wized-cloak=""
-                                  wized="topbar_photo"
-                                  alt=""
-                                  src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg"
-                                />
-                              </_Builtin.Block>
-                              <_Builtin.Block
-                                className="stats_court-box"
+                                className="stats_court bookings"
+                                id="w-node-_1bf7d8b1-45bf-7ee7-4978-3821b784e209-b784e17d"
                                 tag="div"
                               >
                                 <_Builtin.Block
-                                  className="stats_box-number big"
+                                  className=" stats_text-box big"
                                   tag="div"
-                                  wized="current_site_revenue"
-                                  wized-cloak=""
                                 >
-                                  {"0"}
+                                  {"Taux d'occupation"}
                                 </_Builtin.Block>
-                                <_Builtin.NotSupported _atom="Animation" />
+                                <_Builtin.Block
+                                  className="stat1_item-content-bottom court"
+                                  tag="div"
+                                >
+                                  {isNotLoading ? (
+                                    <_Builtin.Block
+                                      className="form_dashboard devlink site chart"
+                                      tag="div"
+                                    >
+                                      <_Builtin.Block tag="div">
+                                        {componentChartRateBooking}
+                                      </_Builtin.Block>
+                                    </_Builtin.Block>
+                                  ) : null}
+                                  {isLoading ? (
+                                    <_Builtin.Block
+                                      className="div-block-5"
+                                      tag="div"
+                                    >
+                                      <_Builtin.Block
+                                        className="block-progress small"
+                                        tag="div"
+                                      >
+                                        {componentProgress}
+                                      </_Builtin.Block>
+                                    </_Builtin.Block>
+                                  ) : null}
+                                </_Builtin.Block>
+                                <_Builtin.Block
+                                  className="stats_icon-box rotate"
+                                  tag="div"
+                                >
+                                  <_Builtin.HtmlEmbed
+                                    className="stats_icon big"
+                                    value="%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20x%3D%220%22%20y%3D%220%22%20viewBox%3D%220%200%20512%20512%22%20style%3D%22enable-background%3A%20new%200%200%20512%20512%22%20xml%3Aspace%3D%22preserve%22%20class%3D%22%22%3E%0A%20%20%3Cg%3E%0A%20%20%20%20%3Cpath%20d%3D%22M397.5%20356.881V457h-283V356.881h-44V501h371V356.881zM70.5%2011v144.119h44V55h283v100.119h44V11z%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M256%20125.119v261.762M114.5%20125.119v261.762M397.5%20125.119v261.762%22%20style%3D%22stroke-width%3A%2022%3B%20stroke-linejoin%3A%20round%3B%20stroke-miterlimit%3A%2010%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M397.5%20386.881h-283M114.5%20125.119h283%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M439.969%20256H72.031%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22%2333cccc%22%20opacity%3D%221%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E"
+                                  />
+                                </_Builtin.Block>
+                              </_Builtin.Block>
+                              <_Builtin.Block
+                                className="stats_court hours"
+                                id="w-node-_7712ff94-f7bd-adcf-b3fb-c1ad3618a0b3-b784e17d"
+                                tag="div"
+                              >
+                                <_Builtin.Block
+                                  className=" stats_text-box big"
+                                  tag="div"
+                                >
+                                  {"Occupation (Heures)"}
+                                </_Builtin.Block>
+                                <_Builtin.Block
+                                  className="stat1_item-content-bottom court"
+                                  tag="div"
+                                >
+                                  {isNotLoading ? (
+                                    <_Builtin.Block
+                                      className="form_dashboard devlink site chart"
+                                      tag="div"
+                                    >
+                                      <_Builtin.Block tag="div">
+                                        {componentChartRateHour}
+                                      </_Builtin.Block>
+                                    </_Builtin.Block>
+                                  ) : null}
+                                  {isLoading ? (
+                                    <_Builtin.Block
+                                      className="div-block-5"
+                                      tag="div"
+                                    >
+                                      <_Builtin.Block
+                                        className="block-progress small"
+                                        tag="div"
+                                      >
+                                        {componentProgress}
+                                      </_Builtin.Block>
+                                    </_Builtin.Block>
+                                  ) : null}
+                                </_Builtin.Block>
+                                <_Builtin.Block
+                                  className="stats_icon-box rotate"
+                                  tag="div"
+                                >
+                                  <_Builtin.HtmlEmbed
+                                    className="stats_icon big"
+                                    value="%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20x%3D%220%22%20y%3D%220%22%20viewBox%3D%220%200%20512%20512%22%20style%3D%22enable-background%3A%20new%200%200%20512%20512%22%20xml%3Aspace%3D%22preserve%22%20class%3D%22%22%3E%0A%20%20%3Cg%3E%0A%20%20%20%20%3Cpath%20d%3D%22M397.5%20356.881V457h-283V356.881h-44V501h371V356.881zM70.5%2011v144.119h44V55h283v100.119h44V11z%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M256%20125.119v261.762M114.5%20125.119v261.762M397.5%20125.119v261.762%22%20style%3D%22stroke-width%3A%2022%3B%20stroke-linejoin%3A%20round%3B%20stroke-miterlimit%3A%2010%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M397.5%20386.881h-283M114.5%20125.119h283%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M439.969%20256H72.031%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22%2333cccc%22%20opacity%3D%221%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E"
+                                  />
+                                </_Builtin.Block>
                               </_Builtin.Block>
                             </_Builtin.Block>
                             <_Builtin.Block
-                              className="stats_court"
-                              id="w-node-_1bf7d8b1-45bf-7ee7-4978-3821b784e221-b784e17d"
+                              className="stats_court second"
+                              id="w-node-_22672635-3639-4e9d-edce-3f71e67aede0-b784e17d"
                               tag="div"
                             >
                               <_Builtin.Block
                                 className=" stats_text-box big"
                                 tag="div"
                               >
-                                {"Revenus Terrain"}
+                                {"Occupation Moyenne"}
                               </_Builtin.Block>
                               <_Builtin.Block
                                 className="stat1_item-content-bottom court"
                                 tag="div"
                               >
-                                <_Builtin.FormWrapper className="form_court_chart">
-                                  <_Builtin.FormForm
-                                    className="stats_form"
-                                    name="email-form-2"
-                                    data-name="Email Form 2"
-                                    method="get"
-                                  >
-                                    <_Builtin.FormSelect
-                                      className="form_input is-select-input is-court-site"
-                                      name="field"
-                                      required={false}
-                                      multiple={false}
-                                      wized="select_court"
-                                      id="select-court"
-                                      options={[
-                                        {
-                                          t: "Terrain",
-                                          v: "null",
-                                        },
-                                      ]}
-                                    />
-                                    <_Builtin.FormSelect
-                                      className="form_input is-select-input is-dashboard"
-                                      name="field-6"
-                                      data-name="Field 6"
-                                      required={false}
-                                      multiple={false}
-                                      wized="select_month_court"
-                                      id="field-6"
-                                      options={[
-                                        {
-                                          t: "Mois",
-                                          v: "--",
-                                        },
-                                        {
-                                          t: "Janvier",
-                                          v: "1",
-                                        },
-                                        {
-                                          t: "Février",
-                                          v: "2",
-                                        },
-                                        {
-                                          t: "Mars",
-                                          v: "3",
-                                        },
-                                        {
-                                          t: "Avril",
-                                          v: "4",
-                                        },
-                                        {
-                                          t: "Mai",
-                                          v: "5",
-                                        },
-                                        {
-                                          t: "Juin",
-                                          v: "6",
-                                        },
-                                        {
-                                          t: "Juillet",
-                                          v: "7",
-                                        },
-                                        {
-                                          t: "Août",
-                                          v: "8",
-                                        },
-                                        {
-                                          t: "Septembre",
-                                          v: "9",
-                                        },
-                                        {
-                                          t: "Octobre",
-                                          v: "10",
-                                        },
-                                        {
-                                          t: "Novembre",
-                                          v: "11",
-                                        },
-                                        {
-                                          t: "Décembre",
-                                          v: "Another option",
-                                        },
-                                      ]}
-                                    />
-                                    <_Builtin.FormSelect
-                                      className="form_input is-select-input is-dashboard is-day"
-                                      name="Jour-2"
-                                      data-name="Jour 2"
-                                      required={false}
-                                      multiple={false}
-                                      wized="select_day_court"
-                                      id="Jour-2"
-                                      options={[
-                                        {
-                                          t: "Jour",
-                                          v: "--",
-                                        },
-                                      ]}
-                                    />
-                                    <_Builtin.Link
-                                      className="button is-xsmall"
-                                      button={true}
-                                      wized="getCourtRevenu_btn"
-                                      block=""
-                                      options={{
-                                        href: "#",
-                                      }}
-                                    >
-                                      {"Actualiser"}
-                                    </_Builtin.Link>
-                                  </_Builtin.FormForm>
-                                  <_Builtin.FormSuccessMessage>
-                                    <_Builtin.Block tag="div">
-                                      {
-                                        "Thank you! Your submission has been received!"
-                                      }
-                                    </_Builtin.Block>
-                                  </_Builtin.FormSuccessMessage>
-                                  <_Builtin.FormErrorMessage>
-                                    <_Builtin.Block tag="div">
-                                      {
-                                        "Oops! Something went wrong while submitting the form."
-                                      }
-                                    </_Builtin.Block>
-                                  </_Builtin.FormErrorMessage>
-                                </_Builtin.FormWrapper>
+                                <_Builtin.Block
+                                  className="form_dashboard devlink site chart"
+                                  tag="div"
+                                >
+                                  <_Builtin.Block tag="div">
+                                    {componentChartRateTotal}
+                                  </_Builtin.Block>
+                                </_Builtin.Block>
+                                {isLoading ? (
+                                  <_Builtin.Block
+                                    className="div-block-5"
+                                    tag="div"
+                                  />
+                                ) : null}
                               </_Builtin.Block>
                               <_Builtin.Block
                                 className="stats_icon-box rotate"
@@ -965,20 +908,6 @@ export function DashboardPage({
                                   className="stats_icon site"
                                   value="%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20x%3D%220%22%20y%3D%220%22%20viewBox%3D%220%200%20512%20512%22%20style%3D%22enable-background%3A%20new%200%200%20512%20512%22%20xml%3Aspace%3D%22preserve%22%20class%3D%22%22%3E%0A%20%20%3Cg%3E%0A%20%20%20%20%3Cpath%20d%3D%22M397.5%20356.881V457h-283V356.881h-44V501h371V356.881zM70.5%2011v144.119h44V55h283v100.119h44V11z%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M256%20125.119v261.762M114.5%20125.119v261.762M397.5%20125.119v261.762%22%20style%3D%22stroke-width%3A%2022%3B%20stroke-linejoin%3A%20round%3B%20stroke-miterlimit%3A%2010%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M397.5%20386.881h-283M114.5%20125.119h283%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M439.969%20256H72.031%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22%2333cccc%22%20opacity%3D%221%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E"
                                 />
-                              </_Builtin.Block>
-                              <_Builtin.Block
-                                className="stats_court-box"
-                                tag="div"
-                              >
-                                <_Builtin.Block
-                                  className="stats_box-number big"
-                                  tag="div"
-                                  wized="current_court_revenue"
-                                  wized-cloak=""
-                                >
-                                  {"0"}
-                                </_Builtin.Block>
-                                <_Builtin.NotSupported _atom="Animation" />
                               </_Builtin.Block>
                             </_Builtin.Block>
                           </_Builtin.Block>
@@ -1061,12 +990,32 @@ export function DashboardPage({
                               </_Builtin.Block>
                             </_Builtin.Block>
                             <_Builtin.Block className="revenue_chart" tag="div">
-                              <_Builtin.HtmlEmbed
-                                className="chart_embed"
-                                wized="revenue_chart"
-                                value="%3Ccanvas%20id%3D%22revenueChart%22%20height%3D%22100%25%22%20width%3D%22100%25%22%20max-width%3D%22100%25%22%3E%3C%2Fcanvas%3E"
-                              />
-                              <_Builtin.NotSupported _atom="Animation" />
+                              {isNotLoading ? (
+                                <_Builtin.Block
+                                  className="chart_embed"
+                                  tag="div"
+                                >
+                                  <_Builtin.Block
+                                    className="chartline"
+                                    tag="div"
+                                  >
+                                    {componentChartRevenues}
+                                  </_Builtin.Block>
+                                </_Builtin.Block>
+                              ) : null}
+                              {isLoading ? (
+                                <_Builtin.Block
+                                  className="div-block-5"
+                                  tag="div"
+                                >
+                                  <_Builtin.Block
+                                    className="block-progress small"
+                                    tag="div"
+                                  >
+                                    {componentProgress}
+                                  </_Builtin.Block>
+                                </_Builtin.Block>
+                              ) : null}
                             </_Builtin.Block>
                           </_Builtin.Block>
                           <_Builtin.Block

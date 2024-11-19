@@ -18,7 +18,7 @@ export function BillingPage({
   disconnectButtonProps,
 
   linkDashboard = {
-    href: "/dashboard",
+    href: "/",
   },
 
   linkManage = {

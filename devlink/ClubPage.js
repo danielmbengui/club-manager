@@ -19,7 +19,7 @@ export function ClubPage({
   disconnectButtonProps,
 
   linkDashboard = {
-    href: "/dashboard",
+    href: "/",
   },
 
   linkManage = {

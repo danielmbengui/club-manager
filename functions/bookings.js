@@ -72,5 +72,54 @@ export async function getRateBookingsPlayPad(querySnapshotBooking) {
 
     return countBoookingsTotal > 0 ? countBoookingsPlayPad * 100 / countBoookingsTotal : 0;
 }
+export async function getRateBookingsClub(querySnapshotBooking) {
+    let countBoookingsPlayPad = 0;
+    let countBoookingsTotal = 0;
+     querySnapshotBooking.forEach((doc) => {
+         const booking = doc.data();
+         if (booking.is_from_web_app) {
+           countBoookingsPlayPad++;
+         }
+         countBoookingsTotal++;
+         // doc.data() is never undefined for query doc snapshots
+         //console.log(doc.id, " => ", doc.data());
+       });
+ 
+     return countBoookingsTotal > 0 ? countBoookingsPlayPad * 100 / countBoookingsTotal : 0;
+ }
+ export async function getRateHoursPlayPad(querySnapshotBooking) {
+    let countBoookingsPlayPad = 0;
+    let countBoookingsTotal = 0;
+     querySnapshotBooking.forEach((doc) => {
+         const booking = doc.data();
+         const addValue = booking.last_booking_time - booking.first_booking_time + 0.5;
+         if (booking.is_from_app) {
+            
+           countBoookingsPlayPad += addValue;
+         }
+         countBoookingsTotal += addValue;
+         // doc.data() is never undefined for query doc snapshots
+         //console.log(doc.id, " => ", doc.data());
+       });
+ 
+     return countBoookingsTotal > 0 ? countBoookingsPlayPad * 100 / countBoookingsTotal : 0;
+ }
+ export async function getRateHoursClub(querySnapshotBooking) {
+    let countBoookingsPlayPad = 0;
+    let countBoookingsTotal = 0;
+     querySnapshotBooking.forEach((doc) => {
+         const booking = doc.data();
+         const addValue = booking.last_booking_time - booking.first_booking_time + 0.5;
+         if (booking.is_from_web_app) {
+            
+           countBoookingsPlayPad += addValue;
+         }
+         countBoookingsTotal += addValue;
+         // doc.data() is never undefined for query doc snapshots
+         //console.log(doc.id, " => ", doc.data());
+       });
+ 
+     return countBoookingsTotal > 0 ? countBoookingsPlayPad * 100 / countBoookingsTotal : 0;
+ }
 
 

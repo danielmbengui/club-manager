@@ -12,7 +12,7 @@ export function SidebarDevlink({
   disconnectButtonProps = {},
 
   linkDashboard = {
-    href: "/dashboard",
+    href: "/",
   },
 
   linkManage = {

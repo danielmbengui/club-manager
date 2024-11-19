@@ -18,7 +18,7 @@ export function SettingsPage({
   disconnectButtonProps,
 
   linkDashboard = {
-    href: "/dashboard",
+    href: "/",
   },
 
   linkManage = {

@@ -27,4 +27,13 @@ declare function DashboardPage(props: {
   nBookingslub?: React.ReactNode;
   revenuesClub?: React.ReactNode;
   revenuesPlayPad?: React.ReactNode;
+  componentSite?: Types.Devlink.Slot;
+  componentCourts?: Types.Devlink.Slot;
+  revenuesTotalSite?: React.ReactNode;
+  revenuesTotalCourt?: React.ReactNode;
+  componentChartRateBooking?: Types.Devlink.Slot;
+  componentChartRateHour?: Types.Devlink.Slot;
+  componentChartRateTotal?: Types.Devlink.Slot;
+  componentDays?: Types.Devlink.Slot;
+  componentChartRevenues?: Types.Devlink.Slot;
 }): React.JSX.Element;

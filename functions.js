@@ -20,6 +20,32 @@ export function getFirstAndLastDayOfMonth(month, year) {
 
     return { firstDay, lastDay };
 }
+export function getFirstAndLastDayOfDay(day, month, year) {
+    // Le mois est 0-indexé en JavaScript (0 pour janvier, 11 pour décembre),
+    // donc pour obtenir le premier jour du mois spécifié, on crée une date avec le jour 1.
+    const firstDay = new Date(year, month, day, 0, 0, 0);
+
+    // Pour obtenir le dernier jour du mois, on crée une date avec le mois suivant et le jour 0.
+    // Cela revient à demander le jour précédant le premier jour du mois suivant.
+    //const lastDay = new Date(year, month + 1, 0);
+    const lastDay = new Date(year, month + 1, day, 23, 59, 59);
+
+    return { firstDay, lastDay };
+}
+export function getDaysInMonth(month, year) {
+    if (month < 1 || month > 12) {
+        throw new Error("Le mois doit être entre 1 (janvier) et 12 (décembre).");
+    }
+    if (year < 1) {
+        throw new Error("L'année doit être un entier positif.");
+    }
+
+    // Calculer le nombre de jours dans le mois
+    const daysInMonth = new Date(year, month, 0).getDate();
+
+    // Générer un tableau de 1 à daysInMonth
+    return Array.from({ length: daysInMonth }, (_, i) => i + 1);
+}
 
 export function formatCountBookings(value) {
     if (typeof value !== "number") {
@@ -60,7 +86,7 @@ export function formatPercentage(value) {
     if (typeof value !== "number") {
         throw new Error("Le paramètre doit être un nombre.");
     }
-    if(value<1) {
+    if (value < 1) {
         value = value * 100;
     }
     // Formater le nombre avec des séparateurs de milliers (apostrophes)

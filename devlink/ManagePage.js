@@ -23,7 +23,7 @@ export function ManagePage({
   disconnectButtonProps,
 
   linkDashboard = {
-    href: "/dashboard",
+    href: "/",
   },
 
   linkManage = {

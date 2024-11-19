@@ -21,7 +21,7 @@ export function CalendarPage({
   disconnectButtonProps,
 
   linkDashboard = {
-    href: "/dashboard",
+    href: "/",
   },
 
   linkManage = {
