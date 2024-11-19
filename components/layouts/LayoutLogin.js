@@ -7,7 +7,6 @@ import LayoutLoading from './LayoutLoading';
 import { DashboardPage, LoginPage } from '@/devlink';
 import { PLAYPAD_CREATION_YEAR } from '@/constants';
 
-
 export default function LayoutLogin({ as: _Component = _Builtin.Block, title, component }) {
     const { login, user, logout } = useAuth();
     const [email, setEmail] = useState('');
