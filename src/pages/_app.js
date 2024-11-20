@@ -1,5 +1,5 @@
-import "@/src/styles/globals.css";
 import "@/devlink/global.css";
+import "@/src/styles/globals.css";
 import { DevLinkProvider } from "@/devlink";
 import { AuthProvider } from "@/providers/AuthProvider";
 

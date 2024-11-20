@@ -15,12 +15,12 @@ const PieChart = ({ playpadRate, clubRate }) => {
         label: 'Taux',
         data: [playpadRate, clubRate], // Supprimé la donnée pour 'Total'
         backgroundColor: [
-          'green',
-          'rgba(54, 162, 235, 0.6)', // Couleurs correspondant aux labels
+          'rgba(66, 133, 244,1)',
+          'rgba(66, 133, 244, 0.1)', // Couleurs correspondant aux labels
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
+          'rgba(66, 133, 244, 1)',
+          'rgba(66, 133, 244, 1)',
         ],
         borderWidth: 1,
       },
@@ -33,6 +33,7 @@ const PieChart = ({ playpadRate, clubRate }) => {
     plugins: {
       legend: {
         position: 'top',
+        hidden:true,
         labels: {
           generateLabels: (chart) => {
             const { datasets } = chart.data;
@@ -41,7 +42,7 @@ const PieChart = ({ playpadRate, clubRate }) => {
             return labels.map((label, i) => {
               const value = dataset.data[i];
               return {
-                text: `${label}: ${formatPercentage(value)}`, // Légende avec les valeurs
+                text: `${label}`, // Légende avec les valeurs
                 fillStyle: dataset.backgroundColor[i],
                 strokeStyle: dataset.borderColor[i],
                 lineWidth: dataset.borderWidth,
@@ -56,7 +57,7 @@ const PieChart = ({ playpadRate, clubRate }) => {
     },
   };
 
-  return <div style={{ width: '350px', height: '350px' }}> {/* Définir la taille du conteneur */}
+  return <div style={{ width: '100%', height: '170px', background:'transparent' }}> {/* Définir la taille du conteneur */}
   <Pie data={data} options={options} />
 </div>;
 };

@@ -28,7 +28,7 @@ export function getFirstAndLastDayOfDay(day, month, year) {
     // Pour obtenir le dernier jour du mois, on crée une date avec le mois suivant et le jour 0.
     // Cela revient à demander le jour précédant le premier jour du mois suivant.
     //const lastDay = new Date(year, month + 1, 0);
-    const lastDay = new Date(year, month + 1, day, 23, 59, 59);
+    const lastDay = new Date(year, month, day, 23, 59, 59);
 
     return { firstDay, lastDay };
 }
@@ -74,9 +74,10 @@ export function formatCurrency(value) {
     if (typeof value !== "number") {
         throw new Error("Le paramètre doit être un nombre.");
     }
-
+    const scaled = value * 100;
+    const rounded = Math.round(scaled / 5) * 5;
     // Formater le nombre avec des séparateurs de milliers (apostrophes)
-    const formattedNumber = value.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+    const formattedNumber = (rounded / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, "'");
 
     // Ajouter " CHF" à la fin
     return `CHF ${formattedNumber}`;
@@ -95,3 +96,87 @@ export function formatPercentage(value) {
     // Ajouter " CHF" à la fin
     return `${formattedNumber} %`;
 }
+
+export function getArrayMonthStr() {
+    return [
+        "Janvier",
+        "Février",
+        "Mars",
+        "Avril",
+        "Mai",
+        "Juin",
+        "Juillet",
+        "Août",
+        "Septembre",
+        "Octobre",
+        "Novembre",
+        "Décembre",
+    ]
+}
+
+export function getArrayMonthJson() {
+    return [
+        { value: 0, text: "Tous" },
+        { value: 1, text: "Janvier" },
+        { value: 2, text: "Février" },
+        { value: 3, text: "Mars" },
+        { value: 4, text: "Avril" },
+        { value: 5, text: "Mai" },
+        { value: 6, text: "Juin" },
+        { value: 7, text: "Juillet" },
+        { value: 8, text: "Août" },
+        { value: 9, text: "Septembre" },
+        { value: 10, text: "Octobre" },
+        { value: 11, text: "Novembre" },
+        { value: 12, text: "Décembre" },
+    ];
+}
+
+export function parseDoubleToTimeInterval(doubleTime) {
+    /// MODIFY CODE ONLY BELOW THIS LINE
+    const total = doubleTime; // Assurez-vous que doubleTime est défini quelque part dans votre code
+  
+    // Obtient la partie entière de 'total' pour les heures
+    const currentHour = Math.trunc(total); // En JavaScript, utilisez Math.truncate() pour obtenir la partie entière
+    // Calcule les minutes en soustrayant les heures de 'total' et en multipliant par 60
+    // Utilisez Math.round() pour arrondir au nombre entier le plus proche si nécessaire
+    const currentMinute = Math.round((total - currentHour) * 60);
+  
+    // Formate les heures et les minutes pour avoir toujours deux chiffres en ajoutant des zéros au besoin
+    const currentTimeString = `${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}`;
+    return currentTimeString;
+  
+    /// MODIFY CODE ONLY ABOVE THIS LINE
+  }
+  export function parseDoubleToHourInterval(doubleTime) {
+    /// MODIFY CODE ONLY BELOW THIS LINE
+    const total = doubleTime; // Assurez-vous que doubleTime est défini quelque part dans votre code
+  
+    // Obtient la partie entière de 'total' pour les heures
+    const currentHour = Math.trunc(total); // En JavaScript, utilisez Math.truncate() pour obtenir la partie entière
+    // Calcule les minutes en soustrayant les heures de 'total' et en multipliant par 60
+    // Utilisez Math.round() pour arrondir au nombre entier le plus proche si nécessaire
+    const currentMinute = Math.round((total - currentHour) * 60);
+  
+    // Formate les heures et les minutes pour avoir toujours deux chiffres en ajoutant des zéros au besoin
+    const currentTimeString = `${currentHour.toString().padStart(2, '0')}h${currentMinute.toString().padStart(2, '0')}`;
+    return currentTimeString;
+  
+    /// MODIFY CODE ONLY ABOVE THIS LINE
+  }
+  export function parseDoubleToHourChartInterval(doubleTime) {
+    /// MODIFY CODE ONLY BELOW THIS LINE
+    const total = doubleTime; // Assurez-vous que doubleTime est défini quelque part dans votre code
+  
+    // Obtient la partie entière de 'total' pour les heures
+    const currentHour = Math.trunc(total); // En JavaScript, utilisez Math.truncate() pour obtenir la partie entière
+    // Calcule les minutes en soustrayant les heures de 'total' et en multipliant par 60
+    // Utilisez Math.round() pour arrondir au nombre entier le plus proche si nécessaire
+    const currentMinute = Math.round((total - currentHour) * 60);
+  
+    // Formate les heures et les minutes pour avoir toujours deux chiffres en ajoutant des zéros au besoin
+    const currentTimeString = `${currentHour.toString().padStart(2, '0')}h${currentMinute.toString().padStart(2, '0')}`;
+    return `${currentHour.toString()}h`;
+  
+    /// MODIFY CODE ONLY ABOVE THIS LINE
+  }

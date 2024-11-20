@@ -36,4 +36,8 @@ declare function DashboardPage(props: {
   componentChartRateTotal?: Types.Devlink.Slot;
   componentDays?: Types.Devlink.Slot;
   componentChartRevenues?: Types.Devlink.Slot;
+  componentCardStats?: Types.Devlink.Slot;
+  componentChartCountBySite?: Types.Devlink.Slot;
+  componentChartCountCourt?: Types.Devlink.Slot;
+  componentChartCountByCourt?: Types.Devlink.Slot;
 }): React.JSX.Element;

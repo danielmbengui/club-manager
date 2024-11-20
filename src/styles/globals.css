@@ -6,12 +6,17 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary-color: rgb(66, 133, 244);
+  --test-component: rgba(0, 0, 0, 0);
+  --test-text: rgb(0, 0, 0);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --test-component: rgba(0, 0, 0, 0);
+    --test-text: rgb(255, 255, 255);
   }
 }
 

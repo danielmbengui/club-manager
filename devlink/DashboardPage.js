@@ -64,6 +64,10 @@ export function DashboardPage({
   componentChartRateTotal,
   componentDays,
   componentChartRevenues,
+  componentCardStats,
+  componentChartCountBySite,
+  componentChartCountCourt,
+  componentChartCountByCourt,
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -292,7 +296,7 @@ export function DashboardPage({
                               </_Builtin.Link>
                             </_Builtin.Block>
                             <_Builtin.Block
-                              className="stat1_list-wrapper"
+                              className="stat1_list-wrapper devlink"
                               tag="div"
                             >
                               <_Builtin.Block
@@ -331,7 +335,7 @@ export function DashboardPage({
                                 >
                                   {isNotLoading ? (
                                     <_Builtin.Block
-                                      className="stats_box-number"
+                                      className="stats_box-number devlink"
                                       tag="div"
                                       wized="dashboard_reservations"
                                     >
@@ -399,7 +403,7 @@ export function DashboardPage({
                                 >
                                   {isNotLoading ? (
                                     <_Builtin.Block
-                                      className="stats_box-number"
+                                      className="stats_box-number devlink"
                                       tag="div"
                                       wized="dashboard_reservations"
                                     >
@@ -479,7 +483,7 @@ export function DashboardPage({
                                   </_Builtin.Block>
                                   {isNotLoading ? (
                                     <_Builtin.Block
-                                      className="stats_box-number"
+                                      className="stats_box-number devlink"
                                       tag="div"
                                       wized="total_reservations"
                                     >
@@ -538,7 +542,7 @@ export function DashboardPage({
                                   </_Builtin.Block>
                                   {isNotLoading ? (
                                     <_Builtin.Block
-                                      className="stats_box-number"
+                                      className="stats_box-number devlink"
                                       tag="div"
                                       wized="total_reservations"
                                     >
@@ -595,7 +599,7 @@ export function DashboardPage({
                                   </_Builtin.Block>
                                   {isNotLoading ? (
                                     <_Builtin.Block
-                                      className="stats_box-number"
+                                      className="stats_box-number devlink"
                                       tag="div"
                                       wized="dashboard_revenue"
                                     >
@@ -652,7 +656,7 @@ export function DashboardPage({
                                   </_Builtin.Block>
                                   {isNotLoading ? (
                                     <_Builtin.Block
-                                      className="stats_box-number"
+                                      className="stats_box-number devlink"
                                       tag="div"
                                       wized="dashboard_revenue"
                                     >
@@ -759,6 +763,61 @@ export function DashboardPage({
                           >
                             <_Builtin.Block
                               className="div-block-7"
+                              id="w-node-_01d21c4b-8a13-d85d-88fa-b4bf76491a3b-b784e17d"
+                              tag="div"
+                            >
+                              <_Builtin.Block
+                                className="stats_court bookings"
+                                id="w-node-_01d21c4b-8a13-d85d-88fa-b4bf76491a3c-b784e17d"
+                                tag="div"
+                              >
+                                <_Builtin.Block
+                                  className=" stats_text-box big"
+                                  tag="div"
+                                >
+                                  {"Statistiques"}
+                                </_Builtin.Block>
+                                <_Builtin.Block
+                                  className="stat1_item-content-bottom court"
+                                  tag="div"
+                                >
+                                  {isNotLoading ? (
+                                    <_Builtin.Block
+                                      className="form_dashboard devlink site chart card-stats"
+                                      tag="div"
+                                    >
+                                      <_Builtin.Block
+                                        className="div-block-11 chart-bar _2 bis"
+                                        id="w-node-_01d21c4b-8a13-d85d-88fa-b4bf76491a85-b784e17d"
+                                        tag="div"
+                                      >
+                                        <_Builtin.Block
+                                          className="div-block-21"
+                                          tag="div"
+                                        >
+                                          {componentChartCountBySite}
+                                        </_Builtin.Block>
+                                      </_Builtin.Block>
+                                    </_Builtin.Block>
+                                  ) : null}
+                                  {isLoading ? (
+                                    <_Builtin.Block
+                                      className="div-block-5"
+                                      tag="div"
+                                    >
+                                      <_Builtin.Block
+                                        className="block-progress small"
+                                        tag="div"
+                                      >
+                                        {componentProgress}
+                                      </_Builtin.Block>
+                                    </_Builtin.Block>
+                                  ) : null}
+                                </_Builtin.Block>
+                              </_Builtin.Block>
+                            </_Builtin.Block>
+                            <_Builtin.Block
+                              className="div-block-7"
                               id="w-node-e7636227-2c5b-8d03-60ac-eb0f6fc8a28f-b784e17d"
                               tag="div"
                             >
@@ -774,140 +833,421 @@ export function DashboardPage({
                                   {"Taux d'occupation"}
                                 </_Builtin.Block>
                                 <_Builtin.Block
-                                  className="stat1_item-content-bottom court"
+                                  className="div-block-8"
                                   tag="div"
                                 >
-                                  {isNotLoading ? (
+                                  <_Builtin.Block
+                                    className="div-block-18"
+                                    tag="div"
+                                  >
                                     <_Builtin.Block
-                                      className="form_dashboard devlink site chart"
+                                      className="stat1_item-content-bottom court booking"
                                       tag="div"
                                     >
-                                      <_Builtin.Block tag="div">
-                                        {componentChartRateBooking}
-                                      </_Builtin.Block>
+                                      {isNotLoading ? (
+                                        <_Builtin.Block
+                                          className="form_dashboard devlink site chart"
+                                          tag="div"
+                                        >
+                                          <_Builtin.Block
+                                            className="text-block-9"
+                                            tag="div"
+                                          >
+                                            {"Taux d'ocupation"}
+                                          </_Builtin.Block>
+                                          <_Builtin.Block tag="div">
+                                            {componentChartRateBooking}
+                                          </_Builtin.Block>
+                                        </_Builtin.Block>
+                                      ) : null}
+                                      {isLoading ? (
+                                        <_Builtin.Block
+                                          className="div-block-5"
+                                          tag="div"
+                                        >
+                                          <_Builtin.Block
+                                            className="block-progress small"
+                                            tag="div"
+                                          >
+                                            {componentProgress}
+                                          </_Builtin.Block>
+                                        </_Builtin.Block>
+                                      ) : null}
                                     </_Builtin.Block>
-                                  ) : null}
-                                  {isLoading ? (
-                                    <_Builtin.Block
-                                      className="div-block-5"
-                                      tag="div"
-                                    >
+                                  </_Builtin.Block>
+                                  <_Builtin.Block
+                                    className="stat1_item-content-bottom court"
+                                    tag="div"
+                                  >
+                                    {isNotLoading ? (
                                       <_Builtin.Block
-                                        className="block-progress small"
+                                        className="form_dashboard devlink site chart card-stats"
                                         tag="div"
                                       >
-                                        {componentProgress}
+                                        <_Builtin.Grid
+                                          className="grid-2"
+                                          tag="div"
+                                        >
+                                          <_Builtin.Block
+                                            className="div-block-11 _1"
+                                            id="w-node-_959851db-b696-21e7-2d95-382f12a379b3-b784e17d"
+                                            tag="div"
+                                          >
+                                            <_Builtin.Block
+                                              className="div-block-10 hours"
+                                              tag="div"
+                                            >
+                                              <_Builtin.Block
+                                                className="stat1_item-content-bottom court"
+                                                tag="div"
+                                              >
+                                                {isNotLoading ? (
+                                                  <_Builtin.Block
+                                                    className="form_dashboard devlink site chart"
+                                                    tag="div"
+                                                  >
+                                                    <_Builtin.Block tag="div">
+                                                      {componentChartRateHour}
+                                                    </_Builtin.Block>
+                                                  </_Builtin.Block>
+                                                ) : null}
+                                                {isLoading ? (
+                                                  <_Builtin.Block
+                                                    className="div-block-5"
+                                                    tag="div"
+                                                  >
+                                                    <_Builtin.Block
+                                                      className="block-progress small"
+                                                      tag="div"
+                                                    >
+                                                      {componentProgress}
+                                                    </_Builtin.Block>
+                                                  </_Builtin.Block>
+                                                ) : null}
+                                              </_Builtin.Block>
+                                              <_Builtin.Block
+                                                className="div-block-20"
+                                                id="w-node-fb028f32-fb30-5217-3cd3-377687802986-b784e17d"
+                                                tag="div"
+                                              >
+                                                <_Builtin.Block
+                                                  className="div-block-19"
+                                                  id="w-node-_9483b914-adea-2e0b-e2bd-6095ce7ad98a-b784e17d"
+                                                  tag="div"
+                                                >
+                                                  <_Builtin.Block
+                                                    className="divtitlecard"
+                                                    tag="div"
+                                                  >
+                                                    <_Builtin.HtmlEmbed
+                                                      className="stats_icon"
+                                                      value="%3Csvg%20width%3D%22auto%22%20height%3D%22auto%22%20viewBox%3D%220%200%2013%2014%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M9.89688%205.78345H6.72246C6.47456%205.78345%206.26897%205.57786%206.26897%205.32996C6.26897%205.08205%206.47456%204.87647%206.72246%204.87647H9.89688C10.0172%204.87647%2010.1325%204.92425%2010.2175%205.00929C10.3026%205.09434%2010.3504%205.20968%2010.3504%205.32996C10.3504%205.45023%2010.3026%205.56558%2010.2175%205.65062C10.1325%205.73567%2010.0172%205.78345%209.89688%205.78345ZM3.54804%206.24298C3.43316%206.24298%203.31828%206.20066%203.22758%206.10996L2.77409%205.65647C2.59874%205.48112%202.59874%205.19089%202.77409%205.01554C2.94944%204.84019%203.23967%204.84019%203.41502%205.01554L3.54804%205.14856L4.58804%204.10856C4.76339%203.93321%205.05362%203.93321%205.22897%204.10856C5.40432%204.28391%205.40432%204.57414%205.22897%204.74949L3.86851%206.10996C3.78354%206.19503%203.66828%206.24288%203.54804%206.24298ZM9.89688%2010.016H6.72246C6.47456%2010.016%206.26897%209.81042%206.26897%209.56252C6.26897%209.31461%206.47456%209.10903%206.72246%209.10903H9.89688C10.0172%209.10903%2010.1325%209.15681%2010.2175%209.24185C10.3026%209.3269%2010.3504%209.44224%2010.3504%209.56252C10.3504%209.68279%2010.3026%209.79813%2010.2175%209.88318C10.1325%209.96823%2010.0172%2010.016%209.89688%2010.016ZM3.54804%2010.4755C3.43316%2010.4755%203.31828%2010.4332%203.22758%2010.3425L2.77409%209.88903C2.59874%209.71368%202.59874%209.42345%202.77409%209.2481C2.94944%209.07275%203.23967%209.07275%203.41502%209.2481L3.54804%209.38112L4.58804%208.34112C4.76339%208.16577%205.05362%208.16577%205.22897%208.34112C5.40432%208.51647%205.40432%208.8067%205.22897%208.98205L3.86851%2010.3425C3.78354%2010.4276%203.66828%2010.4754%203.54804%2010.4755Z%22%20fill%3D%22currentColor%22%2F%3E%0A%3Cpath%20d%3D%22M8.312%2013.7222H4.68409C1.40084%2013.7222%20-0.00195312%2012.3194%20-0.00195312%209.03612V5.40821C-0.00195312%202.12496%201.40084%200.722168%204.68409%200.722168H8.312C11.5953%200.722168%2012.998%202.12496%2012.998%205.40821V9.03612C12.998%2012.3194%2011.5953%2013.7222%208.312%2013.7222ZM4.68409%201.62914C1.89665%201.62914%200.905024%202.62077%200.905024%205.40821V9.03612C0.905024%2011.8236%201.89665%2012.8152%204.68409%2012.8152H8.312C11.0994%2012.8152%2012.0911%2011.8236%2012.0911%209.03612V5.40821C12.0911%202.62077%2011.0994%201.62914%208.312%201.62914H4.68409Z%22%20fill%3D%22currentColor%22%2F%3E%0A%3C%2Fsvg%3E"
+                                                    />
+                                                  </_Builtin.Block>
+                                                  <_Builtin.Block
+                                                    className="div-block-13"
+                                                    id="w-node-_31829807-c986-076c-b8a3-0b2721dede57-b784e17d"
+                                                    tag="div"
+                                                  >
+                                                    <_Builtin.Block
+                                                      className="div-block-14"
+                                                      id="w-node-_6b4d0cfa-4069-0212-57dd-20dc03d42d13-b784e17d"
+                                                      tag="div"
+                                                    >
+                                                      <_Builtin.Block
+                                                        className="titleresult"
+                                                        id="w-node-_41ed6316-5e29-4dfa-808c-ffaf8b5be764-b784e17d"
+                                                        tag="div"
+                                                      >
+                                                        {"PlayPad"}
+                                                      </_Builtin.Block>
+                                                      <_Builtin.Block
+                                                        className="countresult"
+                                                        id="w-node-a593e972-fb44-1672-bc78-9392b7c3122f-b784e17d"
+                                                        tag="div"
+                                                      >
+                                                        {"266h"}
+                                                      </_Builtin.Block>
+                                                    </_Builtin.Block>
+                                                    <_Builtin.Block
+                                                      className="div-block-14"
+                                                      id="w-node-_4ad6d6da-5bb6-9e89-2cdc-a350bdd4e477-b784e17d"
+                                                      tag="div"
+                                                    >
+                                                      <_Builtin.Block
+                                                        className="titleresult"
+                                                        id="w-node-_4ad6d6da-5bb6-9e89-2cdc-a350bdd4e478-b784e17d"
+                                                        tag="div"
+                                                      >
+                                                        {"Club"}
+                                                      </_Builtin.Block>
+                                                      <_Builtin.Block
+                                                        className="countresult"
+                                                        id="w-node-_4ad6d6da-5bb6-9e89-2cdc-a350bdd4e47a-b784e17d"
+                                                        tag="div"
+                                                      >
+                                                        {"84h"}
+                                                      </_Builtin.Block>
+                                                    </_Builtin.Block>
+                                                    <_Builtin.Block
+                                                      className="div-block-14"
+                                                      id="w-node-_9c654108-5231-616e-34b1-6d3f12666e3c-b784e17d"
+                                                      tag="div"
+                                                    >
+                                                      <_Builtin.Block
+                                                        className="titleresult"
+                                                        id="w-node-_9c654108-5231-616e-34b1-6d3f12666e3d-b784e17d"
+                                                        tag="div"
+                                                      >
+                                                        {"Total"}
+                                                      </_Builtin.Block>
+                                                      <_Builtin.Block
+                                                        className="countresult"
+                                                        id="w-node-_9c654108-5231-616e-34b1-6d3f12666e3f-b784e17d"
+                                                        tag="div"
+                                                      >
+                                                        {"350h"}
+                                                      </_Builtin.Block>
+                                                    </_Builtin.Block>
+                                                  </_Builtin.Block>
+                                                </_Builtin.Block>
+                                                <_Builtin.Block
+                                                  className="div-block-19"
+                                                  id="w-node-a788e30a-aa1d-b414-cf96-b0e504b2d09c-b784e17d"
+                                                  tag="div"
+                                                >
+                                                  <_Builtin.Block
+                                                    className="div-block-13"
+                                                    id="w-node-a788e30a-aa1d-b414-cf96-b0e504b2d09f-b784e17d"
+                                                    tag="div"
+                                                  >
+                                                    <_Builtin.Block
+                                                      className="div-block-14"
+                                                      id="w-node-a788e30a-aa1d-b414-cf96-b0e504b2d0a0-b784e17d"
+                                                      tag="div"
+                                                    >
+                                                      <_Builtin.Block
+                                                        className="titleresult"
+                                                        id="w-node-a788e30a-aa1d-b414-cf96-b0e504b2d0a1-b784e17d"
+                                                        tag="div"
+                                                      >
+                                                        {"Joueurs PlayPad"}
+                                                      </_Builtin.Block>
+                                                      <_Builtin.Block
+                                                        className="countresult"
+                                                        id="w-node-a788e30a-aa1d-b414-cf96-b0e504b2d0a3-b784e17d"
+                                                        tag="div"
+                                                      >
+                                                        {"31"}
+                                                      </_Builtin.Block>
+                                                    </_Builtin.Block>
+                                                    <_Builtin.Block
+                                                      className="div-block-14"
+                                                      id="w-node-a788e30a-aa1d-b414-cf96-b0e504b2d0a5-b784e17d"
+                                                      tag="div"
+                                                    >
+                                                      <_Builtin.Block
+                                                        className="titleresult"
+                                                        id="w-node-a788e30a-aa1d-b414-cf96-b0e504b2d0a6-b784e17d"
+                                                        tag="div"
+                                                      >
+                                                        {"JoueursClub"}
+                                                      </_Builtin.Block>
+                                                      <_Builtin.Block
+                                                        className="countresult"
+                                                        id="w-node-a788e30a-aa1d-b414-cf96-b0e504b2d0a8-b784e17d"
+                                                        tag="div"
+                                                      >
+                                                        {"7"}
+                                                      </_Builtin.Block>
+                                                    </_Builtin.Block>
+                                                  </_Builtin.Block>
+                                                </_Builtin.Block>
+                                              </_Builtin.Block>
+                                            </_Builtin.Block>
+                                          </_Builtin.Block>
+                                          <_Builtin.Block
+                                            className="div-block-12 users"
+                                            id="w-node-dbbc2448-2aac-95fc-6b68-5cabb5be65af-b784e17d"
+                                            tag="div"
+                                          >
+                                            <_Builtin.Block
+                                              className="div-block-11"
+                                              id="w-node-_57286811-66e9-721a-533d-0b8da1b8cb4a-b784e17d"
+                                              tag="div"
+                                            >
+                                              <_Builtin.Block
+                                                className="div-block-10"
+                                                tag="div"
+                                              >
+                                                <_Builtin.Block
+                                                  className="divtitlecard"
+                                                  tag="div"
+                                                >
+                                                  <_Builtin.HtmlEmbed
+                                                    className="stats_icon"
+                                                    value="%3Csvg%20width%3D%22auto%22%20height%3D%22auto%22%20viewBox%3D%220%200%2013%2014%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M9.89688%205.78345H6.72246C6.47456%205.78345%206.26897%205.57786%206.26897%205.32996C6.26897%205.08205%206.47456%204.87647%206.72246%204.87647H9.89688C10.0172%204.87647%2010.1325%204.92425%2010.2175%205.00929C10.3026%205.09434%2010.3504%205.20968%2010.3504%205.32996C10.3504%205.45023%2010.3026%205.56558%2010.2175%205.65062C10.1325%205.73567%2010.0172%205.78345%209.89688%205.78345ZM3.54804%206.24298C3.43316%206.24298%203.31828%206.20066%203.22758%206.10996L2.77409%205.65647C2.59874%205.48112%202.59874%205.19089%202.77409%205.01554C2.94944%204.84019%203.23967%204.84019%203.41502%205.01554L3.54804%205.14856L4.58804%204.10856C4.76339%203.93321%205.05362%203.93321%205.22897%204.10856C5.40432%204.28391%205.40432%204.57414%205.22897%204.74949L3.86851%206.10996C3.78354%206.19503%203.66828%206.24288%203.54804%206.24298ZM9.89688%2010.016H6.72246C6.47456%2010.016%206.26897%209.81042%206.26897%209.56252C6.26897%209.31461%206.47456%209.10903%206.72246%209.10903H9.89688C10.0172%209.10903%2010.1325%209.15681%2010.2175%209.24185C10.3026%209.3269%2010.3504%209.44224%2010.3504%209.56252C10.3504%209.68279%2010.3026%209.79813%2010.2175%209.88318C10.1325%209.96823%2010.0172%2010.016%209.89688%2010.016ZM3.54804%2010.4755C3.43316%2010.4755%203.31828%2010.4332%203.22758%2010.3425L2.77409%209.88903C2.59874%209.71368%202.59874%209.42345%202.77409%209.2481C2.94944%209.07275%203.23967%209.07275%203.41502%209.2481L3.54804%209.38112L4.58804%208.34112C4.76339%208.16577%205.05362%208.16577%205.22897%208.34112C5.40432%208.51647%205.40432%208.8067%205.22897%208.98205L3.86851%2010.3425C3.78354%2010.4276%203.66828%2010.4754%203.54804%2010.4755Z%22%20fill%3D%22currentColor%22%2F%3E%0A%3Cpath%20d%3D%22M8.312%2013.7222H4.68409C1.40084%2013.7222%20-0.00195312%2012.3194%20-0.00195312%209.03612V5.40821C-0.00195312%202.12496%201.40084%200.722168%204.68409%200.722168H8.312C11.5953%200.722168%2012.998%202.12496%2012.998%205.40821V9.03612C12.998%2012.3194%2011.5953%2013.7222%208.312%2013.7222ZM4.68409%201.62914C1.89665%201.62914%200.905024%202.62077%200.905024%205.40821V9.03612C0.905024%2011.8236%201.89665%2012.8152%204.68409%2012.8152H8.312C11.0994%2012.8152%2012.0911%2011.8236%2012.0911%209.03612V5.40821C12.0911%202.62077%2011.0994%201.62914%208.312%201.62914H4.68409Z%22%20fill%3D%22currentColor%22%2F%3E%0A%3C%2Fsvg%3E"
+                                                  />
+                                                  <_Builtin.Block
+                                                    className="text-block-7"
+                                                    tag="div"
+                                                  >
+                                                    {"Utilisateurs"}
+                                                  </_Builtin.Block>
+                                                </_Builtin.Block>
+                                                <_Builtin.Block
+                                                  className="div-block-17"
+                                                  id="w-node-_259338c8-e7b4-a8f6-72fe-3cb62b169bee-b784e17d"
+                                                  tag="div"
+                                                >
+                                                  <_Builtin.Block
+                                                    className="div-block-16"
+                                                    id="w-node-_63713eda-26b0-7af8-859e-d220ef072a5f-b784e17d"
+                                                    tag="div"
+                                                  >
+                                                    <_Builtin.Block
+                                                      className="titleresult"
+                                                      id="w-node-_57286811-66e9-721a-533d-0b8da1b8cb51-b784e17d"
+                                                      tag="div"
+                                                    >
+                                                      {"PlayPad"}
+                                                    </_Builtin.Block>
+                                                    <_Builtin.Block
+                                                      className="countresult"
+                                                      tag="div"
+                                                    >
+                                                      {"250"}
+                                                    </_Builtin.Block>
+                                                  </_Builtin.Block>
+                                                  <_Builtin.Block
+                                                    className="div-block-16"
+                                                    id="w-node-e1ff2089-c758-4ac7-f2f0-56c3eb29b46e-b784e17d"
+                                                    tag="div"
+                                                  >
+                                                    <_Builtin.Block
+                                                      className="titleresult"
+                                                      id="w-node-e1ff2089-c758-4ac7-f2f0-56c3eb29b46f-b784e17d"
+                                                      tag="div"
+                                                    >
+                                                      {"Club"}
+                                                    </_Builtin.Block>
+                                                    <_Builtin.Block
+                                                      className="countresult"
+                                                      tag="div"
+                                                    >
+                                                      {"250"}
+                                                    </_Builtin.Block>
+                                                  </_Builtin.Block>
+                                                </_Builtin.Block>
+                                              </_Builtin.Block>
+                                            </_Builtin.Block>
+                                            <_Builtin.Block
+                                              className="div-block-11"
+                                              id="w-node-_2c4e0560-50d0-1d1a-7ce9-06ba41bfacbf-b784e17d"
+                                              tag="div"
+                                            >
+                                              <_Builtin.Block
+                                                className="div-block-10"
+                                                tag="div"
+                                              >
+                                                <_Builtin.Block
+                                                  className="divtitlecard"
+                                                  tag="div"
+                                                >
+                                                  <_Builtin.HtmlEmbed
+                                                    className="stats_icon"
+                                                    value="%3Csvg%20width%3D%22auto%22%20height%3D%22auto%22%20viewBox%3D%220%200%2013%2014%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M9.89688%205.78345H6.72246C6.47456%205.78345%206.26897%205.57786%206.26897%205.32996C6.26897%205.08205%206.47456%204.87647%206.72246%204.87647H9.89688C10.0172%204.87647%2010.1325%204.92425%2010.2175%205.00929C10.3026%205.09434%2010.3504%205.20968%2010.3504%205.32996C10.3504%205.45023%2010.3026%205.56558%2010.2175%205.65062C10.1325%205.73567%2010.0172%205.78345%209.89688%205.78345ZM3.54804%206.24298C3.43316%206.24298%203.31828%206.20066%203.22758%206.10996L2.77409%205.65647C2.59874%205.48112%202.59874%205.19089%202.77409%205.01554C2.94944%204.84019%203.23967%204.84019%203.41502%205.01554L3.54804%205.14856L4.58804%204.10856C4.76339%203.93321%205.05362%203.93321%205.22897%204.10856C5.40432%204.28391%205.40432%204.57414%205.22897%204.74949L3.86851%206.10996C3.78354%206.19503%203.66828%206.24288%203.54804%206.24298ZM9.89688%2010.016H6.72246C6.47456%2010.016%206.26897%209.81042%206.26897%209.56252C6.26897%209.31461%206.47456%209.10903%206.72246%209.10903H9.89688C10.0172%209.10903%2010.1325%209.15681%2010.2175%209.24185C10.3026%209.3269%2010.3504%209.44224%2010.3504%209.56252C10.3504%209.68279%2010.3026%209.79813%2010.2175%209.88318C10.1325%209.96823%2010.0172%2010.016%209.89688%2010.016ZM3.54804%2010.4755C3.43316%2010.4755%203.31828%2010.4332%203.22758%2010.3425L2.77409%209.88903C2.59874%209.71368%202.59874%209.42345%202.77409%209.2481C2.94944%209.07275%203.23967%209.07275%203.41502%209.2481L3.54804%209.38112L4.58804%208.34112C4.76339%208.16577%205.05362%208.16577%205.22897%208.34112C5.40432%208.51647%205.40432%208.8067%205.22897%208.98205L3.86851%2010.3425C3.78354%2010.4276%203.66828%2010.4754%203.54804%2010.4755Z%22%20fill%3D%22currentColor%22%2F%3E%0A%3Cpath%20d%3D%22M8.312%2013.7222H4.68409C1.40084%2013.7222%20-0.00195312%2012.3194%20-0.00195312%209.03612V5.40821C-0.00195312%202.12496%201.40084%200.722168%204.68409%200.722168H8.312C11.5953%200.722168%2012.998%202.12496%2012.998%205.40821V9.03612C12.998%2012.3194%2011.5953%2013.7222%208.312%2013.7222ZM4.68409%201.62914C1.89665%201.62914%200.905024%202.62077%200.905024%205.40821V9.03612C0.905024%2011.8236%201.89665%2012.8152%204.68409%2012.8152H8.312C11.0994%2012.8152%2012.0911%2011.8236%2012.0911%209.03612V5.40821C12.0911%202.62077%2011.0994%201.62914%208.312%201.62914H4.68409Z%22%20fill%3D%22currentColor%22%2F%3E%0A%3C%2Fsvg%3E"
+                                                  />
+                                                  <_Builtin.Block
+                                                    className="text-block-7"
+                                                    tag="div"
+                                                  >
+                                                    {"Matchs"}
+                                                  </_Builtin.Block>
+                                                </_Builtin.Block>
+                                                <_Builtin.Block
+                                                  className="div-block-17"
+                                                  id="w-node-_2c4e0560-50d0-1d1a-7ce9-06ba41bfacc4-b784e17d"
+                                                  tag="div"
+                                                >
+                                                  <_Builtin.Block
+                                                    className="div-block-16"
+                                                    id="w-node-_2c4e0560-50d0-1d1a-7ce9-06ba41bfacc5-b784e17d"
+                                                    tag="div"
+                                                  >
+                                                    <_Builtin.Block
+                                                      className="titleresult"
+                                                      id="w-node-_2c4e0560-50d0-1d1a-7ce9-06ba41bfacc6-b784e17d"
+                                                      tag="div"
+                                                    >
+                                                      {"Fermés"}
+                                                    </_Builtin.Block>
+                                                    <_Builtin.Block
+                                                      className="countresult"
+                                                      tag="div"
+                                                    >
+                                                      {"250"}
+                                                    </_Builtin.Block>
+                                                  </_Builtin.Block>
+                                                  <_Builtin.Block
+                                                    className="div-block-16"
+                                                    id="w-node-_2c4e0560-50d0-1d1a-7ce9-06ba41bfacca-b784e17d"
+                                                    tag="div"
+                                                  >
+                                                    <_Builtin.Block
+                                                      className="titleresult"
+                                                      id="w-node-_2c4e0560-50d0-1d1a-7ce9-06ba41bfaccb-b784e17d"
+                                                      tag="div"
+                                                    >
+                                                      {"Ouverts"}
+                                                    </_Builtin.Block>
+                                                    <_Builtin.Block
+                                                      className="countresult"
+                                                      tag="div"
+                                                    >
+                                                      {"250"}
+                                                    </_Builtin.Block>
+                                                  </_Builtin.Block>
+                                                </_Builtin.Block>
+                                              </_Builtin.Block>
+                                            </_Builtin.Block>
+                                          </_Builtin.Block>
+                                          <_Builtin.Block
+                                            className="div-block-11 chart-bar _1"
+                                            id="w-node-c32ad124-3bbb-0306-3eb9-4d2dd701cda2-b784e17d"
+                                            tag="div"
+                                          >
+                                            <_Builtin.Block tag="div">
+                                              {componentChartCountBySite}
+                                            </_Builtin.Block>
+                                          </_Builtin.Block>
+                                          <_Builtin.Block
+                                            className="div-block-11 chart-bar court"
+                                            id="w-node-ac0c2a68-bf50-c658-23bb-f3e4a6cd9464-b784e17d"
+                                            tag="div"
+                                          >
+                                            <_Builtin.Block tag="div">
+                                              {componentChartCountByCourt}
+                                            </_Builtin.Block>
+                                          </_Builtin.Block>
+                                        </_Builtin.Grid>
                                       </_Builtin.Block>
-                                    </_Builtin.Block>
-                                  ) : null}
-                                </_Builtin.Block>
-                                <_Builtin.Block
-                                  className="stats_icon-box rotate"
-                                  tag="div"
-                                >
-                                  <_Builtin.HtmlEmbed
-                                    className="stats_icon big"
-                                    value="%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20x%3D%220%22%20y%3D%220%22%20viewBox%3D%220%200%20512%20512%22%20style%3D%22enable-background%3A%20new%200%200%20512%20512%22%20xml%3Aspace%3D%22preserve%22%20class%3D%22%22%3E%0A%20%20%3Cg%3E%0A%20%20%20%20%3Cpath%20d%3D%22M397.5%20356.881V457h-283V356.881h-44V501h371V356.881zM70.5%2011v144.119h44V55h283v100.119h44V11z%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M256%20125.119v261.762M114.5%20125.119v261.762M397.5%20125.119v261.762%22%20style%3D%22stroke-width%3A%2022%3B%20stroke-linejoin%3A%20round%3B%20stroke-miterlimit%3A%2010%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M397.5%20386.881h-283M114.5%20125.119h283%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M439.969%20256H72.031%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22%2333cccc%22%20opacity%3D%221%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E"
-                                  />
-                                </_Builtin.Block>
-                              </_Builtin.Block>
-                              <_Builtin.Block
-                                className="stats_court hours"
-                                id="w-node-_7712ff94-f7bd-adcf-b3fb-c1ad3618a0b3-b784e17d"
-                                tag="div"
-                              >
-                                <_Builtin.Block
-                                  className=" stats_text-box big"
-                                  tag="div"
-                                >
-                                  {"Occupation (Heures)"}
-                                </_Builtin.Block>
-                                <_Builtin.Block
-                                  className="stat1_item-content-bottom court"
-                                  tag="div"
-                                >
-                                  {isNotLoading ? (
-                                    <_Builtin.Block
-                                      className="form_dashboard devlink site chart"
-                                      tag="div"
-                                    >
-                                      <_Builtin.Block tag="div">
-                                        {componentChartRateHour}
-                                      </_Builtin.Block>
-                                    </_Builtin.Block>
-                                  ) : null}
-                                  {isLoading ? (
-                                    <_Builtin.Block
-                                      className="div-block-5"
-                                      tag="div"
-                                    >
+                                    ) : null}
+                                    {isLoading ? (
                                       <_Builtin.Block
-                                        className="block-progress small"
+                                        className="div-block-5"
                                         tag="div"
                                       >
-                                        {componentProgress}
+                                        <_Builtin.Block
+                                          className="block-progress small"
+                                          tag="div"
+                                        >
+                                          {componentProgress}
+                                        </_Builtin.Block>
                                       </_Builtin.Block>
-                                    </_Builtin.Block>
-                                  ) : null}
-                                </_Builtin.Block>
-                                <_Builtin.Block
-                                  className="stats_icon-box rotate"
-                                  tag="div"
-                                >
-                                  <_Builtin.HtmlEmbed
-                                    className="stats_icon big"
-                                    value="%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20x%3D%220%22%20y%3D%220%22%20viewBox%3D%220%200%20512%20512%22%20style%3D%22enable-background%3A%20new%200%200%20512%20512%22%20xml%3Aspace%3D%22preserve%22%20class%3D%22%22%3E%0A%20%20%3Cg%3E%0A%20%20%20%20%3Cpath%20d%3D%22M397.5%20356.881V457h-283V356.881h-44V501h371V356.881zM70.5%2011v144.119h44V55h283v100.119h44V11z%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M256%20125.119v261.762M114.5%20125.119v261.762M397.5%20125.119v261.762%22%20style%3D%22stroke-width%3A%2022%3B%20stroke-linejoin%3A%20round%3B%20stroke-miterlimit%3A%2010%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M397.5%20386.881h-283M114.5%20125.119h283%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M439.969%20256H72.031%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22%2333cccc%22%20opacity%3D%221%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E"
-                                  />
-                                </_Builtin.Block>
-                              </_Builtin.Block>
-                            </_Builtin.Block>
-                            <_Builtin.Block
-                              className="stats_court second"
-                              id="w-node-_22672635-3639-4e9d-edce-3f71e67aede0-b784e17d"
-                              tag="div"
-                            >
-                              <_Builtin.Block
-                                className=" stats_text-box big"
-                                tag="div"
-                              >
-                                {"Occupation Moyenne"}
-                              </_Builtin.Block>
-                              <_Builtin.Block
-                                className="stat1_item-content-bottom court"
-                                tag="div"
-                              >
-                                <_Builtin.Block
-                                  className="form_dashboard devlink site chart"
-                                  tag="div"
-                                >
-                                  <_Builtin.Block tag="div">
-                                    {componentChartRateTotal}
+                                    ) : null}
                                   </_Builtin.Block>
                                 </_Builtin.Block>
-                                {isLoading ? (
-                                  <_Builtin.Block
-                                    className="div-block-5"
-                                    tag="div"
-                                  />
-                                ) : null}
-                              </_Builtin.Block>
-                              <_Builtin.Block
-                                className="stats_icon-box rotate"
-                                tag="div"
-                              >
-                                <_Builtin.HtmlEmbed
-                                  className="stats_icon big"
-                                  value="%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20x%3D%220%22%20y%3D%220%22%20viewBox%3D%220%200%20512%20512%22%20style%3D%22enable-background%3A%20new%200%200%20512%20512%22%20xml%3Aspace%3D%22preserve%22%20class%3D%22%22%3E%0A%20%20%3Cg%3E%0A%20%20%20%20%3Cpath%20d%3D%22M397.5%20356.881V457h-283V356.881h-44V501h371V356.881zM70.5%2011v144.119h44V55h283v100.119h44V11z%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M256%20125.119v261.762M114.5%20125.119v261.762M397.5%20125.119v261.762%22%20style%3D%22stroke-width%3A%2022%3B%20stroke-linejoin%3A%20round%3B%20stroke-miterlimit%3A%2010%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M397.5%20386.881h-283M114.5%20125.119h283%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M439.969%20256H72.031%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22%2333cccc%22%20opacity%3D%221%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E"
-                                />
-                              </_Builtin.Block>
-                              <_Builtin.Block
-                                className="stats_icon-box site"
-                                tag="div"
-                              >
-                                <_Builtin.HtmlEmbed
-                                  className="stats_icon site"
-                                  value="%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20x%3D%220%22%20y%3D%220%22%20viewBox%3D%220%200%20512%20512%22%20style%3D%22enable-background%3A%20new%200%200%20512%20512%22%20xml%3Aspace%3D%22preserve%22%20class%3D%22%22%3E%0A%20%20%3Cg%3E%0A%20%20%20%20%3Cpath%20d%3D%22M397.5%20356.881V457h-283V356.881h-44V501h371V356.881zM70.5%2011v144.119h44V55h283v100.119h44V11z%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M256%20125.119v261.762M114.5%20125.119v261.762M397.5%20125.119v261.762%22%20style%3D%22stroke-width%3A%2022%3B%20stroke-linejoin%3A%20round%3B%20stroke-miterlimit%3A%2010%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M397.5%20386.881h-283M114.5%20125.119h283%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22currentColor%22%20class%3D%22%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M439.969%20256H72.031%22%20style%3D%22%0A%20%20%20%20%20%20%20%20stroke-width%3A%2022%3B%0A%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%0A%20%20%20%20%20%20%20%20stroke-miterlimit%3A%2010%3B%0A%20%20%20%20%20%20%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%2222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-miterlimit%3D%2210%22%20data-original%3D%22%2333cccc%22%20opacity%3D%221%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E"
-                                />
                               </_Builtin.Block>
                             </_Builtin.Block>
                           </_Builtin.Block>
@@ -945,7 +1285,7 @@ export function DashboardPage({
                                 </_Builtin.Block>
                               </_Builtin.Block>
                               <_Builtin.Block
-                                className="timeline-button-group"
+                                className="timeline-button-group devlink"
                                 tag="div"
                               >
                                 <_Builtin.Link
@@ -992,7 +1332,7 @@ export function DashboardPage({
                             <_Builtin.Block className="revenue_chart" tag="div">
                               {isNotLoading ? (
                                 <_Builtin.Block
-                                  className="chart_embed"
+                                  className="chart_embed final"
                                   tag="div"
                                 >
                                   <_Builtin.Block

@@ -7,27 +7,14 @@ import { useAuth } from "@/providers/AuthProvider";
 import { Button, CircularProgress, MenuItem, Select, Stack } from '@mui/material';
 import { collection, query, where, getDocs, doc } from "firebase/firestore";
 import { firestore } from '@/firebase';
-import { formatCountBookings, formatCurrency, formatNumber, formatPercentage, getDaysInMonth, getFirstAndLastDayOfDay, getFirstAndLastDayOfMonth, getFirstAndLastDayOfYear } from '@/functions';
+import { formatCountBookings, formatCurrency, formatNumber, formatPercentage, getArrayMonthJson, getArrayMonthStr, getDaysInMonth, getFirstAndLastDayOfDay, getFirstAndLastDayOfMonth, getFirstAndLastDayOfYear, parseDoubleToHourChartInterval, parseDoubleToHourInterval, parseDoubleToTimeInterval } from '@/functions';
 import { getCountBookingsClub, getCountBookingsPlayPad, getCountBookingsTotal, getRateBookingsClub, getRateBookingsPlayPad, getRateHoursClub, getRateHoursPlayPad } from '@/functions/bookings';
-import { getRevenuesClub, getRevenuesPlayPad, getRevenuesTotal, getRevenuesTotalCourt, getRevenuesTotalSite } from '@/functions/transactions';
+import { getArrayRevenuesTotal, getRevenuesClub, getRevenuesPlayPad, getRevenuesTotal, getRevenuesTotalCourt, getRevenuesTotalSite } from '@/functions/transactions';
 import PieChart from '@/components/PieChart';
 import LineChart from '@/components/LineChart';
+import BarChartCustom from '@/components/BarChartCustom';
 
-const MONTHS = [
-  { value: 0, text: "Tous" },
-  { value: 1, text: "Janvier" },
-  { value: 2, text: "Février" },
-  { value: 3, text: "Mars" },
-  { value: 4, text: "Avril" },
-  { value: 5, text: "Mai" },
-  { value: 6, text: "Juin" },
-  { value: 7, text: "Juillet" },
-  { value: 8, text: "Août" },
-  { value: 9, text: "Septembre" },
-  { value: 10, text: "Octobre" },
-  { value: 11, text: "Novembre" },
-  { value: 12, text: "Décembre" },
-];
+const MONTHS = getArrayMonthJson();
 
 var DAYS = [
   { value: 0, text: "Tous" },
@@ -71,8 +58,13 @@ export default function Home() {
   const [rateBookingPlayPad, setRateBookingPlayPad] = useState(0);
   const [rateBookingClub, setRateBookingClub] = useState(0);
 
-  const [rateHoursPlayPad, setRateHourPlayPad] = useState(0);
+  const [rateHoursPlayPad, setRateHoursPlayPad] = useState(0);
   const [rateHoursClub, setRateHourClub] = useState(0);
+  var indexLabelsLineChart = -1;
+  const [labelsLineChart, setLabelsLineChart] = useState(Array.from({ length: 12 }, () => { indexLabelsLineChart++; return getArrayMonthStr()[indexLabelsLineChart]; }));
+  const [valuesLineChart, setValuesLineChart] = useState(Array.from({ length: 12 }, () => { indexLabelsLineChart++; return 0 }));
+
+  //const labels = Array.from({ length: 12 }, () => { i++; return getMonthStr(i); });
 
 
 
@@ -128,14 +120,14 @@ export default function Home() {
     COURTS.unshift({ value: 0, name: "Tous" });
     //COURTS = COURTS.concat(newCourts);
   }
-  function initDays(month = 0, year=0) {
+  function initDays(month = 0, year = 0) {
     const newTab = getDaysInMonth(month, year);
     DAYS = [{ value: 0, text: "Tous" }];
-    for(let element of newTab) {
-DAYS.push({ value: element, text: ""+element },);
+    for (let element of newTab) {
+      DAYS.push({ value: element, text: "" + element },);
     }
   }
-  async function getBookings(club, site = 0, court = 0, day=0,month = 0, year = 2024) {
+  async function getBookings(club, site = 0, court = 0, day = 0, month = 0, year = 2024) {
     console.log("try get bookings");
     //const { firstDay, lastDay } = getFirstAndLastDayOfMonth(year, month - 1);
     const clubRef = doc(firestore, "CLUBS", club.uid);
@@ -144,46 +136,47 @@ DAYS.push({ value: element, text: ""+element },);
     let queryTransaction;
 
     setIsLoading(true);
+    let indexLabelsLineChart = -1;
+
+    if (day != 0) {
+      setLabelsLineChart(Array.from({ length: 24 }, () => { indexLabelsLineChart++; return `${parseDoubleToHourChartInterval(indexLabelsLineChart)} - ${parseDoubleToHourChartInterval(indexLabelsLineChart + 1)}`; }))
+    } else if (month != 0) {
+      const daysInMonth = getDaysInMonth(month, year);
+      setLabelsLineChart(Array.from({ length: daysInMonth.length }, () => { indexLabelsLineChart++; return daysInMonth[indexLabelsLineChart]; }));
+    } else {
+      setLabelsLineChart(Array.from({ length: 12 }, () => { indexLabelsLineChart++; return getArrayMonthStr()[indexLabelsLineChart]; }));
+    }
     if (site != 0) {
       const siteRef = doc(collection(clubRef, "SITES"), site);
-      if (day != 0) {
-        setDisabledAllYear(true);
-        setDisabledAllMonth(true);
-        //const { firstDay, lastDay } = getFirstAndLastDayOfMonth(month - 1, year);
-        const { firstDay, lastDay } = getFirstAndLastDayOfDay(day, month - 1, year);
-        //(day, month, year)
-        queryBooking = query(collection(clubRef, "COURT_BOOKINGS"),
-          //where("is_from_app", "==", true),
-          where("site_ref", "==", siteRef),
-          where("match_start_date", ">=", firstDay),
-          where("match_start_date", "<=", lastDay),
-        );
-        queryTransaction = query(collection(clubRef, "COURT_TRANSACTIONS"),
-          //where("is_from_app", "==", true),
-          where("site_ref", "==", siteRef),
-          where("payment_date", ">=", firstDay),
-          where("payment_date", "<=", lastDay),
-        );
-      } else if (month != 0) {
-        setDisabledAllYear(true);
-        const { firstDay, lastDay } = getFirstAndLastDayOfMonth(month - 1, year);
-        queryBooking = query(collection(clubRef, "COURT_BOOKINGS"),
-          where("site_ref", "==", siteRef),
-          where("match_start_date", ">=", firstDay),
-          where("match_start_date", "<=", lastDay),
-        );
-        queryTransaction = query(collection(clubRef, "COURT_TRANSACTIONS"),
-          where("site_ref", "==", siteRef),
-          where("payment_date", ">=", firstDay),
-          where("payment_date", "<=", lastDay),
-        );
+      if (day != 0 || month != 0 || year != 0) {
+        var { firstDay, lastDay } = {};
+        if (day != 0) {
+          firstDay = getFirstAndLastDayOfDay(day, month - 1, year).firstDay;
+          lastDay = getFirstAndLastDayOfDay(day, month - 1, year).lastDay;
+          setDisabledAllYear(true);
+          setDisabledAllMonth(true);
+        } else if (month != 0) {
+          setDisabledAllYear(true);
+          //const { firstDay, lastDay } = getFirstAndLastDayOfMonth(month - 1, year);
+          firstDay = getFirstAndLastDayOfMonth(month - 1, year).firstDay;
+          lastDay = getFirstAndLastDayOfMonth(month - 1, year).lastDay;
+        } else if (year != 0) {
+          //const requestMonth = month!=0?month:0;
+          if (YEARS.length > 2) {
+            setDisabledAllYear(false);
+          }
+          setMonth(0);
+          //const { firstDay, lastDay } = getFirstAndLastDayOfYear(year);
+          firstDay = getFirstAndLastDayOfYear(year).firstDay;
+          lastDay = getFirstAndLastDayOfYear(year).lastDay;
+        }
         if (court != 0) {
           const courtRef = doc(collection(clubRef, "COURTS"), court);
           queryBooking = query(collection(clubRef, "COURT_BOOKINGS"),
             where("site_ref", "==", siteRef),
             where("court_ref", "==", courtRef),
-            where("match_start_date", ">=", firstDay),
-            where("match_start_date", "<=", lastDay),
+            where("created_date", ">=", firstDay),
+            where("created_date", "<=", lastDay),
           );
           queryTransaction = query(collection(clubRef, "COURT_TRANSACTIONS"),
             where("site_ref", "==", siteRef),
@@ -191,121 +184,97 @@ DAYS.push({ value: element, text: ""+element },);
             where("payment_date", ">=", firstDay),
             where("payment_date", "<=", lastDay),
           );
-        }
-      } else if (year != 0) {
-        //const requestMonth = month!=0?month:0;
-        setDisabledAllYear(false);
-        setMonth(0);
-        const { firstDay, lastDay } = getFirstAndLastDayOfYear(year);
-        queryBooking = query(collection(clubRef, "COURT_BOOKINGS"),
-          // where("is_from_app", "==", true),
-          where("site_ref", "==", siteRef),
-          where("match_start_date", ">=", firstDay),
-          where("match_start_date", "<=", lastDay),
-        );
-        queryTransaction = query(collection(clubRef, "COURT_TRANSACTIONS"),
-          //where("is_from_app", "==", true),
-          where("site_ref", "==", siteRef),
-          where("payment_date", ">=", firstDay),
-          where("payment_date", "<=", lastDay),
-        );
-        if (court != 0) {
-          const courtRef = doc(collection(clubRef, "COURTS"), court);
+        } else {
           queryBooking = query(collection(clubRef, "COURT_BOOKINGS"),
+            //where("is_from_app", "==", true),
             where("site_ref", "==", siteRef),
-            where("court_ref", "==", courtRef),
-            where("match_start_date", ">=", firstDay),
-            where("match_start_date", "<=", lastDay),
+            where("created_date", ">=", firstDay),
+            where("created_date", "<=", lastDay),
           );
           queryTransaction = query(collection(clubRef, "COURT_TRANSACTIONS"),
+            //where("is_from_app", "==", true),
             where("site_ref", "==", siteRef),
-            where("court_ref", "==", courtRef),
             where("payment_date", ">=", firstDay),
             where("payment_date", "<=", lastDay),
           );
         }
       } else {
-        setDisabledAllYear(false);
-        queryBooking = query(collection(clubRef, "COURT_BOOKINGS"),
-          where("site_ref", "==", siteRef),
-          //where("is_from_app", "==", true),
-          //where("match_start_date", ">=", firstDay),
-          //where("match_start_date", "<=", lastDay),
-        );
-        queryTransaction = query(collection(clubRef, "COURT_TRANSACTIONS"),
-          where("site_ref", "==", siteRef),
-          //where("is_from_app", "==", true),
-          //where("payment_date", ">=", firstDay),
-          //where("payment_date", "<=", lastDay),
-        );
         if (court != 0) {
           const courtRef = doc(collection(clubRef, "COURTS"), court);
           queryBooking = query(collection(clubRef, "COURT_BOOKINGS"),
             where("site_ref", "==", siteRef),
             where("court_ref", "==", courtRef),
-            where("match_start_date", ">=", firstDay),
-            where("match_start_date", "<=", lastDay),
+            //where("match_start_date", ">=", firstDay),
+            //where("match_start_date", "<=", lastDay),
           );
           queryTransaction = query(collection(clubRef, "COURT_TRANSACTIONS"),
             where("site_ref", "==", siteRef),
             where("court_ref", "==", courtRef),
-            where("payment_date", ">=", firstDay),
-            where("payment_date", "<=", lastDay),
+            //where("payment_date", ">=", firstDay),
+            //where("payment_date", "<=", lastDay),
+          );
+        } else {
+          queryBooking = query(collection(clubRef, "COURT_BOOKINGS"),
+            //where("is_from_app", "==", true),
+            where("site_ref", "==", siteRef),
+            //where("match_start_date", ">=", firstDay),
+            //where("match_start_date", "<=", lastDay),
+          );
+          queryTransaction = query(collection(clubRef, "COURT_TRANSACTIONS"),
+            //where("is_from_app", "==", true),
+            where("site_ref", "==", siteRef),
+            //where("payment_date", ">=", firstDay),
+            //where("payment_date", "<=", lastDay),
           );
         }
       }
     } else if (court != 0) {
       const courtRef = doc(collection(clubRef, "COURTS"), court);
-      if (day != 0) {
-        setDisabledAllYear(true);
-        setDisabledAllMonth(true);
-        //const { firstDay, lastDay } = getFirstAndLastDayOfMonth(month - 1, year);
-        const { firstDay, lastDay } = getFirstAndLastDayOfDay(day, month - 1, year);
-        //(day, month, year)
-        queryBooking = query(collection(clubRef, "COURT_BOOKINGS"),
-          //where("is_from_app", "==", true),
-          where("court_ref", "==", courtRef),
-          where("match_start_date", ">=", firstDay),
-          where("match_start_date", "<=", lastDay),
-        );
-        queryTransaction = query(collection(clubRef, "COURT_TRANSACTIONS"),
-          //where("is_from_app", "==", true),
-          where("court_ref", "==", courtRef),
-          where("payment_date", ">=", firstDay),
-          where("payment_date", "<=", lastDay),
-        );
-      } else if (month != 0) {
-        setDisabledAllYear(true);
-        const { firstDay, lastDay } = getFirstAndLastDayOfMonth(month - 1, year);
-        queryBooking = query(collection(clubRef, "COURT_BOOKINGS"),
-          where("court_ref", "==", courtRef),
-          where("match_start_date", ">=", firstDay),
-          where("match_start_date", "<=", lastDay),
-        );
-        queryTransaction = query(collection(clubRef, "COURT_TRANSACTIONS"),
-          where("court_ref", "==", courtRef),
-          where("payment_date", ">=", firstDay),
-          where("payment_date", "<=", lastDay),
-        );
-      } else if (year != 0) {
-        //const requestMonth = month!=0?month:0;
-        setDisabledAllYear(false);
-        setMonth(0);
-        const { firstDay, lastDay } = getFirstAndLastDayOfYear(year);
+      var { firstDay, lastDay } = {};
+      if (day != 0 || month != 0 || year != 0) {
+        if (day != 0) {
+          setDisabledAllYear(true);
+          setDisabledAllMonth(true);
+          //const { firstDay, lastDay } = getFirstAndLastDayOfMonth(month - 1, year);
+          firstDay = getFirstAndLastDayOfDay(day, month - 1, year).firstDay;
+          lastDay = getFirstAndLastDayOfDay(day, month - 1, year).lastDay;
+          //const { firstDay, lastDay } = getFirstAndLastDayOfDay(day, month - 1, year);
+          //(day, month, year)
+        } else if (month != 0) {
+          setDisabledAllYear(true);
+          //const { firstDay, lastDay } = getFirstAndLastDayOfMonth(month - 1, year);
+          firstDay = getFirstAndLastDayOfMonth(month - 1, year).firstDay;
+          lastDay = getFirstAndLastDayOfMonth(month - 1, year).lastDay;
+        } else if (year != 0) {
+          //const requestMonth = month!=0?month:0;
+          if (YEARS.length > 2) {
+            setDisabledAllYear(false);
+          }
+          setMonth(0);
+          //const { firstDay, lastDay } = getFirstAndLastDayOfYear(year);
+          firstDay = getFirstAndLastDayOfYear(year).firstDay;
+          lastDay = getFirstAndLastDayOfYear(year).lastDay;
+        }
         queryBooking = query(collection(clubRef, "COURT_BOOKINGS"),
           // where("is_from_app", "==", true),
           where("court_ref", "==", courtRef),
-          where("match_start_date", ">=", firstDay),
-          where("match_start_date", "<=", lastDay),
+          //where("match_start_date", ">=", firstDay),
+          //where("match_start_date", "<=", lastDay),
+          where("created_date", ">=", firstDay),
+          where("created_date", "<=", lastDay),
         );
         queryTransaction = query(collection(clubRef, "COURT_TRANSACTIONS"),
           //where("is_from_app", "==", true),
           where("court_ref", "==", courtRef),
-          where("payment_date", ">=", firstDay),
-          where("payment_date", "<=", lastDay),
+          //where("payment_date", ">=", firstDay),
+          //where("payment_date", "<=", lastDay),
+          where("created_date", ">=", firstDay),
+          where("created_date", "<=", lastDay),
         );
       } else {
-        setDisabledAllYear(false);
+        if (YEARS.length > 2) {
+          setDisabledAllYear(false);
+        }
         queryBooking = query(collection(clubRef, "COURT_BOOKINGS"),
           where("court_ref", "==", courtRef),
           //where("is_from_app", "==", true),
@@ -320,44 +289,34 @@ DAYS.push({ value: element, text: ""+element },);
         );
       }
     } else {
-      if (day != 0) {
-        setDisabledAllYear(true);
-        setDisabledAllMonth(true);
-        //const { firstDay, lastDay } = getFirstAndLastDayOfMonth(month - 1, year);
-        const { firstDay, lastDay } = getFirstAndLastDayOfDay(day, month - 1, year);
-        //(day, month, year)
+      if (day != 0 || month != 0 || year != 0) {
+        var { firstDay, lastDay } = {};
+        if (day != 0) {
+          setDisabledAllYear(true);
+          setDisabledAllMonth(true);
+          //const { firstDay, lastDay } = getFirstAndLastDayOfMonth(month - 1, year);
+          firstDay = getFirstAndLastDayOfDay(day, month - 1, year).firstDay;
+          lastDay = getFirstAndLastDayOfDay(day, month - 1, year).lastDay;
+        } else if (month != 0) {
+          setDisabledAllYear(true);
+          firstDay = getFirstAndLastDayOfMonth(month - 1, year).firstDay;
+          lastDay = getFirstAndLastDayOfMonth(month - 1, year).lastDay;
+        } else if (year != 0) {
+          //const requestMonth = month!=0?month:0;
+          if (YEARS.length > 2) {
+            setDisabledAllYear(false);
+          }
+          setMonth(0);
+          //const { firstDay, lastDay } = getFirstAndLastDayOfYear(year);
+          firstDay = getFirstAndLastDayOfYear(year).firstDay;
+          lastDay = getFirstAndLastDayOfYear(year).lastDay;
+        }
         queryBooking = query(collection(clubRef, "COURT_BOOKINGS"),
           //where("is_from_app", "==", true),
-          where("match_start_date", ">=", firstDay),
-          where("match_start_date", "<=", lastDay),
-        );
-        queryTransaction = query(collection(clubRef, "COURT_TRANSACTIONS"),
-          //where("is_from_app", "==", true),
-          where("payment_date", ">=", firstDay),
-          where("payment_date", "<=", lastDay),
-        );
-      } else if (month != 0) {
-        setDisabledAllYear(true);
-        const { firstDay, lastDay } = getFirstAndLastDayOfMonth(month - 1, year);
-        queryBooking = query(collection(clubRef, "COURT_BOOKINGS"),
-          //where("is_from_app", "==", true),
-          where("match_start_date", ">=", firstDay),
-          where("match_start_date", "<=", lastDay),
-        );
-        queryTransaction = query(collection(clubRef, "COURT_TRANSACTIONS"),
-          //where("is_from_app", "==", true),
-          where("payment_date", ">=", firstDay),
-          where("payment_date", "<=", lastDay),
-        );
-      } else if (year != 0) {
-        //const requestMonth = month!=0?month:0;
-        setDisabledAllYear(false);
-        setMonth(0);
-        const { firstDay, lastDay } = getFirstAndLastDayOfYear(year);
-        queryBooking = query(collection(clubRef, "COURT_BOOKINGS"),
-          // where("is_from_app", "==", true),
-          where("match_start_date", ">=", firstDay),
-          where("match_start_date", "<=", lastDay),
+          where("created_date", ">=", firstDay),
+          where("created_date", "<=", lastDay),
+          //where("match_start_date", ">=", firstDay),
+          //where("match_start_date", "<=", lastDay),
         );
         queryTransaction = query(collection(clubRef, "COURT_TRANSACTIONS"),
           //where("is_from_app", "==", true),
@@ -365,7 +324,9 @@ DAYS.push({ value: element, text: ""+element },);
           where("payment_date", "<=", lastDay),
         );
       } else {
-        setDisabledAllYear(false);
+        if (YEARS.length > 2) {
+          setDisabledAllYear(false);
+        }
         queryBooking = query(collection(clubRef, "COURT_BOOKINGS"),
           //where("is_from_app", "==", true),
           //where("match_start_date", ">=", firstDay),
@@ -383,19 +344,23 @@ DAYS.push({ value: element, text: ""+element },);
 
     const [countBoookingsClub, countBoookingsPlayPad, countBookingTotal,
       revenuesClub, revenuesPlayPad, revenuesTotal, revenuesTotalSite, revenuesTotalCourt,
-      rateBookingPlayPad, rateBookingClub, rateHourPlayPad, rateHourClub] = await Promise.all([
+      rateBookingPlayPad, rateBookingClub, rateHourPlayPad, rateHourClub, arrayRevenuesTotal] = await Promise.all([
         getCountBookingsClub(querySnapshotBooking),
         getCountBookingsPlayPad(querySnapshotBooking),
         getCountBookingsTotal(querySnapshotBooking),
-        getRevenuesClub(clubRef, querySnapshotTransaction),
-        getRevenuesPlayPad(clubRef, querySnapshotTransaction),
-        getRevenuesTotal(querySnapshotTransaction),
+        getRevenuesClub(clubRef, querySnapshotBooking),
+        //getRevenuesClub(clubRef, querySnapshotTransaction),
+        getRevenuesPlayPad(clubRef, querySnapshotBooking),
+        //getRevenuesPlayPad(clubRef, querySnapshotTransaction),
+        getRevenuesTotal(querySnapshotBooking),
+        //getRevenuesTotal(querySnapshotTransaction),
         getRevenuesTotalSite(clubRef, site, querySnapshotTransaction),
         getRevenuesTotalCourt(clubRef, site, court, querySnapshotTransaction),
         getRateBookingsPlayPad(querySnapshotBooking),
         getRateBookingsClub(querySnapshotBooking),
         getRateHoursPlayPad(querySnapshotBooking),
         getRateHoursClub(querySnapshotBooking),
+        getArrayRevenuesTotal(day, month, year, querySnapshotBooking)
         //countBookingsPlayPad(club.uid, month, year),
       ]);
     setCountBookingsTotal(countBookingTotal);
@@ -410,8 +375,10 @@ DAYS.push({ value: element, text: ""+element },);
 
     setRateBookingPlayPad(rateBookingPlayPad);
     setRateBookingClub(rateBookingClub);
-    setRateHourPlayPad(rateHourPlayPad);
+    setRateHoursPlayPad(rateHourPlayPad);
     setRateHourClub(rateHourClub);
+
+    setValuesLineChart(arrayRevenuesTotal);
 
     setIsLoading(false);
     console.log("finish try", querySnapshotBooking.size)
@@ -440,7 +407,7 @@ DAYS.push({ value: element, text: ""+element },);
     //initDays(event.target.value, currentYear);
     //setMonth(event.target.value);
     //setYear(currentYear);
-    if(event.target.value==0) {
+    if (event.target.value == 0) {
       setDisabledAllMonth(false);
     }
     setDay(event.target.value);
@@ -451,7 +418,9 @@ DAYS.push({ value: element, text: ""+element },);
     if (currentYear == 0) {
       currentYear = new Date().getFullYear();
     }
-    initDays(event.target.value, currentYear);
+    if (event.target.value != 0) {
+      initDays(event.target.value, currentYear);
+    }
     setMonth(event.target.value);
     setYear(currentYear);
     getBookings(club, selectedSite, selectedCourt, day, event.target.value, currentYear);
@@ -459,6 +428,7 @@ DAYS.push({ value: element, text: ""+element },);
   const handleChangeYear = (event) => {
     setYear(event.target.value);
     getBookings(club, selectedSite, selectedCourt, day, month, event.target.value);
+
   };
   const handleChangeSite = (event) => {
     const newSite = event.target.value;
@@ -501,9 +471,14 @@ DAYS.push({ value: element, text: ""+element },);
         rateBookingPlayPad={formatPercentage(rateBookingPlayPad)}
         rateBookingClub={formatPercentage(rateBookingClub)}
         componentChartRateBooking={<PieChart playpadRate={rateBookingPlayPad} clubRate={rateBookingClub} />}
-        componentChartRateHour={<PieChart playpadRate={rateHoursPlayPad} clubRate={rateHoursClub} />}
+        componentChartRateHour={<PieChart playpadRate={rateHoursPlayPad} clubRate={12} />}
+        //componentChartRateHour={<PieChart playpadRate={10} clubRate={12} />}
         componentChartRateTotal={<PieChart playpadRate={(rateBookingPlayPad + rateHoursPlayPad) / 2} clubRate={(rateBookingClub + rateHoursClub) / 2} />}
-        componentChartRevenues={<LineChart playpadRate={rateHoursPlayPad} clubRate={rateHoursClub} />}
+        componentChartRevenues={<LineChart revenuesTotal={revenuesTotal} playpadRate={rateHoursPlayPad} clubRate={rateHoursClub} labels={labelsLineChart} values={valuesLineChart} />}
+
+        componentChartCountBySite={<BarChartCustom playpadRate={rateBookingPlayPad} clubRate={rateBookingClub} />}
+        //componentChartCountByCourt={<BarChartCustom playpadRate={rateBookingPlayPad} clubRate={rateBookingClub} />}
+
         componentDays={<Select
           className='form_input is-select-input is-dashboard'
           labelId="demo-simple-select-label"
