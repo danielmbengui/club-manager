@@ -1,29 +1,12 @@
 import * as React from "react";
 import * as Types from "./types";
 
-declare function SettingsPage(props: {
+declare function DialogUpdateSettings(props: {
   as?: React.ElementType;
-  titlePage?: React.ReactNode;
-  clubName?: React.ReactNode;
-  clubLogo?: Types.Asset.Image;
-  disconnectButtonProps?: Types.Devlink.RuntimeProps;
-  linkDashboard?: Types.Basic.Link;
-  linkManage?: Types.Basic.Link;
-  linkCalendar?: Types.Basic.Link;
-  linkBilling?: Types.Basic.Link;
-  linkClub?: Types.Basic.Link;
-  linkSettings?: Types.Basic.Link;
-  styleSettings?: Types.Devlink.RuntimeProps;
-  limitDaysBookings?: React.ReactNode;
-  limitHoursBeforeBooking?: React.ReactNode;
-  limitHoursBeforeCancel?: React.ReactNode;
-  limitActivesBookings?: React.ReactNode;
-  inputLimitDaysBookingsProps?: Types.Devlink.RuntimeProps;
-  loader?: Types.Devlink.Slot;
-  componentSwitch?: Types.Devlink.Slot;
-  componentLogoClub?: Types.Devlink.Slot;
   componentProgress?: Types.Devlink.Slot;
   isLoading?: Types.Visibility.VisibilityConditions;
+  componentHoursLimitDays?: Types.Devlink.Slot;
+  componentMinutesLimitDays?: Types.Devlink.Slot;
   componentLimitDays?: Types.Devlink.Slot;
   componentLimitHoursBeforeBooking?: Types.Devlink.Slot;
   componentLimitMinutesBeforeBooking?: Types.Devlink.Slot;
@@ -31,12 +14,13 @@ declare function SettingsPage(props: {
   componentLimitHoursBeforeCancel?: Types.Devlink.Slot;
   componentLimitActivesBookings?: Types.Devlink.Slot;
   componentLimitDaysBeforeCancel?: Types.Devlink.Slot;
-  actionCancel?: Types.Devlink.RuntimeProps;
-  actionEdit?: Types.Devlink.RuntimeProps;
   isError?: Types.Visibility.VisibilityConditions;
   isSuccess?: Types.Visibility.VisibilityConditions;
   isEditing?: Types.Visibility.VisibilityConditions;
+  actionCancel?: Types.Devlink.RuntimeProps;
+  actionEdit?: Types.Devlink.RuntimeProps;
   isWarning?: Types.Visibility.VisibilityConditions;
   isNotWarning?: Types.Visibility.VisibilityConditions;
+  text?: React.ReactNode;
   warningText?: React.ReactNode;
 }): React.JSX.Element;

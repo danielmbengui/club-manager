@@ -9,10 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
-    "@mui/icons-material": "^6.1.1",
-    "@mui/material": "^6.1.1",
+    "@emotion/react": "^11.13.5",
+    "@emotion/styled": "^11.13.5",
+    "@mui/icons-material": "^6.1.8",
+    "@mui/material": "^6.1.8",
     "@mui/styled-engine-sc": "^6.1.1",
     "@webflow/webflow-cli": "^1.6.13",
     "chart.js": "^4.4.6",
@@ -21,6 +21,7 @@
     "react": "^18",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",
+    "react-table": "^7.8.0",
     "styled-components": "^6.1.13"
   },
   "devDependencies": {

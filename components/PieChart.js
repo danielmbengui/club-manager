@@ -1,26 +1,31 @@
-// components/PieChart.js
 import React from 'react';
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import { formatPercentage } from '@/functions';
+import { BLACK, PRIMARY_CHARTS_RGB, PRIMARY_CHARTS_RGBA_1, WHITE } from '@/colors';
+import { useThemeMode } from '@/contexts/ThemeProvider';
 
 // Enregistre les composants nécessaires
 Chart.register(ArcElement, Tooltip, Legend);
 
-const PieChart = ({ playpadRate, clubRate }) => {
+const PieChart = ({ playpadRate, clubRate, clubName }) => {
+  //const { theme } = useTheme();
+  const { theme } = useThemeMode();
+  const {primary, primaryShadowChart, text} = theme.palette;
+  console.log("THEME", theme)
   const data = {
-    labels: ['PlayPad', 'Club'], // Supprimé 'Total'
+    labels: ['PlayPad', clubName],
     datasets: [
       {
         label: 'Taux',
-        data: [playpadRate, clubRate], // Supprimé la donnée pour 'Total'
+        data: [playpadRate, clubRate],
         backgroundColor: [
-          'rgba(66, 133, 244,1)',
-          'rgba(66, 133, 244, 0.1)', // Couleurs correspondant aux labels
+          primary.main,
+          primaryShadowChart.main,
         ],
         borderColor: [
-          'rgba(66, 133, 244, 1)',
-          'rgba(66, 133, 244, 1)',
+          primary.main,
+          primary.main,
         ],
         borderWidth: 1,
       },
@@ -29,12 +34,14 @@ const PieChart = ({ playpadRate, clubRate }) => {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: false, // Permet de personnaliser la taille via CSS
+    maintainAspectRatio: false,
     plugins: {
       legend: {
+        enabled: true,
         position: 'top',
-        hidden:true,
+        display: true,
         labels: {
+          
           generateLabels: (chart) => {
             const { datasets } = chart.data;
             const { labels } = chart.data;
@@ -42,10 +49,11 @@ const PieChart = ({ playpadRate, clubRate }) => {
             return labels.map((label, i) => {
               const value = dataset.data[i];
               return {
-                text: `${label}`, // Légende avec les valeurs
+                text: `${label} : ${formatPercentage(value)}`,
                 fillStyle: dataset.backgroundColor[i],
                 strokeStyle: dataset.borderColor[i],
                 lineWidth: dataset.borderWidth,
+               fontColor:text.primary
               };
             });
           },
@@ -57,9 +65,11 @@ const PieChart = ({ playpadRate, clubRate }) => {
     },
   };
 
-  return <div style={{ width: '100%', height: '170px', background:'transparent' }}> {/* Définir la taille du conteneur */}
-  <Pie data={data} options={options} />
-</div>;
+  return (
+    <div style={{ width: '100%', height: '170px' }}>
+      <Pie data={data} options={options} />
+    </div>
+  );
 };
 
 export default PieChart;

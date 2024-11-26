@@ -1,3 +1,13 @@
+export function getRandomRGBA(alpha = 0.5) {
+    // Générer des valeurs aléatoires pour le rouge, le vert et le bleu
+    const r = Math.floor(Math.random() * 256); // Rouge : entre 0 et 255
+    const g = Math.floor(Math.random() * 256); // Vert : entre 0 et 255
+    const b = Math.floor(Math.random() * 256); // Bleu : entre 0 et 255
+  
+    // Retourner la chaîne rgb ET rgba
+    return [`rgba(${r}, ${g}, ${b}, ${1})`, `rgba(${r}, ${g}, ${b}, ${alpha})`];
+  }
+
 export function getFirstAndLastDayOfYear(year) {
     // Pour obtenir le premier jour de l'année, on crée une date avec le 1er janvier de cette année.
     const firstDay = new Date(year, 0, 1, 0, 0, 0);
@@ -58,26 +68,38 @@ export function formatCountBookings(value) {
     // Ajouter " CHF" à la fin
     return `${formattedNumber}`;
 }
-export function formatNumber(value) {
+export function formatNumber(value, decimal=2) {
     if (typeof value !== "number") {
         throw new Error("Le paramètre doit être un nombre.");
     }
-
+    //let decimal = 0;
+    const scaled = value * 100;
+    const rounded = Math.round(scaled / 5) * 5;
+    if(value - parseInt(value) > 0) {
+        decimal = decimal;
+    } else {
+        decimal = 0;
+    }
     // Formater le nombre avec des séparateurs de milliers (apostrophes)
-    const formattedNumber = value.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+    const formattedNumber = (rounded / 100).toFixed(decimal).replace(/\B(?=(\d{3})+(?!\d))/g, "'");
 
     // Ajouter " CHF" à la fin
     return `${formattedNumber}`;
 }
 
-export function formatCurrency(value) {
+export function formatCurrency(value, decimal=2) {
     if (typeof value !== "number") {
         throw new Error("Le paramètre doit être un nombre.");
     }
     const scaled = value * 100;
     const rounded = Math.round(scaled / 5) * 5;
+    if(value - parseFloat(value) > 0) {
+        decimal = decimal;
+    } else {
+        decimal = 0;
+    }
     // Formater le nombre avec des séparateurs de milliers (apostrophes)
-    const formattedNumber = (rounded / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+    const formattedNumber = (rounded / 100).toFixed(decimal).replace(/\B(?=(\d{3})+(?!\d))/g, "'");
 
     // Ajouter " CHF" à la fin
     return `CHF ${formattedNumber}`;
@@ -159,7 +181,10 @@ export function parseDoubleToTimeInterval(doubleTime) {
     const currentMinute = Math.round((total - currentHour) * 60);
   
     // Formate les heures et les minutes pour avoir toujours deux chiffres en ajoutant des zéros au besoin
-    const currentTimeString = `${currentHour.toString().padStart(2, '0')}h${currentMinute.toString().padStart(2, '0')}`;
+    var currentTimeString = `${currentHour.toString().padStart(1, '0')}h${currentMinute.toString().padStart(2, '0')}`;
+    if(currentMinute == 0) {
+        currentTimeString = `${currentHour.toString().padStart(1, '0')}h`;
+    }
     return currentTimeString;
   
     /// MODIFY CODE ONLY ABOVE THIS LINE

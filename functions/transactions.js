@@ -118,7 +118,8 @@ export async function getArrayRevenuesTotal(day = 0, month = 0, year = 0, queryS
             const jetlag = isSummerTime(new Date(match_start_timestamp.seconds * 1000)) ? 2 : 1;
             var start_date = new Date(match_start_timestamp.seconds * 1000);
             //const eligibleDate = addHoursToDate(new Date(), jetlag + hourCancelMatch);
-            const matchDate = addHoursToDate(start_date, jetlag);
+            //const matchDate = addHoursToDate(start_date, jetlag);
+            const matchDate = start_date;
             //console.log("date match", matchDate);
             var hourTime = 0;
             if (day != 0) {
