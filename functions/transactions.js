@@ -1,9 +1,10 @@
 import { firestore } from "@/firebase";
-import { getDaysInMonth, getFirstAndLastDayOfDay, getFirstAndLastDayOfMonth, getFirstAndLastDayOfYear, parseDoubleToTimeInterval } from "@/functions";
+import { distributeWithPrecision, getDaysInMonth, getFirstAndLastDayOfDay, getFirstAndLastDayOfMonth, getFirstAndLastDayOfYear, parseDoubleToTimeInterval } from "@/functions";
 import { collection, doc, getDoc, getDocs, loadBundle, query, where, updateDoc } from "firebase/firestore";
 import { addHoursToDate, isSummerTime } from "./manage-time";
 
 export async function getRevenuesClub(clubRef, querySnapshotBooking) {
+    const total = await getRevenuesTotal(querySnapshotBooking);
     let revenuesClub = 0;
     let commission = 1;
     const clubSnap = await getDoc(clubRef);
@@ -18,7 +19,9 @@ export async function getRevenuesClub(clubRef, querySnapshotBooking) {
         const booking = doc.data();
         revenuesClub += booking.amount_paid;
     });
-    return revenuesClub - (revenuesClub * commission);
+    const results = distributeWithPrecision(total, [commission * 100, (1 - commission) * 100]);
+    console.log("format currency", results)
+    return results[1];
 }
 export async function getRevenuesClubBis(clubRef, querySnapshotTransaction) {
     let revenuesClub = 0;
@@ -38,6 +41,7 @@ export async function getRevenuesClubBis(clubRef, querySnapshotTransaction) {
     return revenuesClub - (revenuesClub * commission);
 }
 export async function getRevenuesPlayPad(clubRef, querySnapshotBooking) {
+    const total = await getRevenuesTotal(querySnapshotBooking);
     let revenuesClub = 0;
     //var clubRef = querySnapshotTransaction.size > 0 ? querySnapshotTransaction.docs[0].data().club_ref : null;
     // console.log(clubRef.id)
@@ -61,7 +65,9 @@ export async function getRevenuesPlayPad(clubRef, querySnapshotBooking) {
         }
     }
     //console.log("transaction total", revenuesClub)
-    return revenuesClub * commission;
+    const results = distributeWithPrecision(total, [commission * 100, (1 - commission) * 100]);
+    console.log("format currency", results)
+    return results[0];
 }
 export async function getRevenuesPlayPadBis(clubRef, querySnapshotTransaction) {
     let revenuesClub = 0;
@@ -189,12 +195,12 @@ export async function getRevenuesTotalCourt(clubRef, site = 0, court = 0, queryS
                 const courtData = courtSnap.data();
                 //commission = clubData.comission_percentage;
                 //console.log("WESH", clubData)
-/*
-                await updateDoc(transationRef, {
-                    site_ref: courtData.site_ref,
-                    site_uid: courtData.site_uid,
-                });
-*/
+                /*
+                                await updateDoc(transationRef, {
+                                    site_ref: courtData.site_ref,
+                                    site_uid: courtData.site_uid,
+                                });
+                */
 
             }
 

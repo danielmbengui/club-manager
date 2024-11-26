@@ -87,19 +87,22 @@ export function formatNumber(value, decimal=2) {
     return `${formattedNumber}`;
 }
 
-export function formatCurrency(value, decimal=2) {
+export function formatCurrency(value, decimal = 2) {
     if (typeof value !== "number") {
         throw new Error("Le paramètre doit être un nombre.");
     }
+
+    // Calculer la valeur en centimes
     const scaled = value * 100;
-    const rounded = Math.round(scaled / 5) * 5;
-    if(value - parseFloat(value) > 0) {
-        decimal = decimal;
-    } else {
-        decimal = 0;
-    }
+
+    // Arrondir au multiple inférieur ou égal de 5 centimes
+    const rounded = Math.ceil(scaled / 5) * 5;
+
+    // Vérifier si le nombre initial a des décimales pour ajuster les décimales
+    const decimals = value % 1 !== 0 ? decimal : 0;
+
     // Formater le nombre avec des séparateurs de milliers (apostrophes)
-    const formattedNumber = (rounded / 100).toFixed(decimal).replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+    const formattedNumber = (rounded / 100).toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, "'");
 
     // Ajouter " CHF" à la fin
     return `CHF ${formattedNumber}`;
@@ -205,3 +208,27 @@ export function parseDoubleToTimeInterval(doubleTime) {
   
     /// MODIFY CODE ONLY ABOVE THIS LINE
   }
+
+  export function distributeWithPrecision(total, percentages) {
+    if (typeof total !== "number" || !Array.isArray(percentages)) {
+        throw new Error("Paramètres invalides. 'total' doit être un nombre et 'percentages' un tableau.");
+    }
+
+    // Calcul des sous-totaux arrondis au plus proche multiple de 0.05
+    let subTotals = percentages.map(percentage => {
+        const rawValue = total * (percentage / 100);
+        const scaled = Math.floor(rawValue * 100 / 5) * 5; // Arrondi inférieur à 0.05
+        return scaled / 100; // Retour en unités
+    });
+
+    // Calcul de l'écart total
+    const roundedTotal = subTotals.reduce((sum, value) => sum + value, 0);
+    const difference = total - roundedTotal;
+
+    // Ajuster la dernière valeur pour combler l'écart
+    if (Math.abs(difference) > 0) {
+        subTotals[subTotals.length - 1] += difference;
+    }
+
+    return subTotals;
+}

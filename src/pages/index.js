@@ -1364,7 +1364,7 @@ export default function Home() {
         nBookingsPlayPad={formatCountBookings(countBookingsPlayPad)}
         nBookingsTotal={formatCountBookings(countBookingsTotal)}
         //revenuesTotal={"72'000 CHF"}
-        revenuesClub={formatCurrency(revenuesClubs)}
+        revenuesClub={formatCurrency(revenuesTotal - revenuesPlayPad)}
         revenuesPlayPad={formatCurrency(revenuesPlayPad)}
         revenuesTotal={formatCurrency(revenuesTotal)}
         revenuesTotalSite={formatCurrency(revenuesTotalSite)}
