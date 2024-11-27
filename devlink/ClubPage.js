@@ -211,7 +211,7 @@ export function ClubPage({
                       >
                         <_Builtin.TabsWrapper
                           className="tabs"
-                          current="Horaires"
+                          current="informations"
                           easing="ease"
                           fadeIn={300}
                           fadeOut={100}
