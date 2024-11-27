@@ -9849,7 +9849,7 @@ figcaption {
 .div-block-club-price {
   width: 100%;
   min-height: 1rem;
-  background-color: var(--error);
+  background-color: var(--test-component);
 }
 
 .div-block-41 {
@@ -9861,14 +9861,28 @@ figcaption {
 
 .sub-row {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: nowrap;
+  align-items: flex-start;
 }
 
 .subrow-list-price-devlink {
   width: 100%;
   min-height: 1rem;
-  background-color: var(--brand-2);
+  background-color: var(--test-component);
+}
+
+.subrow-list-price-devlink.sub-sub {
+  margin-bottom: 10px;
+  background-color: var(--test-component);
+  color: var(--playpad-primary);
+}
+
+.div-block-42 {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
 

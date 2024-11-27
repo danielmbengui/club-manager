@@ -9,6 +9,7 @@ export function ClubInfoRow({
   intervalTime = "14h-17h",
   extraPriceValue = "CHF 46.00",
   standardExtraPriceList,
+  hasExtraPrice = true,
 }) {
   return (
     <_Component
@@ -29,9 +30,11 @@ export function ClubInfoRow({
           {priceValue}
         </_Builtin.Block>
       </_Builtin.Block>
-      <_Builtin.Block className="subrow-list-price-devlink" tag="div">
-        {standardExtraPriceList}
-      </_Builtin.Block>
+      {hasExtraPrice ? (
+        <_Builtin.Block className="subrow-list-price-devlink" tag="div">
+          {standardExtraPriceList}
+        </_Builtin.Block>
+      ) : null}
     </_Component>
   );
 }

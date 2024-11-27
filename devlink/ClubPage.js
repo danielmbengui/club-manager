@@ -74,11 +74,11 @@ export function ClubPage({
   componentSwitch,
   componentLogoClub,
   standardPriceList,
-  standardExtraPriceList,
-  timeName = "1h",
-  priceValue = "CHF 52.00",
   weekPriceList,
   specialPriceList,
+  standardOpeningList,
+  weekOpeningList,
+  specialOpeningList,
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -211,7 +211,7 @@ export function ClubPage({
                       >
                         <_Builtin.TabsWrapper
                           className="tabs"
-                          current="Tarifs"
+                          current="Horaires"
                           easing="ease"
                           fadeIn={300}
                           fadeOut={100}
@@ -597,25 +597,10 @@ export function ClubPage({
                                       <ButtonPrimary text="Modifier" />
                                     </_Builtin.Block>
                                     <_Builtin.Block
-                                      className="clubinfo_row"
+                                      className="div-block-club-price"
                                       tag="div"
-                                      wized="pricing_list_item"
-                                      wized-cloak=""
                                     >
-                                      <_Builtin.Block
-                                        className="settings_label devlink"
-                                        tag="div"
-                                        wized="price_name"
-                                      >
-                                        {"Jour"}
-                                      </_Builtin.Block>
-                                      <_Builtin.Block
-                                        className="devlink"
-                                        tag="div"
-                                        wized="price_value"
-                                      >
-                                        {"Horaire"}
-                                      </_Builtin.Block>
+                                      {standardOpeningList}
                                     </_Builtin.Block>
                                   </_Builtin.Block>
                                 </_Builtin.Block>
@@ -642,25 +627,10 @@ export function ClubPage({
                                       <ButtonPrimary text="Modifier" />
                                     </_Builtin.Block>
                                     <_Builtin.Block
-                                      className="clubinfo_row"
+                                      className="div-block-club-price"
                                       tag="div"
-                                      wized="pricing_list_item"
-                                      wized-cloak=""
                                     >
-                                      <_Builtin.Block
-                                        className="settings_label devlink"
-                                        tag="div"
-                                        wized="price_name"
-                                      >
-                                        {"Jour"}
-                                      </_Builtin.Block>
-                                      <_Builtin.Block
-                                        className="devlink"
-                                        tag="div"
-                                        wized="price_value"
-                                      >
-                                        {"Horaire"}
-                                      </_Builtin.Block>
+                                      {weekOpeningList}
                                     </_Builtin.Block>
                                   </_Builtin.Block>
                                 </_Builtin.Block>
@@ -685,25 +655,10 @@ export function ClubPage({
                                       <ButtonPrimary text="Modifier" />
                                     </_Builtin.Block>
                                     <_Builtin.Block
-                                      className="clubinfo_row"
+                                      className="div-block-club-price"
                                       tag="div"
-                                      wized="pricing_list_item"
-                                      wized-cloak=""
                                     >
-                                      <_Builtin.Block
-                                        className="settings_label devlink"
-                                        tag="div"
-                                        wized="price_name"
-                                      >
-                                        {"Jour"}
-                                      </_Builtin.Block>
-                                      <_Builtin.Block
-                                        className="devlink"
-                                        tag="div"
-                                        wized="price_value"
-                                      >
-                                        {"Horaire"}
-                                      </_Builtin.Block>
+                                      {specialOpeningList}
                                     </_Builtin.Block>
                                   </_Builtin.Block>
                                 </_Builtin.Block>

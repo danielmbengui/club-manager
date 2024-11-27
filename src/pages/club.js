@@ -7,8 +7,8 @@ import LayoutLoading from '@/components/layouts/LayoutLoading';
 import { Stack } from '@mui/material';
 import SwitchTheme from '@/components/SwitchTheme';
 import Image from 'next/image';
-import { formatCurrency, parseDoubleToHourInterval } from '@/functions';
-import { getArrayDayStr } from '@/functions/manage-time';
+import { formatCurrency, getArrayMonthStr, parseDoubleToHourInterval } from '@/functions';
+import { getArrayDayStr, getDateFromDayOfYear } from '@/functions/manage-time';
 
 export default function Club() {
   const { login, user, logout, club } = useAuth();
@@ -26,6 +26,9 @@ export default function Club() {
   const [pricesStandard, setPricesStandard] = useState([]);
   const [pricesWeek, setPricesWeek] = useState([]);
   const [pricesSpecial, setPricesSpecial] = useState([]);
+  const [openingStandard, setOpeningStandard] = useState({});
+  const [openingWeek, setOpeningWeek] = useState([]);
+  const [openingSpecial, setOpeningSpecial] = useState([]);
 
   const year = new Date().getFullYear();
   const handleLogout = async () => {
@@ -55,6 +58,10 @@ export default function Club() {
       setPricesStandard(club.booking_prices_standard);
       setPricesWeek(club.booking_prices_week_days);
       setPricesSpecial(club.booking_prices_special_days);
+      setOpeningStandard(club.booking_opening_standard);
+      setOpeningWeek(club.booking_opening_week_days);
+      setOpeningSpecial(club.booking_opening_special_days);
+      console.log("WEEEEESH", club.booking_opening_standard)
     }
   }, [club]);
   if (user && !user.connected) {
@@ -91,6 +98,7 @@ export default function Club() {
               priceValue={formatCurrency(priceGame, 2)}
               intervalTime={"WESH"}
               extraPriceValue={38}
+              hasExtraPrice={dayPrices.length > 0}
               standardExtraPriceList={dayPrices.map((extraPrice, index) => {
                 const priceGame = extraPrice.price_game;
                 const startHour = parseDoubleToHourInterval(extraPrice.start_hour);
@@ -98,7 +106,9 @@ export default function Club() {
                 return (<ClubInfoSubRow
                   key={`${priceGame}${index}`}
                   intervalTime={`${startHour}-${endHour}`}
-                  extraPriceValue={formatCurrency(priceGame, 2)} />)
+                  extraPriceValue={formatCurrency(priceGame, 2)}
+                  hasExtraPrice={false}
+                />)
               })}
             />)
           })
@@ -109,55 +119,180 @@ export default function Club() {
           pricesWeek.map((price, index) => {
             const valueName = price.day_of_week;
             //const priceGame = price.price_game;
-            //const dayPrices = price.day_prices;
+            const prices = price.prices;
+
             return (<ClubInfoRow
               key={`${valueName}${index}`}
-              timeName={getArrayDayStr()[valueName-1]}
+              timeName={getArrayDayStr()[valueName - 1]}
               priceValue={""}
-              /*
-              
-              intervalTime={"WESH"}
-              extraPriceValue={38}
-              standardExtraPriceList={dayPrices.map((extraPrice, index) => {
+              hasExtraPrice={prices.length > 0}
+              standardExtraPriceList={prices.map((extraPrice, index) => {
+                const valueName = extraPrice.duration.name;
                 const priceGame = extraPrice.price_game;
+                const dayPrices = extraPrice.day_prices;
                 const startHour = parseDoubleToHourInterval(extraPrice.start_hour);
                 const endHour = parseDoubleToHourInterval(extraPrice.end_hour);
                 return (<ClubInfoSubRow
                   key={`${priceGame}${index}`}
-                  intervalTime={`${startHour}-${endHour}`}
-                  extraPriceValue={formatCurrency(priceGame, 2)} />)
+                  intervalTime={`${valueName}`}
+                  extraPriceValue={formatCurrency(priceGame, 2)}
+                  hasExtraPrice={dayPrices.length > 0}
+                  standardExtraPriceList={dayPrices.map((extraPrice, index) => {
+                    //const valueName = extraPrice.duration.name;
+                    const priceGame = extraPrice.price_game;
+                    //const dayPrices = price.day_prices;
+                    const startHour = parseDoubleToHourInterval(extraPrice.start_hour);
+                    const endHour = parseDoubleToHourInterval(extraPrice.end_hour);
+                    return (<ClubInfoSubRow
+                      key={`${priceGame}${index}`}
+                      intervalTime={`(${startHour}-${endHour})`}
+                      extraPriceValue={formatCurrency(priceGame, 2)}
+                      hasExtraPrice={false}
+                    />)
+                  })}
+                />)
               })}
-              */
             />)
           })
         }
       </Stack>}
       specialPriceList={<Stack>
         {
-          pricesStandard.map((price, index) => {
-            const valueName = price.duration.name;
-            const priceGame = price.price_game;
-            const dayPrices = price.day_prices;
+          pricesSpecial.map((price, index) => {
+            const dayOfYear = price.day_of_year;
+            const year = price.year;
+            const date = getDateFromDayOfYear(dayOfYear, year);
+            //const priceGame = price.price_game;
+            const prices = price.prices;
+
             return (<ClubInfoRow
-              key={`${valueName}${index}`}
-              timeName={valueName}
-              priceValue={formatCurrency(priceGame, 2)}
-              intervalTime={"WESH"}
-              extraPriceValue={38}
-              standardExtraPriceList={dayPrices.map((extraPrice, index) => {
+              key={`${dayOfYear}${year}${index}`}
+              timeName={`${date.getDate()} ${getArrayMonthStr()[date.getMonth()]} ${date.getFullYear()}`}
+              priceValue={""}
+              hasExtraPrice={prices.length > 0}
+              standardExtraPriceList={prices.map((extraPrice, index) => {
+                const valueName = extraPrice.duration.name;
                 const priceGame = extraPrice.price_game;
+                const dayPrices = extraPrice.day_prices;
                 const startHour = parseDoubleToHourInterval(extraPrice.start_hour);
                 const endHour = parseDoubleToHourInterval(extraPrice.end_hour);
                 return (<ClubInfoSubRow
                   key={`${priceGame}${index}`}
-                  intervalTime={`${startHour}-${endHour}`}
-                  extraPriceValue={formatCurrency(priceGame, 2)} />)
+                  intervalTime={`${valueName}`}
+                  extraPriceValue={formatCurrency(priceGame, 2)}
+                  hasExtraPrice={dayPrices.length > 0}
+                  standardExtraPriceList={dayPrices.map((extraPrice, index) => {
+                    //const valueName = extraPrice.duration.name;
+                    const priceGame = extraPrice.price_game;
+                    //const dayPrices = price.day_prices;
+                    const startHour = parseDoubleToHourInterval(extraPrice.start_hour);
+                    const endHour = parseDoubleToHourInterval(extraPrice.end_hour);
+                    return (<ClubInfoSubRow
+                      key={`${priceGame}${index}`}
+                      intervalTime={`(${startHour}-${endHour})`}
+                      extraPriceValue={formatCurrency(priceGame, 2)}
+                      hasExtraPrice={false}
+
+                    />)
+                  })}
+                />)
               })}
             />)
           })
         }
       </Stack>}
 
+      standardOpeningList={<Stack>
+        {
+          openingStandard.open_time && <ClubInfoRow
+            // key={`${openTime.value}${closeTime.value}${index}`}
+            timeName={`${openingStandard.open_time.name}-${openingStandard.close_time.name}`}
+            priceValue={""}
+            hasExtraPrice={true}
+            standardExtraPriceList={openingStandard.extra_closed_time_list.map((opening, index) => {
+              const startHour = opening.start_hour;
+              const endHour = opening.end_hour;
+              return (<ClubInfoSubRow
+                key={`${startHour}${endHour}${index}`}
+                intervalTime={`Fermé de ${startHour}h à ${endHour}h`}
+                extraPriceValue={""}
+                hasExtraPrice={false}
+
+              />)
+            })}
+          />
+        }
+      </Stack>}
+      weekOpeningList={<Stack>
+        {
+          openingWeek.map((opening, index) => {
+            const dayOfWeek = opening.day_of_week;
+            const bookingTime = opening.booking_time;
+            const openTime = bookingTime.open_time;
+            const closeTime = bookingTime.close_time;
+            const extra = bookingTime.extra_closed_time_list;
+
+            return (<ClubInfoRow
+              key={`${dayOfWeek}${index}`}
+              timeName={`${getArrayDayStr()[dayOfWeek - 1]}`}
+              priceValue={""}
+              hasExtraPrice={true}
+              standardExtraPriceList={<ClubInfoSubRow
+                key={`${dayOfWeek}${openTime.value}${closeTime.value}`}
+                intervalTime={`${openTime.name}-${closeTime.name}`}
+                extraPriceValue={""}
+                hasExtraPrice={extra.length > 0}
+                standardExtraPriceList={extra.map((opening, index) => {
+                  const startHour = opening.start_hour;
+                  const endHour = opening.end_hour;
+                  return (<ClubInfoSubRow
+                    key={`${startHour}${endHour}${index}`}
+                    intervalTime={`Fermé de ${startHour}h à ${endHour}h`}
+                    extraPriceValue={""}
+                    hasExtraPrice={false}
+                  />)
+                })}
+              />}
+            />)
+          })
+        }
+      </Stack>}
+      specialOpeningList={<Stack>
+        {
+          openingSpecial.map((opening, index) => {
+            const dayOfYear = opening.day_of_year;
+            const year = opening.year;
+            const bookingTime = opening.booking_time;
+            const openTime = bookingTime.open_time;
+            const closeTime = bookingTime.close_time;
+            const extra = bookingTime.extra_closed_time_list;
+            const date = getDateFromDayOfYear(dayOfYear, year);
+            return (<ClubInfoRow
+              key={`${dayOfYear}${year}${index}`}
+              //timeName={`${date}`}
+              timeName={`${date.getDate()} ${getArrayMonthStr()[date.getMonth()]} ${date.getFullYear()}`}
+              priceValue={""}
+              hasExtraPrice={true}
+              standardExtraPriceList={<ClubInfoSubRow
+                key={`${dayOfYear}${year}${openTime.value}${closeTime.value}`}
+                intervalTime={`${openTime.name}-${closeTime.name}`}
+                extraPriceValue={""}
+                hasExtraPrice={extra.length > 0}
+                standardExtraPriceList={extra.map((opening, index) => {
+                  const startHour = opening.start_hour;
+                  const endHour = opening.end_hour;
+                  return (<ClubInfoSubRow
+                    key={`${startHour}${endHour}${index}`}
+                    intervalTime={`Fermé de ${startHour}h à ${endHour}h`}
+                    extraPriceValue={""}
+                    hasExtraPrice={false}
+                  />)
+                })}
+              />}
+            />)
+          })
+        }
+      </Stack>}
       componentSwitch={<Stack sx={{ width: '100%', height: '100%' }}><SwitchTheme /></Stack>}
       componentLogoClub={<Stack sx={{ height: '100%', p: '2px', background: clubBackColor }} alignItems={'center'} justifyContent={'center'}>
         <Image src={clubLogo} width={50} height={50} style={{ width: '2rem', height: 'auto' }} loading='lazy' />

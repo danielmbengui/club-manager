@@ -8,4 +8,5 @@ declare function ClubInfoRow(props: {
   intervalTime?: React.ReactNode;
   extraPriceValue?: React.ReactNode;
   standardExtraPriceList?: Types.Devlink.Slot;
+  hasExtraPrice?: Types.Visibility.VisibilityConditions;
 }): React.JSX.Element;

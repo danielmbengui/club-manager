@@ -59,3 +59,25 @@ export function getArrayDayJson() {
       { value: 7, text: "Dimanche" },
   ];
 }
+
+export function getDateFromDayOfYear(dayOfYear, year) {
+  if (typeof dayOfYear !== "number" || typeof year !== "number") {
+      throw new Error("Les paramètres doivent être des nombres.");
+  }
+  if (dayOfYear < 1 || (dayOfYear > 365 && !isLeapYear(year)) || dayOfYear > 366) {
+      throw new Error("Le jour de l'année est invalide pour l'année donnée.");
+  }
+
+  // Crée une date le 1er janvier de l'année spécifiée
+  const date = new Date(year, 0, dayOfYear);
+  return date;
+}
+
+/**
+* Vérifie si une année est bissextile
+* @param {number} year - L'année à vérifier
+* @returns {boolean} - true si l'année est bissextile, false sinon
+*/
+export function isLeapYear(year) {
+  return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+}
