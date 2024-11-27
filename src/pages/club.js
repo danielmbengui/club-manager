@@ -113,8 +113,9 @@ export default function Club() {
             return (<ClubInfoRow
               key={`${valueName}${index}`}
               timeName={getArrayDayStr()[valueName-1]}
+              priceValue={""}
               /*
-              priceValue={formatCurrency(priceGame, 2)}
+              
               intervalTime={"WESH"}
               extraPriceValue={38}
               standardExtraPriceList={dayPrices.map((extraPrice, index) => {

@@ -505,27 +505,6 @@ export function ClubPage({
                                       <ButtonPrimary text="Modifier" />
                                     </_Builtin.Block>
                                     <_Builtin.Block
-                                      className="clubinfo_row"
-                                      tag="div"
-                                      wized="pricing_list_item"
-                                      wized-cloak=""
-                                    >
-                                      <_Builtin.Block
-                                        className="settings_label devlink"
-                                        tag="div"
-                                        wized="price_name"
-                                      >
-                                        {"Temps"}
-                                      </_Builtin.Block>
-                                      <_Builtin.Block
-                                        className="devlink"
-                                        tag="div"
-                                        wized="price_value"
-                                      >
-                                        {"Prix"}
-                                      </_Builtin.Block>
-                                    </_Builtin.Block>
-                                    <_Builtin.Block
                                       className="div-block-club-price"
                                       tag="div"
                                     >
@@ -584,27 +563,6 @@ export function ClubPage({
                                         }
                                       </_Builtin.Block>
                                       <ButtonPrimary text="Modifier" />
-                                    </_Builtin.Block>
-                                    <_Builtin.Block
-                                      className="clubinfo_row"
-                                      tag="div"
-                                      wized="pricing_list_item"
-                                      wized-cloak=""
-                                    >
-                                      <_Builtin.Block
-                                        className="settings_label devlink"
-                                        tag="div"
-                                        wized="price_name"
-                                      >
-                                        {"Temps"}
-                                      </_Builtin.Block>
-                                      <_Builtin.Block
-                                        className="devlink"
-                                        tag="div"
-                                        wized="price_value"
-                                      >
-                                        {"Prix"}
-                                      </_Builtin.Block>
                                     </_Builtin.Block>
                                     <_Builtin.Block
                                       className="div-block-club-price"
