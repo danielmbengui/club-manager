@@ -325,6 +325,7 @@ export function DialogUpdateSettings({
               >
                 <ButtonDisabled isWarning={isWarning} text={text} />
                 <ButtonPrimary
+                  text={text}
                   action={actionEdit}
                   isNotWarning={isNotWarning}
                 />

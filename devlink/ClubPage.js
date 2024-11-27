@@ -73,6 +73,12 @@ export function ClubPage({
   website = "https://www.airpad.ch",
   componentSwitch,
   componentLogoClub,
+  standardPriceList,
+  standardExtraPriceList,
+  timeName = "1h",
+  priceValue = "CHF 52.00",
+  weekPriceList,
+  specialPriceList,
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -205,7 +211,7 @@ export function ClubPage({
                       >
                         <_Builtin.TabsWrapper
                           className="tabs"
-                          current="informations"
+                          current="Tarifs"
                           easing="ease"
                           fadeIn={300}
                           fadeOut={100}
@@ -494,7 +500,7 @@ export function ClubPage({
                                         className="settings_label-title devlink"
                                         tag="div"
                                       >
-                                        {"Tarifs tous les jours"}
+                                        {"Tarifs tous les jours, tarif normal"}
                                       </_Builtin.Block>
                                       <ButtonPrimary text="Modifier" />
                                     </_Builtin.Block>
@@ -519,6 +525,12 @@ export function ClubPage({
                                         {"Prix"}
                                       </_Builtin.Block>
                                     </_Builtin.Block>
+                                    <_Builtin.Block
+                                      className="div-block-club-price"
+                                      tag="div"
+                                    >
+                                      {standardPriceList}
+                                    </_Builtin.Block>
                                   </_Builtin.Block>
                                 </_Builtin.Block>
                                 <_Builtin.Block
@@ -538,7 +550,37 @@ export function ClubPage({
                                         tag="div"
                                       >
                                         {
-                                          "Tarifs jour de semaine -> samedi, dimanche"
+                                          "Tarifs genre les samedis, les dimanches"
+                                        }
+                                      </_Builtin.Block>
+                                      <ButtonPrimary text="Modifier" />
+                                    </_Builtin.Block>
+                                    <_Builtin.Block
+                                      className="div-block-club-price"
+                                      tag="div"
+                                    >
+                                      {weekPriceList}
+                                    </_Builtin.Block>
+                                  </_Builtin.Block>
+                                </_Builtin.Block>
+                                <_Builtin.Block
+                                  className="clubinfo_component price"
+                                  tag="div"
+                                >
+                                  <_Builtin.Block
+                                    className="clubinfo_left"
+                                    tag="div"
+                                  >
+                                    <_Builtin.Block
+                                      className="clubinfo_row title"
+                                      tag="div"
+                                    >
+                                      <_Builtin.Block
+                                        className="settings_label-title devlink"
+                                        tag="div"
+                                      >
+                                        {
+                                          "Tarifs jours spéciaux genre noel, halloween"
                                         }
                                       </_Builtin.Block>
                                       <ButtonPrimary text="Modifier" />
@@ -564,48 +606,11 @@ export function ClubPage({
                                         {"Prix"}
                                       </_Builtin.Block>
                                     </_Builtin.Block>
-                                  </_Builtin.Block>
-                                </_Builtin.Block>
-                                <_Builtin.Block
-                                  className="clubinfo_component price"
-                                  tag="div"
-                                >
-                                  <_Builtin.Block
-                                    className="clubinfo_left"
-                                    tag="div"
-                                  >
                                     <_Builtin.Block
-                                      className="clubinfo_row title"
+                                      className="div-block-club-price"
                                       tag="div"
                                     >
-                                      <_Builtin.Block
-                                        className="settings_label-title devlink"
-                                        tag="div"
-                                      >
-                                        {"Tarifs jours spéciaux -> noel"}
-                                      </_Builtin.Block>
-                                      <ButtonPrimary text="Modifier" />
-                                    </_Builtin.Block>
-                                    <_Builtin.Block
-                                      className="clubinfo_row"
-                                      tag="div"
-                                      wized="pricing_list_item"
-                                      wized-cloak=""
-                                    >
-                                      <_Builtin.Block
-                                        className="settings_label devlink"
-                                        tag="div"
-                                        wized="price_name"
-                                      >
-                                        {"Temps"}
-                                      </_Builtin.Block>
-                                      <_Builtin.Block
-                                        className="devlink"
-                                        tag="div"
-                                        wized="price_value"
-                                      >
-                                        {"Prix"}
-                                      </_Builtin.Block>
+                                      {specialPriceList}
                                     </_Builtin.Block>
                                   </_Builtin.Block>
                                 </_Builtin.Block>

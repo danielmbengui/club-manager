@@ -5,7 +5,7 @@ import * as _Builtin from "./_Builtin";
 export function ButtonPrimary({
   as: _Component = _Builtin.Block,
   action,
-  text = "Enregistrer",
+  text = "Actualiser",
   isNotWarning = true,
 }) {
   return isNotWarning ? (

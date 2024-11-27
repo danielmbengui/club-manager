@@ -34,3 +34,28 @@ export function addHoursToDate(date, nHours = 0) {
   newDate.setHours(newDate.getHours() + nHours);
   return newDate;
 }
+
+export function getArrayDayStr() {
+  return [
+      "Lundi",
+      "Mardi",
+      "Mercredi",
+      "Jeudi",
+      "Vendredi",
+      "Samedi",
+      "Dimanche",
+  ]
+}
+
+export function getArrayDayJson() {
+  return [
+      { value: 0, text: "Tous" },
+      { value: 1, text: "Lundi" },
+      { value: 2, text: "Mardi" },
+      { value: 3, text: "Mercredi" },
+      { value: 4, text: "Jeudi" },
+      { value: 5, text: "Vendredi" },
+      { value: 6, text: "Samedi" },
+      { value: 7, text: "Dimanche" },
+  ];
+}

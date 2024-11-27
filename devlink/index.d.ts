@@ -16,6 +16,8 @@ export * from "./ButtonRed";
 export * from "./ButtonSecondary";
 export * from "./ButtonWarning";
 export * from "./CalendarPage";
+export * from "./ClubInfoRow";
+export * from "./ClubInfoSubRow";
 export * from "./ClubPage";
 export * from "./DashboardPage";
 export * from "./DevLinkNavBarSwitchTheme";

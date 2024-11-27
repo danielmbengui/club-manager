@@ -24,4 +24,10 @@ declare function ClubPage(props: {
   website?: React.ReactNode;
   componentSwitch?: Types.Devlink.Slot;
   componentLogoClub?: Types.Devlink.Slot;
+  standardPriceList?: Types.Devlink.Slot;
+  standardExtraPriceList?: Types.Devlink.Slot;
+  timeName?: React.ReactNode;
+  priceValue?: React.ReactNode;
+  weekPriceList?: Types.Devlink.Slot;
+  specialPriceList?: Types.Devlink.Slot;
 }): React.JSX.Element;
