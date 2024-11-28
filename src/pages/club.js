@@ -122,7 +122,7 @@ export default function Club() {
         }
       </Grid2>}
       
-      /*
+      
       componentCourts={<Grid2 container spacing={1}>
         {
           courts.sort((a, b) => a.name_or_number.localeCompare(b.name_or_number)).map((court, index) => {
@@ -138,8 +138,8 @@ export default function Club() {
             //const clubData = clubSnap.data();
             //commission = clubData.comission_percentage;
 
-            return (<Grid2 size={4}><CardOneCourt
-              key={`${court.name_or_number}${index}`}
+            return (<Grid2 size={4}  key={`${court.name_or_number}${index}`}>
+              <CardOneCourt
               courtName={court.name_or_number}
               address={court.site_name}
               //siteName={court.name_or_number}
@@ -149,7 +149,7 @@ export default function Club() {
           })
         }
       </Grid2>}
-      */
+      
       siteName={""}
       imageSite={""}
       addressSite={""}
