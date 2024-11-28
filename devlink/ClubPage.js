@@ -213,7 +213,7 @@ export function ClubPage({
                       >
                         <_Builtin.TabsWrapper
                           className="tabs"
-                          current="Sites"
+                          current="informations"
                           easing="ease"
                           fadeIn={300}
                           fadeOut={100}
