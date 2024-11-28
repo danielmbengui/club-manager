@@ -140,6 +140,7 @@ export default function Club() {
             //commission = clubData.comission_percentage;
 
             return (<Grid2 size={4}><CardOneCourt
+            key={`${court.name_or_number}${index}`}
               courtName={court.name_or_number}
             address={court.site_name}
               //siteName={court.name_or_number}
