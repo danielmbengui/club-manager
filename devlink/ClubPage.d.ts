@@ -30,4 +30,6 @@ declare function ClubPage(props: {
   standardOpeningList?: Types.Devlink.Slot;
   weekOpeningList?: Types.Devlink.Slot;
   specialOpeningList?: Types.Devlink.Slot;
+  componentSites?: Types.Devlink.Slot;
+  componentCourts?: Types.Devlink.Slot;
 }): React.JSX.Element;

@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { BillingPage, CalendarPage, ClubInfoRow, ClubInfoSubRow, ClubPage, } from "@/devlink";
+import { BillingPage, CalendarPage, CardOneCourt, CardOneSite, ClubInfoRow, ClubInfoSubRow, ClubPage, } from "@/devlink";
 import Head from "next/head";
 import { TITLE_PAGE_BILLING, TITLE_PAGE_CALENDAR, TITLE_PAGE_CLUB, TITLE_WEB_APP } from "@/constants";
 import { useAuth } from "@/providers/AuthProvider";
 import LayoutLoading from '@/components/layouts/LayoutLoading';
-import { Stack } from '@mui/material';
+import { Grid2, Stack } from '@mui/material';
 import SwitchTheme from '@/components/SwitchTheme';
 import Image from 'next/image';
 import { formatCurrency, getArrayMonthStr, parseDoubleToHourInterval } from '@/functions';
 import { getArrayDayStr, getDateFromDayOfYear } from '@/functions/manage-time';
+import { getCourtsList, getSiteList } from '@/functions/club';
+import { firestore } from '@/firebase';
+import { collection, doc, getDoc } from 'firebase/firestore';
 
 export default function Club() {
   const { login, user, logout, club } = useAuth();
@@ -29,8 +32,9 @@ export default function Club() {
   const [openingStandard, setOpeningStandard] = useState({});
   const [openingWeek, setOpeningWeek] = useState([]);
   const [openingSpecial, setOpeningSpecial] = useState([]);
+  const [sites, setSites] = useState([]);
+  const [courts, setCourts] = useState([]);
 
-  const year = new Date().getFullYear();
   const handleLogout = async () => {
     try {
       await logout();
@@ -61,9 +65,25 @@ export default function Club() {
       setOpeningStandard(club.booking_opening_standard);
       setOpeningWeek(club.booking_opening_week_days);
       setOpeningSpecial(club.booking_opening_special_days);
-      console.log("WEEEEESH", club.booking_opening_standard)
+      console.log("WEEEEESH", club.booking_opening_standard);
+      //const clubRef = doc(firestore, court);
+
+      //setSites(getSiteList(clubRef));
     }
   }, [club]);
+  useEffect(() => {
+    if (club) {
+      async function start() {
+        const clubRef = doc(firestore, "CLUBS", club.uid);
+        const list = await getSiteList(clubRef);
+        const courtList = await getCourtsList(clubRef);
+        console.log("WESH", list);
+        setSites(list);
+        setCourts(courtList);
+      }
+      start();
+    }
+  }, [club])
   if (user && !user.connected) {
     return (<><Head>
       <title>{`${TITLE_WEB_APP} | ${TITLE_PAGE_CLUB}`}</title>
@@ -86,6 +106,54 @@ export default function Club() {
       email={email}
       phone={phone}
       website={website}
+      componentSites={<Grid2 container spacing={1}>
+        {
+          sites.sort((a, b) => a.name.localeCompare(b.name)).map((site, index) => {
+            return (<Grid2 size={4}>
+              <CardOneSite
+                key={`${site.name}${index}`}
+                siteName={site.name}
+                imageSite={club.gallery[0]}
+                addressSite={site.address.fullAddress}
+                nCourts={`${9} terrains `}
+                courtName={"WESH"}
+              />
+            </Grid2>)
+          })
+        }
+
+        componentCourts
+      </Grid2>}
+      componentCourts={<Grid2 container spacing={1}>
+        {
+          courts.sort((a, b) => a.name_or_number.localeCompare(b.name_or_number)).map((court, index) => {
+            const openTime = court.booking_opening_standard.open_time.name;
+            const closeTime = court.booking_opening_standard.close_time.name;
+            const clubRef = doc(firestore, "CLUBS", club.uid);
+            
+            //
+
+            //const courtData = await getDoc(courtRef);
+            //const siteRef = doc(collection(clubRef, "SITES"), club);
+            // const courtSnap= await getDoc(courtRef);
+            //const clubData = clubSnap.data();
+            //commission = clubData.comission_percentage;
+
+            return (<Grid2 size={4}><CardOneCourt
+              courtName={court.name_or_number}
+            address={court.site_name}
+              //siteName={court.name_or_number}
+              openTime={openTime}
+              closeTime={closeTime}
+            /></Grid2>)
+          })
+        }
+
+
+      </Grid2>}
+      siteName={""}
+      imageSite={""}
+      addressSite={""}
       standardPriceList={<Stack>
         {
           pricesStandard.map((price, index) => {

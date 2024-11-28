@@ -4267,6 +4267,10 @@ figcaption {
   color: var(--error);
 }
 
+.button.is-icon.is-small.is-red.is-hide {
+  display: none;
+}
+
 .button.is-icon.is-small.is-red.is-delete {
   width: 1rem;
   height: 1rem;
@@ -6712,6 +6716,8 @@ figcaption {
   display: block;
   flex-direction: column;
   border-top: 1px solid var(--color--light-card);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 .card_header_left-content {
@@ -6828,6 +6834,15 @@ figcaption {
   grid-row-gap: 16px;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto auto;
+
+  background-color: var(--brand-2);
+}
+
+.courts_grid.devlink {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: var(--error);
 }
 
 .court-image_box {
@@ -6855,6 +6870,9 @@ figcaption {
   align-items: center;
   grid-column-gap: 0.5rem;
   grid-row-gap: 0.5rem;
+
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 
   background-color: var(--color--black-grey);
 
@@ -8388,6 +8406,10 @@ figcaption {
   flex-wrap: nowrap;
   grid-column-gap: 0rem;
   grid-row-gap: 0rem;
+
+  border-radius: 12px;
+
+  background-color: var(--card-devlink);
 }
 
 .text-block-4 {
@@ -8861,6 +8883,11 @@ figcaption {
   display: block;
   overflow: hidden;
   padding: 0rem 0rem 1rem;
+}
+
+.card_line.court.devlink {
+  border: 0px none var(--transparent);
+  border-radius: 0px;
 }
 
 .card_line.older {
@@ -9885,6 +9912,21 @@ figcaption {
   justify-content: space-between;
 }
 
+.block-sites {
+  flex: 1;
+}
+
+.block-sites.courts {
+  display: block;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.countcourts {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
 
  #w-node-c0acb421-8b3f-022e-f137-3e1ddebb0728-debb0728 {
   justify-self: end;
@@ -10189,6 +10231,10 @@ figcaption {
   grid-column-end: span 1;
   grid-row-start: span 1;
   grid-row-end: span 1;
+}
+#w-node-c9ef8c45-656a-cd57-b4e4-0963468e8d2e-82900087 {
+}
+#w-node-ebcba32c-50fd-6c1c-4c46-bd6656345350-82900087 {
 }
  #w-node-_56d276ce-6ef8-b699-75b4-3571b6bf317c-04d3a1e5 {
   grid-column-start: span 1;
