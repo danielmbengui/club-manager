@@ -123,24 +123,36 @@ export default function Club() {
           })
         }
       </Grid2>}
-      
+      /*
       componentCourts={<Grid2 container spacing={1}>
         {
           courts.sort((a, b) => a.name_or_number.localeCompare(b.name_or_number)).map((court, index) => {
             const openTime = court.booking_opening_standard.open_time.name;
             const closeTime = court.booking_opening_standard.close_time.name;
             const clubRef = doc(firestore, "CLUBS", club.uid);
+
+            //
+
+            //const courtData = await getDoc(courtRef);
+            //const siteRef = doc(collection(clubRef, "SITES"), club);
+            // const courtSnap= await getDoc(courtRef);
+            //const clubData = clubSnap.data();
+            //commission = clubData.comission_percentage;
+
             return (<Grid2 size={4}><CardOneCourt
               key={`${court.name_or_number}${index}`}
               courtName={court.name_or_number}
               address={court.site_name}
+              //siteName={court.name_or_number}
               openTime={openTime}
               closeTime={closeTime}
             /></Grid2>)
           })
         }
+
+
       </Grid2>}
-      
+      */
       siteName={""}
       imageSite={""}
       addressSite={""}
