@@ -106,6 +106,7 @@ export default function Club() {
       email={email}
       phone={phone}
       website={website}
+      /*
       componentSites={<Grid2 container spacing={1}>
         {
           sites.sort((a, b) => a.name.localeCompare(b.name)).map((site, index) => {
@@ -130,7 +131,7 @@ export default function Club() {
             const openTime = court.booking_opening_standard.open_time.name;
             const closeTime = court.booking_opening_standard.close_time.name;
             const clubRef = doc(firestore, "CLUBS", club.uid);
-            
+
             //
 
             //const courtData = await getDoc(courtRef);
@@ -140,9 +141,9 @@ export default function Club() {
             //commission = clubData.comission_percentage;
 
             return (<Grid2 size={4}><CardOneCourt
-            key={`${court.name_or_number}${index}`}
+              key={`${court.name_or_number}${index}`}
               courtName={court.name_or_number}
-            address={court.site_name}
+              address={court.site_name}
               //siteName={court.name_or_number}
               openTime={openTime}
               closeTime={closeTime}
@@ -152,6 +153,7 @@ export default function Club() {
 
 
       </Grid2>}
+      */
       siteName={""}
       imageSite={""}
       addressSite={""}
