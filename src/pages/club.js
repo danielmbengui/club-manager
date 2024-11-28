@@ -109,7 +109,7 @@ export default function Club() {
       componentSites={<Grid2 container spacing={1}>
         {
           sites.sort((a, b) => a.name.localeCompare(b.name)).map((site, index) => {
-            return (<Grid2 size={4} key={`${site.name}${index}`}>
+            return (<Grid2 size={4} key={`${site.name}${index} `}>
               <CardOneSite
                 siteName={site.name}
                 imageSite={club.gallery[0]}
