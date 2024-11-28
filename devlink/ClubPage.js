@@ -552,7 +552,7 @@ export function ClubPage({
                                   className="heading-style-h5"
                                   tag="div"
                                 >
-                                  {"Courts"}
+                                  {"Terrains"}
                                 </_Builtin.Block>
                                 <_Builtin.Block
                                   className="card_header_left-content"
