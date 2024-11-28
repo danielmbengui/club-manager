@@ -6834,8 +6834,6 @@ figcaption {
   grid-row-gap: 16px;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto auto;
-
-  background-color: var(--brand-2);
 }
 
 .courts_grid.devlink {
