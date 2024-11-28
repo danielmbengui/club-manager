@@ -106,7 +106,6 @@ export default function Club() {
       email={email}
       phone={phone}
       website={website}
-      /*
       componentSites={<Grid2 container spacing={1}>
         {
           sites.sort((a, b) => a.name.localeCompare(b.name)).map((site, index) => {
@@ -114,7 +113,7 @@ export default function Club() {
               <CardOneSite
                 key={`${site.name}${index}`}
                 siteName={site.name}
-                imageSite={club.gallery[0]}
+                //imageSite={club.gallery[0]}
                 addressSite={site.address.fullAddress}
                 nCourts={`${9} terrains `}
                 courtName={"WESH"}
@@ -123,7 +122,7 @@ export default function Club() {
           })
         }
       </Grid2>}
-      */
+      
       /*
       componentCourts={<Grid2 container spacing={1}>
         {
