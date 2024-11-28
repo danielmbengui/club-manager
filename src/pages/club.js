@@ -106,7 +106,7 @@ export default function Club() {
       email={email}
       phone={phone}
       website={website}
-      
+      /*
       componentSites={<Grid2 container spacing={1}>
         {
           sites.sort((a, b) => a.name.localeCompare(b.name)).map((site, index) => {
@@ -123,6 +123,7 @@ export default function Club() {
           })
         }
       </Grid2>}
+      */
       /*
       componentCourts={<Grid2 container spacing={1}>
         {
@@ -149,8 +150,6 @@ export default function Club() {
             /></Grid2>)
           })
         }
-
-
       </Grid2>}
       */
       siteName={""}
