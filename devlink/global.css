@@ -2210,6 +2210,7 @@ textarea.w-select {
   --warning-devlink: hsla(39, 100.00%, 50.00%, 1.00);
   --button-disabled: hsla(0, 1.35%, 40.12%, 1.00);
   --playpad-primary-shadow-chart: hsla(217.41573033707866, 89.00%, 60.78%, 0.10);
+  --background-reverse: hsla(0, 0.00%, 9.02%, 1.00);
   --color--text: var(--text-lightmode);
   --color--card: var(--card-lightmode);
   --color--background: var(--bg-lightmode);
@@ -4326,6 +4327,17 @@ figcaption {
   display: flex;
 }
 
+.button.is-icon.is-tiny.is-all.all-ourts.devlink {
+  border-width: 1px;
+  border-color: var(--playpad-secondary);
+  background-color: var(--playpad-secondary);
+}
+
+.button.is-icon.is-tiny.is-all.all-ourts.devlink.all {
+  border-color: hsla(72.23300970873785, 0.00%, 0.00%, 1.00);
+  background-color: var(--background-reverse);
+}
+
 .button.is-icon.is-tiny.green {
   position: absolute;
   left: auto;
@@ -4357,6 +4369,8 @@ figcaption {
 
 .button.is-icon.is-tiny.green.devlink {
   position: static;
+  border-color: var(--success);
+  background-color: var(--success);
   color: var(--button-text-color);
   cursor: pointer;
 }
@@ -4385,6 +4399,17 @@ figcaption {
 .button.is-icon.is-tiny.timeline.w--current {
   background-color: var(--brand-2);
   color: var(--white);
+}
+
+.button.is-icon.is-tiny.devlink {
+  border-color: var(--button-color);
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+}
+
+.button.is-icon.is-tiny.devlink:hover {
+  background-color: var(--transparent);
+  color: var(--text-primary-devlink);
 }
 
 .button.is-tertiary {

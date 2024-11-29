@@ -6,13 +6,17 @@
 :root {
   --background: #efefef;
   --foreground: #171717;
+  --background-reverse: #171717;
+
+ 
   --text-primary-devlink: #171717;
   --text-secondary-devlink: #bdbbbb;
+  --text-reverse-devlink: #bdbbbb;
   --primary-color: rgb(66, 133, 244);
   --test-component: rgba(0, 0, 0, 0);
   --test-text: rgb(0, 0, 0);
   --test-text-1: hsla(0, 0.00%, 82.67%, 1.00);
-  --playpad-main: #e6fb94;
+  --playpad-main: #1f201f;
   --playpad-primary: #4285f4;
   --playpad-primary-shadow-chart: rgba(66, 133, 244, 0.1);
   --border-color-devlink: #ecececcc;
@@ -29,8 +33,11 @@
   --background: #0a0a0a;
   --bg-lightmode: #0a0a0a;
   --foreground: #ededed;
+  --background-reverse: rgb(255, 255, 255);
+
   --text-primary-devlink: rgb(255, 255, 255);
   --text-secondary-devlink: #bdbbbb;
+  --text-reverse-devlink: #bdbbbb;
   --test-component: rgba(0, 0, 0, 0);
   --test-text: rgb(255, 255, 255);
   --test-text-1: hsla(0, 0.00%, 82.67%, 1.00);
@@ -40,6 +47,7 @@
   --border-color-devlink: rgba(236, 236, 236, 0.25);
   --playpad-secondary: #4285f4;
   --button-color: #e6fb94;
+  --button-color-all: #e6fb94;
   --button-text-color: black;
   --card-lightmode: var(--card-darkmode);
   --card-light-lightmode: var(--card-light-darkmode);

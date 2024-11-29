@@ -12,6 +12,7 @@ export * from "./devlink";
 export * from "./BillingPage";
 export * from "./ButtonDisabled";
 export * from "./ButtonPrimary";
+export * from "./ButtonPrimaryWithIcon";
 export * from "./ButtonRed";
 export * from "./ButtonSecondary";
 export * from "./ButtonWarning";
