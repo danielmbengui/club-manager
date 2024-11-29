@@ -269,6 +269,44 @@ export function CalendarPage({
                               tag="div"
                               id="calendar"
                             />
+                            <_Builtin.Block className="div-block-49" tag="div">
+                              <_Builtin.Block
+                                className="div-block-51"
+                                tag="div"
+                              >
+                                <_Builtin.Block
+                                  className="div-block-50"
+                                  tag="div"
+                                />
+                                <_Builtin.Block className="devlink" tag="div">
+                                  {"PlayPad"}
+                                </_Builtin.Block>
+                              </_Builtin.Block>
+                              <_Builtin.Block
+                                className="div-block-51"
+                                tag="div"
+                              >
+                                <_Builtin.Block
+                                  className="div-block-50 club"
+                                  tag="div"
+                                />
+                                <_Builtin.Block className="devlink" tag="div">
+                                  {clubName}
+                                </_Builtin.Block>
+                              </_Builtin.Block>
+                              <_Builtin.Block
+                                className="div-block-51"
+                                tag="div"
+                              >
+                                <_Builtin.Block
+                                  className="div-block-50 pending"
+                                  tag="div"
+                                />
+                                <_Builtin.Block className="devlink" tag="div">
+                                  {"Réservations en cours"}
+                                </_Builtin.Block>
+                              </_Builtin.Block>
+                            </_Builtin.Block>
                             <_Builtin.Block
                               className="popup_update_trigger"
                               data-w-id="3bf6ef48-906c-6954-3b84-47cb5cf21b1c"

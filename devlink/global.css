@@ -2209,6 +2209,7 @@ textarea.w-select {
   --text-secondary-devlink: hsla(0, 1.25%, 73.67%, 1.00);
   --warning-devlink: hsla(39, 100.00%, 50.00%, 1.00);
   --button-disabled: hsla(0, 1.35%, 40.12%, 1.00);
+  --playpad-primary-shadow-chart: hsla(217.41573033707866, 89.00%, 60.78%, 0.10);
   --color--text: var(--text-lightmode);
   --color--card: var(--card-lightmode);
   --color--background: var(--bg-lightmode);
@@ -4357,6 +4358,11 @@ figcaption {
 .button.is-icon.is-tiny.green.devlink {
   position: static;
   color: var(--button-text-color);
+  cursor: pointer;
+}
+
+.button.is-icon.is-tiny.green.devlink:hover {
+  color: var(--success);
 }
 
 .button.is-icon.is-tiny.timeline {
@@ -9978,6 +9984,37 @@ figcaption {
 
 .div-block-48 {
   background-color: var(--error);
+}
+
+.div-block-49 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+}
+
+.div-block-50 {
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--text-primary-devlink);
+  background-color: var(--playpad-primary);
+}
+
+.div-block-50.club {
+  background-color: var(--playpad-primary-shadow-chart);
+}
+
+.div-block-50.pending {
+  background-color: var(--warning-devlink);
+}
+
+.div-block-51 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
 }
 
 
