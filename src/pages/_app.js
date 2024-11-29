@@ -1,5 +1,6 @@
 import "@/devlink/global.css";
 import "@/src/styles/globals.css";
+import "@/src/styles/calendar.css";
 import { DevLinkProvider } from "@/devlink";
 import { AuthProvider } from "@/providers/AuthProvider";
 import { ThemeProvider, useTheme } from "@/contexts/ThemeProvider";

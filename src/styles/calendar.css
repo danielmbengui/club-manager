@@ -1,0 +1,67 @@
+.fc-toolbar-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.fc-event {
+    border: none;
+    font-size: 0.9rem;
+    text-align: center;
+    width: 100%;
+}
+
+/* Styliser le bouton Actualiser */
+.custom-refresh-button {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.custom-refresh-button:hover {
+    background-color: darkred;
+}
+
+.fc-datagrid-cell {
+    background-color: #f4f4f4 !important;
+    color: #333 !important;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 1px solid #ddd;
+  }
+  
+  .fc-datagrid-cell:hover {
+    background-color: #e9ecef !important;
+  }
+  
+
+/* Terrain 1 - Vert */
+.terrain-green {
+    background-color: green !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+/* Terrain 2 - Orange */
+.terrain-orange {
+    background-color: orange !important;
+    color: black !important;
+    font-weight: bold;
+}
+
+/* Terrain 3 - Bleu */
+.terrain-blue {
+    background-color: blue !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+/* Terrain 4 - Rouge */
+.terrain-red {
+    background-color: red !important;
+    color: white !important;
+    font-weight: bold;
+}

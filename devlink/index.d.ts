@@ -25,6 +25,7 @@ export * from "./DashboardPage";
 export * from "./DevLinkNavBarSwitchTheme";
 export * from "./DevLinkProvider";
 export * from "./DialogUpdateBooking";
+export * from "./DialogUpdateClub";
 export * from "./DialogUpdateSettings";
 export * from "./GlobalStyles";
 export * from "./LoginPage";

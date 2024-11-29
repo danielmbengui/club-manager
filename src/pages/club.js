@@ -4,7 +4,7 @@ import Head from "next/head";
 import { TITLE_PAGE_BILLING, TITLE_PAGE_CALENDAR, TITLE_PAGE_CLUB, TITLE_WEB_APP } from "@/constants";
 import { useAuth } from "@/providers/AuthProvider";
 import LayoutLoading from '@/components/layouts/LayoutLoading';
-import { Grid2, Stack } from '@mui/material';
+import { Grid2, Stack, TextField } from '@mui/material';
 import SwitchTheme from '@/components/SwitchTheme';
 import Image from 'next/image';
 import { formatCurrency, getArrayMonthStr, parseDoubleToHourInterval } from '@/functions';
@@ -12,8 +12,11 @@ import { getArrayDayStr, getDateFromDayOfYear } from '@/functions/manage-time';
 import { getCourtsList, getSiteList } from '@/functions/club';
 import { firestore } from '@/firebase';
 import { collection, doc, getDoc } from 'firebase/firestore';
+import { useThemeMode } from '@/contexts/ThemeProvider';
+import { getGoogleMapAddress } from '@/functions/google-map';
 
 export default function Club() {
+  const { theme, themeMode } = useThemeMode();
   const { login, user, logout, club } = useAuth();
   const [clubName, setClubName] = useState('--');
   const [clubLogo, setClubLogo] = useState('');
@@ -35,6 +38,26 @@ export default function Club() {
   const [sites, setSites] = useState([]);
   const [courts, setCourts] = useState([]);
 
+  const [editClubName, setEditClubName] = useState('--');
+  const [errorClubName, setErrorClubName] = useState(false);
+  const [helperClubName, setHelperClubName] = useState("");
+
+  const [editClubAddress, setEditClubAddress] = useState('--');
+  const [errorClubAddress, setErrorClubAddress] = useState(false);
+  const [helperClubAddress, setHelperClubAddress] = useState("");
+
+  const [editClubPhone, setEditClubPhone] = useState('--');
+  const [errorClubPhone, setErrorClubPhone] = useState(false);
+  const [helperClubPhone, setHelperClubPhone] = useState("");
+
+  const [editClubMail, setEditClubMail] = useState('--');
+  const [errorClubMail, setErrorClubMail] = useState(false);
+  const [helperClubMail, setHelperClubMail] = useState("");
+
+  const [editClubWebsite, setEditClubWebsite] = useState('--');
+  const [errorClubWebsite, setErrorClubWebsite] = useState(false);
+  const [helperClubWebsite, setHelperClubWebsite] = useState("");
+
   const handleLogout = async () => {
     try {
       await logout();
@@ -44,6 +67,7 @@ export default function Club() {
     }
   };
   useEffect(() => {
+    
     if (club) {
       setClubName(club.name);
       setClubLogo(club.logo);
@@ -67,7 +91,11 @@ export default function Club() {
       setOpeningSpecial(club.booking_opening_special_days);
       console.log("WEEEEESH", club.booking_opening_standard);
       //const clubRef = doc(firestore, court);
-
+      setEditClubName(club.name);
+      setEditClubAddress(clubAddress.fullAddress);
+      setEditClubPhone(clubContact.phones[0] ?? "");
+      setEditClubMail(clubContact.mails[0] ?? "");
+      setEditClubWebsite(clubContact.websites[0] ?? "");
       //setSites(getSiteList(clubRef));
     }
   }, [club]);
@@ -80,10 +108,66 @@ export default function Club() {
         console.log("WESH", list);
         setSites(list);
         setCourts(courtList);
+        console.log("ADDDDD", await getGoogleMapAddress("Rue Croix du levant 20"))
       }
       start();
     }
-  }, [club])
+  }, [club]);
+  const handleChangeClubName = (event) => {
+    const newName = event.target.value;
+    setEditClubName(newName);
+    if (newName.length <= 3) {
+      setErrorClubName(true);
+      setHelperClubName("Le nom du club doit avoir minimum 3 caractères");
+    } else {
+      setErrorClubName(false);
+      setHelperClubName("");
+    }
+  }
+  const handleChangeClubAddress = (event) => {
+    const newAddress = event.target.value;
+    setEditClubAddress(newAddress);
+    if (newAddress.length <= 3) {
+      setErrorClubAddress(true);
+      setHelperClubAddress("L'adresse est introuvable");
+    } else {
+      setErrorClubAddress(false);
+      setHelperClubAddress("");
+    }
+  }
+  const handleChangeClubPhone = (event) => {
+    const newPhone = event.target.value;
+    setEditClubPhone(newPhone);
+    if (!newPhone.includes("+")) {
+      setErrorClubPhone(true);
+      setHelperClubPhone("Il manque l'indicatif !");
+    } else {
+      setErrorClubPhone(false);
+      setHelperClubPhone("");
+    }
+  }
+  const handleChangeClubMail = (event) => {
+    const newMail = event.target.value;
+    setEditClubMail(newMail);
+    if (!newMail.includes("@")) {
+      setErrorClubMail(true);
+      setHelperClubMail("Le format de l'email est invalide !");
+    } else {
+      setErrorClubMail(false);
+      setHelperClubMail("");
+    }
+  }
+  const handleChangeClubWebsite = (event) => {
+    const newWebsite = event.target.value;
+    setEditClubWebsite(newWebsite);
+    if (!newWebsite.includes("https")) {
+      setErrorClubWebsite(true);
+      setHelperClubWebsite("L'adresse du site internet est invalide !");
+    } else {
+      setErrorClubWebsite(false);
+      setHelperClubWebsite("");
+    }
+  }
   if (user && !user.connected) {
     return (<><Head>
       <title>{`${TITLE_WEB_APP} | ${TITLE_PAGE_CLUB}`}</title>
@@ -106,6 +190,167 @@ export default function Club() {
       email={email}
       phone={phone}
       website={website}
+      isEditing={false}
+      isLoading={false}
+      isSuccess={false}
+      isError={false}
+      textfieldClubName={<TextField
+        //className='form_input'
+        value={editClubName}
+        onChange={handleChangeClubName}
+        helperText={helperClubName}
+        error={errorClubName}
+        placeholder='Nom'
+        sx={{
+          width: '100%',
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              border: 'none', // Supprime la bordure principale
+            },
+            '&:focus-within fieldset': {
+              border: `1px solid ${theme.palette.primary.main}`, // Bordure bleue ou personnalisée au focus
+            },
+          },
+        }}
+        slotProps={{
+          input: {
+            sx: {
+              width: '100%',
+              height: '2.5rem', // Définit la hauteur de l'élément <input>
+              padding: 0, // Ajuste le padding si nécessaire
+              background: "var(--color--light-card)",
+              borderRadius: '5px',
+              border: 'none'
+            },
+          },
+        }}
+      />}
+      textfieldClubAddress={<TextField
+        //className='form_input'
+        value={editClubAddress}
+        onChange={handleChangeClubAddress}
+        helperText={helperClubAddress}
+        error={errorClubAddress}
+        placeholder='Adresse'
+        sx={{
+          width: '100%',
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              border: 'none', // Supprime la bordure principale
+            },
+            '&:focus-within fieldset': {
+              border: `1px solid ${theme.palette.primary.main}`, // Bordure bleue ou personnalisée au focus
+            },
+          },
+        }}
+        slotProps={{
+          input: {
+            sx: {
+              width: '100%',
+              height: '2.5rem', // Définit la hauteur de l'élément <input>
+              padding: 0, // Ajuste le padding si nécessaire
+              background: "var(--color--light-card)",
+              borderRadius: '5px',
+              border: 'none'
+            },
+          },
+        }}
+      />}
+      
+      textfieldClubPhone={<TextField
+        //className='form_input'
+        value={editClubPhone}
+        onChange={handleChangeClubPhone}
+        helperText={helperClubPhone}
+        error={errorClubPhone}
+        placeholder='Téléphone'
+        sx={{
+          width: '100%',
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              border: 'none', // Supprime la bordure principale
+            },
+            '&:focus-within fieldset': {
+              border: `1px solid ${theme.palette.primary.main}`, // Bordure bleue ou personnalisée au focus
+            },
+          },
+        }}
+        slotProps={{
+          input: {
+            sx: {
+              height: '2.5rem', // Définit la hauteur de l'élément <input>
+              padding: 0, // Ajuste le padding si nécessaire
+              background: "var(--color--light-card)",
+              borderRadius: '5px',
+              border: 'none'
+            },
+          },
+        }}
+      />}
+      textfieldClubMail={<TextField
+        //className='form_input'
+        value={editClubMail}
+        onChange={handleChangeClubMail}
+        helperText={helperClubMail}
+        error={errorClubMail}
+        placeholder='Email'
+        sx={{
+          width: '100%',
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              border: 'none', // Supprime la bordure principale
+            },
+            '&:focus-within fieldset': {
+              border: `1px solid ${theme.palette.primary.main}`, // Bordure bleue ou personnalisée au focus
+            },
+          },
+        }}
+        slotProps={{
+          input: {
+            sx: {
+              height: '2.5rem', // Définit la hauteur de l'élément <input>
+              padding: 0, // Ajuste le padding si nécessaire
+              background: "var(--color--light-card)",
+              borderRadius: '5px',
+              border: 'none'
+            },
+          },
+        }}
+      />}
+      textfieldClubWebsite={<TextField
+        //className='form_input'
+        value={editClubWebsite}
+        onChange={handleChangeClubWebsite}
+        helperText={helperClubWebsite}
+        error={errorClubWebsite}
+        placeholder='Adresse site internet'
+        sx={{
+          width: '100%',
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              border: 'none', // Supprime la bordure principale
+            },
+            '&:focus-within fieldset': {
+              border: `1px solid ${theme.palette.primary.main}`, // Bordure bleue ou personnalisée au focus
+            },
+          },
+        }}
+        slotProps={{
+          input: {
+            sx: {
+              height: '2.5rem', // Définit la hauteur de l'élément <input>
+              padding: 0, // Ajuste le padding si nécessaire
+              background: "var(--color--light-card)",
+              borderRadius: '5px',
+              border: 'none'
+            },
+          },
+        }}
+      />}
+
+
+
+
       componentSites={<Grid2 container spacing={1}>
         {
           sites.sort((a, b) => a.name.localeCompare(b.name)).map((site, index) => {
@@ -121,8 +366,8 @@ export default function Club() {
           })
         }
       </Grid2>}
-      
-      
+
+
       componentCourts={<Grid2 container spacing={1}>
         {
           courts.sort((a, b) => a.name_or_number.localeCompare(b.name_or_number)).map((court, index) => {
@@ -138,18 +383,18 @@ export default function Club() {
             //const clubData = clubSnap.data();
             //commission = clubData.comission_percentage;
 
-            return (<Grid2 size={4}  key={`${court.name_or_number}${index}`}>
+            return (<Grid2 size={4} key={`${court.name_or_number}${index}`}>
               <CardOneCourt
-              courtName={court.name_or_number}
-              address={court.site_name}
-              //siteName={court.name_or_number}
-              openTime={openTime}
-              closeTime={closeTime}
-            /></Grid2>)
+                courtName={court.name_or_number}
+                address={court.site_name}
+                //siteName={court.name_or_number}
+                openTime={openTime}
+                closeTime={closeTime}
+              /></Grid2>)
           })
         }
       </Grid2>}
-      
+
       siteName={""}
       imageSite={""}
       addressSite={""}

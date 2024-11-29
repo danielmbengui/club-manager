@@ -32,4 +32,13 @@ declare function ClubPage(props: {
   specialOpeningList?: Types.Devlink.Slot;
   componentSites?: Types.Devlink.Slot;
   componentCourts?: Types.Devlink.Slot;
+  textfieldClubName?: Types.Devlink.Slot;
+  textfieldClubPhone?: Types.Devlink.Slot;
+  textfieldClubMail?: Types.Devlink.Slot;
+  textfieldClubWebsite?: Types.Devlink.Slot;
+  isEditing?: Types.Visibility.VisibilityConditions;
+  isLoading?: Types.Visibility.VisibilityConditions;
+  isSuccess?: Types.Visibility.VisibilityConditions;
+  isError?: Types.Visibility.VisibilityConditions;
+  textfieldClubAddress?: Types.Devlink.Slot;
 }): React.JSX.Element;

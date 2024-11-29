@@ -55,7 +55,7 @@ export function CardOneCourt({
                 {openTime}
               </_Builtin.Block>
             </_Builtin.Block>
-            <_Builtin.Block className="details_row court" tag="div">
+            <_Builtin.Block className="details_row court last" tag="div">
               <_Builtin.Block className="court-row-text" tag="div">
                 <_Builtin.HtmlEmbed
                   className="icon-court"
