@@ -55,6 +55,8 @@ export function CalendarPage({
   componentSite,
   componentCourts,
   actionUpdate = {},
+  nBookings = "(12)",
+  nPendingBookings = "(1)",
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -296,6 +298,11 @@ export function CalendarPage({
                                 <_Builtin.Block className="devlink" tag="div">
                                   {"Confirmés"}
                                 </_Builtin.Block>
+                                {isNotLoading ? (
+                                  <_Builtin.Block className="devlink" tag="div">
+                                    {nBookings}
+                                  </_Builtin.Block>
+                                ) : null}
                               </_Builtin.Block>
                               <_Builtin.Block
                                 className="div-block-51 club"
@@ -332,6 +339,11 @@ export function CalendarPage({
                                 <_Builtin.Block className="devlink" tag="div">
                                   {"En cours"}
                                 </_Builtin.Block>
+                                {isNotLoading ? (
+                                  <_Builtin.Block className="devlink" tag="div">
+                                    {nPendingBookings}
+                                  </_Builtin.Block>
+                                ) : null}
                               </_Builtin.Block>
                             </_Builtin.Block>
                             {isNotLoading ? (

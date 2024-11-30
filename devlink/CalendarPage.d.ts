@@ -23,4 +23,6 @@ declare function CalendarPage(props: {
   componentSite?: Types.Devlink.Slot;
   componentCourts?: Types.Devlink.Slot;
   actionUpdate?: Types.Devlink.RuntimeProps;
+  nBookings?: React.ReactNode;
+  nPendingBookings?: React.ReactNode;
 }): React.JSX.Element;

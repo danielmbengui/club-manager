@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import FullCalendar from "@fullcalendar/react";
 import resourceTimeGridPlugin from "@fullcalendar/resource-timegrid";
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
@@ -12,7 +12,8 @@ import { getFirstAndLastDayOfWeek, getWeek, removeMinutesToDate } from "@/functi
 import { LastPage } from "@mui/icons-material";
 //import listPlugin from "@fullcalendar/list";
 
-const Calendar = ({ courts, values, clubUid, setIsLoading, siteUid = 0, courtUid = 0 }) => {
+const Calendar = ({ isReseting, setIsReseting, clubUid, setIsLoading, siteUid = 0, courtUid = 0, setCountBookings, setCountPendingBookings }) => {
+    const calendarRef = useRef(null);
     const today = new Date();
     const [firstDay, setFirstDay] = useState(getFirstAndLastDayOfDay(today.getDate(), today.getMonth(), today.getFullYear()).firstDay);
     const [lastDay, setLastDay] = useState(getFirstAndLastDayOfDay(today.getDate(), today.getMonth(), today.getFullYear()).lastDay);
@@ -27,175 +28,50 @@ const Calendar = ({ courts, values, clubUid, setIsLoading, siteUid = 0, courtUid
     const [rightToolbar, setRightToolbar] = useState("resourceTimeGridDay,resourceTimeGridWeek");
     const [slotMinTime, setSlotMinTime] = useState("06:00:00");
     const [slotMaxTime, setSlotMaxTime] = useState("24:00:00");
-
-
-
     // Recalculer les valeurs dynamiquement
 
 
-    function getQueryBookingStats(clubRef, site, court, firstDay, lastDay, day, week, month, year, pending = false) {
+    function getQueryBookingStats(clubRef, site, court, firstDay, lastDay, pending = false) {
         //const clubRef = doc(firestore, "CLUBS", club.uid);
         const collectionStr = pending ? "COURT_PENDING_BOOKINGS" : "COURT_BOOKINGS";
         let queryBookingStats;
         if (court != 0) {
             const courtRef = doc(collection(clubRef, "COURTS"), court);
             //var { firstDay, lastDay } = {};
-            if (week != 0 || day != 0 || month != 0 || year != 0) {
-                /*
-                if (day != 0) {
-                    // setDisabledAllYear(true);
-                    //setDisabledAllMonth(true);
-                    //const { firstDay, lastDay } = getFirstAndLastDayOfMonth(month - 1, year);
-                    firstDay = getFirstAndLastDayOfDay(day, month - 1, year).firstDay;
-                    lastDay = getFirstAndLastDayOfDay(day, month - 1, year).lastDay;
-                    //const { firstDay, lastDay } = getFirstAndLastDayOfDay(day, month - 1, year);
-                    //(day, month, year)
-                } else if (week != 0) {
-                    firstDay = getFirstAndLastDayOfWeek(year, week).firstDay;
-                    lastDay = getFirstAndLastDayOfWeek(year, week).lastDay;
-                    //setDisabledAllYear(true);
-                    //setDisabledAllMonth(true);
-                } else if (month != 0) {
-                    //setDisabledAllYear(true);
-                    //const { firstDay, lastDay } = getFirstAndLastDayOfMonth(month - 1, year);
-                    firstDay = getFirstAndLastDayOfMonth(month - 1, year).firstDay;
-                    lastDay = getFirstAndLastDayOfMonth(month - 1, year).lastDay;
-                } else if (year != 0) {
-                    //const requestMonth = month!=0?month:0;
-                    //const { firstDay, lastDay } = getFirstAndLastDayOfYear(year);
-                    firstDay = getFirstAndLastDayOfYear(year).firstDay;
-                    lastDay = getFirstAndLastDayOfYear(year).lastDay;
-                }
-                */
-                queryBookingStats = query(collection(clubRef, collectionStr),
-                    //where("site_ref", "==", siteRef),
-                    where("court_ref", "==", courtRef),
-                    where("match_start_date", ">=", firstDay),
-                    where("match_start_date", "<=", lastDay),
-                );
-            } else {
-                /*
-                if (YEARS.length > 2) {
-                  setDisabledAllYear(false);
-                }
-                */
-                queryBookingStats = query(collection(clubRef, collectionStr),
-                    //where("site_ref", "==", siteRef),
-                    where("court_ref", "==", courtRef),
-                    //where("match_start_date", ">=", firstDay),
-                    //where("match_start_date", "<=", lastDay),
-                );
-            }
+            queryBookingStats = query(collection(clubRef, collectionStr),
+                //where("site_ref", "==", siteRef),
+                where("court_ref", "==", courtRef),
+                where("match_start_date", ">=", firstDay),
+                where("match_start_date", "<=", lastDay),
+            );
         } else if (site != 0) {
             const siteRef = doc(collection(clubRef, "SITES"), site);
-            if (week != 0 || day != 0 || month != 0 || year != 0) {
-                //var { firstDay, lastDay } = {};
-                /*
-                if (day != 0) {
-                    firstDay = getFirstAndLastDayOfDay(day, month - 1, year).firstDay;
-                    lastDay = getFirstAndLastDayOfDay(day, month - 1, year).lastDay;
-                    //setDisabledAllYear(true);
-                    //setDisabledAllMonth(true);
-                } else if (week != 0) {
-                    firstDay = getFirstAndLastDayOfWeek(year, week).firstDay;
-                    lastDay = getFirstAndLastDayOfWeek(year, week).lastDay;
-                    //setDisabledAllYear(true);
-                    //setDisabledAllMonth(true);
-                } else if (month != 0) {
-                    //setDisabledAllYear(true);
-                    //const { firstDay, lastDay } = getFirstAndLastDayOfMonth(month - 1, year);
-                    firstDay = getFirstAndLastDayOfMonth(month - 1, year).firstDay;
-                    lastDay = getFirstAndLastDayOfMonth(month - 1, year).lastDay;
-                } else if (year != 0) {
-                    //const requestMonth = month!=0?month:0;
-                    //const { firstDay, lastDay } = getFirstAndLastDayOfYear(year);
-                    firstDay = getFirstAndLastDayOfYear(year).firstDay;
-                    lastDay = getFirstAndLastDayOfYear(year).lastDay;
-                }
-                */
-                if (court != 0) {
-                    const courtRef = doc(collection(clubRef, "COURTS"), court);
-                    queryBookingStats = query(collection(clubRef, collectionStr),
-                        where("site_ref", "==", siteRef),
-                        where("court_ref", "==", courtRef),
-                        where("match_start_date", ">=", firstDay),
-                        where("match_start_date", "<=", lastDay),
-                    );
-                } else {
-                    queryBookingStats = query(collection(clubRef, collectionStr),
-                        where("site_ref", "==", siteRef),
-                        //where("court_ref", "==", courtRef),
-                        where("match_start_date", ">=", firstDay),
-                        where("match_start_date", "<=", lastDay),
-                    );
-                }
-            } else {
-                if (court != 0) {
-                    const courtRef = doc(collection(clubRef, "COURTS"), court);
-                    queryBookingStats = query(collection(clubRef, collectionStr),
-                        where("site_ref", "==", siteRef),
-                        where("court_ref", "==", courtRef),
-                        //where("payment_date", ">=", firstDay),
-                        //where("payment_date", "<=", lastDay),
-                    );
-                } else {
-                    queryBookingStats = query(collection(clubRef, collectionStr),
-                        where("site_ref", "==", siteRef),
-                        //where("court_ref", "==", courtRef),
-                        //where("payment_date", ">=", firstDay),
-                        //where("payment_date", "<=", lastDay),
-                    );
-                }
-            }
-        } else {
-            if (week != 0 || day != 0 || month != 0 || year != 0) {
-                //var { firstDay, lastDay } = {};
-                /*
-                if (day != 0) {
-                    //setDisabledAllYear(true);
-                    //setDisabledAllMonth(true);
-                    //const { firstDay, lastDay } = getFirstAndLastDayOfMonth(month - 1, year);
-                    firstDay = getFirstAndLastDayOfDay(day, month - 1, year).firstDay;
-                    lastDay = getFirstAndLastDayOfDay(day, month - 1, year).lastDay;
-                } else if (week != 0) {
-                    firstDay = getFirstAndLastDayOfWeek(year, week).firstDay;
-                    lastDay = getFirstAndLastDayOfWeek(year, week).lastDay;
-                    //setDisabledAllYear(true);
-                    //setDisabledAllMonth(true);
-                } else if (month != 0) {
-                    // setDisabledAllYear(true);
-                    firstDay = getFirstAndLastDayOfMonth(month - 1, year).firstDay;
-                    lastDay = getFirstAndLastDayOfMonth(month - 1, year).lastDay;
-                } else if (year != 0) {
-                    //const requestMonth = month!=0?month:0;
-                    //const { firstDay, lastDay } = getFirstAndLastDayOfYear(year);
-                    firstDay = getFirstAndLastDayOfYear(year).firstDay;
-                    lastDay = getFirstAndLastDayOfYear(year).lastDay;
-                }
-                */
+            if (court != 0) {
+                const courtRef = doc(collection(clubRef, "COURTS"), court);
                 queryBookingStats = query(collection(clubRef, collectionStr),
-                    //where("site_ref", "==", siteRef),
-                    //where("court_ref", "==", courtRef),
+                    where("site_ref", "==", siteRef),
+                    where("court_ref", "==", courtRef),
                     where("match_start_date", ">=", firstDay),
                     where("match_start_date", "<=", lastDay),
                 );
             } else {
-                /*
-                if (YEARS.length > 2) {
-                  setDisabledAllYear(false);
-                }
-                */
                 queryBookingStats = query(collection(clubRef, collectionStr),
-                    //where("site_ref", "==", siteRef),
-                    //where("court_ref", "==", courtRef),
-                    //where("match_start_date", ">=", firstDay),
-                    //where("match_start_date", "<=", lastDay),
+                    where("site_ref", "==", siteRef),
+                    where("match_start_date", ">=", firstDay),
+                    where("match_start_date", "<=", lastDay),
                 );
             }
+        } else {
+            queryBookingStats = query(collection(clubRef, collectionStr),
+                //where("site_ref", "==", siteRef),
+                //where("court_ref", "==", courtRef),
+                where("match_start_date", ">=", firstDay),
+                where("match_start_date", "<=", lastDay),
+            );
         }
         return queryBookingStats;
     }
-    async function init(site = 0, court = 0, firstDay, lastDay, day = new Date().getDate(), week = getWeek(new Date()), month = new Date().getMonth() + 1, year = new Date().getFullYear()) {
+    async function init(site = 0, court = 0, firstDay, lastDay) {
         const clubRef = doc(firestore, "CLUBS", clubUid);
         var queryCourt = query(collection(clubRef, "COURTS"),
             //where("site_uid", "==", site),
@@ -225,16 +101,23 @@ const Calendar = ({ courts, values, clubUid, setIsLoading, siteUid = 0, courtUid
         newCourts = newCourts.sort((a, b) => { return a.title.localeCompare(b.title) });
         setResources(newCourts);
         console.log("courts", newCourts);
-        const pendingQueryBooking = getQueryBookingStats(clubRef, site, court, firstDay, lastDay, day, week, month, year, true);
+        const pendingQueryBooking = getQueryBookingStats(clubRef, site, court, firstDay, lastDay, true);
         const pendingQuerySnapshotBooking = await getDocs(pendingQueryBooking);
         const pendingCalendarBooking = await getBookingListCalendar(pendingQuerySnapshotBooking, true);
-        const queryBooking = getQueryBookingStats(clubRef, site, court, firstDay, lastDay, day, week, month, year, false);
+        const queryBooking = getQueryBookingStats(clubRef, site, court, firstDay, lastDay, false);
         const querySnapshotBooking = await getDocs(queryBooking);
         const calendarBooking = await getBookingListCalendar(querySnapshotBooking, false);
         const newBookings = [];
+        var countBookings = 0;
+        var countPendingBookings = 0;
         for (let booking of calendarBooking.concat(pendingCalendarBooking)) {
             //const court = snapshotCourt.data();
             //console.log("court", booking);
+            if (booking.is_pending) {
+                countPendingBookings++;
+            } else {
+                countBookings++;
+            }
             newBookings.push({
                 id: booking.uid,
                 resourceId: booking.court_name,
@@ -248,21 +131,38 @@ const Calendar = ({ courts, values, clubUid, setIsLoading, siteUid = 0, courtUid
             });
         }
         setEvents(newBookings);
+        setCountBookings(countBookings);
+        setCountPendingBookings(countPendingBookings);
         console.log("bookings", newBookings);
     }
+    useEffect(() => {
+        if (isReseting) {
+            setEvents([]);
+            setIsLoading(true);
+            //firstDay = getFirstAndLastDayOfDay(day, month - 1, year).firstDay;
+            //          lastDay = getFirstAndLastDayOfDay(day, month - 1, year).lastDay;
+            init(siteUid, courtUid, firstDay, lastDay);
+            const isResource = courtUid === 0;
+            console.log("isResourceView recalculé :", isResource);
+            console.log("courtUid :", courtUid, "resources.length :", resources.length);
 
+            setRightToolbar(
+                isResource
+                    ? "resourceTimeGridDay,resourceTimeGridWeek"
+                    : "resourceTimeGridDay,resourceTimeGridWeek,dayGridMonth,year"
+            );
+            setIsResourceView(isResource);
+            setInitialView(isResource ? "resourceTimeGridDay" : "timeGridDay");
+            //console.log("day change", week)
+            setIsLoading(false);
+            setIsReseting(false);
+        }
+    }, [isReseting])
     useEffect(() => {
         setIsLoading(true);
         //firstDay = getFirstAndLastDayOfDay(day, month - 1, year).firstDay;
-          //          lastDay = getFirstAndLastDayOfDay(day, month - 1, year).lastDay;
-        init(siteUid, courtUid, firstDay, lastDay, day, week, month, year);
-        //console.log("day change", week)
-        setIsLoading(false);
-    }, [firstDay, lastDay,day, week, month, year]);
-    useEffect(() => {
-        setIsLoading(true);
-        init(siteUid, courtUid, firstDay, lastDay, day, week, month, year);
-        //console.log("site change", siteUid, "court change", courtUid);
+        //          lastDay = getFirstAndLastDayOfDay(day, month - 1, year).lastDay;
+        init(siteUid, courtUid, firstDay, lastDay);
         const isResource = courtUid === 0;
         console.log("isResourceView recalculé :", isResource);
         console.log("courtUid :", courtUid, "resources.length :", resources.length);
@@ -273,12 +173,51 @@ const Calendar = ({ courts, values, clubUid, setIsLoading, siteUid = 0, courtUid
                 : "resourceTimeGridDay,resourceTimeGridWeek,dayGridMonth,year"
         );
         setIsResourceView(isResource);
-        setInitialView(isResource ? "resourceTimeGridDay" : "timeGridDay");
+        //setInitialView("resourceTimeGridDay");
+        //console.log("day change", week)
+        setIsLoading(false);
+    }, [firstDay, lastDay, day, week, month, year]);
+    useEffect(() => {
+        setIsLoading(true);
+        init(siteUid, courtUid, firstDay, lastDay);
+        //console.log("site change", siteUid, "court change", courtUid);
+        const isResource = courtUid === 0;
+        console.log("isResourceView recalculé :", isResource);
+        console.log("courtUid :", courtUid, "resources.length :", resources.length);
+
+        setRightToolbar(
+            isResource
+                ? "resourceTimeGridDay,resourceTimeGridWeek"
+                : "resourceTimeGridDay,resourceTimeGridWeek,dayGridMonth,year"
+        );
+        if (isResource) {
+            //goToDate(new Date());
+            setIsResourceView(isResource);
+            setInitialView("resourceTimeGridDay");
+            //simulateDatesSet("resourceTimeGridDay");
+            
+        }
+
+        //setInitialView("resourceTimeGridDay");
         setIsLoading(false);
     }, [siteUid, courtUid]);
+
     const handleRefresh = () => {
         setIsLoading(true);
-        init(siteUid, courtUid, day, week, month, year);
+        setEvents([]);
+        init(siteUid, courtUid, firstDay, lastDay);
+        const isResource = courtUid === 0;
+        console.log("isResourceView recalculé :", isResource);
+        console.log("courtUid :", courtUid, "resources.length :", resources.length);
+
+        setRightToolbar(
+            isResource
+                ? "resourceTimeGridDay,resourceTimeGridWeek"
+                : "resourceTimeGridDay,resourceTimeGridWeek,dayGridMonth,year"
+        );
+        setIsResourceView(isResource);
+        //setInitialView(isResource ? "resourceTimeGridDay" : "timeGridDay");
+        //setInitialView("resourceTimeGridDay");
         console.log("site change", siteUid);
         setIsLoading(false);
     };
@@ -327,7 +266,7 @@ const Calendar = ({ courts, values, clubUid, setIsLoading, siteUid = 0, courtUid
         const startDate = new Date(info.startStr); // Début de la période visible (format ISO)
         const endDate = removeMinutesToDate(new Date(info.endStr), 1); // Fin de la période visible (format ISO)
         const currentView = info.view.type; // Vue actuelle (ex : 'resourceTimeGridDay')
-        var {firstDay, lastDay} = {};
+        var { firstDay, lastDay } = {};
         //var lastDay = getFirstAndLastDayOfDay(day, month - 1, year).lastDay;
         if (currentView == "resourceTimeGridDay" || currentView == "timeGridDay") {
             setDay(startDate.getDate());
@@ -336,6 +275,7 @@ const Calendar = ({ courts, values, clubUid, setIsLoading, siteUid = 0, courtUid
             //setYear(0);
             firstDay = getFirstAndLastDayOfDay(startDate.getDate(), startDate.getMonth(), startDate.getFullYear()).firstDay;
             lastDay = getFirstAndLastDayOfDay(endDate.getDate(), endDate.getMonth(), endDate.getFullYear()).lastDay;
+            setInitialView(currentView);
         } else if (currentView == "resourceTimeGridWeek" || currentView == "timeGridWeek") {
             //setDay(0);
             setWeek(getWeek(startDate));
@@ -343,13 +283,15 @@ const Calendar = ({ courts, values, clubUid, setIsLoading, siteUid = 0, courtUid
             //setYear(0);
             firstDay = getFirstAndLastDayOfWeek(year, getWeek(startDate)).firstDay;
             lastDay = getFirstAndLastDayOfWeek(year, getWeek(endDate)).lastDay;
+            setInitialView(currentView);
         } else if (currentView == "dayGridMonth") {
             setDay(0);
             setWeek(0);
             setMonth(startDate.getMonth() + 1);
             setYear(0);
             firstDay = getFirstAndLastDayOfMonth(startDate.getMonth(), startDate.getFullYear()).firstDay;
-            lastDay = getFirstAndLastDayOfMonth(endDate.getMonth(),endDate.getFullYear()).lastDay;
+            lastDay = getFirstAndLastDayOfMonth(endDate.getMonth(), endDate.getFullYear()).lastDay;
+            setInitialView("resourceTimeGridDay");
         } else if (currentView == "year") {
             setDay(0);
             setWeek(0);
@@ -358,6 +300,7 @@ const Calendar = ({ courts, values, clubUid, setIsLoading, siteUid = 0, courtUid
             //setYear(0);
             firstDay = getFirstAndLastDayOfYear(startDate.getFullYear()).firstDay;
             lastDay = getFirstAndLastDayOfYear(endDate.getFullYear()).lastDay;
+            setInitialView("resourceTimeGridDay");
         } else {
             setDay(startDate.getDate());
             setWeek(0);
@@ -366,6 +309,7 @@ const Calendar = ({ courts, values, clubUid, setIsLoading, siteUid = 0, courtUid
             firstDay = getFirstAndLastDayOfDay(startDate.getDate(), month - 1, year).firstDay;
             lastDay = getFirstAndLastDayOfDay(endDate.getDate(), month - 1, year).lastDay;
             //setWeek(0);
+            setInitialView(currentView);
         }
 
         //setMonth(startDate.getMonth() + 1);
@@ -378,10 +322,42 @@ const Calendar = ({ courts, values, clubUid, setIsLoading, siteUid = 0, courtUid
         // Vous pouvez ici recharger les événements pour cette période
         // Exemple : fetchEvents(startDate, endDate);
     };
+    const simulateDatesSet = (currentView) => {
+        var today = new Date();
+        var { firstDay, lastDay } = {};
+        if (currentView == "resourceTimeGridDay" || currentView == "timeGridDay") {
+            setDay(today.getDate());
+            //setWeek(0);
+            //setMonth(0);
+            //setYear(0);
+            firstDay = getFirstAndLastDayOfDay(today.getDate(), today.getMonth(), today.getFullYear()).firstDay;
+            lastDay = getFirstAndLastDayOfDay(today.getDate(), today.getMonth(), today.getFullYear()).lastDay;
+        }
+        setInitialView(currentView);
+        const simulatedInfo = {
+            startStr: firstDay.toISOString(),
+            endStr: lastDay.toISOString(),
+            view: { type: currentView }, // Simulez la vue souhaitée
+        };
+        console.log("simulate");
+        handleDatesSet(simulatedInfo);
+    };
+
+    function goNext() {
+        const calendarApi = calendarRef.current.getApi()
+        calendarApi.next()
+      }
+      const goToDate = (date) => {
+        const calendarApi = calendarRef.current.getApi()
+        calendarApi.gotoDate(date.toISOString())
+        //console.log("go date", date);
+      }
 
     return (
         <div style={{ margin: "20px" }}>
+            <button onClick={goNext}>Go Next!</button>
             <FullCalendar
+                ref={calendarRef}
                 plugins={[resourceTimeGridPlugin, interactionPlugin, dayGridPlugin]}
                 //initialView="resourceTimeGridDay"
                 initialView={initialView}
@@ -389,12 +365,17 @@ const Calendar = ({ courts, values, clubUid, setIsLoading, siteUid = 0, courtUid
                 firstDay={1} // Commence la semaine le lundi
                 slotMinTime={slotMinTime}
                 slotMaxTime={slotMaxTime}
-                
+                slotLabelContent={(info) => {
+                    if (info.text === "all-day") {
+                        return "Toute la journée"; // Remplace "all-day"
+                    }
+                    return info.text; // Conserve les autres labels
+                }}
                 //scrollTime="09:00:00" // Scroll automatique à 9h
                 locale="fr"
                 editable={true}
                 selectable={true}
-                resources={resources}
+                resources={isResourceView ? resources : null}
                 //resourceDidMount={handleResourceMount} // Appliquer les styles au montage des ressources
                 events={events}
                 views={{
@@ -431,15 +412,7 @@ const Calendar = ({ courts, values, clubUid, setIsLoading, siteUid = 0, courtUid
                     refreshButton: {
                         text: "Actualiser",
                         click: handleRefresh,
-                        className: "custom-refresh-button", // Ajout de la classe
-                        didMount: function (element) {
-                            element.style.backgroundColor = "red";
-                            element.style.color = "white";
-                            element.style.border = "none";
-                            element.style.borderRadius = "5px";
-                            element.style.padding = "5px 10px";
-                            element.style.cursor = "pointer";
-                        },
+                        classNames: ['fc-refresh-button'], // Classe CSS personnalisée
                     },
                 }}
                 datesSet={handleDatesSet} // Appelé à chaque changement de période

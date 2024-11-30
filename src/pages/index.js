@@ -215,8 +215,9 @@ export default function Home() {
 
             prepareRow(row);
             const { key, ...rest } = row.getRowProps(); // Extraire `key`
-            const colorBackground = row.cells[7].value == "En attente" ? 'var(--playpad-primary)' : '';
-            const colorText = row.cells[7].value == "En attente" ? themeMode == 'light' ? 'white' : 'black' : 'var(--text-primary-devlink)';
+            const colorBackground = row.cells[7].value == "En attente" ? 'var(--warning-devlink)' : '';
+            //const colorText = row.cells[7].value == "En attente" ? themeMode == 'light' ? 'white' : 'black' : 'var(--text-primary-devlink)';
+            const colorText = row.cells[7].value == "En attente" ? 'black' : 'var(--text-primary-devlink)';
             return (
               <tr key={key} {...rest} style={{ borderCollapse: 'collapse', background: colorBackground }} className='table_row' >
                 {row.cells.map((cell, index) => {

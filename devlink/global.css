@@ -5299,6 +5299,10 @@ figcaption {
   color: var(--playpad-main);
 }
 
+.icon-embed-xxsmall.text-color-brand1.devlink.menu {
+  color: var(--playpad-main);
+}
+
 .icon-embed-xxsmall.datepicker {
   position: absolute;
   left: 13px;

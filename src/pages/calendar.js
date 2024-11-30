@@ -37,11 +37,15 @@ export default function CalendarComponent() {
   const [year, setYear] = useState(new Date().getFullYear());
   //const year = new Date().getFullYear();
   const [isLoading, setIsLoading] = useState(false);
+  const [isReseting, setIsReseting] = useState(false);
 
   const [allSites, setAllSites] = useState([{ value: 0, name: "Tous" }]);
   const [selectedSite, setSelectedSite] = useState(0);
   const [allCourts, setAllCourts] = useState([{ value: 0, name: "Tous" }]);
   const [selectedCourt, setSelectedCourt] = useState(0);
+  const [countBookings, setCountBookings] = useState(0);
+  const [countPendingBookings, setCountPendingBookings] = useState(0);
+  //const [countPendingBookings, setCountPendingBookings] = useState(0);
   async function initSites(clubUid) {
     const clubRef = doc(firestore, "CLUBS", clubUid);
     const querySite = query(collection(clubRef, "SITES"),
@@ -58,7 +62,7 @@ export default function CalendarComponent() {
     }
     list = list.sort((a, b) => a.name.localeCompare(b.name));
     //list.unshift({ value: 0, name: "Tous" });
-    setAllSites((prev)=>prev.concat(list));
+    setAllSites((prev) => prev.concat(list));
     setSelectedSite(0);
     console.log("size", querySnapshotSites.size)
   }
@@ -105,7 +109,7 @@ export default function CalendarComponent() {
     //getBookings(club, newSite, selectedCourt, day, month, year);
     //start();
   };
-  
+
   const handleChangeCourt = (event) => {
     var newCourt = event.target.value;
     setSelectedCourt(newCourt);
@@ -150,6 +154,8 @@ export default function CalendarComponent() {
       isLoading={isLoading}
       isNotLoading={!isLoading}
       componentProgress={<CircularProgress color="primary" size={'20px'} />}
+      nBookings={`(${countBookings})`}
+      nPendingBookings={`(${countPendingBookings})`}
       styleCalendar={{
         className: "sidebar4_link w--current",
       }}
@@ -188,6 +194,10 @@ export default function CalendarComponent() {
         }
       </Select>}
       componentCalendar={club && <Calendar
+      isReseting={isReseting}
+      setIsReseting={setIsReseting}
+      setCountBookings={setCountBookings}
+      setCountPendingBookings={setCountPendingBookings}
         clubUid={club.uid}
         isLoading={isLoading}
         siteUid={selectedSite}
@@ -203,8 +213,13 @@ export default function CalendarComponent() {
       actionUpdate={{
         onClick: () => {
           console.log("updated");
-          setSelectedSite((prevState) => prevState);
-          setSelectedCourt((prevState) => prevState);
+          /*
+          setSelectedSite((prevState) => {
+            //setSelectedSite(-1);
+            setSelectedSite(prevState);
+          });
+          */
+         setIsReseting(true);
 
         },  // Ajout de la fonction onClick ici
         //className: "btn-primary",  // Ajout d'une classe CSS

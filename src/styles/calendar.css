@@ -21,100 +21,176 @@
     padding-top: 0.3rem;
     padding-left: 0.3rem;
 }
+/* Modifier la couleur de fond et le style des cellules d'en-tête */
+.fc-col-header-cell {
+    background-color: var(--card-lightmode); /* Fond noir */
+    color: var(--text-primary-devlink); /* Texte blanc */
+    font-weight: bold;
+    text-align: center;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+  }
 
+  
+  /* Ajouter des bordures entre les jours */
 .fc .fc-button-primary {
-    color: var(--text-primary-devlink);
-    background-color: var(--color--text-secondary);
-    border: 1px solid var(--text-secondary);
+    color: var(--button-text-color);
+    font-weight: normal;
+    background-color: var(--button-color);    
+    height: 40px;
+    border: none;
 }
-
 
 .fc .fc-button-primary:hover {
-    color: var(--color-text);
-    background-color: var(--color--text-secondary);
-    border: 1px solid var(--color-text);
-}
-.fc-toolbar-title {
-    color: var(--text-primary-devlink); /* Couleur du texte */
-  }
-  
-  /* Exemple d'alignement */
-  .fc-toolbar-title {
-    text-align: center;
-  }
-
-.fc-today-button {
-    background-color: #4caf50; /* Vert */
-    color: white;
+    color: var(--button-text-color);
+    background-color: var(--button-color);    
+    height: 40px;
     border: none;
+}
+
+.fc-toolbar-title {
+    color: var(--text-primary-devlink);
+    /* Couleur du texte */
+}
+
+/* Exemple d'alignement */
+.fc-toolbar-title {
+    text-align: center;
+}
+
+.fc .fc-today-button {
+    background-color:var(--button-color);
+    /* Vert */
+    color: var(--button-text-color);
+    border: none;
+    height: 40px;
+    font-weight: normal;
+}
+
+/* Effet au survol */
+.fc .fc-today-button:hover,
+.fc .fc-today-button:active,
+.fc .fc-today-button:focus {
+    background-color:var(--button-color);
+    /* Vert */
+    color: var(--button-text-color);
+    border: none;
+    height: 40px;
+    font-weight: normal;
+}
+.fc .fc-today-button:disabled {
+    background-color:var(--button-color);
+    /* Vert */
+    color: var(--button-text-color);
+    border: none;
+    height: 40px;
+    font-weight: normal;
+    /* Vert foncé */
+}
+
+/* Boutons prev/next */
+.fc .fc-prev-button,
+.fc .fc-next-button {
+    background-color: var(--card-lightmode);
+    /* Couleur de fond */
+    color: var(--text-primary-devlink);
+    /* Couleur du texte */
+    border: none;
+    /* Suppression de la bordure */
     border-radius: 5px;
-    font-weight: bold;
+    border: 0.5px solid var(--text-primary-devlink);
+    /* Coins arrondis */
     padding: 5px 10px;
-    transition: background-color 0.3s;
-  }
-  
-  /* Effet au survol */
-  .fc-today-button:hover {
-    background-color: #45a049; /* Vert foncé */
-  }
-
-.fc-timeGridDay-button.fc-button.fc-button-primary.fc-button-active {
-    color: white;
-    background-color: var(--color--black-grey);
-    border: 1px solid var(--color--black-grey);
+    /* Espacement */
+    font-weight: bold;
+    /* Texte en gras */
+    height: 40px;
 }
 
-.fc-timeGridWeek-button.fc-button.fc-button-primary.fc-button-active {
-    color: white;
-    background-color: var(--color--black-grey);
-    border: 1px solid var(--color--black-grey);
+.fc .fc-prev-button:hover,
+.fc .fc-next-button:hover,
+.fc .fc-prev-button:focus,
+.fc .fc-next-button:active {
+    /* Couleur au survol */
+    cursor: pointer;
+    /* Curseur de pointeur */
+    background-color:var(--button-color);
+    /* Vert */
+    color: var(--button-text-color);
 }
 
-.fc-dayGridMonth-button.fc-button.fc-button-primary.fc-button-active {
-    color: white;
-    background-color: var(--color--black-grey);
-    border: 1px solid var(--color--black-grey);
+/* Bouton Actualiser */
+.fc .fc-resourceTimeGridDay-button,
+.fc .fc-resourceTimeGridWeek-button,
+.fc .fc-dayGridMonth-button,
+.fc .fc-year-button {
+    color: var(--text-primary-devlink);
+    background-color: var(--card-lightmode);
+    border: 1px solid var(--text-primary-devlink);
+}
+.fc .fc-resourceTimeGridDay-button:hover,
+.fc .fc-resourceTimeGridDay-button.fc-button-primary.fc-button-active,
+.fc .fc-resourceTimeGridWeek-button:hover,
+.fc .fc-resourceTimeGridWeek-button.fc-button-primary.fc-button-active,
+.fc .fc-dayGridMonth-button:hover,
+.fc .fc-dayGridMonth-button.fc-button-primary.fc-button-active,
+.fc .fc-year-button:hover,
+.fc .fc-year-button.fc-button-primary.fc-button-active {
+    color: var(--button-text-color);
+    background-color: var(--button-color);
+    border: 1px solid var(--button-color);
 }
 
-/* Hover */
-.fc-timeGridDay-button.fc-button.fc-button-primary:hover {
-    color: white;
-    background-color: var(--color--black-grey);
-    border: 1px solid var(--color--black-grey);
-}
-
-.fc-timeGridWeek-button.fc-button.fc-button-primary:hover {
-    color: white;
-    background-color: var(--color--black-grey);
-    border: 1px solid var(--color--black-grey);
-}
-
-.fc-dayGridMonth-button.fc-button.fc-button-primary:hover {
-    color: white;
-    background-color: var(--color--black-grey);
-    border: 1px solid var(--color--black-grey);
-}
-
-#calendar{
+#calendar {
     color: var(--text-primary-devlink);
 }
+
 #calendar>div.fc-header-toolbar.fc-toolbar>div:nth-child(1)>button {
     color: var(--card-lightmode);
     background-color: red;
     border: 1px solid var(--brand-2);
 }
-  
-  /* Surligner les heures pleines */
-  .fc-timegrid-slot-label {
-    color: var(--text-primary-devlink);
-  }
 
-  .fc-resource {
-    background-color: var(--card-lightmode); /* Couleur de fond */
-    color: var(--text-primary-devlink); /* Couleur du texte */
-    font-weight: normal; /* Texte en gras */
-    padding: 10px; /* Ajout d'espacement */
-  }
+/* Surligner les heures pleines */
+.fc-timegrid-slot-label {
+    color: var(--text-primary-devlink);
+}
+
+.fc-resource {
+    background-color: var(--card-lightmode);
+    /* Couleur de fond */
+    color: var(--text-primary-devlink);
+    /* Couleur du texte */
+    font-weight: normal;
+    /* Texte en gras */
+    padding: 10px;
+    /* Ajout d'espacement */
+}
+
+.fc-timegrid-axis-cushion {
+    background-color: var(--card-lightmode);
+    /* Couleur de fond */
+    color: var(--text-primary-devlink);
+    /* Couleur du texte */
+    display: none;
+}
+
+/* Bordures pour toute la colonne */
+.fc-timegrid-axis {
+    border-right: 2px solid #ccc;
+    background-color: var(--card-lightmode);
+}
+
+.fc-timegrid-axis-frame {
+    background-color: var(--card-lightmode);
+    /* Ajuste la hauteur de la cellule */
+}
+
+.fc .fc-timegrid-axis-frame {
+    background-color: var(--card-lightmode);
+
+}
+
 /* Terrain 1 - Vert */
 .terrain-green {
     background-color: green !important;
