@@ -69,6 +69,7 @@ export function CalendarPage({
   clientPhone = "--",
   clientEmail = "--",
   hasTransaction = true,
+  bookingType = "--",
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -573,6 +574,7 @@ export function CalendarPage({
         clientPhone={clientPhone}
         clientEmail={clientEmail}
         hasTransaction={hasTransaction}
+        bookingType={bookingType}
       />
     </_Component>
   );

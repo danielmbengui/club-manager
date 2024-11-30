@@ -36,4 +36,5 @@ declare function CalendarPage(props: {
   clientPhone?: React.ReactNode;
   clientEmail?: React.ReactNode;
   hasTransaction?: Types.Visibility.VisibilityConditions;
+  bookingType?: React.ReactNode;
 }): React.JSX.Element;

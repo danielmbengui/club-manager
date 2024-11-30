@@ -48,7 +48,7 @@ export default function CalendarComponent() {
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [showDialogBooking, setShowDialogBooking] = useState(false);
 
-  
+
   //const [countPendingBookings, setCountPendingBookings] = useState(0);
   async function initSites(clubUid) {
     const clubRef = doc(firestore, "CLUBS", clubUid);
@@ -163,12 +163,15 @@ export default function CalendarComponent() {
       bookingUid={selectedBooking ? selectedBooking.uid : ""}
       transactionUid={selectedBooking ? selectedBooking.transaction_ref.id : ""}
       accessCode={selectedBooking ? selectedBooking.access_code : ""}
-      
       clientName={selectedBooking ? selectedBooking.user_info.name : ""}
-      clientPhone={selectedBooking ? selectedBooking.phone_number : ""}
-      clientEmail={selectedBooking ? selectedBooking.email : ""}
+      clientPhone={selectedBooking ? selectedBooking.user_info.phone_number : ""}
+      clientEmail={selectedBooking ? selectedBooking.user_info.email : ""}
+      bookingType={selectedBooking ? selectedBooking.type : ""}
+
+
+
       hasTransaction={selectedBooking ? selectedBooking.transaction_ref : ""}
-      
+
       componentProgress={<CircularProgress color="primary" size={'20px'} />}
       nBookings={`(${countBookings})`}
       nPendingBookings={`(${countPendingBookings})`}
@@ -213,10 +216,10 @@ export default function CalendarComponent() {
         setShowDialogBooking={setShowDialogBooking}
         selectedBooking={selectedBooking}
         setSelectedBooking={setSelectedBooking}
-      isReseting={isReseting}
-      setIsReseting={setIsReseting}
-      setCountBookings={setCountBookings}
-      setCountPendingBookings={setCountPendingBookings}
+        isReseting={isReseting}
+        setIsReseting={setIsReseting}
+        setCountBookings={setCountBookings}
+        setCountPendingBookings={setCountPendingBookings}
         clubUid={club.uid}
         isLoading={isLoading}
         siteUid={selectedSite}
@@ -252,7 +255,7 @@ export default function CalendarComponent() {
             setSelectedSite(prevState);
           });
           */
-         setIsReseting(true);
+          setIsReseting(true);
 
         },  // Ajout de la fonction onClick ici
         //className: "btn-primary",  // Ajout d'une classe CSS
