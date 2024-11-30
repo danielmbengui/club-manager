@@ -4558,6 +4558,12 @@ figcaption {
   background-color: var(--button-disabled);
 }
 
+.button.is-xsmall.update.all-data.final.error {
+  display: none;
+  border-color: var(--error);
+  background-color: var(--error);
+}
+
 .fs-styleguide_classes {
   display: grid;
   grid-auto-columns: 1fr;

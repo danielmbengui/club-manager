@@ -45,6 +45,10 @@ export default function CalendarComponent() {
   const [selectedCourt, setSelectedCourt] = useState(0);
   const [countBookings, setCountBookings] = useState(0);
   const [countPendingBookings, setCountPendingBookings] = useState(0);
+  const [selectedBooking, setSelectedBooking] = useState(null);
+  const [showDialogBooking, setShowDialogBooking] = useState(false);
+
+  
   //const [countPendingBookings, setCountPendingBookings] = useState(0);
   async function initSites(clubUid) {
     const clubRef = doc(firestore, "CLUBS", clubUid);
@@ -153,6 +157,7 @@ export default function CalendarComponent() {
       clubLogo={clubLogo}
       isLoading={isLoading}
       isNotLoading={!isLoading}
+      isWebAppBooking={false}
       componentProgress={<CircularProgress color="primary" size={'20px'} />}
       nBookings={`(${countBookings})`}
       nPendingBookings={`(${countPendingBookings})`}
@@ -194,6 +199,9 @@ export default function CalendarComponent() {
         }
       </Select>}
       componentCalendar={club && <Calendar
+        setShowDialogBooking={setShowDialogBooking}
+        selectedBooking={selectedBooking}
+        setSelectedBooking={setSelectedBooking}
       isReseting={isReseting}
       setIsReseting={setIsReseting}
       setCountBookings={setCountBookings}
@@ -206,6 +214,20 @@ export default function CalendarComponent() {
         courts={allCourts}
         values={calendarValues}
       />}
+      styleDialogEditBooking={{
+        style: {
+          display: showDialogBooking ? 'flex' : 'none'
+        }
+      }}
+      closeDialogUpdateBooking={{
+        onClick: () => {
+          setShowDialogBooking(false);
+          setSelectedBooking(null);
+          console.log("dialog closed");
+        },  // Ajout de la fonction onClick ici
+        //className: "btn-primary",  // Ajout d'une classe CSS
+        //type: "button"
+      }}
       componentSwitch={<Stack sx={{ width: '100%', height: '100%' }}><SwitchTheme /></Stack>}
       componentLogoClub={clubLogo && <Stack sx={{ height: '100%', p: '2px', background: clubBackColor }} alignItems={'center'} justifyContent={'center'}>
         <Image alt={`logo ${clubName}`} width={50} height={50} style={{ width: '2rem', height: 'auto' }} loading='lazy' src={clubLogo} />

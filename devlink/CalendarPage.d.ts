@@ -25,4 +25,8 @@ declare function CalendarPage(props: {
   actionUpdate?: Types.Devlink.RuntimeProps;
   nBookings?: React.ReactNode;
   nPendingBookings?: React.ReactNode;
+  editable?: Types.Visibility.VisibilityConditions;
+  closeDialogUpdateBooking?: Types.Devlink.RuntimeProps;
+  styleDialogEditBooking?: Types.Devlink.RuntimeProps;
+  isWebAppBooking?: Types.Visibility.VisibilityConditions;
 }): React.JSX.Element;
