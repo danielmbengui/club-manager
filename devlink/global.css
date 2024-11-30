@@ -5804,6 +5804,10 @@ figcaption {
   font-size: 1rem;
 }
 
+.shell3_inner-wrapper.devlink {
+  overflow: auto;
+}
+
 .shell3_inner-wrapper-height {
   display: none;
 }
@@ -5821,6 +5825,12 @@ figcaption {
   padding-top: 1rem;
   padding-bottom: 1rem;
   flex: 1;
+}
+
+.section_shell3-layout.devlink {
+  width: 100%;
+  height: 100%;
+  flex: 0 auto;
 }
 
 .shell3-layout_header {

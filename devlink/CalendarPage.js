@@ -173,12 +173,18 @@ export function CalendarPage({
                   />
                 </_Builtin.Block>
               </_Builtin.Block>
-              <_Builtin.Block className="shell3_inner-wrapper" tag="div">
+              <_Builtin.Block
+                className="shell3_inner-wrapper devlink"
+                tag="div"
+              >
                 <_Builtin.HtmlEmbed
                   className="shell3_inner-wrapper-height"
                   value="%3Cstyle%3E%0A%2F*%20This%20code%20adjusts%20the%20height%20of%20the%20main%20content%20to%20work%20with%20the%20topbar%20and%20fit%20within%20the%20viewport%20height%20*%2F%0A.shell3_inner-wrapper%20%7B%0A%20%20height%3A%20calc(100vh%20-%204.5rem)%3B%20%2F*%204.5rem%20reflects%20the%20height%20of%20the%20topbar%20*%2F%0A%7D%0A%3C%2Fstyle%3E"
                 />
-                <_Builtin.Block className="section_shell3-layout" tag="div">
+                <_Builtin.Block
+                  className="section_shell3-layout devlink"
+                  tag="div"
+                >
                   <_Builtin.Block
                     className="padding-horizontal padding-medium"
                     tag="div"
@@ -324,7 +330,7 @@ export function CalendarPage({
                                   tag="div"
                                 />
                                 <_Builtin.Block className="devlink" tag="div">
-                                  {"Réservations en cours"}
+                                  {"En cours"}
                                 </_Builtin.Block>
                               </_Builtin.Block>
                             </_Builtin.Block>
