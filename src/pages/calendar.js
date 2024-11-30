@@ -157,7 +157,18 @@ export default function CalendarComponent() {
       clubLogo={clubLogo}
       isLoading={isLoading}
       isNotLoading={!isLoading}
-      isWebAppBooking={false}
+      editable={selectedBooking ? selectedBooking.is_from_web_app : true}
+      isWebAppBooking={selectedBooking ? selectedBooking.is_from_web_app : false}
+
+      bookingUid={selectedBooking ? selectedBooking.uid : ""}
+      transactionUid={selectedBooking ? selectedBooking.transaction_ref.id : ""}
+      accessCode={selectedBooking ? selectedBooking.access_code : ""}
+      
+      clientName={selectedBooking ? selectedBooking.user_info.name : ""}
+      clientPhone={selectedBooking ? selectedBooking.phone_number : ""}
+      clientEmail={selectedBooking ? selectedBooking.email : ""}
+      hasTransaction={selectedBooking ? selectedBooking.transaction_ref : ""}
+      
       componentProgress={<CircularProgress color="primary" size={'20px'} />}
       nBookings={`(${countBookings})`}
       nPendingBookings={`(${countPendingBookings})`}

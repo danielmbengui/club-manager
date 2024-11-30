@@ -6441,6 +6441,11 @@ figcaption {
   align-items: flex-start;
 }
 
+.modal_content.update-booking.devlink {
+  justify-content: center;
+  align-items: flex-start;
+}
+
 .modal_close_btn {
   position: absolute;
   left: auto;
@@ -7951,7 +7956,7 @@ figcaption {
 .booking_update_modal_component.devlink {
   z-index: 1001;
 
-  display: none;
+  display: flex;
   width: 100%;
   height: 100%;
   flex-direction: column;
@@ -8689,6 +8694,10 @@ figcaption {
 .card-row-title {
   font-size: 0.8rem;
   font-weight: 700;
+}
+
+.card-row-title.sub-title-devlink {
+  font-weight: 500;
 }
 
 .delete_block {
@@ -10419,6 +10428,8 @@ figcaption {
   justify-self: center;
 }
 #w-node-d9cf1a34-cc1b-8ef7-ccee-e251e1888250-e1888206 {
+}
+#w-node-a592d279-34f0-0219-89bf-66091cb5fc30-e1888206 {
 }
  #w-node-_311d9394-2d14-8483-ffc6-fc4bc24d2486-c24d2486 {
   justify-self: end;

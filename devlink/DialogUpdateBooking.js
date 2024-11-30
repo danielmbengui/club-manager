@@ -104,7 +104,10 @@ export function DialogUpdateBooking({
             </_Builtin.Link>
           ) : null}
         </_Builtin.Block>
-        <_Builtin.Block className="modal_content" tag="div">
+        <_Builtin.Block
+          className="modal_content update-booking devlink"
+          tag="div"
+        >
           {editable ? (
             <_Builtin.Block
               className="modal_content-right devlink"
@@ -539,25 +542,31 @@ export function DialogUpdateBooking({
               >
                 <_Builtin.Block className="info-card_header" tag="div">
                   <_Builtin.Block className="header_title" tag="div">
-                    {"Informations réservations"}
+                    {"Informations réservation"}
                   </_Builtin.Block>
                 </_Builtin.Block>
                 {hasTransaction ? (
                   <_Builtin.Block className="info-card-row" tag="div">
-                    <_Builtin.Block className="card-row-title" tag="div">
-                      {"Transaction UID :"}
+                    <_Builtin.Block
+                      className="card-row-title sub-title-devlink"
+                      tag="div"
+                    >
+                      {"Réservation n°"}
                     </_Builtin.Block>
                     <_Builtin.Block
                       className="update_form-info"
                       tag="div"
                       wized="current_transaction_uid"
                     >
-                      {transactionUid}
+                      {bookingUid}
                     </_Builtin.Block>
                   </_Builtin.Block>
                 ) : null}
                 <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block className="card-row-title" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
                     {"Code d'accès :"}
                   </_Builtin.Block>
                   <_Builtin.Block
@@ -569,7 +578,10 @@ export function DialogUpdateBooking({
                   </_Builtin.Block>
                 </_Builtin.Block>
                 <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block className="card-row-title" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
                     {"Nom du Client :"}
                   </_Builtin.Block>
                   <_Builtin.Block
@@ -581,7 +593,10 @@ export function DialogUpdateBooking({
                   </_Builtin.Block>
                 </_Builtin.Block>
                 <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block className="card-row-title" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
                     {"Téléphone :"}
                   </_Builtin.Block>
                   <_Builtin.Block
@@ -593,7 +608,10 @@ export function DialogUpdateBooking({
                   </_Builtin.Block>
                 </_Builtin.Block>
                 <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block className="card-row-title" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
                     {"Email :"}
                   </_Builtin.Block>
                   <_Builtin.Block
@@ -605,7 +623,10 @@ export function DialogUpdateBooking({
                   </_Builtin.Block>
                 </_Builtin.Block>
                 <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block className="card-row-title" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
                     {"Type :"}
                   </_Builtin.Block>
                   <_Builtin.Block
@@ -617,7 +638,10 @@ export function DialogUpdateBooking({
                   </_Builtin.Block>
                 </_Builtin.Block>
                 <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block className="card-row-title" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
                     {"Site :"}
                   </_Builtin.Block>
                   <_Builtin.Block
@@ -629,7 +653,10 @@ export function DialogUpdateBooking({
                   </_Builtin.Block>
                 </_Builtin.Block>
                 <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block className="card-row-title" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
                     {"Court :"}
                   </_Builtin.Block>
                   <_Builtin.Block
@@ -641,7 +668,10 @@ export function DialogUpdateBooking({
                   </_Builtin.Block>
                 </_Builtin.Block>
                 <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block className="card-row-title" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
                     {"Date/Heure :"}
                   </_Builtin.Block>
                   <_Builtin.Block
@@ -653,7 +683,10 @@ export function DialogUpdateBooking({
                   </_Builtin.Block>
                 </_Builtin.Block>
                 <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block className="card-row-title" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
                     {"Temps de Jeu :"}
                   </_Builtin.Block>
                   <_Builtin.Block
@@ -665,8 +698,133 @@ export function DialogUpdateBooking({
                   </_Builtin.Block>
                 </_Builtin.Block>
                 <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block className="card-row-title" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
                     {"Commentaire interne :"}
+                  </_Builtin.Block>
+                  <_Builtin.Block
+                    className="update_form-info"
+                    tag="div"
+                    wized="current_notes"
+                  >
+                    {bookingDescription}
+                  </_Builtin.Block>
+                </_Builtin.Block>
+              </_Builtin.Block>
+            </_Builtin.Block>
+          ) : null}
+          {notEditable ? (
+            <_Builtin.Block className="modal_content-left devlink" tag="div">
+              <_Builtin.Block
+                className="info-card"
+                id="w-node-a592d279-34f0-0219-89bf-66091cb5fc30-e1888206"
+                tag="div"
+              >
+                <_Builtin.Block className="info-card_header" tag="div">
+                  <_Builtin.Block className="header_title" tag="div">
+                    {"Informations paiement"}
+                  </_Builtin.Block>
+                </_Builtin.Block>
+                {hasTransaction ? (
+                  <_Builtin.Block className="info-card-row" tag="div">
+                    <_Builtin.Block
+                      className="card-row-title sub-title-devlink"
+                      tag="div"
+                    >
+                      {"Facture n°"}
+                    </_Builtin.Block>
+                    <_Builtin.Block
+                      className="update_form-info"
+                      tag="div"
+                      wized="current_transaction_uid"
+                    >
+                      {transactionUid}
+                    </_Builtin.Block>
+                  </_Builtin.Block>
+                ) : null}
+                <_Builtin.Block className="info-card-row" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
+                    {"Date de paiement :"}
+                  </_Builtin.Block>
+                  <_Builtin.Block
+                    className="update_form-info"
+                    tag="div"
+                    wized="current_notes"
+                  >
+                    {bookingDescription}
+                  </_Builtin.Block>
+                </_Builtin.Block>
+                <_Builtin.Block className="info-card-row" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
+                    {"Méthode de paiement :"}
+                  </_Builtin.Block>
+                  <_Builtin.Block
+                    className="update_form-info"
+                    tag="div"
+                    wized="current_notes"
+                  >
+                    {bookingDescription}
+                  </_Builtin.Block>
+                </_Builtin.Block>
+                <_Builtin.Block className="info-card-row" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
+                    {"Paiement avec wallet"}
+                  </_Builtin.Block>
+                  <_Builtin.Block
+                    className="update_form-info"
+                    tag="div"
+                    wized="current_notes"
+                  >
+                    {bookingDescription}
+                  </_Builtin.Block>
+                </_Builtin.Block>
+                <_Builtin.Block className="info-card-row" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
+                    {"Montant avec wallet"}
+                  </_Builtin.Block>
+                  <_Builtin.Block
+                    className="update_form-info"
+                    tag="div"
+                    wized="current_notes"
+                  >
+                    {bookingDescription}
+                  </_Builtin.Block>
+                </_Builtin.Block>
+                <_Builtin.Block className="info-card-row" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
+                    {"Montant avec carte"}
+                  </_Builtin.Block>
+                  <_Builtin.Block
+                    className="update_form-info"
+                    tag="div"
+                    wized="current_notes"
+                  >
+                    {bookingDescription}
+                  </_Builtin.Block>
+                </_Builtin.Block>
+                <_Builtin.Block className="info-card-row" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
+                    {"Total"}
                   </_Builtin.Block>
                   <_Builtin.Block
                     className="update_form-info"

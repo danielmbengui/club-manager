@@ -62,6 +62,13 @@ export function CalendarPage({
   closeDialogUpdateBooking = {},
   styleDialogEditBooking,
   isWebAppBooking = true,
+  transactionUid = "--",
+  bookingUid = "ROksz0ABcdeD52HG4Kcx",
+  accessCode = "--",
+  clientName = "--",
+  clientPhone = "--",
+  clientEmail = "--",
+  hasTransaction = true,
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -559,6 +566,13 @@ export function CalendarPage({
         close={closeDialogUpdateBooking}
         styleDialogEditBooking={styleDialogEditBooking}
         isWebAppBooking={isWebAppBooking}
+        transactionUid={transactionUid}
+        bookingUid={bookingUid}
+        accessCode={accessCode}
+        clientName={clientName}
+        clientPhone={clientPhone}
+        clientEmail={clientEmail}
+        hasTransaction={hasTransaction}
       />
     </_Component>
   );

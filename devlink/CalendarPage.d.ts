@@ -29,4 +29,11 @@ declare function CalendarPage(props: {
   closeDialogUpdateBooking?: Types.Devlink.RuntimeProps;
   styleDialogEditBooking?: Types.Devlink.RuntimeProps;
   isWebAppBooking?: Types.Visibility.VisibilityConditions;
+  transactionUid?: React.ReactNode;
+  bookingUid?: React.ReactNode;
+  accessCode?: React.ReactNode;
+  clientName?: React.ReactNode;
+  clientPhone?: React.ReactNode;
+  clientEmail?: React.ReactNode;
+  hasTransaction?: Types.Visibility.VisibilityConditions;
 }): React.JSX.Element;
