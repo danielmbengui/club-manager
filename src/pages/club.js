@@ -7,7 +7,7 @@ import LayoutLoading from '@/components/layouts/LayoutLoading';
 import { Grid2, Stack, TextField } from '@mui/material';
 import SwitchTheme from '@/components/SwitchTheme';
 import Image from 'next/image';
-import { formatCurrency, getArrayMonthStr, parseDoubleToHourInterval } from '@/functions';
+import { formatCurrency, getArrayMonthStr, getFirstAndLastDayOfDay, getFirstAndLastDayOfMonth, getFirstAndLastDayOfYear, parseDoubleToHourInterval } from '@/functions';
 import { getArrayDayStr, getDateFromDayOfYear } from '@/functions/manage-time';
 import { getCourtsList, getSiteList } from '@/functions/club';
 import { firestore } from '@/firebase';
@@ -58,6 +58,9 @@ export default function Club() {
   const [errorClubWebsite, setErrorClubWebsite] = useState(false);
   const [helperClubWebsite, setHelperClubWebsite] = useState("");
 
+
+
+
   const handleLogout = async () => {
     try {
       await logout();
@@ -105,7 +108,7 @@ export default function Club() {
         const clubRef = doc(firestore, "CLUBS", club.uid);
         const list = await getSiteList(clubRef);
         const courtList = await getCourtsList(clubRef);
-        console.log("WESH", list);
+        
         setSites(list);
         setCourts(courtList);
         console.log("ADDDDD", await getGoogleMapAddress("Rue Croix du levant 20"))

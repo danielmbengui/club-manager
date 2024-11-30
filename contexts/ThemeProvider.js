@@ -69,6 +69,7 @@ export const ThemeProvider = ({ children }) => {
         main:themeColors.border
       },
       text: {
+        //main: themeColors.textPrimary,
         primary: themeColors.textPrimary,
       },
       backgroundSwitch:{

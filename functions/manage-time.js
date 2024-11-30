@@ -25,7 +25,16 @@ export function isSummerTime(date) {
   // Retourner la date ajustée (si ajustement il y a)
   //return date;
 }
-
+export function formatDateToISO(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Mois (0-indexé)
+  const day = String(date.getDate()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const seconds = String(date.getSeconds()).padStart(2, '0');
+  //2024-11-30T07:00:00
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+}
 export function addHoursToDate(date, nHours = 0) {
   if (!date || !(date instanceof Date)) {
     return null; // Ou tout autre indication d'une erreur
@@ -37,35 +46,35 @@ export function addHoursToDate(date, nHours = 0) {
 
 export function getArrayDayStr() {
   return [
-      "Lundi",
-      "Mardi",
-      "Mercredi",
-      "Jeudi",
-      "Vendredi",
-      "Samedi",
-      "Dimanche",
+    "Lundi",
+    "Mardi",
+    "Mercredi",
+    "Jeudi",
+    "Vendredi",
+    "Samedi",
+    "Dimanche",
   ]
 }
 
 export function getArrayDayJson() {
   return [
-      { value: 0, text: "Tous" },
-      { value: 1, text: "Lundi" },
-      { value: 2, text: "Mardi" },
-      { value: 3, text: "Mercredi" },
-      { value: 4, text: "Jeudi" },
-      { value: 5, text: "Vendredi" },
-      { value: 6, text: "Samedi" },
-      { value: 7, text: "Dimanche" },
+    { value: 0, text: "Tous" },
+    { value: 1, text: "Lundi" },
+    { value: 2, text: "Mardi" },
+    { value: 3, text: "Mercredi" },
+    { value: 4, text: "Jeudi" },
+    { value: 5, text: "Vendredi" },
+    { value: 6, text: "Samedi" },
+    { value: 7, text: "Dimanche" },
   ];
 }
 
 export function getDateFromDayOfYear(dayOfYear, year) {
   if (typeof dayOfYear !== "number" || typeof year !== "number") {
-      throw new Error("Les paramètres doivent être des nombres.");
+    throw new Error("Les paramètres doivent être des nombres.");
   }
   if (dayOfYear < 1 || (dayOfYear > 365 && !isLeapYear(year)) || dayOfYear > 366) {
-      throw new Error("Le jour de l'année est invalide pour l'année donnée.");
+    throw new Error("Le jour de l'année est invalide pour l'année donnée.");
   }
 
   // Crée une date le 1er janvier de l'année spécifiée
@@ -80,4 +89,49 @@ export function getDateFromDayOfYear(dayOfYear, year) {
 */
 export function isLeapYear(year) {
   return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+}
+
+export function getWeek(date) {
+  //const currentDate = new Date();
+  const startOfYear = new Date(date.getFullYear(), 0, 1);
+  const days = Math.floor((date - startOfYear) / (24 * 60 * 60 * 1000));
+  const week = Math.ceil((days + startOfYear.getDay() + 1) / 7);
+  return week;
+}
+
+export function getFirstAndLastDayOfWeek(year, weekNumber) {
+  // Calculer le 1er janvier de l'année
+  const firstDayOfYear = new Date(year, 0, 1);
+
+  // Trouver le premier lundi de l'année
+  const firstMonday = new Date(
+    firstDayOfYear.setDate(
+      firstDayOfYear.getDate() + ((1 - firstDayOfYear.getDay() + 7) % 7)
+    )
+  );
+
+  // Calculer le premier jour de la semaine donnée
+  const firstDayOfWeek = new Date(
+    firstMonday.setDate(firstMonday.getDate() + (weekNumber - 1) * 7)
+  );
+
+  // Calculer le dernier jour de la semaine donnée (dimanche)
+  const lastDayOfWeek = new Date(firstDayOfWeek);
+  lastDayOfWeek.setDate(firstDayOfWeek.getDate() + 6);
+
+  return {
+    firstDay: firstDayOfWeek,
+    lastDay: lastDayOfWeek,
+  };
+}
+
+export function removeMinutesToDate(date, nMinutes = 0) {
+  if (!date || !(date instanceof Date)) {
+    //console.error("Invalid date object");
+    return null; // Ou tout autre indication d'une erreur
+  }
+
+  const newDate = new Date(date.getTime());
+  newDate.setMinutes(newDate.getMinutes() - nMinutes);
+  return newDate;
 }

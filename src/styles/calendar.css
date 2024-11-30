@@ -1,43 +1,120 @@
-.fc-toolbar-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.fc-event {
-    border: none;
-    font-size: 0.9rem;
-    text-align: center;
-    width: 100%;
-}
-
-/* Styliser le bouton Actualiser */
-.custom-refresh-button {
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    font-size: 0.9rem;
+.fc .fc-timegrid-event-harness .fc-timegrid-event-harness-inset {
+    position: absolute;
+    z-index: 0 !important;
     cursor: pointer;
 }
 
-.custom-refresh-button:hover {
-    background-color: darkred;
+.fc .fc-event-main {
+    color: black;
+    padding-left: 0.3rem;
+    border: none;
+    overflow: hidden;
+    position: relative;
 }
 
-.fc-datagrid-cell {
-    background-color: #f4f4f4 !important;
-    color: #333 !important;
-    font-size: 1rem;
-    font-weight: bold;
-    border: 1px solid #ddd;
-  }
-  
-  .fc-datagrid-cell:hover {
-    background-color: #e9ecef !important;
-  }
-  
+.fc .fc-event {
+    color: black;
+    background-color: #3ce0a2;
+    border: none;
+    border-left: 3px solid #3c95fa;
+    border-radius: none;
+    padding-top: 0.3rem;
+    padding-left: 0.3rem;
+}
 
+.fc .fc-button-primary {
+    color: var(--text-primary-devlink);
+    background-color: var(--color--text-secondary);
+    border: 1px solid var(--text-secondary);
+}
+
+
+.fc .fc-button-primary:hover {
+    color: var(--color-text);
+    background-color: var(--color--text-secondary);
+    border: 1px solid var(--color-text);
+}
+.fc-toolbar-title {
+    color: var(--text-primary-devlink); /* Couleur du texte */
+  }
+  
+  /* Exemple d'alignement */
+  .fc-toolbar-title {
+    text-align: center;
+  }
+
+.fc-today-button {
+    background-color: #4caf50; /* Vert */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+  }
+  
+  /* Effet au survol */
+  .fc-today-button:hover {
+    background-color: #45a049; /* Vert foncé */
+  }
+
+.fc-timeGridDay-button.fc-button.fc-button-primary.fc-button-active {
+    color: white;
+    background-color: var(--color--black-grey);
+    border: 1px solid var(--color--black-grey);
+}
+
+.fc-timeGridWeek-button.fc-button.fc-button-primary.fc-button-active {
+    color: white;
+    background-color: var(--color--black-grey);
+    border: 1px solid var(--color--black-grey);
+}
+
+.fc-dayGridMonth-button.fc-button.fc-button-primary.fc-button-active {
+    color: white;
+    background-color: var(--color--black-grey);
+    border: 1px solid var(--color--black-grey);
+}
+
+/* Hover */
+.fc-timeGridDay-button.fc-button.fc-button-primary:hover {
+    color: white;
+    background-color: var(--color--black-grey);
+    border: 1px solid var(--color--black-grey);
+}
+
+.fc-timeGridWeek-button.fc-button.fc-button-primary:hover {
+    color: white;
+    background-color: var(--color--black-grey);
+    border: 1px solid var(--color--black-grey);
+}
+
+.fc-dayGridMonth-button.fc-button.fc-button-primary:hover {
+    color: white;
+    background-color: var(--color--black-grey);
+    border: 1px solid var(--color--black-grey);
+}
+
+#calendar{
+    color: var(--text-primary-devlink);
+}
+#calendar>div.fc-header-toolbar.fc-toolbar>div:nth-child(1)>button {
+    color: var(--card-lightmode);
+    background-color: red;
+    border: 1px solid var(--brand-2);
+}
+  
+  /* Surligner les heures pleines */
+  .fc-timegrid-slot-label {
+    color: var(--text-primary-devlink);
+  }
+
+  .fc-resource {
+    background-color: var(--card-lightmode); /* Couleur de fond */
+    color: var(--text-primary-devlink); /* Couleur du texte */
+    font-weight: normal; /* Texte en gras */
+    padding: 10px; /* Ajout d'espacement */
+  }
 /* Terrain 1 - Vert */
 .terrain-green {
     background-color: green !important;

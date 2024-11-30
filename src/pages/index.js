@@ -389,8 +389,6 @@ export default function Home() {
       // where("match_start_date", ">=", firstDay),
       // where("match_start_date", "<=", lastDay),
     );
-
-    var countBooking
     const querySnapshotSites = await getDocs(querySite);
     for (let snapshotSite of querySnapshotSites.docs) {
       const site = snapshotSite.data();
@@ -743,7 +741,7 @@ export default function Home() {
     return queryBookingStats;
   }
   function getQueryTransaction(clubRef, site, court, day, month, year, pending = false) {
-    const collectionStr = pending ? "COURT_PENDING_BOOKINGS" : "COURT_BOOKINGS";
+    const collectionStr = pending ? "COURT_PENDING_TRANSACTIONS" : "COURT_TRANSACTIONS";
     let queryTransaction;
     if (site != 0) {
       const siteRef = doc(collection(clubRef, "SITES"), site);

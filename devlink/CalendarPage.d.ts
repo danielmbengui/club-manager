@@ -17,4 +17,10 @@ declare function CalendarPage(props: {
   componentCalendar?: Types.Devlink.Slot;
   componentSwitch?: Types.Devlink.Slot;
   componentLogoClub?: Types.Devlink.Slot;
+  isLoading?: Types.Visibility.VisibilityConditions;
+  componentProgress?: Types.Devlink.Slot;
+  isNotLoading?: Types.Visibility.VisibilityConditions;
+  componentSite?: Types.Devlink.Slot;
+  componentCourts?: Types.Devlink.Slot;
+  actionUpdate?: Types.Devlink.RuntimeProps;
 }): React.JSX.Element;
