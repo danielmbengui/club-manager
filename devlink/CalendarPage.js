@@ -84,6 +84,20 @@ export function CalendarPage({
   cardUsedAmount = "--",
   totalAmount = "--",
   removable = true,
+  isLoadingUpdateBooking = true,
+  isNotLoadingUpdateBooking = true,
+  componentProgressUpdateBooking,
+  sEditing = true,
+  isError = true,
+  isSuccess = true,
+  errorMessage = "Cette plage horaire est déjà occupée !",
+  successMessage = "La réservation a bien été modifiée !",
+  waitMessage = "patientez svp",
+  isWarning = true,
+  warningMessage = "La réservation sera crée 18 fois !",
+  isNotWarning = true,
+  actionResetDialogUpdate,
+  updateBooking,
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -580,7 +594,6 @@ export function CalendarPage({
         editable={editable}
         close={closeDialogUpdateBooking}
         styleDialogEditBooking={styleDialogEditBooking}
-        isWebAppBooking={isWebAppBooking}
         transactionUid={transactionUid}
         bookingUid={bookingUid}
         accessCode={accessCode}
@@ -603,6 +616,21 @@ export function CalendarPage({
         cardUsedAmount={cardUsedAmount}
         totalAmount={totalAmount}
         removable={removable}
+        isLoading={isLoadingUpdateBooking}
+        isNotLoading={isNotLoadingUpdateBooking}
+        componentProgressUpdateBooking={componentProgressUpdateBooking}
+        isEditing={sEditing}
+        componentProgress={componentProgress}
+        isError={isError}
+        isSuccess={isSuccess}
+        errorMessage={errorMessage}
+        successMessage={successMessage}
+        waitMessage={waitMessage}
+        isWarning={isWarning}
+        warningMessage={warningMessage}
+        isNotWarning={isNotWarning}
+        actionReset={actionResetDialogUpdate}
+        update={updateBooking}
       />
     </_Component>
   );

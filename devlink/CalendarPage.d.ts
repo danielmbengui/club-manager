@@ -51,4 +51,18 @@ declare function CalendarPage(props: {
   cardUsedAmount?: React.ReactNode;
   totalAmount?: React.ReactNode;
   removable?: Types.Visibility.VisibilityConditions;
+  isLoadingUpdateBooking?: Types.Visibility.VisibilityConditions;
+  isNotLoadingUpdateBooking?: Types.Visibility.VisibilityConditions;
+  componentProgressUpdateBooking?: Types.Devlink.Slot;
+  sEditing?: Types.Visibility.VisibilityConditions;
+  isError?: Types.Visibility.VisibilityConditions;
+  isSuccess?: Types.Visibility.VisibilityConditions;
+  errorMessage?: React.ReactNode;
+  successMessage?: React.ReactNode;
+  waitMessage?: React.ReactNode;
+  isWarning?: Types.Visibility.VisibilityConditions;
+  warningMessage?: React.ReactNode;
+  isNotWarning?: Types.Visibility.VisibilityConditions;
+  actionResetDialogUpdate?: Types.Devlink.RuntimeProps;
+  updateBooking?: Types.Devlink.RuntimeProps;
 }): React.JSX.Element;

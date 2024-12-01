@@ -8,8 +8,8 @@ import { Button, CircularProgress, MenuItem, Select, Stack, Typography } from '@
 import { collection, query, where, getDocs, doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { firestore } from '@/firebase';
 import { formatCountBookings, formatCurrency, formatNumber, formatPercentage, getArrayMonthJson, getArrayMonthStr, getDaysInMonth, getFirstAndLastDayOfDay, getFirstAndLastDayOfMonth, getFirstAndLastDayOfYear, getRandomRGBA, parseDoubleToHourChartInterval, parseDoubleToHourInterval, parseDoubleToTimeInterval } from '@/functions';
-import { getBookingListDashboard, getBookingListTotal, getCountBookingsClub, getCountBookingsClubByCourt, getCountBookingsClubBySite, getCountBookingsPlayPad, getCountBookingsTotal, getCountHoursClub, getCountHoursPlayPad, getCountUsersClub, getCountUsersPlayPad, getRateBookingsClub, getRateBookingsPlayPad, getRateHoursClub, getRateHoursPlayPad } from '@/functions/bookings';
-import { getArrayRevenuesTotal, getRevenuesClub, getRevenuesPlayPad, getRevenuesTotal, getRevenuesTotalCourt, getRevenuesTotalSite } from '@/functions/transactions';
+import { getBookingListDashboard, getBookingListTotal, getCountBookingsClub, getCountBookingsClubByCourt, getCountBookingsClubBySite, getCountBookingsPlayPad, getCountBookingsTotal, getCountHoursClub, getCountHoursPlayPad, getCountUsersClub, getCountUsersPlayPad, getOneBookingCalendar, getRateBookingsClub, getRateBookingsPlayPad, getRateHoursClub, getRateHoursPlayPad } from '@/functions/bookings';
+import { getArrayRevenuesTotal, getOneTransactionCalendar, getRevenuesClub, getRevenuesPlayPad, getRevenuesTotal, getRevenuesTotalCourt, getRevenuesTotalSite } from '@/functions/transactions';
 import PieChart from '@/components/PieChart';
 import LineChart from '@/components/LineChart';
 import BarChartCustom from '@/components/BarChartCustom';
@@ -91,6 +91,7 @@ export default function Home() {
   const [data, setData] = useState([]);
   const [showDialogBooking, setShowDialogBooking] = useState(false);
   const [selectedBooking, setSeletedBooking] = useState(null);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [selectedSorting, setSelectedSorting] = useState(SORT_CREATED_DATE);
   const [selectedDesc, setSelectedDesc] = useState(true);
 
@@ -249,11 +250,35 @@ export default function Home() {
                                 //borderRadius: '4px',
                                 //cursor: 'pointer',
                               }}
+
                               action={{
-                                onClick: () => {
-                                  setSeletedBooking(bookingList[cell.row.index]);
-                                  console.log("booking", bookingList[cell.row.index]);
+                                onClick: async () => {
                                   setShowDialogBooking(true);
+                                  setIsLoading(true);
+                                  const id = bookingList[cell.row.index].uid;
+                                  const clubRef = doc(firestore, "CLUBS", club.uid);
+                                  var bookingRef = doc((collection(clubRef, "COURT_PENDING_BOOKINGS")), id);
+                                  var bookingSnap = await getDoc(bookingRef);
+                                  const isPending = bookingSnap.exists();
+                                  if (!isPending) {
+                                    bookingRef = doc((collection(clubRef, "COURT_BOOKINGS")), id);
+                                    bookingSnap = await getDoc(bookingRef);
+                                  }
+                                  console.log("AAAAAAA", bookingSnap.exists())
+                                  //const bookingData = bookingSnap.data();
+                                  const bookingData = getOneBookingCalendar(bookingSnap, isPending);
+                                  setSeletedBooking(bookingData);
+                                  if (bookingData.transaction_uid != "") {
+                                    const transactionCollection = isPending ? "COURT_PENDING_TRANSACTIONS" : "COURT_TRANSACTIONS";
+                                    var transactionRef = doc((collection(clubRef, transactionCollection)), bookingData.transaction_uid);
+                                    var transactionSnap = await getDoc(transactionRef);
+                                    const transactionData = getOneTransactionCalendar(transactionSnap, isPending);
+                                    console.log("TRAAAAAAA", transactionData);
+                                    setSelectedTransaction(transactionData);
+                                  }
+                                  setIsLoading(false);
+                                  //console.log("booking", bookingData);
+                                  
                                 },  // Ajout de la fonction onClick ici
                                 //className: "btn-primary",  // Ajout d'une classe CSS
                                 //type: "button"
@@ -1308,10 +1333,13 @@ export default function Home() {
         isLoading={isLoading}
         isNotLoading={!isLoading}
         componentProgress={<CircularProgress color="primary" size={'20px'} />}
+        isLoadingUpdateBooking={isLoading}
+        isNotLoadingUpdateBooking={!isLoading}
+        componentProgressUpdateBooking={<CircularProgress color="primary" size={'50px'} />}
         bookingCreatedDate={selectedBooking ? selectedBooking.created_date : ""}
         bookingUid={selectedBooking ? selectedBooking.uid : ""}
-        transactionUid={selectedBooking ? selectedBooking.transaction_uid : ""}
-        hasTransaction={selectedBooking && selectedBooking.transaction_uid ? true : false}
+        //transactionUid={selectedBooking ? selectedBooking.transaction_uid : ""}
+        //hasTransaction={selectedBooking && selectedBooking.transaction_uid ? true : false}
         accessCode={selectedBooking ? selectedBooking.access_code : ""}
         clientName={selectedBooking ? selectedBooking.name : ""}
         clientPhone={selectedBooking ? selectedBooking.phone : ""}
@@ -1322,6 +1350,18 @@ export default function Home() {
         bookingMatchDate={selectedBooking ? selectedBooking.match_date : ""}
         bookingDuration={selectedBooking ? selectedBooking.duration : ""}
         bookingDescription={selectedBooking ? selectedBooking.description : ""}
+
+        hasTransaction={selectedTransaction}
+        transactionUid={selectedTransaction ? selectedTransaction.uid : ""}
+        paymentProvider={selectedTransaction ? selectedTransaction.payment_provider : ""}
+        refNo={selectedTransaction ? selectedTransaction.ref_no : ""}
+        paymentDate={selectedTransaction ? selectedTransaction.payment_date : ""}
+
+        //paymentMethod={selectedTransaction ? selectedTransaction.payment_method : ""}
+        walletUsedAmount={formatCurrency(selectedTransaction ? selectedTransaction.wallet_used_amount : 0, 2)}
+        cardUsedAmount={formatCurrency(selectedTransaction ? selectedTransaction.total_amount - selectedTransaction.wallet_used_amount : 0, 2)}
+        totalAmount={formatCurrency(selectedTransaction ? selectedTransaction.total_amount : 0, 2)}
+
         componentSwitch={<Stack sx={{ width: '100%', height: '100%' }}><ThemeSwitcher /></Stack>}
         //clientPhone={""}
         componentLogoClub={<Stack sx={{ height: '100%', p: '2px', background: clubBackColor }} alignItems={'center'} justifyContent={'center'}>
@@ -1331,6 +1371,7 @@ export default function Home() {
         editable={false}
         notEditable={true}
         isWebAppBooking={false}
+        removable={false}
         styleDialogEditBooking={{
           style: {
             display: showDialogBooking ? 'flex' : 'none'
@@ -1340,19 +1381,23 @@ export default function Home() {
           onClick: () => {
             const sorting = selectedSorting;
             const desc = selectedDesc;
-            const timeOut = setTimeout(() => {
-              const allBookings = sortBookingList([...bookingList], sorting, desc);
-              setBookingList(allBookings);
+            //const allBookings = sortBookingList([...bookingList], sorting, desc);
+              //setBookingList(allBookings);
               setSeletedBooking(null);
+              setSelectedTransaction(null);
               setShowDialogBooking(false);
 
               console.log("close dialog");
+            /*
+            const timeOut = setTimeout(() => {
+              
             }, 1000);
             return () => {
               if (timeOut) {
                 clearTimeout(timeOut);
               }
             };
+            */
           },  // Ajout de la fonction onClick ici
           //className: "btn-primary",  // Ajout d'une classe CSS
           //type: "button"

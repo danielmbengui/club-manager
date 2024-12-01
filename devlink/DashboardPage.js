@@ -109,6 +109,16 @@ export function DashboardPage({
   hasTransaction = true,
   componentSwitch,
   componentLogoClub,
+  paymentProvider = "--",
+  refNo = "--",
+  paymentDate = "--",
+  walletUsedAmount = "--",
+  cardUsedAmount = "--",
+  totalAmount = "--",
+  removable = true,
+  isLoadingUpdateBooking = true,
+  isNotLoadingUpdateBooking = true,
+  componentProgressUpdateBooking,
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -1363,9 +1373,18 @@ export function DashboardPage({
         accessCode={accessCode}
         transactionUid={transactionUid}
         bookingUid={bookingUid}
-        isWebAppBooking={isWebAppBooking}
         bookingCreatedDate={bookingCreatedDate}
         hasTransaction={hasTransaction}
+        paymentProvider={paymentProvider}
+        refNo={refNo}
+        paymentDate={paymentDate}
+        walletUsedAmount={walletUsedAmount}
+        cardUsedAmount={cardUsedAmount}
+        totalAmount={totalAmount}
+        removable={removable}
+        isLoading={isLoadingUpdateBooking}
+        isNotLoading={isNotLoadingUpdateBooking}
+        componentProgressUpdateBooking={componentProgressUpdateBooking}
       />
     </_Component>
   );

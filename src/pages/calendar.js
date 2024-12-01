@@ -37,6 +37,7 @@ export default function CalendarComponent() {
   const [year, setYear] = useState(new Date().getFullYear());
   //const year = new Date().getFullYear();
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingDialogBooking, setIsLoadingDialogBooking] = useState(false);
   const [isReseting, setIsReseting] = useState(false);
 
   const [allSites, setAllSites] = useState([{ value: 0, name: "Tous" }]);
@@ -158,9 +159,37 @@ export default function CalendarComponent() {
       clubLogo={clubLogo}
       isLoading={isLoading}
       isNotLoading={!isLoading}
+      isLoadingUpdateBooking={isLoadingDialogBooking}
+      isNotLoadingUpdateBooking={!isLoadingDialogBooking}
+      componentProgressUpdateBooking={<CircularProgress color="primary" size={'50px'} />}
       editable={selectedBooking ? selectedBooking.is_from_web_app && selectedBooking.match_finished_date_D > new Date() : false}
       notEditable={selectedBooking ? selectedBooking.is_from_app || (selectedBooking.is_from_web_app && new Date(selectedBooking.match_finished_date_D) < new Date()) : true}
       removable={selectedBooking ? selectedBooking.is_from_web_app && selectedBooking.match_finished_date_D > new Date() : false}
+      
+      isEditing={true}
+      isSuccess={true}
+      //successMessage={""}
+      isError={true}
+      //errorMessage={""}
+      //waitMessage={""}
+      isWarning={true}
+      isNotWarning={true}
+      //warningMessage={""}
+      
+      actionResetDialogUpdate={{
+        onClick: () => {
+          alert("RESET");
+        },  // Ajout de la fonction onClick ici
+        //className: "btn-primary",  // Ajout d'une classe CSS
+        //type: "button"
+      }}
+      updateBooking={{
+        onClick: () => {
+          alert("SAVE");
+        },  // Ajout de la fonction onClick ici
+        //className: "btn-primary",  // Ajout d'une classe CSS
+        //type: "button"
+      }}
       
       //notEditable={selectedBooking ? !selectedBooking.is_from_web_app : true}
       isWebAppBooking={selectedBooking ? selectedBooking.is_from_web_app : false}
@@ -183,7 +212,7 @@ export default function CalendarComponent() {
       paymentProvider={selectedTransaction ? selectedTransaction.payment_provider : ""}
       refNo={selectedTransaction ? selectedTransaction.ref_no : ""}
       paymentDate={selectedTransaction ? selectedTransaction.payment_date : ""}
-      
+
       //paymentMethod={selectedTransaction ? selectedTransaction.payment_method : ""}
       walletUsedAmount={formatCurrency(selectedTransaction ? selectedTransaction.wallet_used_amount : 0, 2)}
       cardUsedAmount={formatCurrency(selectedTransaction ? selectedTransaction.total_amount - selectedTransaction.wallet_used_amount : 0, 2)}
@@ -242,7 +271,8 @@ export default function CalendarComponent() {
         isLoading={isLoading}
         siteUid={selectedSite}
         courtUid={selectedCourt}
-        setIsLoading={setIsLoading}
+        setIsLoading={setIsLoadingDialogBooking}
+        //setIsLoadingDialogBooking={}
         courts={allCourts}
         values={calendarValues}
       />}

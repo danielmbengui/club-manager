@@ -83,30 +83,31 @@ export async function getBookingListDashboard(querySnapshotBooking, is_from_app 
         
         const clubRef = doc(firestore, "CLUBS", booking.club_ref.id);
         const bookingRef = doc((collection(clubRef, "COURT_BOOKINGS")), booking.uid);
+        if (!booking.hasOwnProperty('site_name')) {
+            console.log("no site", booking.uid)
+            const siteSnap = await getDoc(booking.site_ref);
+            if (siteSnap.exists()) {
+                const siteData = siteSnap.data();
+                await updateDoc(bookingRef, {
+                    site_name: siteData.name,          // Nouvelle valeur pour 'age
+                });
+            }
+        }
+        if (!booking.hasOwnProperty('court_name')) {
+            console.log("no court", booking.uid)
+            const courtSnap = await getDoc(booking.court_ref);
+            if (courtSnap.exists()) {
+                const courtData = courtSnap.data();
+                await updateDoc(bookingRef, {
+                    court_name: courtData.name_or_number,          // Nouvelle valeur pour 'age
+                });
+            }
+        }
         if (booking.transaction_ref) {
             const transactionRef = doc((collection(clubRef, "COURT_TRANSACTIONS")), booking.transaction_ref.id);
             const transactionSnap = await getDoc(booking.transaction_ref);
             console.log("transaction OKAY", transactionRef.id);
-            if (!booking.hasOwnProperty('site_name')) {
-                console.log("no site", booking.uid)
-                const siteSnap = await getDoc(booking.site_ref);
-                if (siteSnap.exists()) {
-                    const siteData = siteSnap.data();
-                    await updateDoc(bookingRef, {
-                        site_name: siteData.name,          // Nouvelle valeur pour 'age
-                    });
-                }
-            }
-            if (!booking.hasOwnProperty('court_name')) {
-                console.log("no court", booking.uid)
-                const courtSnap = await getDoc(booking.court_ref);
-                if (courtSnap.exists()) {
-                    const courtData = courtSnap.data();
-                    await updateDoc(bookingRef, {
-                        court_name: courtData.name_or_number,          // Nouvelle valeur pour 'age
-                    });
-                }
-            }
+            
             if (transactionSnap.exists()) {
                 const transactionData = transactionSnap.data();
                 //const siteRef = doc(collection(clubRef, "SITES"), site);
@@ -129,6 +130,12 @@ export async function getBookingListDashboard(querySnapshotBooking, is_from_app 
                             court_name: courtData.name_or_number,          // Nouvelle valeur pour 'age
                         });
                     }
+                }
+                if (!transactionData.hasOwnProperty('payment_provider')) {
+                    console.log("no payment_provider", booking.uid)
+                    await updateDoc(transactionRef, {
+                        payment_provider: "datatrans",          // Nouvelle valeur pour 'age
+                    });
                 }
             } else {
                 await deleteDoc(transactionRef);
@@ -298,44 +305,7 @@ export async function getCountBookingsPlayPad(querySnapshotBooking) {
 
     return countBoookingsPlayPad;
 }
-export async function getCountBookingsTotal(querySnapshotBooking) {
-    /*
-    for (const snap of querySnapshotBooking.docs) {
-        const booking = snap.data();
-        const clubRef = doc(firestore, "CLUBS", booking.club_ref.id);
-        const bookingRef = doc((collection(clubRef, "COURT_BOOKINGS")), booking.uid);
-        if (booking.transaction_ref) {
-            const transactionRef = doc((collection(clubRef, "COURT_TRANSACTIONS")), booking.transaction_ref.id);
-            const transactionSnap = await getDoc(booking.transaction_ref);
-            if (transactionSnap.exists()) {
-                const transactionData = transactionSnap.data();
-                //const siteRef = doc(collection(clubRef, "SITES"), site);
-                if (!transactionData.hasOwnProperty('site_name')) {
-                    console.log("no site", booking.uid)
-                    const siteSnap = await getDoc(transactionData.site_ref);
-                    if (siteSnap.exists()) {
-                        const siteData = siteSnap.data();
-                        await updateDoc(transactionRef, {
-                            site_name: siteData.name,          // Nouvelle valeur pour 'age
-                        });
-                    }
-                }
-                if (!transactionData.hasOwnProperty('court_name')) {
-                    console.log("no court", booking.uid)
-                    const courtSnap = await getDoc(transactionData.court_ref);
-                    if (courtSnap.exists()) {
-                        const courtData = courtSnap.data();
-                        await updateDoc(transactionRef, {
-                            court_name: courtData.name_or_number,          // Nouvelle valeur pour 'age
-                        });
-                    }
-                }
-            } else {
-                await deleteDoc(transactionRef);
-            }
-        }
-    }
-    */
+export async function getCountBookingsTotal(querySnapshotBooking) {    
     return querySnapshotBooking.size;
 }
 export async function getRateBookingsPlayPad(querySnapshotBooking) {

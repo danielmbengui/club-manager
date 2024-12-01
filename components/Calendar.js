@@ -261,6 +261,8 @@ const Calendar = ({ isReseting, setIsReseting, clubUid, setIsLoading, siteUid = 
         // Récupérer les informations sur l'événement cliqué
         
         async function init() {
+            setShowDialogBooking(true);
+            setIsLoading(true);
             const { id } = clickInfo.event;
             const clubRef = doc(firestore, "CLUBS", clubUid);
             var bookingRef = doc((collection(clubRef, "COURT_PENDING_BOOKINGS")), id);
@@ -282,7 +284,7 @@ const Calendar = ({ isReseting, setIsReseting, clubUid, setIsLoading, siteUid = 
                 console.log("TRAAAAAAA", transactionData);
                 setSelectedTransaction(transactionData);
             }
-            setShowDialogBooking(true);
+            setIsLoading(false);
             
             //
             //console.log("WEEEEEEEEEEESH", bookingData)

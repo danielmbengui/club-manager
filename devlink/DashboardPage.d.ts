@@ -79,4 +79,14 @@ declare function DashboardPage(props: {
   hasTransaction?: Types.Visibility.VisibilityConditions;
   componentSwitch?: Types.Devlink.Slot;
   componentLogoClub?: Types.Devlink.Slot;
+  paymentProvider?: React.ReactNode;
+  refNo?: React.ReactNode;
+  paymentDate?: React.ReactNode;
+  walletUsedAmount?: React.ReactNode;
+  cardUsedAmount?: React.ReactNode;
+  totalAmount?: React.ReactNode;
+  removable?: Types.Visibility.VisibilityConditions;
+  isLoadingUpdateBooking?: Types.Visibility.VisibilityConditions;
+  isNotLoadingUpdateBooking?: Types.Visibility.VisibilityConditions;
+  componentProgressUpdateBooking?: Types.Devlink.Slot;
 }): React.JSX.Element;
