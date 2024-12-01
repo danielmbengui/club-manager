@@ -158,19 +158,23 @@ export default function CalendarComponent() {
       isLoading={isLoading}
       isNotLoading={!isLoading}
       editable={selectedBooking ? selectedBooking.is_from_web_app : true}
+      notEditable={selectedBooking ? selectedBooking.is_from_app : true}
       isWebAppBooking={selectedBooking ? selectedBooking.is_from_web_app : false}
 
       bookingUid={selectedBooking ? selectedBooking.uid : ""}
-      transactionUid={selectedBooking ? selectedBooking.transaction_ref.id : ""}
+      transactionUid={selectedBooking ? selectedBooking.transaction_uid : ""}
       accessCode={selectedBooking ? selectedBooking.access_code : ""}
-      clientName={selectedBooking ? selectedBooking.user_info.name : ""}
-      clientPhone={selectedBooking ? selectedBooking.user_info.phone_number : ""}
-      clientEmail={selectedBooking ? selectedBooking.user_info.email : ""}
+      clientName={selectedBooking ? selectedBooking.name : ""}
+      clientPhone={selectedBooking ? selectedBooking.phone : ""}
+      clientEmail={selectedBooking ? selectedBooking.email : ""}
       bookingType={selectedBooking ? selectedBooking.type : ""}
-
-
-
       hasTransaction={selectedBooking ? selectedBooking.transaction_ref : ""}
+      bookingSite={selectedBooking ? selectedBooking.site_name : ""}
+      bookingCourt={selectedBooking ? selectedBooking.court_name : ""}
+      bookingCreatedDate={selectedBooking ? selectedBooking.created_date : ""}
+      bookingMatchDate={selectedBooking ? selectedBooking.match_date : ""}
+      bookingDuration={selectedBooking ? selectedBooking.duration : ""}
+      bookingDescription={selectedBooking ? selectedBooking.description : ""}
 
       componentProgress={<CircularProgress color="primary" size={'20px'} />}
       nBookings={`(${countBookings})`}

@@ -7,7 +7,7 @@ import { Stack } from "@mui/material";
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { getFirstAndLastDayOfDay, getFirstAndLastDayOfMonth, getFirstAndLastDayOfYear } from "@/functions";
 import { firestore } from "@/firebase";
-import { getBookingListCalendar } from "@/functions/bookings";
+import { getBookingListCalendar, getOneBookingCalendar } from "@/functions/bookings";
 import { getFirstAndLastDayOfWeek, getWeek, removeMinutesToDate } from "@/functions/manage-time";
 import { LastPage } from "@mui/icons-material";
 //import listPlugin from "@fullcalendar/list";
@@ -34,7 +34,6 @@ const Calendar = ({ isReseting, setIsReseting, clubUid, setIsLoading, siteUid = 
     const [slotMinTime, setSlotMinTime] = useState("06:00:00");
     const [slotMaxTime, setSlotMaxTime] = useState("24:00:00");
     // Recalculer les valeurs dynamiquement
-    //const [selectedBooking, setSelectedBooking] = useState(null);
 
 
     function getQueryBookingStats(clubRef, site, court, firstDay, lastDay, pending = false) {
@@ -263,12 +262,20 @@ const Calendar = ({ isReseting, setIsReseting, clubUid, setIsLoading, siteUid = 
         async function init() {
             const { id } = clickInfo.event;
             const clubRef = doc(firestore, "CLUBS", clubUid);
-            const bookingRef = doc((collection(clubRef, "COURT_BOOKINGS")), id);
-            const bookingSnap = await getDoc(bookingRef);
-            const bookingData = bookingSnap.data();
+            var bookingRef = doc((collection(clubRef, "COURT_PENDING_BOOKINGS")), id);
+            var bookingSnap = await getDoc(bookingRef);
+            const isPending = bookingSnap.exists();
+            if(!isPending) {
+                bookingRef = doc((collection(clubRef, "COURT_BOOKINGS")), id);
+                bookingSnap = await getDoc(bookingRef);
+            }
+            console.log("AAAAAAA", bookingSnap.exists())
+            //const bookingData = bookingSnap.data();
+            const bookingData = getOneBookingCalendar(bookingSnap, isPending);
+            
             setShowDialogBooking(true);
             setSelectedBooking(bookingData);
-            console.log("WEEEEEEEEEEESH", bookingData)
+            //console.log("WEEEEEEEEEEESH", bookingData)
         }
         init();
         /*

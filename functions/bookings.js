@@ -224,6 +224,52 @@ export async function getBookingListCalendar(querySnapshotBooking, is_pending = 
         })
         .filter(Boolean); // Supprime les valeurs undefined
 }
+export function getOneBookingCalendar(bookingDoc, is_pending=false) {
+    const { uid, user_info, transaction_ref, type, description, access_code, created_date, first_booking_time, last_booking_time, amount_paid, match_start_date, match_finished_date, club_ref, site_name, court_name, site_ref, court_ref, is_from_app, is_from_web_app } = bookingDoc.data();
+            const createdDateTimestamp = created_date;
+            const createdDate = new Date(createdDateTimestamp.seconds * 1_000);
+            const matchDateTimestamp = match_start_date;
+            const matchDate = new Date(matchDateTimestamp.seconds * 1_000);
+            const matchDateTimestampF = match_finished_date;
+            const matchDateF = new Date(matchDateTimestampF.seconds * 1_000);
+            return {
+                uid,
+                name: user_info.name,
+                phone: user_info.phone_number,
+                email: user_info.email,
+                created_date: `${createdDate.getDate().toString().padStart(2, '0')}.${(createdDate.getMonth() + 1).toString().padStart(2, '0')}.${createdDate.getFullYear()} ${createdDate.getHours().toString().padStart(2, '0')}h${createdDate.getMinutes().toString().padStart(2, '0')}`,
+                //match_date: matchDate,
+                match_date: `${matchDate.getDate().toString().padStart(2, '0')}.${(matchDate.getMonth() + 1).toString().padStart(2, '0')}.${matchDate.getFullYear()} ${matchDate.getHours().toString().padStart(2, '0')}h${matchDate.getMinutes().toString().padStart(2, '0')}-${matchDateF.getHours().toString().padStart(2, '0')}h${matchDateF.getMinutes().toString().padStart(2, '0')}`,
+                is_from_app: is_from_app,
+                is_from_web_app: is_from_web_app,
+                club_uid: club_ref.id,
+                site_name: site_name,
+                court_name: court_name,
+                is_pending: is_pending,
+                amount_paid: amount_paid,
+                first_booking_time: first_booking_time,
+                last_booking_time: last_booking_time,
+                duration: `${parseDoubleToHourInterval(last_booking_time - first_booking_time + 0.5)}`,
+                status: is_pending ? "En attente" : "Confirmé",
+                transaction_uid: transaction_ref ? transaction_ref.id : "",
+                type: type,
+                access_code: access_code,
+                description: description,
+                //const startDate = new Date(booking.match_start_date).toISOString();
+                //const endDate = new Date(booking.match_finished_date).toISOString();
+                //id: uid,
+                site_uid: site_ref.id,
+                court_uid: court_ref.id,
+                match_start_date:new Date(matchDate).toISOString(),
+                match_finished_date:new Date(matchDateF).toISOString(),
+                //title: "Emilie Devaud",
+                //start: "2024-11-30T07:00:00",
+                //end: "2024-11-30T08:30:00",
+                backgroundColor: "green", // Changer la couleur de fond
+                borderColor: "darkgreen", // Couleur de bordure
+                textColor: "white", // Couleur du texte
+            };
+}
 export async function getCountBookingsPlayPad(querySnapshotBooking) {
     /*
     const clubRef = doc(firestore, "CLUBS", clubUid);

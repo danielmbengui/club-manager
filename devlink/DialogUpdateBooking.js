@@ -533,308 +533,308 @@ export function DialogUpdateBooking({
               </_Builtin.FormWrapper>
             </_Builtin.Block>
           ) : null}
-          {notEditable ? (
-            <_Builtin.Block className="modal_content-left devlink" tag="div">
-              <_Builtin.Block
-                className="info-card"
-                id="w-node-d9cf1a34-cc1b-8ef7-ccee-e251e1888250-e1888206"
-                tag="div"
-              >
-                <_Builtin.Block className="info-card_header" tag="div">
-                  <_Builtin.Block className="header_title" tag="div">
-                    {"Informations réservation"}
-                  </_Builtin.Block>
+          <_Builtin.Block className="modal_content-left devlink" tag="div">
+            <_Builtin.Block
+              className="info-card"
+              id="w-node-d9cf1a34-cc1b-8ef7-ccee-e251e1888250-e1888206"
+              tag="div"
+            >
+              <_Builtin.Block className="info-card_header" tag="div">
+                <_Builtin.Block className="header_title" tag="div">
+                  {"Informations réservation"}
                 </_Builtin.Block>
-                {hasTransaction ? (
-                  <_Builtin.Block className="info-card-row" tag="div">
-                    <_Builtin.Block
-                      className="card-row-title sub-title-devlink"
-                      tag="div"
-                    >
-                      {"Réservation n°"}
-                    </_Builtin.Block>
-                    <_Builtin.Block
-                      className="update_form-info"
-                      tag="div"
-                      wized="current_transaction_uid"
-                    >
-                      {bookingUid}
-                    </_Builtin.Block>
-                  </_Builtin.Block>
-                ) : null}
+              </_Builtin.Block>
+              {hasTransaction ? (
                 <_Builtin.Block className="info-card-row" tag="div">
                   <_Builtin.Block
                     className="card-row-title sub-title-devlink"
                     tag="div"
                   >
-                    {"Code d'accès :"}
+                    {"Réservation n°"}
                   </_Builtin.Block>
                   <_Builtin.Block
                     className="update_form-info"
                     tag="div"
-                    wized="current_access_code"
+                    wized="current_transaction_uid"
                   >
-                    {accessCode}
+                    {bookingUid}
                   </_Builtin.Block>
                 </_Builtin.Block>
-                <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block
-                    className="card-row-title sub-title-devlink"
-                    tag="div"
-                  >
-                    {"Nom du Client :"}
-                  </_Builtin.Block>
-                  <_Builtin.Block
-                    className="update_form-info"
-                    tag="div"
-                    wized="current_name"
-                  >
-                    {clientName}
-                  </_Builtin.Block>
+              ) : null}
+              <_Builtin.Block className="info-card-row" tag="div">
+                <_Builtin.Block
+                  className="card-row-title sub-title-devlink"
+                  tag="div"
+                >
+                  {"Code d'accès :"}
                 </_Builtin.Block>
-                <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block
-                    className="card-row-title sub-title-devlink"
-                    tag="div"
-                  >
-                    {"Téléphone :"}
-                  </_Builtin.Block>
-                  <_Builtin.Block
-                    className="update_form-info"
-                    tag="div"
-                    wized="current_phone"
-                  >
-                    {clientPhone}
-                  </_Builtin.Block>
+                <_Builtin.Block
+                  className="update_form-info"
+                  tag="div"
+                  wized="current_access_code"
+                >
+                  {accessCode}
                 </_Builtin.Block>
-                <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block
-                    className="card-row-title sub-title-devlink"
-                    tag="div"
-                  >
-                    {"Email :"}
-                  </_Builtin.Block>
-                  <_Builtin.Block
-                    className="update_form-info"
-                    tag="div"
-                    wized="current_email"
-                  >
-                    {clientEmail}
-                  </_Builtin.Block>
+              </_Builtin.Block>
+              <_Builtin.Block className="info-card-row" tag="div">
+                <_Builtin.Block
+                  className="card-row-title sub-title-devlink"
+                  tag="div"
+                >
+                  {"Nom du Client :"}
                 </_Builtin.Block>
-                <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block
-                    className="card-row-title sub-title-devlink"
-                    tag="div"
-                  >
-                    {"Type :"}
-                  </_Builtin.Block>
-                  <_Builtin.Block
-                    className="update_form-info"
-                    tag="div"
-                    wized="current_type"
-                  >
-                    {bookingType}
-                  </_Builtin.Block>
+                <_Builtin.Block
+                  className="update_form-info"
+                  tag="div"
+                  wized="current_name"
+                >
+                  {clientName}
                 </_Builtin.Block>
-                <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block
-                    className="card-row-title sub-title-devlink"
-                    tag="div"
-                  >
-                    {"Site :"}
-                  </_Builtin.Block>
-                  <_Builtin.Block
-                    className="update_form-info"
-                    tag="div"
-                    wized="current_court"
-                  >
-                    {bookingSite}
-                  </_Builtin.Block>
+              </_Builtin.Block>
+              <_Builtin.Block className="info-card-row" tag="div">
+                <_Builtin.Block
+                  className="card-row-title sub-title-devlink"
+                  tag="div"
+                >
+                  {"Téléphone :"}
                 </_Builtin.Block>
-                <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block
-                    className="card-row-title sub-title-devlink"
-                    tag="div"
-                  >
-                    {"Court :"}
-                  </_Builtin.Block>
-                  <_Builtin.Block
-                    className="update_form-info"
-                    tag="div"
-                    wized="current_court"
-                  >
-                    {bookingCourt}
-                  </_Builtin.Block>
+                <_Builtin.Block
+                  className="update_form-info"
+                  tag="div"
+                  wized="current_phone"
+                >
+                  {clientPhone}
                 </_Builtin.Block>
-                <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block
-                    className="card-row-title sub-title-devlink"
-                    tag="div"
-                  >
-                    {"Date/Heure :"}
-                  </_Builtin.Block>
-                  <_Builtin.Block
-                    className="update_form-info"
-                    tag="div"
-                    wized="current_date"
-                  >
-                    {bookingMatchDate}
-                  </_Builtin.Block>
+              </_Builtin.Block>
+              <_Builtin.Block className="info-card-row" tag="div">
+                <_Builtin.Block
+                  className="card-row-title sub-title-devlink"
+                  tag="div"
+                >
+                  {"Email :"}
                 </_Builtin.Block>
-                <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block
-                    className="card-row-title sub-title-devlink"
-                    tag="div"
-                  >
-                    {"Temps de Jeu :"}
-                  </_Builtin.Block>
-                  <_Builtin.Block
-                    className="update_form-info"
-                    tag="div"
-                    wized="current_time"
-                  >
-                    {bookingDuration}
-                  </_Builtin.Block>
+                <_Builtin.Block
+                  className="update_form-info"
+                  tag="div"
+                  wized="current_email"
+                >
+                  {clientEmail}
                 </_Builtin.Block>
-                <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block
-                    className="card-row-title sub-title-devlink"
-                    tag="div"
-                  >
-                    {"Commentaire interne :"}
-                  </_Builtin.Block>
-                  <_Builtin.Block
-                    className="update_form-info"
-                    tag="div"
-                    wized="current_notes"
-                  >
-                    {bookingDescription}
-                  </_Builtin.Block>
+              </_Builtin.Block>
+              <_Builtin.Block className="info-card-row" tag="div">
+                <_Builtin.Block
+                  className="card-row-title sub-title-devlink"
+                  tag="div"
+                >
+                  {"Type :"}
+                </_Builtin.Block>
+                <_Builtin.Block
+                  className="update_form-info"
+                  tag="div"
+                  wized="current_type"
+                >
+                  {bookingType}
+                </_Builtin.Block>
+              </_Builtin.Block>
+              <_Builtin.Block className="info-card-row" tag="div">
+                <_Builtin.Block
+                  className="card-row-title sub-title-devlink"
+                  tag="div"
+                >
+                  {"Site :"}
+                </_Builtin.Block>
+                <_Builtin.Block
+                  className="update_form-info"
+                  tag="div"
+                  wized="current_court"
+                >
+                  {bookingSite}
+                </_Builtin.Block>
+              </_Builtin.Block>
+              <_Builtin.Block className="info-card-row" tag="div">
+                <_Builtin.Block
+                  className="card-row-title sub-title-devlink"
+                  tag="div"
+                >
+                  {"Court :"}
+                </_Builtin.Block>
+                <_Builtin.Block
+                  className="update_form-info"
+                  tag="div"
+                  wized="current_court"
+                >
+                  {bookingCourt}
+                </_Builtin.Block>
+              </_Builtin.Block>
+              <_Builtin.Block className="info-card-row" tag="div">
+                <_Builtin.Block
+                  className="card-row-title sub-title-devlink"
+                  tag="div"
+                >
+                  {"Date/Heure :"}
+                </_Builtin.Block>
+                <_Builtin.Block
+                  className="update_form-info"
+                  tag="div"
+                  wized="current_date"
+                >
+                  {bookingMatchDate}
+                </_Builtin.Block>
+              </_Builtin.Block>
+              <_Builtin.Block className="info-card-row" tag="div">
+                <_Builtin.Block
+                  className="card-row-title sub-title-devlink"
+                  tag="div"
+                >
+                  {"Temps de Jeu :"}
+                </_Builtin.Block>
+                <_Builtin.Block
+                  className="update_form-info"
+                  tag="div"
+                  wized="current_time"
+                >
+                  {bookingDuration}
+                </_Builtin.Block>
+              </_Builtin.Block>
+              <_Builtin.Block className="info-card-row" tag="div">
+                <_Builtin.Block
+                  className="card-row-title sub-title-devlink"
+                  tag="div"
+                >
+                  {"Commentaire interne :"}
+                </_Builtin.Block>
+                <_Builtin.Block
+                  className="update_form-info"
+                  tag="div"
+                  wized="current_notes"
+                >
+                  {bookingDescription}
                 </_Builtin.Block>
               </_Builtin.Block>
             </_Builtin.Block>
-          ) : null}
+          </_Builtin.Block>
           {notEditable ? (
             <_Builtin.Block className="modal_content-left devlink" tag="div">
-              <_Builtin.Block
-                className="info-card"
-                id="w-node-a592d279-34f0-0219-89bf-66091cb5fc30-e1888206"
-                tag="div"
-              >
-                <_Builtin.Block className="info-card_header" tag="div">
-                  <_Builtin.Block className="header_title" tag="div">
-                    {"Informations paiement"}
+              {hasTransaction ? (
+                <_Builtin.Block
+                  className="info-card"
+                  id="w-node-a592d279-34f0-0219-89bf-66091cb5fc30-e1888206"
+                  tag="div"
+                >
+                  <_Builtin.Block className="info-card_header" tag="div">
+                    <_Builtin.Block className="header_title" tag="div">
+                      {"Informations paiement"}
+                    </_Builtin.Block>
                   </_Builtin.Block>
-                </_Builtin.Block>
-                {hasTransaction ? (
+                  {hasTransaction ? (
+                    <_Builtin.Block className="info-card-row" tag="div">
+                      <_Builtin.Block
+                        className="card-row-title sub-title-devlink"
+                        tag="div"
+                      >
+                        {"Facture n°"}
+                      </_Builtin.Block>
+                      <_Builtin.Block
+                        className="update_form-info"
+                        tag="div"
+                        wized="current_transaction_uid"
+                      >
+                        {transactionUid}
+                      </_Builtin.Block>
+                    </_Builtin.Block>
+                  ) : null}
                   <_Builtin.Block className="info-card-row" tag="div">
                     <_Builtin.Block
                       className="card-row-title sub-title-devlink"
                       tag="div"
                     >
-                      {"Facture n°"}
+                      {"Date de paiement :"}
                     </_Builtin.Block>
                     <_Builtin.Block
                       className="update_form-info"
                       tag="div"
-                      wized="current_transaction_uid"
+                      wized="current_notes"
                     >
-                      {transactionUid}
+                      {bookingDescription}
                     </_Builtin.Block>
                   </_Builtin.Block>
-                ) : null}
-                <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block
-                    className="card-row-title sub-title-devlink"
-                    tag="div"
-                  >
-                    {"Date de paiement :"}
+                  <_Builtin.Block className="info-card-row" tag="div">
+                    <_Builtin.Block
+                      className="card-row-title sub-title-devlink"
+                      tag="div"
+                    >
+                      {"Méthode de paiement :"}
+                    </_Builtin.Block>
+                    <_Builtin.Block
+                      className="update_form-info"
+                      tag="div"
+                      wized="current_notes"
+                    >
+                      {bookingDescription}
+                    </_Builtin.Block>
                   </_Builtin.Block>
-                  <_Builtin.Block
-                    className="update_form-info"
-                    tag="div"
-                    wized="current_notes"
-                  >
-                    {bookingDescription}
+                  <_Builtin.Block className="info-card-row" tag="div">
+                    <_Builtin.Block
+                      className="card-row-title sub-title-devlink"
+                      tag="div"
+                    >
+                      {"Paiement avec wallet"}
+                    </_Builtin.Block>
+                    <_Builtin.Block
+                      className="update_form-info"
+                      tag="div"
+                      wized="current_notes"
+                    >
+                      {bookingDescription}
+                    </_Builtin.Block>
                   </_Builtin.Block>
-                </_Builtin.Block>
-                <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block
-                    className="card-row-title sub-title-devlink"
-                    tag="div"
-                  >
-                    {"Méthode de paiement :"}
+                  <_Builtin.Block className="info-card-row" tag="div">
+                    <_Builtin.Block
+                      className="card-row-title sub-title-devlink"
+                      tag="div"
+                    >
+                      {"Montant avec wallet"}
+                    </_Builtin.Block>
+                    <_Builtin.Block
+                      className="update_form-info"
+                      tag="div"
+                      wized="current_notes"
+                    >
+                      {bookingDescription}
+                    </_Builtin.Block>
                   </_Builtin.Block>
-                  <_Builtin.Block
-                    className="update_form-info"
-                    tag="div"
-                    wized="current_notes"
-                  >
-                    {bookingDescription}
+                  <_Builtin.Block className="info-card-row" tag="div">
+                    <_Builtin.Block
+                      className="card-row-title sub-title-devlink"
+                      tag="div"
+                    >
+                      {"Montant avec carte"}
+                    </_Builtin.Block>
+                    <_Builtin.Block
+                      className="update_form-info"
+                      tag="div"
+                      wized="current_notes"
+                    >
+                      {bookingDescription}
+                    </_Builtin.Block>
                   </_Builtin.Block>
-                </_Builtin.Block>
-                <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block
-                    className="card-row-title sub-title-devlink"
-                    tag="div"
-                  >
-                    {"Paiement avec wallet"}
-                  </_Builtin.Block>
-                  <_Builtin.Block
-                    className="update_form-info"
-                    tag="div"
-                    wized="current_notes"
-                  >
-                    {bookingDescription}
-                  </_Builtin.Block>
-                </_Builtin.Block>
-                <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block
-                    className="card-row-title sub-title-devlink"
-                    tag="div"
-                  >
-                    {"Montant avec wallet"}
-                  </_Builtin.Block>
-                  <_Builtin.Block
-                    className="update_form-info"
-                    tag="div"
-                    wized="current_notes"
-                  >
-                    {bookingDescription}
-                  </_Builtin.Block>
-                </_Builtin.Block>
-                <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block
-                    className="card-row-title sub-title-devlink"
-                    tag="div"
-                  >
-                    {"Montant avec carte"}
-                  </_Builtin.Block>
-                  <_Builtin.Block
-                    className="update_form-info"
-                    tag="div"
-                    wized="current_notes"
-                  >
-                    {bookingDescription}
-                  </_Builtin.Block>
-                </_Builtin.Block>
-                <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block
-                    className="card-row-title sub-title-devlink"
-                    tag="div"
-                  >
-                    {"Total"}
-                  </_Builtin.Block>
-                  <_Builtin.Block
-                    className="update_form-info"
-                    tag="div"
-                    wized="current_notes"
-                  >
-                    {bookingDescription}
+                  <_Builtin.Block className="info-card-row" tag="div">
+                    <_Builtin.Block
+                      className="card-row-title sub-title-devlink"
+                      tag="div"
+                    >
+                      {"Total"}
+                    </_Builtin.Block>
+                    <_Builtin.Block
+                      className="update_form-info"
+                      tag="div"
+                      wized="current_notes"
+                    >
+                      {bookingDescription}
+                    </_Builtin.Block>
                   </_Builtin.Block>
                 </_Builtin.Block>
-              </_Builtin.Block>
+              ) : null}
             </_Builtin.Block>
           ) : null}
         </_Builtin.Block>
@@ -845,7 +845,7 @@ export function DialogUpdateBooking({
           {...close}
         >
           <_Builtin.HtmlEmbed
-            className="icon-embed-small"
+            className="icon-embed-small devlink"
             value="%3Csvg%20width%3D%22100%25%22%20height%3D%22100%25%22%20viewBox%3D%220%200%2032%2032%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M24.056%2023.5004L23.5004%2024.056C23.1935%2024.3628%2022.696%2024.3628%2022.3892%2024.056L16%2017.6668L9.61078%2024.056C9.30394%2024.3628%208.80645%2024.3628%208.49961%2024.056L7.94403%2023.5004C7.63719%2023.1936%207.63719%2022.6961%207.94403%2022.3892L14.3332%2016L7.94403%209.61081C7.63719%209.30397%207.63719%208.80648%207.94403%208.49964L8.49961%207.94406C8.80645%207.63721%209.30394%207.63721%209.61078%207.94406L16%2014.3333L22.3892%207.94404C22.6961%207.6372%2023.1935%207.6372%2023.5004%207.94404L24.056%208.49963C24.3628%208.80647%2024.3628%209.30395%2024.056%209.61079L17.6667%2016L24.056%2022.3892C24.3628%2022.6961%2024.3628%2023.1936%2024.056%2023.5004Z%22%20fill%3D%22currentColor%22%2F%3E%0A%3C%2Fsvg%3E"
           />
         </_Builtin.Block>
