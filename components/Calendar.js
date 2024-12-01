@@ -5,7 +5,7 @@ import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import interactionPlugin from "@fullcalendar/interaction";
 import { Stack } from "@mui/material";
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
-import { getFirstAndLastDayOfDay, getFirstAndLastDayOfMonth, getFirstAndLastDayOfYear } from "@/functions";
+import { getFirstAndLastDayOfDay, getFirstAndLastDayOfMonth, getFirstAndLastDayOfYear, parseDoubleToHourInterval } from "@/functions";
 import { firestore } from "@/firebase";
 import { getBookingListCalendar, getOneBookingCalendar } from "@/functions/bookings";
 import { getFirstAndLastDayOfWeek, getWeek, removeMinutesToDate } from "@/functions/manage-time";
@@ -236,7 +236,7 @@ const Calendar = ({ isReseting, setIsReseting, clubUid, setIsLoading, siteUid = 
             const diff = (endDate - startDate) / (1000 * 60);
             const hours = Math.floor(diff / 60);
             const minutes = diff % 60;
-            return `${hours}h${minutes > 0 ? ` ${minutes}m` : ""}`;
+            return diff / 60;
         };
         const duration = calculateDuration(start, end);
 
@@ -252,7 +252,7 @@ const Calendar = ({ isReseting, setIsReseting, clubUid, setIsLoading, siteUid = 
                     hour: "2-digit",
                     minute: "2-digit",
                 })}`}</div>
-                <div>{duration}</div>
+                <div>{parseDoubleToHourInterval(duration)}</div>
             </div>
         );
     };

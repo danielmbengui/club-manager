@@ -548,23 +548,21 @@ export function DialogUpdateBooking({
                   {"Informations réservation"}
                 </_Builtin.Block>
               </_Builtin.Block>
-              {hasTransaction ? (
-                <_Builtin.Block className="info-card-row" tag="div">
-                  <_Builtin.Block
-                    className="card-row-title sub-title-devlink"
-                    tag="div"
-                  >
-                    {"Réservation n°"}
-                  </_Builtin.Block>
-                  <_Builtin.Block
-                    className="update_form-info"
-                    tag="div"
-                    wized="current_transaction_uid"
-                  >
-                    {bookingUid}
-                  </_Builtin.Block>
+              <_Builtin.Block className="info-card-row" tag="div">
+                <_Builtin.Block
+                  className="card-row-title sub-title-devlink"
+                  tag="div"
+                >
+                  {"Réservation n° :"}
                 </_Builtin.Block>
-              ) : null}
+                <_Builtin.Block
+                  className="update_form-info"
+                  tag="div"
+                  wized="current_transaction_uid"
+                >
+                  {bookingUid}
+                </_Builtin.Block>
+              </_Builtin.Block>
               <_Builtin.Block className="info-card-row" tag="div">
                 <_Builtin.Block
                   className="card-row-title sub-title-devlink"
@@ -735,7 +733,7 @@ export function DialogUpdateBooking({
                       className="card-row-title sub-title-devlink"
                       tag="div"
                     >
-                      {"Facture n°"}
+                      {"Facture n° :"}
                     </_Builtin.Block>
                     <_Builtin.Block
                       className="update_form-info"
@@ -796,7 +794,7 @@ export function DialogUpdateBooking({
                     className="card-row-title sub-title-devlink"
                     tag="div"
                   >
-                    {"Montant avec wallet"}
+                    {"Montant avec wallet :"}
                   </_Builtin.Block>
                   <_Builtin.Block
                     className="update_form-info"
@@ -811,7 +809,7 @@ export function DialogUpdateBooking({
                     className="card-row-title sub-title-devlink"
                     tag="div"
                   >
-                    {"Montant avec carte"}
+                    {"Montant avec carte :"}
                   </_Builtin.Block>
                   <_Builtin.Block
                     className="update_form-info"
@@ -826,7 +824,7 @@ export function DialogUpdateBooking({
                     className="card-row-title sub-title-devlink"
                     tag="div"
                   >
-                    {"Total"}
+                    {"Total :"}
                   </_Builtin.Block>
                   <_Builtin.Block
                     className="update_form-info"
