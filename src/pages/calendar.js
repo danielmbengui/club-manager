@@ -5,7 +5,7 @@ import { TITLE_PAGE_CALENDAR, TITLE_WEB_APP } from "@/constants";
 import { useAuth } from "@/providers/AuthProvider";
 import LayoutLoading from '@/components/layouts/LayoutLoading';
 import dynamic from "next/dynamic";
-import { CircularProgress, MenuItem, Select, Stack, Typography } from '@mui/material';
+import { CircularProgress, MenuItem, Select, Stack, TextField, Typography } from '@mui/material';
 import SwitchTheme from '@/components/SwitchTheme';
 import Image from 'next/image';
 import { firestore } from '@/firebase';
@@ -165,7 +165,7 @@ export default function CalendarComponent() {
       editable={selectedBooking ? selectedBooking.is_from_web_app && selectedBooking.match_finished_date_D > new Date() : false}
       notEditable={selectedBooking ? selectedBooking.is_from_app || (selectedBooking.is_from_web_app && new Date(selectedBooking.match_finished_date_D) < new Date()) : true}
       removable={selectedBooking ? selectedBooking.is_from_web_app && selectedBooking.match_finished_date_D > new Date() : false}
-      
+
       isEditing={true}
       isSuccess={true}
       //successMessage={""}
@@ -175,7 +175,7 @@ export default function CalendarComponent() {
       isWarning={true}
       isNotWarning={true}
       //warningMessage={""}
-      
+
       actionResetDialogUpdate={{
         onClick: () => {
           alert("RESET");
@@ -190,13 +190,42 @@ export default function CalendarComponent() {
         //className: "btn-primary",  // Ajout d'une classe CSS
         //type: "button"
       }}
-      inputDate={<input className='form_input' type='date' />}
+      inputDate={<input className='custom-date-input' style={{ width: '100%', color:theme.palette.text.primary }} type='date' />}
       selectStartHour={<label>Start hour</label>}
       selectEndHour={<label>End hour</label>}
-      selectTypeBooking={<label>Type booking</label>}
-      textFieldDescription={<label>Description</label>}
-      
-      
+      selectTypeBooking={<Select
+        className='form_select'
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={"Lesson"}
+        label="Day"
+        //onChange={handleChangeDay}
+        sx={{ height: 40, width:'100%', color: 'text.primary' }}
+      >
+        <MenuItem value={"Lesson"} sx={{ color: 'text.primary' }}><Typography color='text.primary'>{"Cours"}</Typography></MenuItem>
+        <MenuItem value={"Training"} sx={{ color: 'text.primary' }}><Typography color='text.primary'>{"Entrainement"}</Typography></MenuItem>
+        <MenuItem value={"Tournament"} sx={{ color: 'text.primary' }}><Typography color='text.primary'>{"Tournoi"}</Typography></MenuItem>
+      </Select>}
+      textFieldDescription={<TextField
+        multiline
+        minRows={2} maxRows={10}
+        sx={{
+          width: '100%', background: 'var(--color--light-card)',
+          '& .MuiOutlinedInput-root': {
+            border: 'none', // Supprime la bordure pour "outlined"
+          },
+        }}
+        slotProps={{
+          input: {
+            style: {
+              border: 'none', // Supprime la bordure de l'élément d'entrée
+              outline: 'none', // Supprime le contour au focus
+            },
+          },
+        }}
+      />}
+
+
       //notEditable={selectedBooking ? !selectedBooking.is_from_web_app : true}
       isWebAppBooking={selectedBooking ? selectedBooking.is_from_web_app : false}
 
