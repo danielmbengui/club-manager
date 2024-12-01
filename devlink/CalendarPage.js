@@ -77,6 +77,13 @@ export function CalendarPage({
   bookingDescription = "--",
   bookingCreatedDate = "--",
   notEditable = true,
+  paymentProvider = "--",
+  refNo = "--",
+  paymentDate = "--",
+  walletUsedAmount = "--",
+  cardUsedAmount = "--",
+  totalAmount = "--",
+  removable = true,
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -589,6 +596,13 @@ export function CalendarPage({
         bookingDescription={bookingDescription}
         bookingCreatedDate={bookingCreatedDate}
         notEditable={notEditable}
+        paymentProvider={paymentProvider}
+        refNo={refNo}
+        paymentDate={paymentDate}
+        walletUsedAmount={walletUsedAmount}
+        cardUsedAmount={cardUsedAmount}
+        totalAmount={totalAmount}
+        removable={removable}
       />
     </_Component>
   );

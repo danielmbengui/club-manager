@@ -44,4 +44,11 @@ declare function CalendarPage(props: {
   bookingDescription?: React.ReactNode;
   bookingCreatedDate?: React.ReactNode;
   notEditable?: Types.Visibility.VisibilityConditions;
+  paymentProvider?: React.ReactNode;
+  refNo?: React.ReactNode;
+  paymentDate?: React.ReactNode;
+  walletUsedAmount?: React.ReactNode;
+  cardUsedAmount?: React.ReactNode;
+  totalAmount?: React.ReactNode;
+  removable?: Types.Visibility.VisibilityConditions;
 }): React.JSX.Element;

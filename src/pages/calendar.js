@@ -10,7 +10,7 @@ import SwitchTheme from '@/components/SwitchTheme';
 import Image from 'next/image';
 import { firestore } from '@/firebase';
 import { collection, doc, getDocs, query, where } from 'firebase/firestore';
-import { getFirstAndLastDayOfDay, getFirstAndLastDayOfMonth, getFirstAndLastDayOfYear } from '@/functions';
+import { formatCurrency, getFirstAndLastDayOfDay, getFirstAndLastDayOfMonth, getFirstAndLastDayOfYear } from '@/functions';
 import { getBookingListCalendar } from '@/functions/bookings';
 import { useThemeMode } from '@/contexts/ThemeProvider';
 
@@ -46,6 +46,7 @@ export default function CalendarComponent() {
   const [countBookings, setCountBookings] = useState(0);
   const [countPendingBookings, setCountPendingBookings] = useState(0);
   const [selectedBooking, setSelectedBooking] = useState(null);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [showDialogBooking, setShowDialogBooking] = useState(false);
 
 
@@ -157,24 +158,36 @@ export default function CalendarComponent() {
       clubLogo={clubLogo}
       isLoading={isLoading}
       isNotLoading={!isLoading}
-      editable={selectedBooking ? selectedBooking.is_from_web_app : true}
-      notEditable={selectedBooking ? selectedBooking.is_from_app : true}
+      editable={selectedBooking ? selectedBooking.is_from_web_app && selectedBooking.match_finished_date_D > new Date() : false}
+      notEditable={selectedBooking ? selectedBooking.is_from_app || (selectedBooking.is_from_web_app && new Date(selectedBooking.match_finished_date_D) < new Date()) : true}
+      removable={selectedBooking ? selectedBooking.is_from_web_app && selectedBooking.match_finished_date_D > new Date() : false}
+      
+      //notEditable={selectedBooking ? !selectedBooking.is_from_web_app : true}
       isWebAppBooking={selectedBooking ? selectedBooking.is_from_web_app : false}
 
       bookingUid={selectedBooking ? selectedBooking.uid : ""}
-      transactionUid={selectedBooking ? selectedBooking.transaction_uid : ""}
-      accessCode={selectedBooking ? selectedBooking.access_code : ""}
-      clientName={selectedBooking ? selectedBooking.name : ""}
-      clientPhone={selectedBooking ? selectedBooking.phone : ""}
-      clientEmail={selectedBooking ? selectedBooking.email : ""}
+      accessCode={selectedBooking ? (selectedBooking.access_code ? selectedBooking.access_code : "--") : ""}
+      clientName={selectedBooking ? (selectedBooking.name ? selectedBooking.name : "--") : ""}
+      clientPhone={selectedBooking ? (selectedBooking.phone ? selectedBooking.phone : "--") : ""}
+      clientEmail={selectedBooking ? (selectedBooking.email ? selectedBooking.email : "--") : ""}
       bookingType={selectedBooking ? selectedBooking.type : ""}
-      hasTransaction={selectedBooking ? selectedBooking.transaction_ref : ""}
       bookingSite={selectedBooking ? selectedBooking.site_name : ""}
       bookingCourt={selectedBooking ? selectedBooking.court_name : ""}
       bookingCreatedDate={selectedBooking ? selectedBooking.created_date : ""}
       bookingMatchDate={selectedBooking ? selectedBooking.match_date : ""}
       bookingDuration={selectedBooking ? selectedBooking.duration : ""}
-      bookingDescription={selectedBooking ? selectedBooking.description : ""}
+      bookingDescription={selectedBooking ? (selectedBooking.description ? selectedBooking.description : "--") : ""}
+
+      hasTransaction={selectedTransaction}
+      transactionUid={selectedTransaction ? selectedTransaction.uid : ""}
+      paymentProvider={selectedTransaction ? selectedTransaction.payment_provider : ""}
+      refNo={selectedTransaction ? selectedTransaction.ref_no : ""}
+      paymentDate={selectedTransaction ? selectedTransaction.payment_date : ""}
+      
+      //paymentMethod={selectedTransaction ? selectedTransaction.payment_method : ""}
+      walletUsedAmount={formatCurrency(selectedTransaction ? selectedTransaction.wallet_used_amount : 0, 2)}
+      cardUsedAmount={formatCurrency(selectedTransaction ? selectedTransaction.total_amount - selectedTransaction.wallet_used_amount : 0, 2)}
+      totalAmount={formatCurrency(selectedTransaction ? selectedTransaction.total_amount : 0, 2)}
 
       componentProgress={<CircularProgress color="primary" size={'20px'} />}
       nBookings={`(${countBookings})`}
@@ -220,6 +233,7 @@ export default function CalendarComponent() {
         setShowDialogBooking={setShowDialogBooking}
         selectedBooking={selectedBooking}
         setSelectedBooking={setSelectedBooking}
+        setSelectedTransaction={setSelectedTransaction}
         isReseting={isReseting}
         setIsReseting={setIsReseting}
         setCountBookings={setCountBookings}
@@ -241,6 +255,7 @@ export default function CalendarComponent() {
         onClick: () => {
           setShowDialogBooking(false);
           setSelectedBooking(null);
+          setSelectedTransaction(null);
           console.log("dialog closed");
         },  // Ajout de la fonction onClick ici
         //className: "btn-primary",  // Ajout d'une classe CSS

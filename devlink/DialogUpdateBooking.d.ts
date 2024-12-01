@@ -22,4 +22,12 @@ declare function DialogUpdateBooking(props: {
   bookingDescription?: React.ReactNode;
   bookingCreatedDate?: React.ReactNode;
   hasTransaction?: Types.Visibility.VisibilityConditions;
+  paymentProvider?: React.ReactNode;
+  refNo?: React.ReactNode;
+  paymentDate?: React.ReactNode;
+  paymentMethod?: React.ReactNode;
+  walletUsedAmount?: React.ReactNode;
+  cardUsedAmount?: React.ReactNode;
+  totalAmount?: React.ReactNode;
+  removable?: Types.Visibility.VisibilityConditions;
 }): React.JSX.Element;

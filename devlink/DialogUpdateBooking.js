@@ -28,6 +28,14 @@ export function DialogUpdateBooking({
   bookingDescription = "--",
   bookingCreatedDate = "--",
   hasTransaction = true,
+  paymentProvider = "--",
+  refNo = "--",
+  paymentDate = "--",
+  paymentMethod = "--",
+  walletUsedAmount = "--",
+  cardUsedAmount = "--",
+  totalAmount = "--",
+  removable = true,
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -86,22 +94,18 @@ export function DialogUpdateBooking({
               </_Builtin.Block>
             </_Builtin.Block>
           </_Builtin.Block>
-          {isWebAppBooking ? (
-            <_Builtin.Link
+          {removable ? (
+            <_Builtin.Block
               className="button is-icon is-small is-red is-delete"
               data-w-id="d9cf1a34-cc1b-8ef7-ccee-e251e1888211"
-              button={false}
+              tag="div"
               wized="delete_buttons"
-              block="inline"
-              options={{
-                href: "#",
-              }}
             >
               <_Builtin.HtmlEmbed
                 className="icon-1x1-small"
                 value="%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22auto%22%20height%3D%22auto%22%20x%3D%220%22%20y%3D%220%22%20viewBox%3D%220%200%2024%2024%22%20style%3D%22enable-background%3Anew%200%200%20512%20512%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20d%3D%22M19%207a1%201%200%200%200-1%201v11.191A1.92%201.92%200%200%201%2015.99%2021H8.01A1.92%201.92%200%200%201%206%2019.191V8a1%201%200%200%200-2%200v11.191A3.918%203.918%200%200%200%208.01%2023h7.98A3.918%203.918%200%200%200%2020%2019.191V8a1%201%200%200%200-1-1ZM20%204h-4V2a1%201%200%200%200-1-1H9a1%201%200%200%200-1%201v2H4a1%201%200%200%200%200%202h16a1%201%200%200%200%200-2ZM10%204V3h4v1Z%22%20fill%3D%22currentColor%22%20opacity%3D%221%22%20data-original%3D%22%23000000%22%2F%3E%3Cpath%20d%3D%22M11%2017v-7a1%201%200%200%200-2%200v7a1%201%200%200%200%202%200ZM15%2017v-7a1%201%200%200%200-2%200v7a1%201%200%200%200%202%200Z%22%20fill%3D%22currentColor%22%20opacity%3D%221%22%20data-original%3D%22%23000000%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"
               />
-            </_Builtin.Link>
+            </_Builtin.Block>
           ) : null}
         </_Builtin.Block>
         <_Builtin.Block
@@ -713,128 +717,126 @@ export function DialogUpdateBooking({
               </_Builtin.Block>
             </_Builtin.Block>
           </_Builtin.Block>
-          {notEditable ? (
+          {hasTransaction ? (
             <_Builtin.Block className="modal_content-left devlink" tag="div">
-              {hasTransaction ? (
-                <_Builtin.Block
-                  className="info-card"
-                  id="w-node-a592d279-34f0-0219-89bf-66091cb5fc30-e1888206"
-                  tag="div"
-                >
-                  <_Builtin.Block className="info-card_header" tag="div">
-                    <_Builtin.Block className="header_title" tag="div">
-                      {"Informations paiement"}
-                    </_Builtin.Block>
-                  </_Builtin.Block>
-                  {hasTransaction ? (
-                    <_Builtin.Block className="info-card-row" tag="div">
-                      <_Builtin.Block
-                        className="card-row-title sub-title-devlink"
-                        tag="div"
-                      >
-                        {"Facture n°"}
-                      </_Builtin.Block>
-                      <_Builtin.Block
-                        className="update_form-info"
-                        tag="div"
-                        wized="current_transaction_uid"
-                      >
-                        {transactionUid}
-                      </_Builtin.Block>
-                    </_Builtin.Block>
-                  ) : null}
-                  <_Builtin.Block className="info-card-row" tag="div">
-                    <_Builtin.Block
-                      className="card-row-title sub-title-devlink"
-                      tag="div"
-                    >
-                      {"Date de paiement :"}
-                    </_Builtin.Block>
-                    <_Builtin.Block
-                      className="update_form-info"
-                      tag="div"
-                      wized="current_notes"
-                    >
-                      {bookingDescription}
-                    </_Builtin.Block>
-                  </_Builtin.Block>
-                  <_Builtin.Block className="info-card-row" tag="div">
-                    <_Builtin.Block
-                      className="card-row-title sub-title-devlink"
-                      tag="div"
-                    >
-                      {"Méthode de paiement :"}
-                    </_Builtin.Block>
-                    <_Builtin.Block
-                      className="update_form-info"
-                      tag="div"
-                      wized="current_notes"
-                    >
-                      {bookingDescription}
-                    </_Builtin.Block>
-                  </_Builtin.Block>
-                  <_Builtin.Block className="info-card-row" tag="div">
-                    <_Builtin.Block
-                      className="card-row-title sub-title-devlink"
-                      tag="div"
-                    >
-                      {"Paiement avec wallet"}
-                    </_Builtin.Block>
-                    <_Builtin.Block
-                      className="update_form-info"
-                      tag="div"
-                      wized="current_notes"
-                    >
-                      {bookingDescription}
-                    </_Builtin.Block>
-                  </_Builtin.Block>
-                  <_Builtin.Block className="info-card-row" tag="div">
-                    <_Builtin.Block
-                      className="card-row-title sub-title-devlink"
-                      tag="div"
-                    >
-                      {"Montant avec wallet"}
-                    </_Builtin.Block>
-                    <_Builtin.Block
-                      className="update_form-info"
-                      tag="div"
-                      wized="current_notes"
-                    >
-                      {bookingDescription}
-                    </_Builtin.Block>
-                  </_Builtin.Block>
-                  <_Builtin.Block className="info-card-row" tag="div">
-                    <_Builtin.Block
-                      className="card-row-title sub-title-devlink"
-                      tag="div"
-                    >
-                      {"Montant avec carte"}
-                    </_Builtin.Block>
-                    <_Builtin.Block
-                      className="update_form-info"
-                      tag="div"
-                      wized="current_notes"
-                    >
-                      {bookingDescription}
-                    </_Builtin.Block>
-                  </_Builtin.Block>
-                  <_Builtin.Block className="info-card-row" tag="div">
-                    <_Builtin.Block
-                      className="card-row-title sub-title-devlink"
-                      tag="div"
-                    >
-                      {"Total"}
-                    </_Builtin.Block>
-                    <_Builtin.Block
-                      className="update_form-info"
-                      tag="div"
-                      wized="current_notes"
-                    >
-                      {bookingDescription}
-                    </_Builtin.Block>
+              <_Builtin.Block
+                className="info-card"
+                id="w-node-a592d279-34f0-0219-89bf-66091cb5fc30-e1888206"
+                tag="div"
+              >
+                <_Builtin.Block className="info-card_header" tag="div">
+                  <_Builtin.Block className="header_title" tag="div">
+                    {"Informations paiement"}
                   </_Builtin.Block>
                 </_Builtin.Block>
-              ) : null}
+                {hasTransaction ? (
+                  <_Builtin.Block className="info-card-row" tag="div">
+                    <_Builtin.Block
+                      className="card-row-title sub-title-devlink"
+                      tag="div"
+                    >
+                      {"Facture n°"}
+                    </_Builtin.Block>
+                    <_Builtin.Block
+                      className="update_form-info"
+                      tag="div"
+                      wized="current_transaction_uid"
+                    >
+                      {transactionUid}
+                    </_Builtin.Block>
+                  </_Builtin.Block>
+                ) : null}
+                <_Builtin.Block className="info-card-row" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
+                    {"Fournisseur :"}
+                  </_Builtin.Block>
+                  <_Builtin.Block
+                    className="update_form-info"
+                    tag="div"
+                    wized="current_notes"
+                  >
+                    {paymentProvider}
+                  </_Builtin.Block>
+                </_Builtin.Block>
+                <_Builtin.Block className="info-card-row" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
+                    {"Référence fournisseur :"}
+                  </_Builtin.Block>
+                  <_Builtin.Block
+                    className="update_form-info"
+                    tag="div"
+                    wized="current_notes"
+                  >
+                    {refNo}
+                  </_Builtin.Block>
+                </_Builtin.Block>
+                <_Builtin.Block className="info-card-row" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
+                    {"Date de paiement :"}
+                  </_Builtin.Block>
+                  <_Builtin.Block
+                    className="update_form-info"
+                    tag="div"
+                    wized="current_notes"
+                  >
+                    {paymentDate}
+                  </_Builtin.Block>
+                </_Builtin.Block>
+                <_Builtin.Block className="info-card-row" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
+                    {"Montant avec wallet"}
+                  </_Builtin.Block>
+                  <_Builtin.Block
+                    className="update_form-info"
+                    tag="div"
+                    wized="current_notes"
+                  >
+                    {walletUsedAmount}
+                  </_Builtin.Block>
+                </_Builtin.Block>
+                <_Builtin.Block className="info-card-row" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
+                    {"Montant avec carte"}
+                  </_Builtin.Block>
+                  <_Builtin.Block
+                    className="update_form-info"
+                    tag="div"
+                    wized="current_notes"
+                  >
+                    {cardUsedAmount}
+                  </_Builtin.Block>
+                </_Builtin.Block>
+                <_Builtin.Block className="info-card-row" tag="div">
+                  <_Builtin.Block
+                    className="card-row-title sub-title-devlink"
+                    tag="div"
+                  >
+                    {"Total"}
+                  </_Builtin.Block>
+                  <_Builtin.Block
+                    className="update_form-info"
+                    tag="div"
+                    wized="current_notes"
+                  >
+                    {totalAmount}
+                  </_Builtin.Block>
+                </_Builtin.Block>
+              </_Builtin.Block>
             </_Builtin.Block>
           ) : null}
         </_Builtin.Block>

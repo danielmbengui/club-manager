@@ -3,6 +3,35 @@ import { distributeWithPrecision, getDaysInMonth, getFirstAndLastDayOfDay, getFi
 import { collection, doc, getDoc, getDocs, loadBundle, query, where, updateDoc } from "firebase/firestore";
 import { addHoursToDate, isSummerTime } from "./manage-time";
 
+export function getOneTransactionCalendar(transactionDoc, is_pending=false) {
+    //const { uid, user_info, transaction_ref, type, description, access_code, created_date, first_booking_time, last_booking_time, amount_paid, match_start_date, match_finished_date, club_ref, site_name, court_name, site_ref, court_ref, is_from_app, is_from_web_app } = transactionDoc.data();
+    const {uid, created_date, payment_date, payment_method, payment_provider, ref_no, wallet_used, wallet_used_amount, total_amount} = transactionDoc.data();        
+    const createdDateTimestamp = created_date;
+            const createdDate = new Date(createdDateTimestamp.seconds * 1_000);
+            const paymentDateTimestamp = payment_date;
+            const paymentDate = new Date(paymentDateTimestamp.seconds * 1_000);
+            
+            //const matchDateTimestampF = match_finished_date;
+            //const matchDateF = new Date(matchDateTimestampF.seconds * 1_000);
+            const paymentMethod = payment_method.toLowerCase().includes("card") ? "Carte" : "Wallet";
+            //console.log();
+            
+            return {
+                uid,
+                created_date: `${createdDate.getDate().toString().padStart(2, '0')}.${(createdDate.getMonth() + 1).toString().padStart(2, '0')}.${createdDate.getFullYear()} ${createdDate.getHours().toString().padStart(2, '0')}h${createdDate.getMinutes().toString().padStart(2, '0')}`,
+                payment_date: `${paymentDate.getDate().toString().padStart(2, '0')}.${(paymentDate.getMonth() + 1).toString().padStart(2, '0')}.${paymentDate.getFullYear()} ${paymentDate.getHours().toString().padStart(2, '0')}h${paymentDate.getMinutes().toString().padStart(2, '0')}`,
+                payment_method:paymentMethod,
+                payment_provider:payment_provider,
+                ref_no:ref_no,
+                wallet_used:wallet_used,
+                card_used_amount:total_amount-wallet_used_amount,
+                wallet_used_amount:wallet_used_amount,
+                total_amount:total_amount,
+            };
+            
+           //return transactionDoc.data();
+}
+
 export async function getRevenuesClub(clubRef, querySnapshotBooking) {
     const total = await getRevenuesTotal(querySnapshotBooking);
     let revenuesClub = 0;
