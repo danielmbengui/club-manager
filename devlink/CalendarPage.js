@@ -98,6 +98,11 @@ export function CalendarPage({
   isNotWarning = true,
   actionResetDialogUpdate,
   updateBooking,
+  inputDate,
+  selectStartHour,
+  selectEndHour,
+  selectTypeBooking,
+  textFieldDescription,
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -631,6 +636,11 @@ export function CalendarPage({
         isNotWarning={isNotWarning}
         actionReset={actionResetDialogUpdate}
         update={updateBooking}
+        inputDate={inputDate}
+        selectStartHour={selectStartHour}
+        selectEndHour={selectEndHour}
+        selectTypeBooking={selectTypeBooking}
+        textFieldDescription={textFieldDescription}
       />
     </_Component>
   );

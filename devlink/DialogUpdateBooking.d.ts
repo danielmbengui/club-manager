@@ -43,4 +43,9 @@ declare function DialogUpdateBooking(props: {
   isNotWarning?: Types.Visibility.VisibilityConditions;
   actionReset?: Types.Devlink.RuntimeProps;
   update?: Types.Devlink.RuntimeProps;
+  inputDate?: Types.Devlink.Slot;
+  selectStartHour?: Types.Devlink.Slot;
+  selectEndHour?: Types.Devlink.Slot;
+  selectTypeBooking?: Types.Devlink.Slot;
+  textFieldDescription?: Types.Devlink.Slot;
 }): React.JSX.Element;

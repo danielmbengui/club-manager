@@ -190,6 +190,12 @@ export default function CalendarComponent() {
         //className: "btn-primary",  // Ajout d'une classe CSS
         //type: "button"
       }}
+      inputDate={<input className='form_input' type='date' />}
+      selectStartHour={<label>Start hour</label>}
+      selectEndHour={<label>End hour</label>}
+      selectTypeBooking={<label>Type booking</label>}
+      textFieldDescription={<label>Description</label>}
+      
       
       //notEditable={selectedBooking ? !selectedBooking.is_from_web_app : true}
       isWebAppBooking={selectedBooking ? selectedBooking.is_from_web_app : false}

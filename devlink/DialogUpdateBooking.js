@@ -53,6 +53,11 @@ export function DialogUpdateBooking({
   isNotWarning = true,
   actionReset,
   update,
+  inputDate,
+  selectStartHour,
+  selectEndHour,
+  selectTypeBooking,
+  textFieldDescription,
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -63,7 +68,7 @@ export function DialogUpdateBooking({
       {...styleDialogEditBooking}
     >
       <_Builtin.Block
-        className="booking_update_content-wrapper devlink"
+        className="booking_update_content-wrapper devlink update-booking"
         tag="div"
       >
         {isNotLoading ? (
@@ -169,7 +174,12 @@ export function DialogUpdateBooking({
                             {"Date et heure"}
                           </_Builtin.FormBlockLabel>
                         </_Builtin.Block>
-                        <_Builtin.NotSupported _atom="DOM" />
+                        <_Builtin.Block
+                          className="container-update-booking devlink"
+                          tag="div"
+                        >
+                          <_Builtin.Block tag="div">{inputDate}</_Builtin.Block>
+                        </_Builtin.Block>
                       </_Builtin.Block>
                       <_Builtin.Block className="form_control" tag="div">
                         <_Builtin.Block className="form_flex" tag="div">
@@ -341,6 +351,14 @@ export function DialogUpdateBooking({
                             },
                           ]}
                         />
+                        <_Builtin.Block
+                          className="container-update-booking devlink"
+                          tag="div"
+                        >
+                          <_Builtin.Block tag="div">
+                            {selectStartHour}
+                          </_Builtin.Block>
+                        </_Builtin.Block>
                       </_Builtin.Block>
                       <_Builtin.Block className="form_control" tag="div">
                         <_Builtin.Block className="form_flex" tag="div">
@@ -420,6 +438,14 @@ export function DialogUpdateBooking({
                             },
                           ]}
                         />
+                        <_Builtin.Block
+                          className="container-update-booking devlink"
+                          tag="div"
+                        >
+                          <_Builtin.Block tag="div">
+                            {selectEndHour}
+                          </_Builtin.Block>
+                        </_Builtin.Block>
                       </_Builtin.Block>
                     </_Builtin.Block>
                     <_Builtin.Block className="form_control" tag="div">
@@ -460,6 +486,14 @@ export function DialogUpdateBooking({
                           },
                         ]}
                       />
+                      <_Builtin.Block
+                        className="container-update-booking devlink"
+                        tag="div"
+                      >
+                        <_Builtin.Block tag="div">
+                          {selectTypeBooking}
+                        </_Builtin.Block>
+                      </_Builtin.Block>
                     </_Builtin.Block>
                     <_Builtin.Block className="form_control" tag="div">
                       <_Builtin.Block className="form_flex" tag="div">
@@ -486,6 +520,14 @@ export function DialogUpdateBooking({
                         wized="update_notes"
                         id="comment-2"
                       />
+                      <_Builtin.Block
+                        className="container-update-booking devlink"
+                        tag="div"
+                      >
+                        <_Builtin.Block tag="div">
+                          {textFieldDescription}
+                        </_Builtin.Block>
+                      </_Builtin.Block>
                     </_Builtin.Block>
                     {isEditing ? (
                       <_Builtin.Block
@@ -541,7 +583,10 @@ export function DialogUpdateBooking({
                             {warningMessage}
                           </_Builtin.Block>
                         </_Builtin.Block>
-                        <ButtonWarning text="Continuer quand même" action="" />
+                        <ButtonWarning
+                          action={update}
+                          text="Continuer quand même"
+                        />
                       </_Builtin.Block>
                     ) : null}
                     {isError ? (
