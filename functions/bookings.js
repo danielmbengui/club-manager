@@ -438,7 +438,6 @@ export async function getCountHoursClub(querySnapshotBooking) {
 
     return countBoookingsHoursClub;
 }
-
 export async function getCountUsersPlayPad(querySnapshotBooking) {
     let countUsers = 0;
     let countBoookingsHoursPlayPad = 0;
@@ -493,3 +492,33 @@ export async function getCountUsersClub(querySnapshotBooking) {
 
     return uniqueUsers.length;
 }
+export function getTypeBookingJson(type, lang="fr") {
+ if(type=="Match") {
+    return {value:"Match", name:"Match"};
+ } 
+ if(type=="Lesson") {
+    return {value:"Lesson", name:"Cours"};
+ }
+ if(type=="Training") {
+    return {value:"Training", name:"Entrainement"};
+ }
+ if(type=="Tournament") {
+    return {value:"Tournament", name:"Tournoi"};
+ }  
+ return {value:"Unknow", name:"Inonnu"};
+}
+export function getTypeBookingStr(type, lang="fr") {
+    if(type=="Match") {
+       return "Match";
+    } 
+    if(type=="Lesson") {
+       return "Cours";
+    }
+    if(type=="Training") {
+       return "Entrainement";
+    }
+    if(type=="Tournament") {
+       return "Tournoi";
+    }  
+    return "Inconnu"; 
+   }

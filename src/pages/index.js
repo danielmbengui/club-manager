@@ -8,7 +8,7 @@ import { Button, CircularProgress, MenuItem, Select, Stack, Typography } from '@
 import { collection, query, where, getDocs, doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { firestore } from '@/firebase';
 import { formatCountBookings, formatCurrency, formatNumber, formatPercentage, getArrayMonthJson, getArrayMonthStr, getDaysInMonth, getFirstAndLastDayOfDay, getFirstAndLastDayOfMonth, getFirstAndLastDayOfYear, getRandomRGBA, parseDoubleToHourChartInterval, parseDoubleToHourInterval, parseDoubleToTimeInterval } from '@/functions';
-import { getBookingListDashboard, getBookingListTotal, getCountBookingsClub, getCountBookingsClubByCourt, getCountBookingsClubBySite, getCountBookingsPlayPad, getCountBookingsTotal, getCountHoursClub, getCountHoursPlayPad, getCountUsersClub, getCountUsersPlayPad, getOneBookingCalendar, getRateBookingsClub, getRateBookingsPlayPad, getRateHoursClub, getRateHoursPlayPad } from '@/functions/bookings';
+import { getBookingListDashboard, getBookingListTotal, getCountBookingsClub, getCountBookingsClubByCourt, getCountBookingsClubBySite, getCountBookingsPlayPad, getCountBookingsTotal, getCountHoursClub, getCountHoursPlayPad, getCountUsersClub, getCountUsersPlayPad, getOneBookingCalendar, getRateBookingsClub, getRateBookingsPlayPad, getRateHoursClub, getRateHoursPlayPad, getTypeBookingStr } from '@/functions/bookings';
 import { getArrayRevenuesTotal, getOneTransactionCalendar, getRevenuesClub, getRevenuesPlayPad, getRevenuesTotal, getRevenuesTotalCourt, getRevenuesTotalSite } from '@/functions/transactions';
 import PieChart from '@/components/PieChart';
 import LineChart from '@/components/LineChart';
@@ -1344,7 +1344,7 @@ export default function Home() {
         clientName={selectedBooking ? selectedBooking.name : ""}
         clientPhone={selectedBooking ? selectedBooking.phone : ""}
         clientEmail={selectedBooking ? selectedBooking.email : ""}
-        bookingType={selectedBooking ? selectedBooking.type : ""}
+        bookingType={selectedBooking ? getTypeBookingStr(selectedBooking.type): ""}
         bookingSite={selectedBooking ? selectedBooking.site_name : ""}
         bookingCourt={selectedBooking ? selectedBooking.court_name : ""}
         bookingMatchDate={selectedBooking ? selectedBooking.match_date : ""}

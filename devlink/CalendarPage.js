@@ -103,6 +103,7 @@ export function CalendarPage({
   selectEndHour,
   selectTypeBooking,
   textFieldDescription,
+  selectDuration,
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -641,6 +642,7 @@ export function CalendarPage({
         selectEndHour={selectEndHour}
         selectTypeBooking={selectTypeBooking}
         textFieldDescription={textFieldDescription}
+        selectDuration={selectDuration}
       />
     </_Component>
   );

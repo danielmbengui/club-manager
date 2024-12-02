@@ -17,6 +17,8 @@ const useThemeColors = (themeMode) => {
   });
 
   useEffect(() => {
+    
+    console.log("thme", themeMode)
     const root = document.documentElement;
     document.documentElement.className = themeMode; // Applique la classe du thème
     const computedStyles = getComputedStyle(root);
@@ -40,10 +42,21 @@ export const ThemeProvider = ({ children }) => {
   const [themeMode, setThemeMode] = useState('light'); // Mode clair par défaut
   const themeColors = useThemeColors(themeMode);
   useEffect(() => {
-    const actual = document.documentElement.className; // Applique la classe du thème
-    setThemeMode(actual);
+    const theme = localStorage.getItem("theme"); // Récupère la donnée du localStorage
+    console.log("thme", theme)
+        if (theme) {
+          setThemeMode(theme); // Met à jour l'état avec la donnée stockée
+        } else {
+          localStorage.setItem("theme", 'light'); // Enregistre dans le localStorage
+          setThemeMode('light');
+        }
+    //const actual = document.documentElement.className; // Applique la classe du thème
+    //setThemeMode(actual);
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("theme", themeMode);
+  }, [themeMode]);
   const toggleTheme = () => {
     setThemeMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
   };

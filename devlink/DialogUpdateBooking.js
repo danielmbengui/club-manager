@@ -58,6 +58,7 @@ export function DialogUpdateBooking({
   selectEndHour,
   selectTypeBooking,
   textFieldDescription,
+  selectDuration,
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -196,161 +197,6 @@ export function DialogUpdateBooking({
                             {"Heure de début"}
                           </_Builtin.FormBlockLabel>
                         </_Builtin.Block>
-                        <_Builtin.FormSelect
-                          className="form_select"
-                          name="add_booking_start-6"
-                          data-name="Add Booking Start 6"
-                          required={true}
-                          multiple={false}
-                          wized="update_booking_hour"
-                          id="add_booking_start-6"
-                          options={[
-                            {
-                              t: "heure",
-                              v: "--",
-                            },
-                            {
-                              t: "06h30",
-                              v: "6.5",
-                            },
-                            {
-                              t: "07h00",
-                              v: "7",
-                            },
-                            {
-                              t: "07h30",
-                              v: "7.5",
-                            },
-                            {
-                              t: "08h00",
-                              v: "8",
-                            },
-                            {
-                              t: "08h30",
-                              v: "8.5",
-                            },
-                            {
-                              t: "09h00",
-                              v: "9",
-                            },
-                            {
-                              t: "09h30",
-                              v: "9.5",
-                            },
-                            {
-                              t: "10h00",
-                              v: "10",
-                            },
-                            {
-                              t: "10h30",
-                              v: "10.5",
-                            },
-                            {
-                              t: "11h00",
-                              v: "11",
-                            },
-                            {
-                              t: "11h30",
-                              v: "11.5",
-                            },
-                            {
-                              t: "12h00",
-                              v: "12",
-                            },
-                            {
-                              t: "12h30",
-                              v: "12.5",
-                            },
-                            {
-                              t: "13h00",
-                              v: "13",
-                            },
-                            {
-                              t: "13h30",
-                              v: "13.5",
-                            },
-                            {
-                              t: "14h00",
-                              v: "14",
-                            },
-                            {
-                              t: "14h30",
-                              v: "14.5",
-                            },
-                            {
-                              t: "15h00",
-                              v: "15",
-                            },
-                            {
-                              t: "15h30",
-                              v: "15.5",
-                            },
-                            {
-                              t: "16h00",
-                              v: "16",
-                            },
-                            {
-                              t: "16h30",
-                              v: "16.5",
-                            },
-                            {
-                              t: "17h00",
-                              v: "17",
-                            },
-                            {
-                              t: "17h30",
-                              v: "17.5",
-                            },
-                            {
-                              t: "18h00",
-                              v: "18",
-                            },
-                            {
-                              t: "18h30",
-                              v: "18.5",
-                            },
-                            {
-                              t: "19h00",
-                              v: "19",
-                            },
-                            {
-                              t: "19h30",
-                              v: "19.5",
-                            },
-                            {
-                              t: "20h00",
-                              v: "20",
-                            },
-                            {
-                              t: "20h30",
-                              v: "20.5",
-                            },
-                            {
-                              t: "21h00",
-                              v: "21",
-                            },
-                            {
-                              t: "21h30",
-                              v: "21.5",
-                            },
-                            {
-                              t: "22h00",
-                              v: "22",
-                            },
-                            {
-                              t: "22h30",
-                              v: "22.5",
-                            },
-                            {
-                              t: "23h00",
-                              v: "23",
-                            },
-                            {
-                              t: "23h30",
-                              v: "23.5",
-                            },
-                          ]}
-                        />
                         <_Builtin.Block
                           className="container-update-booking devlink"
                           tag="div"
@@ -375,75 +221,12 @@ export function DialogUpdateBooking({
                             {"Durée du match"}
                           </_Builtin.FormBlockLabel>
                         </_Builtin.Block>
-                        <_Builtin.FormSelect
-                          className="form_select"
-                          name="add_booking_start-5"
-                          data-name="Add Booking Start 5"
-                          required={true}
-                          multiple={false}
-                          wized="update_booking_time"
-                          id="add_booking_start-5"
-                          options={[
-                            {
-                              t: "temps",
-                              v: "--",
-                            },
-                            {
-                              t: "30 min",
-                              v: "0.5",
-                            },
-                            {
-                              t: "1h00",
-                              v: "1",
-                            },
-                            {
-                              t: "1h30",
-                              v: "1.5",
-                            },
-                            {
-                              t: "2h",
-                              v: "2",
-                            },
-                            {
-                              t: "2h30",
-                              v: "2.5",
-                            },
-                            {
-                              t: "3h00",
-                              v: "3",
-                            },
-                            {
-                              t: "3h30",
-                              v: "3.5",
-                            },
-                            {
-                              t: "4h00",
-                              v: "4",
-                            },
-                            {
-                              t: "4h30",
-                              v: "4.5",
-                            },
-                            {
-                              t: "5h00",
-                              v: "5",
-                            },
-                            {
-                              t: "5h30",
-                              v: "5.5",
-                            },
-                            {
-                              t: "6h00",
-                              v: "6",
-                            },
-                          ]}
-                        />
                         <_Builtin.Block
                           className="container-update-booking devlink"
                           tag="div"
                         >
                           <_Builtin.Block tag="div">
-                            {selectEndHour}
+                            {selectDuration}
                           </_Builtin.Block>
                         </_Builtin.Block>
                       </_Builtin.Block>
@@ -463,29 +246,6 @@ export function DialogUpdateBooking({
                           {"Type évènements"}
                         </_Builtin.FormBlockLabel>
                       </_Builtin.Block>
-                      <_Builtin.FormSelect
-                        className="form_select"
-                        name="field-7"
-                        data-name="Field 7"
-                        required={false}
-                        multiple={false}
-                        wized="update_type"
-                        id="field-7"
-                        options={[
-                          {
-                            t: "Leçons",
-                            v: "Lesson",
-                          },
-                          {
-                            t: "Entrainement",
-                            v: "Training",
-                          },
-                          {
-                            t: "Tournoi",
-                            v: "Tournament",
-                          },
-                        ]}
-                      />
                       <_Builtin.Block
                         className="container-update-booking devlink"
                         tag="div"
@@ -510,16 +270,6 @@ export function DialogUpdateBooking({
                           {"Commentaire interne"}
                         </_Builtin.FormBlockLabel>
                       </_Builtin.Block>
-                      <_Builtin.FormTextarea
-                        className="form_input is-text-area"
-                        name="comment-2"
-                        maxLength={5000}
-                        data-name="Comment 2"
-                        required={false}
-                        autoFocus={false}
-                        wized="update_notes"
-                        id="comment-2"
-                      />
                       <_Builtin.Block
                         className="container-update-booking devlink"
                         tag="div"

@@ -11,8 +11,16 @@ import Image from 'next/image';
 import { firestore } from '@/firebase';
 import { collection, doc, getDocs, query, where } from 'firebase/firestore';
 import { formatCurrency, getFirstAndLastDayOfDay, getFirstAndLastDayOfMonth, getFirstAndLastDayOfYear } from '@/functions';
-import { getBookingListCalendar } from '@/functions/bookings';
+import { getBookingListCalendar, getTypeBookingStr } from '@/functions/bookings';
 import { useThemeMode } from '@/contexts/ThemeProvider';
+import { formatDateToInputDate } from '@/functions/manage-time';
+import { createArrayDurationManageCourt } from '@/functions/courts';
+import { createArrayBookingType } from '@/functions/manage-firestore';
+//import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { frFR } from '@mui/x-date-pickers/locales';
 
 // Importation dynamique pour éviter les problèmes de SSR (Server-Side Rendering)
 const Calendar = dynamic(() => import("@/components/Calendar"), { ssr: false });
@@ -21,6 +29,8 @@ var COURTS = [
   { value: 0, name: "Tous" }
 ];
 
+const DURATIONS = createArrayDurationManageCourt(1, 9);
+const BOOKING_TYPES = createArrayBookingType();
 export default function CalendarComponent() {
   const { theme, themeMode } = useThemeMode();
   const { login, user, logout, club } = useAuth();
@@ -37,8 +47,14 @@ export default function CalendarComponent() {
   const [year, setYear] = useState(new Date().getFullYear());
   //const year = new Date().getFullYear();
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingDialogBooking, setIsLoadingDialogBooking] = useState(false);
   const [isReseting, setIsReseting] = useState(false);
+
+  const [isLoadingDialogBooking, setIsLoadingDialogBooking] = useState(true);
+  const [isEditingDialogBooking, setIsEditingDialogBooking] = useState(true);
+  const [isSuccessDialogBooking, setIsSuccessDialogBooking] = useState(true);
+  const [isErrorDialogBooking, setIsErrorDialogBooking] = useState(true);
+  const [isWarningDialogBooking, setIsWarningDialogBooking] = useState(true);
+
 
   const [allSites, setAllSites] = useState([{ value: 0, name: "Tous" }]);
   const [selectedSite, setSelectedSite] = useState(0);
@@ -47,6 +63,13 @@ export default function CalendarComponent() {
   const [countBookings, setCountBookings] = useState(0);
   const [countPendingBookings, setCountPendingBookings] = useState(0);
   const [selectedBooking, setSelectedBooking] = useState(null);
+  const [availableHours, setAvailableHours] = useState([]);
+  const [selectedDate, setSelectedDate] = useState();
+  const [selectedHour, setSelectedHour] = useState();
+  const [selectedDuration, setSelectedDuration] = useState();
+  const [selectedType, setSelectedType] = useState();
+  const [selectedDescription, setSelectedDescription] = useState();
+
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [showDialogBooking, setShowDialogBooking] = useState(false);
 
@@ -166,13 +189,13 @@ export default function CalendarComponent() {
       notEditable={selectedBooking ? selectedBooking.is_from_app || (selectedBooking.is_from_web_app && new Date(selectedBooking.match_finished_date_D) < new Date()) : true}
       removable={selectedBooking ? selectedBooking.is_from_web_app && selectedBooking.match_finished_date_D > new Date() : false}
 
-      isEditing={true}
-      isSuccess={true}
+      isEditing={isEditingDialogBooking}
+      isSuccess={isSuccessDialogBooking}
       //successMessage={""}
-      isError={true}
+      isError={isErrorDialogBooking}
       //errorMessage={""}
       //waitMessage={""}
-      isWarning={true}
+      isWarning={isWarningDialogBooking}
       isNotWarning={true}
       //warningMessage={""}
 
@@ -190,27 +213,95 @@ export default function CalendarComponent() {
         //className: "btn-primary",  // Ajout d'une classe CSS
         //type: "button"
       }}
-      inputDate={<input className='custom-date-input' style={{ width: '100%', color:theme.palette.text.primary }} type='date' />}
-      selectStartHour={<label>Start hour</label>}
-      selectEndHour={<label>End hour</label>}
-      selectTypeBooking={<Select
-        className='form_select'
+
+      inputDate={<TextField
+        value={selectedDate}
+        className="custom-date-input"
+        style={{
+          width: '100%',
+          color: theme.palette.text.primary,
+        }}
+        type="date"
+        slotProps={{
+          input: {
+            style: {
+              height: '2.5rem',
+              borderRadius: '20px',
+              border: '1px solid var(--color--light-card)',
+              backgroundColor: 'var(--color--light-card)',
+              padding: '0.25rem 0.5rem',
+            },
+          },
+          select: {
+            style: {
+              color: 'red'
+            }
+          }
+
+        }}
+        onChange={()=>{
+          //setS
+        }}
+      />}
+
+      /*
+      inputDate={<LocalizationProvider localeText={frFR.components.MuiLocalizationProvider.defaultProps.localeText} dateAdapter={AdapterDayjs}>
+      <DatePicker label="Basic date picker" />
+    </LocalizationProvider>}
+    */
+      selectStartHour={<Select
+        className='form_input is-select-input is-calendar'
         labelId="demo-simple-select-label"
         id="demo-simple-select"
-        value={"Lesson"}
-        label="Day"
+        value={selectedHour}
+        label="Start hour"
         //onChange={handleChangeDay}
-        sx={{ height: 40, width:'100%', color: 'text.primary' }}
+        sx={{ height: 40, width: '100%', color: 'text.primary' }}
       >
-        <MenuItem value={"Lesson"} sx={{ color: 'text.primary' }}><Typography color='text.primary'>{"Cours"}</Typography></MenuItem>
-        <MenuItem value={"Training"} sx={{ color: 'text.primary' }}><Typography color='text.primary'>{"Entrainement"}</Typography></MenuItem>
-        <MenuItem value={"Tournament"} sx={{ color: 'text.primary' }}><Typography color='text.primary'>{"Tournoi"}</Typography></MenuItem>
+        {
+          availableHours.sort((a, b) => a.value - b.value).map((hour, index) => {
+            return (<MenuItem key={`${hour.name}${index}`} value={hour.value} sx={{ color: 'text.primary' }}><Typography color='text.primary'>{hour.name}</Typography></MenuItem>)
+          })
+        }
+      </Select>}
+      selectDuration={<Select
+        className='form_input is-select-input is-calendar'
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={selectedDuration}
+        label="Selet duration"
+        //onChange={handleChangeDay}
+        sx={{ height: 40, width: '100%', color: 'text.primary' }}
+      >
+        {
+          DURATIONS.sort((a, b) => a.value - b.value).map((hour, index) => {
+            return (<MenuItem key={`${hour.name}${index}`} value={hour.value} sx={{ color: 'text.primary' }}><Typography color='text.primary'>{hour.name}</Typography></MenuItem>)
+          })
+        }
+      </Select>}
+      selectTypeBooking={<Select
+        className='form_input is-select-input is-calendar'
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={selectedType}
+        label="Select type"
+        //onChange={handleChangeDay}
+        sx={{ height: 40, width: '100%', color: 'text.primary' }}
+      >
+        {
+          BOOKING_TYPES.map((type, index) => {
+            return (<MenuItem key={`${type.name}${index}`} value={type.value} sx={{ color: 'text.primary' }}><Typography color='text.primary'>{type.name}</Typography></MenuItem>)
+          })
+        }
       </Select>}
       textFieldDescription={<TextField
+        value={selectedDescription}
+        //className='form_input is-text-input'
         multiline
         minRows={2} maxRows={10}
         sx={{
-          width: '100%', background: 'var(--color--light-card)',
+          width: '100%',
+          
           '& .MuiOutlinedInput-root': {
             border: 'none', // Supprime la bordure pour "outlined"
           },
@@ -218,7 +309,9 @@ export default function CalendarComponent() {
         slotProps={{
           input: {
             style: {
+              background: 'var(--color--light-card)',
               border: 'none', // Supprime la bordure de l'élément d'entrée
+              borderRadius: '20px',
               outline: 'none', // Supprime le contour au focus
             },
           },
@@ -234,7 +327,7 @@ export default function CalendarComponent() {
       clientName={selectedBooking ? (selectedBooking.name ? selectedBooking.name : "--") : ""}
       clientPhone={selectedBooking ? (selectedBooking.phone ? selectedBooking.phone : "--") : ""}
       clientEmail={selectedBooking ? (selectedBooking.email ? selectedBooking.email : "--") : ""}
-      bookingType={selectedBooking ? selectedBooking.type : ""}
+      bookingType={selectedBooking ? getTypeBookingStr(selectedBooking.type) : ""}
       bookingSite={selectedBooking ? selectedBooking.site_name : ""}
       bookingCourt={selectedBooking ? selectedBooking.court_name : ""}
       bookingCreatedDate={selectedBooking ? selectedBooking.created_date : ""}
@@ -297,7 +390,13 @@ export default function CalendarComponent() {
         setShowDialogBooking={setShowDialogBooking}
         selectedBooking={selectedBooking}
         setSelectedBooking={setSelectedBooking}
+        setAvailableHours={setAvailableHours}
+        setSelectedDate={setSelectedDate}
+        setSelectedHour={setSelectedHour}
+        setSelectedDuration={setSelectedDuration}
         setSelectedTransaction={setSelectedTransaction}
+        setSelectedType={setSelectedType}
+        setSelectedDescription={setSelectedDescription}
         isReseting={isReseting}
         setIsReseting={setIsReseting}
         setCountBookings={setCountBookings}

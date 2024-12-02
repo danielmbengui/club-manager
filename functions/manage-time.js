@@ -135,3 +135,11 @@ export function removeMinutesToDate(date, nMinutes = 0) {
   newDate.setMinutes(newDate.getMinutes() - nMinutes);
   return newDate;
 }
+
+export function formatDateToInputDate(date) {
+  const d = new Date(date); // Crée un objet Date
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0'); // Mois 0-indexé
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}

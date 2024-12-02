@@ -48,4 +48,5 @@ declare function DialogUpdateBooking(props: {
   selectEndHour?: Types.Devlink.Slot;
   selectTypeBooking?: Types.Devlink.Slot;
   textFieldDescription?: Types.Devlink.Slot;
+  selectDuration?: Types.Devlink.Slot;
 }): React.JSX.Element;
