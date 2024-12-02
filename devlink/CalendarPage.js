@@ -5,6 +5,7 @@ import * as _interactions from "./interactions";
 import { GlobalStyles } from "./GlobalStyles";
 import { DialogUpdateBooking } from "./DialogUpdateBooking";
 import { DialogResetBooking } from "./DialogResetBooking";
+import { DialogDeleteBooking } from "./DialogDeleteBooking";
 import { SidebarDevlink } from "./SidebarDevlink";
 import { DevLinkNavBarSwitchTheme } from "./DevLinkNavBarSwitchTheme";
 import { ButtonPrimary } from "./ButtonPrimary";
@@ -175,6 +176,7 @@ export function CalendarPage({
         isLoading={isLoadingReset}
         componentProgress={componentProgress}
       />
+      <DialogDeleteBooking />
       <_Builtin.Block className="main-wrapper" tag="main">
         <_Builtin.Block className="page-wrapper div-block-53" tag="div">
           <_Builtin.HtmlEmbed

@@ -23,7 +23,7 @@ const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialog
     _interactions.useInteractions(_interactionsData);
     const calendarRef = useRef(null);
     //const today = new Date();
-    const today = new Date(2024,11,30);
+    const today = new Date();
     const [firstDay, setFirstDay] = useState(getFirstAndLastDayOfDay(today.getDate(), today.getMonth(), today.getFullYear()).firstDay);
     const [lastDay, setLastDay] = useState(getFirstAndLastDayOfDay(today.getDate(), today.getMonth(), today.getFullYear()).lastDay);
     const [week, setWeek] = useState(0);

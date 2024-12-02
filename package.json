@@ -17,6 +17,7 @@
     "@fullcalendar/react": "^6.1.15",
     "@fullcalendar/resource-timegrid": "^6.1.15",
     "@fullcalendar/timegrid": "^6.1.15",
+    "@google-cloud/secret-manager": "^5.6.0",
     "@mui/icons-material": "^6.1.9",
     "@mui/material": "^6.1.9",
     "@mui/styled-engine-sc": "^6.1.1",

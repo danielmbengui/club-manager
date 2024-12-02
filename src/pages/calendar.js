@@ -21,6 +21,10 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { frFR } from '@mui/x-date-pickers/locales';
+import { getValue } from "firebase/remote-config";
+//import { SecretManagerServiceClient } from '@google-cloud/secret-manager';
+
+
 
 // Importation dynamique pour éviter les problèmes de SSR (Server-Side Rendering)
 const Calendar = dynamic(() => import("@/components/Calendar"), { ssr: false });
@@ -31,7 +35,8 @@ var COURTS = [
 
 const DURATIONS = createArrayDurationManageCourt(1, 9);
 const BOOKING_TYPES = createArrayBookingType();
-export default function CalendarComponent() {
+export default function CalendarComponent({ remoteConfig }) {
+
   const { theme, themeMode } = useThemeMode();
   const { login, user, logout, club } = useAuth();
   const [clubName, setClubName] = useState('');
@@ -158,8 +163,15 @@ export default function CalendarComponent() {
       console.error('Login failed:', error);
     }
   };
-
   useEffect(() => {
+    if (remoteConfig) {
+      const keysLink = getValue(remoteConfig, "urlGetKeys")._value;
+      //const value =val._val;
+      console.log("remote config", keysLink);
+    }
+  }, [remoteConfig])
+  useEffect(() => {
+
     if (club) {
       setClubName(club.name);
       setClubLogo(club.logo);
@@ -353,15 +365,15 @@ export default function CalendarComponent() {
 
 
           await updateDoc(bookingRef, {
-            match_start_date:matchStartDate,
-            match_finished_date:matchEndDate,
-            first_booking_time:selectedHour,
-            last_booking_time:selectedHour + selectedDuration - 0.5,
-            day_of_year:getDayOfYear(new Date(selectedDate)),
-            description:selectedDescription,
-            edit_date:new Date(),
-            type:selectedType,
-            year:new Date(new Date(selectedDate)).getFullYear()
+            match_start_date: matchStartDate,
+            match_finished_date: matchEndDate,
+            first_booking_time: selectedHour,
+            last_booking_time: selectedHour + selectedDuration - 0.5,
+            day_of_year: getDayOfYear(new Date(selectedDate)),
+            description: selectedDescription,
+            edit_date: new Date(),
+            type: selectedType,
+            year: new Date(new Date(selectedDate)).getFullYear()
           });
           bookingSnap = await getDoc(bookingRef);
           bookingData = getOneBookingCalendar(bookingSnap, selectedBooking.is_pending);
@@ -387,7 +399,7 @@ export default function CalendarComponent() {
         inputProps={{
           min: formatDateToInputDate(new Date()), // Date actuelle comme date minimale
         }}
-        slotProps={{ 
+        slotProps={{
           input: {
             type: "date",
             //min: formatDateToInputDate(new Date()),
@@ -406,7 +418,7 @@ export default function CalendarComponent() {
           }
 
         }}
-        
+
         onChange={(event) => {
           const date = event.target.value;
           /*
@@ -454,8 +466,8 @@ export default function CalendarComponent() {
         {
           availableHours.sort((a, b) => a.value - b.value).map((hour, index) => {
             const date = new Date(selectedDate);
-            const {value, name} = hour;
-            const{hours, minutes} = convertValueToHourMinutesJson(value);
+            const { value, name } = hour;
+            const { hours, minutes } = convertValueToHourMinutesJson(value);
             const dateDisabled = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hours, minutes);
             //console.log("disabled date", hours, minutes);
             return (<MenuItem
@@ -476,12 +488,12 @@ export default function CalendarComponent() {
           const duration = event.target.value;
           var editing = false;
           if (selectedBooking) {
-            
+
             editing = duration !== selectedBooking.duration_DO;
           }
           //setSelectedHour(event.target.value);
           setSelectedDuration(duration);
-          
+
           setIsChangedDatas(editing);
           setIsDisabled(false);
           setIsSuccessDialogBooking(false);
@@ -491,7 +503,7 @@ export default function CalendarComponent() {
       >
         {
           DURATIONS.sort((a, b) => a.value - b.value).map((hour, index) => {
-            const {value, name} = hour;            
+            const { value, name } = hour;
             return (<MenuItem key={`${name}${index}`} value={value} sx={{ color: 'text.primary' }}><Typography color='text.primary'>{name}</Typography></MenuItem>)
           })
         }
@@ -562,7 +574,7 @@ export default function CalendarComponent() {
           setIsSuccessDialogBooking(false);
           setIsErrorDialogBooking(false);
           setIsWarningDialogBooking(false);
-          
+
         }}
       />}
 

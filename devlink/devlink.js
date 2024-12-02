@@ -5866,9 +5866,11 @@ function QP(e, t, r) {
   e.style[t] = r;
 }
 function $P(e, t) {
-  return t.startsWith("--")
-    ? window.getComputedStyle(document.documentElement).getPropertyValue(t)
-    : e.style[t];
+  if (t.startsWith("--"))
+    return window
+      .getComputedStyle(document.documentElement)
+      .getPropertyValue(t);
+  if (e.style instanceof CSSStyleDeclaration) return e.style[t];
 }
 function ZP(e, t) {
   return e[t];
