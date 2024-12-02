@@ -209,6 +209,7 @@ export async function getBookingListCalendar(querySnapshotBooking, is_pending = 
                 amount_paid: amount_paid,
                 first_booking_time: first_booking_time,
                 last_booking_time: last_booking_time,
+                duration_DO: last_booking_time - first_booking_time + 0.5,
                 duration: `${parseDoubleToHourInterval(last_booking_time - first_booking_time + 0.5)}`,
                 status: is_pending ? "En attente" : "Confirmé",
                 transaction_uid: transaction_ref ? transaction_ref.id : "",
@@ -260,6 +261,7 @@ export function getOneBookingCalendar(bookingDoc, is_pending = false) {
         amount_paid: amount_paid,
         first_booking_time: first_booking_time,
         last_booking_time: last_booking_time,
+        duration_DO: last_booking_time - first_booking_time + 0.5,
         duration: `${parseDoubleToHourInterval(last_booking_time - first_booking_time + 0.5)}`,
         status: is_pending ? "En attente" : "Confirmé",
         transaction_uid: transaction_ref ? transaction_ref.id : "",
@@ -525,6 +527,7 @@ export function getTypeBookingStr(type, lang = "fr") {
 }
 
 export async function isBookedTime(
+    bookingId,
     collectionName,
     clubId,
     courtRef,
@@ -582,7 +585,7 @@ export async function isBookedTime(
         const bookingTimeValueEnd = hourEnd + minutesEnd / 60;
        // console.log("WAAAAA", collectionName=="COURT_PENDING_BOOKINGS"?"pending":"confirmed" , booking.uid, start_date, time)
         // Vérifier si le temps demandé est dans la plage
-        if (time >= bookingTimeValueStart && time < bookingTimeValueEnd) {
+        if (booking.uid != bookingId && time >= bookingTimeValueStart && time < bookingTimeValueEnd) {
             return true;
         }
     }

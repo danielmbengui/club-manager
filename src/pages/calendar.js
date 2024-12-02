@@ -13,7 +13,7 @@ import { collection, doc, getDoc, getDocs, query, updateDoc, where } from 'fireb
 import { formatCurrency, getFirstAndLastDayOfDay, getFirstAndLastDayOfMonth, getFirstAndLastDayOfYear, parseDoubleToHourInterval } from '@/functions';
 import { getBookingListCalendar, getOneBookingCalendar, getTypeBookingJson, getTypeBookingStr, isBookedTime } from '@/functions/bookings';
 import { useThemeMode } from '@/contexts/ThemeProvider';
-import { addHoursToDate, formatDateToInputDate, getDayOfYear } from '@/functions/manage-time';
+import { addHoursToDate, convertDateToHourValue, convertValueToHourMinutesJson, formatDateToInputDate, getDayOfYear } from '@/functions/manage-time';
 import { createArrayDurationCourt, createArrayDurationManageCourt, getFirstAndLastHourCourt } from '@/functions/courts';
 import { createArrayBookingType, getFirestoreRef, getFirestoreSubData, getFirestoreSubRef } from '@/functions/manage-firestore';
 //import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -56,7 +56,7 @@ export default function CalendarComponent() {
   const [isSuccessDialogBooking, setIsSuccessDialogBooking] = useState(false);
   const [isErrorDialogBooking, setIsErrorDialogBooking] = useState(false);
   const [errorMessageDialogBooking, setErrorMessageDialogBooking] = useState("");
-  const [isWarningDialogBooking, setIsWarningDialogBooking] = useState(true);
+  const [isWarningDialogBooking, setIsWarningDialogBooking] = useState(false);
   const [isResetingDialogBooking, setIsResetingDialogBooking] = useState(false);
 
 
@@ -317,8 +317,8 @@ export default function CalendarComponent() {
             let bookingTimeValueStart = hour + minutes;
             let bookingTimeValueEnd = (matchEndDate.getHours() + (matchEndDate.getMinutes() / 60)) - 0.5;
             for (let time = bookingTimeValueStart; time <= bookingTimeValueEnd; time += 0.5) {
-              const booked = await isBookedTime("COURT_BOOKINGS", club.uid, courtRef, year, dayOfYear, time);
-              const pending_booked = await isBookedTime("COURT_PENDING_BOOKINGS", club.uid, courtRef, year, dayOfYear, time);
+              const booked = await isBookedTime(bookingRef.id, "COURT_BOOKINGS", club.uid, courtRef, year, dayOfYear, time);
+              const pending_booked = await isBookedTime(bookingRef.id, "COURT_PENDING_BOOKINGS", club.uid, courtRef, year, dayOfYear, time);
               if (booked || pending_booked) {
                 console.log("Is Time busy", time);
                 //console.log("This slot is already busy !");
@@ -353,15 +353,15 @@ export default function CalendarComponent() {
 
 
           await updateDoc(bookingRef, {
-            //match_start_date:matchStartDate,
-            //match_finished_date:matchEndDate,
-            //first_booking_time:selectedHour,
-            //last_booking_time:selectedHour + selectedDuration - 0.5,
-            //day_of_year:getDayOfYear(new Date(selectedDate)),
-            //description:selectedDescription,
-            //edit_date:new Date(),
-            //type:selectedType,
-            //year:new Date(new Date(selectedDate)).getFullYear()
+            match_start_date:matchStartDate,
+            match_finished_date:matchEndDate,
+            first_booking_time:selectedHour,
+            last_booking_time:selectedHour + selectedDuration - 0.5,
+            day_of_year:getDayOfYear(new Date(selectedDate)),
+            description:selectedDescription,
+            edit_date:new Date(),
+            type:selectedType,
+            year:new Date(new Date(selectedDate)).getFullYear()
           });
           bookingSnap = await getDoc(bookingRef);
           bookingData = getOneBookingCalendar(bookingSnap, selectedBooking.is_pending);
@@ -371,17 +371,6 @@ export default function CalendarComponent() {
           }
           setSelectedBooking(bookingData);
           console.log("WESH", bookingRef.id);
-
-          /*
-          const booked = await isBookedTime(
-            collectionName,
-            club.uid,
-            courtRef,
-            year,
-            getDayOfYear(matchStartDate),
-            selectedHour
-          );
-          */
           //console.log("booked", booked);
         },  // Ajout de la fonction onClick ici
         //className: "btn-primary",  // Ajout d'une classe CSS
@@ -395,9 +384,13 @@ export default function CalendarComponent() {
           width: '100%',
           color: theme.palette.text.primary,
         }}
-        type="date"
-        slotProps={{
+        inputProps={{
+          min: formatDateToInputDate(new Date()), // Date actuelle comme date minimale
+        }}
+        slotProps={{ 
           input: {
+            type: "date",
+            //min: formatDateToInputDate(new Date()),
             style: {
               height: '2.5rem',
               borderRadius: '20px',
@@ -413,6 +406,7 @@ export default function CalendarComponent() {
           }
 
         }}
+        
         onChange={(event) => {
           const date = event.target.value;
           /*
@@ -459,7 +453,14 @@ export default function CalendarComponent() {
       >
         {
           availableHours.sort((a, b) => a.value - b.value).map((hour, index) => {
-            return (<MenuItem key={`${hour.name}${index}`} value={hour.value} sx={{ color: 'text.primary' }}><Typography color='text.primary'>{hour.name}</Typography></MenuItem>)
+            const date = new Date(selectedDate);
+            const {value, name} = hour;
+            const{hours, minutes} = convertValueToHourMinutesJson(value);
+            const dateDisabled = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hours, minutes);
+            //console.log("disabled date", hours, minutes);
+            return (<MenuItem
+              disabled={dateDisabled < new Date()}
+              key={`${name}${index}`} value={value} sx={{ color: 'text.primary' }}><Typography color='text.primary'>{name}</Typography></MenuItem>)
           })
         }
       </Select>}
@@ -471,14 +472,27 @@ export default function CalendarComponent() {
         label="Selet duration"
         //onChange={handleChangeDay}
         sx={{ height: 40, width: '100%', color: 'text.primary' }}
-        onChange={(event) => {
-          setSelectedDuration(event.target.value);
-
+        onChange={async (event) => {
+          const duration = event.target.value;
+          var editing = false;
+          if (selectedBooking) {
+            
+            editing = duration !== selectedBooking.duration_DO;
+          }
+          //setSelectedHour(event.target.value);
+          setSelectedDuration(duration);
+          
+          setIsChangedDatas(editing);
+          setIsDisabled(false);
+          setIsSuccessDialogBooking(false);
+          setIsErrorDialogBooking(false);
+          setIsWarningDialogBooking(false);
         }}
       >
         {
           DURATIONS.sort((a, b) => a.value - b.value).map((hour, index) => {
-            return (<MenuItem key={`${hour.name}${index}`} value={hour.value} sx={{ color: 'text.primary' }}><Typography color='text.primary'>{hour.name}</Typography></MenuItem>)
+            const {value, name} = hour;            
+            return (<MenuItem key={`${name}${index}`} value={value} sx={{ color: 'text.primary' }}><Typography color='text.primary'>{name}</Typography></MenuItem>)
           })
         }
       </Select>}
@@ -491,7 +505,19 @@ export default function CalendarComponent() {
         //onChange={handleChangeDay}
         sx={{ height: 40, width: '100%', color: 'text.primary' }}
         onChange={(event) => {
-          setSelectedType(event.target.value)
+          const type = event.target.value;
+          var editing = false;
+          if (selectedBooking) {
+            editing = type !== selectedBooking.type;
+          }
+          //setSelectedHour(event.target.value);
+          setSelectedType(type);
+          console.log("duration booking", selectedBooking.type)
+          setIsChangedDatas(editing);
+          setIsDisabled(false);
+          setIsSuccessDialogBooking(false);
+          setIsErrorDialogBooking(false);
+          setIsWarningDialogBooking(false);
         }}
       >
         {
@@ -523,7 +549,20 @@ export default function CalendarComponent() {
           },
         }}
         onChange={(event) => {
-          setSelectedDescription(event.target.value)
+          const description = event.target.value;
+          var editing = false;
+          if (selectedBooking) {
+            editing = description !== selectedBooking.description;
+          }
+          //setSelectedHour(event.target.value);
+          setSelectedDescription(description)
+          console.log("description booking", selectedBooking.description)
+          setIsChangedDatas(editing);
+          setIsDisabled(false);
+          setIsSuccessDialogBooking(false);
+          setIsErrorDialogBooking(false);
+          setIsWarningDialogBooking(false);
+          
         }}
       />}
 

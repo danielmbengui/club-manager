@@ -22,13 +22,14 @@ const _interactionsData = JSON.parse(
 const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialogReset,setSelectedType, setSelectedDate, setSelectedDescription,clubUid, setIsLoading, siteUid = 0, courtUid = 0, setCountBookings, setCountPendingBookings, setShowDialogBooking, setAvailableHours,setSelectedHour,setSelectedBooking, setSelectedTransaction }) => {
     _interactions.useInteractions(_interactionsData);
     const calendarRef = useRef(null);
-    const today = new Date();
+    //const today = new Date();
+    const today = new Date(2024,11,30);
     const [firstDay, setFirstDay] = useState(getFirstAndLastDayOfDay(today.getDate(), today.getMonth(), today.getFullYear()).firstDay);
     const [lastDay, setLastDay] = useState(getFirstAndLastDayOfDay(today.getDate(), today.getMonth(), today.getFullYear()).lastDay);
     const [week, setWeek] = useState(0);
-    const [day, setDay] = useState(new Date().getDate());
-    const [month, setMonth] = useState(new Date().getMonth() + 1);
-    const [year, setYear] = useState(new Date().getFullYear());
+    const [day, setDay] = useState(today.getDate());
+    const [month, setMonth] = useState(today.getMonth() + 1);
+    const [year, setYear] = useState(today.getFullYear());
     const [events, setEvents] = useState([]);
     const [resources, setResources] = useState([]);
     const [isResourceView, setIsResourceView] = useState(true);
@@ -286,7 +287,7 @@ const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialog
             setAvailableHours(hours);
             setSelectedDate(formatDateToInputDate(bookingData.match_start_date_D));
             setSelectedHour(startHour);
-            setSelectedDuration(endHour - startHour);
+            setSelectedDuration(bookingData.duration_DO);
             setSelectedType(getTypeBookingJson(bookingData.type).value);
             setSelectedDescription(bookingData.description != "--" ? bookingData.description : "");
             //const {first_time, last_time} = getFirstAndLastHourCourt(courtData);
@@ -391,7 +392,7 @@ const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialog
                 plugins={[resourceTimeGridPlugin, interactionPlugin, dayGridPlugin]}
                 //initialView="resourceTimeGridDay"
                 initialView={initialView}
-                initialDate={new Date().toISOString()} // S'assurer que la période inclut vos événements
+                initialDate={today.toISOString()} // S'assurer que la période inclut vos événements
                 firstDay={1} // Commence la semaine le lundi
                 slotMinTime={slotMinTime}
                 slotMaxTime={slotMaxTime}

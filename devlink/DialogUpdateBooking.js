@@ -511,7 +511,7 @@ export function DialogUpdateBooking({
                     className="card-row-title sub-title-devlink"
                     tag="div"
                   >
-                    {"Court :"}
+                    {"Terrain :"}
                   </_Builtin.Block>
                   <_Builtin.Block
                     className="update_form-info"

@@ -10141,7 +10141,7 @@ figcaption {
 }
 
 .container-update-booking.devlink {
-  background-color: var(--error);
+  background-color: var(--test-component);
 }
 
 .div-block-53 {

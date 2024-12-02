@@ -1,3 +1,18 @@
+export function convertDateToHourValue(date) {
+  if (!date || !(date instanceof Date)) {
+    // Handle the case where 'date' is not a Date object or is undefined
+    //console.error("Invalid date object");
+    return null; // Or some other indication of an error
+  }
+  const hour = date.getHours();
+  const minutes = date.getMinutes();
+  return hour + (minutes / 60);
+}
+
+export function convertValueToHourMinutesJson(value) {
+  return { hours: parseInt(value), minutes: value - parseInt(value) };
+}
+
 export function isSummerTime(date) {
   // Fonction pour trouver le dernier dimanche d'un mois spécifique pour une année donnée
   function lastSunday(month, year) {
@@ -41,9 +56,9 @@ export function addHoursToDate(date, nHours = 0) {
   }
   const newDate = new Date(date.getTime());
   const hours = parseInt(nHours);
-  const minutes = nHours - parseInt(nHours);
-  newDate.setHours(newDate.getHours() + nHours);
-  //newDate.setMinutes(newDate.getMonth() + nHours);
+  const minutes = (nHours - parseInt(nHours)) * 60;
+  newDate.setHours(newDate.getHours() + hours);
+  newDate.setMinutes(newDate.getMinutes() + minutes);
   return newDate;
 }
 
