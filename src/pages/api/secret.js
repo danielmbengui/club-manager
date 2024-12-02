@@ -16,7 +16,7 @@ export default async function handler(req, res) {
 
   try {
     const secretName = 'VLSJINHIeATv4nVi7O4Y'; // Remplacez par votre nom de secret
-    const version = 'latest';
+    const version = '27';
     const name = `projects/${process.env.GCP_PROJECT_ID}/secrets/${secretName}/versions/${version}`;
     
     const [accessResponse] = await client.accessSecretVersion({ name });
