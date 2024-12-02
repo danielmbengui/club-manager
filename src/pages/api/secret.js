@@ -1,5 +1,5 @@
 import { SecretManagerServiceClient } from '@google-cloud/secret-manager';
-//require('dotenv').config();
+require('dotenv').config();
 const client = new SecretManagerServiceClient({
   credentials: {
     private_key: process.env.GCP_PRIVATE_KEY.replace(/\\n/g, '\n'),
@@ -23,7 +23,11 @@ export default async function handler(req, res) {
     const secretValue = accessResponse.payload.data.toString('utf8');
     const values = JSON.parse(secretValue);
     const clubUid = values.clubUid;
-    res.status(200).json({ clubUid: clubUid});
+    res.status(200).json({
+      apiKey: process.env.GCP_PRIVATE_KEY,
+      projectId: process.env.GCP_CLIENT_EMAIL,
+      secretKey: process.env.GCP_PROJECT_ID ? 'Loaded' : 'Missing',
+    });
   } catch (error) {
     console.error('Erreur lors de la récupération du secret :', error);
     res.status(500).json({ error: 'Erreur lors de la récupération du secret' });
