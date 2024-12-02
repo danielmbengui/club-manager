@@ -1,7 +1,8 @@
 import { firestore } from "@/firebase";
 import { getArrayMonthStr, getFirstAndLastDayOfMonth, getFirstAndLastDayOfYear, parseDoubleToHourInterval } from "@/functions";
 import { collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
-import { addHoursToDate, formatDateToISO, isSummerTime } from "./manage-time";
+import { addHoursToDate, formatDateToISO, getStartAndEndOfDay, isSummerTime } from "./manage-time";
+import { getFirestoreSubData } from "./manage-firestore";
 
 export async function getCountBookingsClub(querySnapshotBooking) {
     let countBoookingsPlayPad = 0;
@@ -219,8 +220,8 @@ export async function getBookingListCalendar(querySnapshotBooking, is_pending = 
                 //id: uid,
                 site_uid: site_ref.id,
                 court_uid: court_ref.id,
-                match_start_date:new Date(matchDate).toISOString(),
-                match_finished_date:new Date(matchDateF).toISOString(),
+                match_start_date: new Date(matchDate).toISOString(),
+                match_finished_date: new Date(matchDateF).toISOString(),
                 //title: "Emilie Devaud",
                 //start: "2024-11-30T07:00:00",
                 //end: "2024-11-30T08:30:00",
@@ -231,54 +232,54 @@ export async function getBookingListCalendar(querySnapshotBooking, is_pending = 
         })
         .filter(Boolean); // Supprime les valeurs undefined
 }
-export function getOneBookingCalendar(bookingDoc, is_pending=false) {
+export function getOneBookingCalendar(bookingDoc, is_pending = false) {
     const { uid, user_info, transaction_ref, type, description, access_code, created_date, first_booking_time, last_booking_time, amount_paid, match_start_date, match_finished_date, club_ref, site_name, court_name, site_ref, court_ref, is_from_app, is_from_web_app } = bookingDoc.data();
-            const createdDateTimestamp = created_date;
-            const createdDate = new Date(createdDateTimestamp.seconds * 1_000);
-            const matchDateTimestamp = match_start_date;
-            const matchDate = new Date(matchDateTimestamp.seconds * 1_000);
-            const matchDateTimestampF = match_finished_date;
-            const matchDateF = new Date(matchDateTimestampF.seconds * 1_000);
-            return {
-                uid,
-                name: user_info.name,
-                phone: user_info.phone_number,
-                email: user_info.email,
-                created_date_D:createdDate,
-                match_start_date_D:matchDate,
-                match_finished_date_D:matchDateF,
-                created_date: `${createdDate.getDate().toString().padStart(2, '0')}.${(createdDate.getMonth() + 1).toString().padStart(2, '0')}.${createdDate.getFullYear()} ${createdDate.getHours().toString().padStart(2, '0')}h${createdDate.getMinutes().toString().padStart(2, '0')}`,
-                //match_date: matchDate,
-                match_date: `${matchDate.getDate().toString().padStart(2, '0')}.${(matchDate.getMonth() + 1).toString().padStart(2, '0')}.${matchDate.getFullYear()} ${matchDate.getHours().toString().padStart(2, '0')}h${matchDate.getMinutes().toString().padStart(2, '0')}-${matchDateF.getHours().toString().padStart(2, '0')}h${matchDateF.getMinutes().toString().padStart(2, '0')}`,
-                is_from_app: is_from_app,
-                is_from_web_app: is_from_web_app,
-                club_uid: club_ref.id,
-                site_name: site_name,
-                court_name: court_name,
-                is_pending: is_pending,
-                amount_paid: amount_paid,
-                first_booking_time: first_booking_time,
-                last_booking_time: last_booking_time,
-                duration: `${parseDoubleToHourInterval(last_booking_time - first_booking_time + 0.5)}`,
-                status: is_pending ? "En attente" : "Confirmé",
-                transaction_uid: transaction_ref ? transaction_ref.id : "",
-                type: type,
-                access_code: access_code,
-                description: description,
-                //const startDate = new Date(booking.match_start_date).toISOString();
-                //const endDate = new Date(booking.match_finished_date).toISOString();
-                //id: uid,
-                site_uid: site_ref.id,
-                court_uid: court_ref.id,
-                match_start_date:new Date(matchDate).toISOString(),
-                match_finished_date:new Date(matchDateF).toISOString(),
-                //title: "Emilie Devaud",
-                //start: "2024-11-30T07:00:00",
-                //end: "2024-11-30T08:30:00",
-                backgroundColor: "green", // Changer la couleur de fond
-                borderColor: "darkgreen", // Couleur de bordure
-                textColor: "white", // Couleur du texte
-            };
+    const createdDateTimestamp = created_date;
+    const createdDate = new Date(createdDateTimestamp.seconds * 1_000);
+    const matchDateTimestamp = match_start_date;
+    const matchDate = new Date(matchDateTimestamp.seconds * 1_000);
+    const matchDateTimestampF = match_finished_date;
+    const matchDateF = new Date(matchDateTimestampF.seconds * 1_000);
+    return {
+        uid,
+        name: user_info.name,
+        phone: user_info.phone_number,
+        email: user_info.email,
+        created_date_D: createdDate,
+        match_start_date_D: matchDate,
+        match_finished_date_D: matchDateF,
+        created_date: `${createdDate.getDate().toString().padStart(2, '0')}.${(createdDate.getMonth() + 1).toString().padStart(2, '0')}.${createdDate.getFullYear()} ${createdDate.getHours().toString().padStart(2, '0')}h${createdDate.getMinutes().toString().padStart(2, '0')}`,
+        //match_date: matchDate,
+        match_date: `${matchDate.getDate().toString().padStart(2, '0')}.${(matchDate.getMonth() + 1).toString().padStart(2, '0')}.${matchDate.getFullYear()} ${matchDate.getHours().toString().padStart(2, '0')}h${matchDate.getMinutes().toString().padStart(2, '0')}-${matchDateF.getHours().toString().padStart(2, '0')}h${matchDateF.getMinutes().toString().padStart(2, '0')}`,
+        is_from_app: is_from_app,
+        is_from_web_app: is_from_web_app,
+        club_uid: club_ref.id,
+        site_name: site_name,
+        court_name: court_name,
+        is_pending: is_pending,
+        amount_paid: amount_paid,
+        first_booking_time: first_booking_time,
+        last_booking_time: last_booking_time,
+        duration: `${parseDoubleToHourInterval(last_booking_time - first_booking_time + 0.5)}`,
+        status: is_pending ? "En attente" : "Confirmé",
+        transaction_uid: transaction_ref ? transaction_ref.id : "",
+        type: type,
+        access_code: access_code,
+        description: description,
+        //const startDate = new Date(booking.match_start_date).toISOString();
+        //const endDate = new Date(booking.match_finished_date).toISOString();
+        //id: uid,
+        site_uid: site_ref.id,
+        court_uid: court_ref.id,
+        match_start_date: new Date(matchDate).toISOString(),
+        match_finished_date: new Date(matchDateF).toISOString(),
+        //title: "Emilie Devaud",
+        //start: "2024-11-30T07:00:00",
+        //end: "2024-11-30T08:30:00",
+        backgroundColor: "green", // Changer la couleur de fond
+        borderColor: "darkgreen", // Couleur de bordure
+        textColor: "white", // Couleur du texte
+    };
 }
 export async function getCountBookingsPlayPad(querySnapshotBooking) {
     /*
@@ -305,7 +306,7 @@ export async function getCountBookingsPlayPad(querySnapshotBooking) {
 
     return countBoookingsPlayPad;
 }
-export async function getCountBookingsTotal(querySnapshotBooking) {    
+export async function getCountBookingsTotal(querySnapshotBooking) {
     return querySnapshotBooking.size;
 }
 export async function getRateBookingsPlayPad(querySnapshotBooking) {
@@ -492,33 +493,100 @@ export async function getCountUsersClub(querySnapshotBooking) {
 
     return uniqueUsers.length;
 }
-export function getTypeBookingJson(type, lang="fr") {
- if(type=="Match") {
-    return {value:"Match", name:"Match"};
- } 
- if(type=="Lesson") {
-    return {value:"Lesson", name:"Cours"};
- }
- if(type=="Training") {
-    return {value:"Training", name:"Entrainement"};
- }
- if(type=="Tournament") {
-    return {value:"Tournament", name:"Tournoi"};
- }  
- return {value:"Unknow", name:"Inonnu"};
+export function getTypeBookingJson(type, lang = "fr") {
+    if (type == "Match") {
+        return { value: "Match", name: "Match" };
+    }
+    if (type == "Lesson") {
+        return { value: "Lesson", name: "Cours" };
+    }
+    if (type == "Training") {
+        return { value: "Training", name: "Entrainement" };
+    }
+    if (type == "Tournament") {
+        return { value: "Tournament", name: "Tournoi" };
+    }
+    return { value: "Unknow", name: "Inonnu" };
 }
-export function getTypeBookingStr(type, lang="fr") {
-    if(type=="Match") {
-       return "Match";
-    } 
-    if(type=="Lesson") {
-       return "Cours";
+export function getTypeBookingStr(type, lang = "fr") {
+    if (type == "Match") {
+        return "Match";
     }
-    if(type=="Training") {
-       return "Entrainement";
+    if (type == "Lesson") {
+        return "Cours";
     }
-    if(type=="Tournament") {
-       return "Tournoi";
-    }  
-    return "Inconnu"; 
-   }
+    if (type == "Training") {
+        return "Entrainement";
+    }
+    if (type == "Tournament") {
+        return "Tournoi";
+    }
+    return "Inconnu";
+}
+
+export async function isBookedTime(
+    collectionName,
+    clubId,
+    courtRef,
+    year,
+    dayOfYear,
+    time = 0
+) {
+    // Calculer le début et la fin du jour
+   // console.log("start function")
+    const { startOfDay, endOfDay } = getStartAndEndOfDay(year, dayOfYear);
+
+    // Construire une requête pour les réservations du jour
+    const bookingsQuery = query(
+        collection(doc(firestore, "CLUBS", clubId), collectionName),
+        where("match_start_date", ">=", startOfDay),
+        where("match_start_date", "<=", endOfDay),
+        where("court_ref", "==", courtRef)
+    );
+
+    // Récupérer les documents
+    const bookingsSnapshot = await getDocs(bookingsQuery);
+
+    const bookings = await Promise.all(
+        bookingsSnapshot.docs.map(async (bookingDoc) => {
+            // Récupérer les sous-données si nécessaire
+            const bookingRef = bookingDoc.ref;
+            const subData = await getFirestoreSubData(clubId, "CLUBS", bookingRef.id, collectionName);
+            return subData;
+        })
+    );
+
+    // Vérification de la plage horaire
+    for (const booking of bookings) {
+        const match_start_timestamp = booking.match_start_date;
+        const match_end_timestamp = booking.match_finished_date;
+
+        // Convertir les timestamps Firestore en objets Date
+        const startDate = new Date(match_start_timestamp.seconds * 1000);
+        const endDate = new Date(match_end_timestamp.seconds * 1000);
+
+        // Gérer le décalage horaire
+        const jetlag = isSummerTime(startDate) ? 2 : 1;
+        //const start_date = addHoursToDate(startDate, jetlag);
+        //const end_date = addHoursToDate(endDate, jetlag);
+        const start_date = startDate;
+        const end_date =endDate;
+
+        // Calculer les heures de début et de fin
+        const hourStart = start_date.getHours();
+        const minutesStart = start_date.getMinutes();
+        const bookingTimeValueStart = hourStart + minutesStart / 60;
+
+        const hourEnd = end_date.getHours();
+        const minutesEnd = end_date.getMinutes();
+        const bookingTimeValueEnd = hourEnd + minutesEnd / 60;
+       // console.log("WAAAAA", collectionName=="COURT_PENDING_BOOKINGS"?"pending":"confirmed" , booking.uid, start_date, time)
+        // Vérifier si le temps demandé est dans la plage
+        if (time >= bookingTimeValueStart && time < bookingTimeValueEnd) {
+            return true;
+        }
+    }
+    //console.log("finish function")
+    // Pas de réservation trouvée pour l'heure donnée
+    return false;
+}

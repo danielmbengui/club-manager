@@ -9,13 +9,13 @@ import { CircularProgress, MenuItem, Select, Stack, TextField, Typography } from
 import SwitchTheme from '@/components/SwitchTheme';
 import Image from 'next/image';
 import { firestore } from '@/firebase';
-import { collection, doc, getDocs, query, where } from 'firebase/firestore';
-import { formatCurrency, getFirstAndLastDayOfDay, getFirstAndLastDayOfMonth, getFirstAndLastDayOfYear } from '@/functions';
-import { getBookingListCalendar, getTypeBookingStr } from '@/functions/bookings';
+import { collection, doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
+import { formatCurrency, getFirstAndLastDayOfDay, getFirstAndLastDayOfMonth, getFirstAndLastDayOfYear, parseDoubleToHourInterval } from '@/functions';
+import { getBookingListCalendar, getOneBookingCalendar, getTypeBookingJson, getTypeBookingStr, isBookedTime } from '@/functions/bookings';
 import { useThemeMode } from '@/contexts/ThemeProvider';
-import { formatDateToInputDate } from '@/functions/manage-time';
-import { createArrayDurationManageCourt } from '@/functions/courts';
-import { createArrayBookingType } from '@/functions/manage-firestore';
+import { addHoursToDate, formatDateToInputDate, getDayOfYear } from '@/functions/manage-time';
+import { createArrayDurationCourt, createArrayDurationManageCourt, getFirstAndLastHourCourt } from '@/functions/courts';
+import { createArrayBookingType, getFirestoreRef, getFirestoreSubData, getFirestoreSubRef } from '@/functions/manage-firestore';
 //import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -47,13 +47,18 @@ export default function CalendarComponent() {
   const [year, setYear] = useState(new Date().getFullYear());
   //const year = new Date().getFullYear();
   const [isLoading, setIsLoading] = useState(false);
-  const [isReseting, setIsReseting] = useState(false);
+  const [isReseting, setIsReseting] = useState(true);
 
   const [isLoadingDialogBooking, setIsLoadingDialogBooking] = useState(true);
-  const [isEditingDialogBooking, setIsEditingDialogBooking] = useState(true);
-  const [isSuccessDialogBooking, setIsSuccessDialogBooking] = useState(true);
-  const [isErrorDialogBooking, setIsErrorDialogBooking] = useState(true);
+  const [isChangedDatas, setIsChangedDatas] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [isEditingDialogBooking, setIsEditingDialogBooking] = useState(false);
+  const [isSuccessDialogBooking, setIsSuccessDialogBooking] = useState(false);
+  const [isErrorDialogBooking, setIsErrorDialogBooking] = useState(false);
+  const [errorMessageDialogBooking, setErrorMessageDialogBooking] = useState("");
   const [isWarningDialogBooking, setIsWarningDialogBooking] = useState(true);
+  const [isResetingDialogBooking, setIsResetingDialogBooking] = useState(false);
+
 
 
   const [allSites, setAllSites] = useState([{ value: 0, name: "Tous" }]);
@@ -72,6 +77,7 @@ export default function CalendarComponent() {
 
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [showDialogBooking, setShowDialogBooking] = useState(false);
+  const [showDialogReset, setShowDialogReset] = useState(false);
 
 
   //const [countPendingBookings, setCountPendingBookings] = useState(0);
@@ -165,6 +171,36 @@ export default function CalendarComponent() {
       start();
     }
   }, [club]);
+
+  async function resetBooking() {
+    if (selectedBooking) {
+      //setIsLoadingDialogBooking(true);
+      setIsResetingDialogBooking(true);
+      const clubRef = await getFirestoreRef(club.uid, "CLUBS");
+      const bookingRef = doc((collection(clubRef, "COURT_BOOKINGS")), selectedBooking.uid);
+      const bookingSnap = await getDoc(bookingRef);
+      const bookingData = getOneBookingCalendar(bookingSnap, false);
+      const courtData = await getFirestoreSubData(club.uid, "CLUBS", bookingData.court_uid, "COURTS");
+      const hours = createArrayDurationCourt(courtData);
+      const startHour = bookingData.first_booking_time;
+      const endHour = bookingData.last_booking_time + 0.5;
+      setAvailableHours(hours);
+      setSelectedDate(formatDateToInputDate(bookingData.match_start_date_D));
+      setSelectedHour(startHour);
+      setSelectedDuration(endHour - startHour);
+      setSelectedType(getTypeBookingJson(bookingData.type).value);
+      setSelectedDescription(bookingData.description != "--" ? bookingData.description : "");
+      setSelectedBooking(bookingData);
+      setIsResetingDialogBooking(false);
+      setIsChangedDatas(false);
+      //setIsLoadingDialogBooking(false);
+      setIsEditingDialogBooking(false);
+      setIsErrorDialogBooking(false);
+      setErrorMessageDialogBooking("");
+      setIsDisabled(false);
+      setShowDialogReset(false);
+    }
+  }
   /*
 */
   if (user && !user.connected) {
@@ -184,31 +220,169 @@ export default function CalendarComponent() {
       isNotLoading={!isLoading}
       isLoadingUpdateBooking={isLoadingDialogBooking}
       isNotLoadingUpdateBooking={!isLoadingDialogBooking}
+      isReseting={isReseting}
       componentProgressUpdateBooking={<CircularProgress color="primary" size={'50px'} />}
       editable={selectedBooking ? selectedBooking.is_from_web_app && selectedBooking.match_finished_date_D > new Date() : false}
       notEditable={selectedBooking ? selectedBooking.is_from_app || (selectedBooking.is_from_web_app && new Date(selectedBooking.match_finished_date_D) < new Date()) : true}
       removable={selectedBooking ? selectedBooking.is_from_web_app && selectedBooking.match_finished_date_D > new Date() : false}
 
+      isDifferentDatas={isChangedDatas}
+      isDisabled={isDisabled}
+      isNotDisabled={!isDisabled}
       isEditing={isEditingDialogBooking}
       isSuccess={isSuccessDialogBooking}
       //successMessage={""}
       isError={isErrorDialogBooking}
-      //errorMessage={""}
+      errorMessage={errorMessageDialogBooking}
       //waitMessage={""}
       isWarning={isWarningDialogBooking}
       isNotWarning={true}
       //warningMessage={""}
-
+      isLoadingReset={isResetingDialogBooking}
+      openResetingDialog={{
+        onClick: async () => {
+          //alert("open dialog RESET");
+          setShowDialogReset(true);
+        },  // Ajout de la fonction onClick ici
+        //className: "btn-primary",  // Ajout d'une classe CSS
+        //type: "button"
+      }}
+      closeResetingDialog={{
+        onClick: async () => {
+          //alert("close dialog RESET");
+          setShowDialogReset(false);
+        },  // Ajout de la fonction onClick ici
+        //className: "btn-primary",  // Ajout d'une classe CSS
+        //type: "button"
+      }}
       actionResetDialogUpdate={{
-        onClick: () => {
-          alert("RESET");
+        onClick: async () => {
+          //alert("RESET");
+          await resetBooking();
+          //setIsReseting(false);
         },  // Ajout de la fonction onClick ici
         //className: "btn-primary",  // Ajout d'une classe CSS
         //type: "button"
       }}
       updateBooking={{
-        onClick: () => {
-          alert("SAVE");
+        onClick: async () => {
+
+          alert(`Date:${new Date(selectedDate).toDateString()}\nStart hour:${selectedHour}\nDuration:${selectedDuration}\nType:${selectedType}\nDescription:${selectedDescription}\n
+            Potential error:slot already booked, slot outside opening hours
+            Future warnings:recursive bookig -> say how many recursive will be created
+            Future edits: site,court,name,phone,email\n
+            Action: update booking, IF smart padel -> remove + recreate booking
+            `);
+          setIsEditingDialogBooking(true);
+          setIsErrorDialogBooking(false);
+          setErrorMessageDialogBooking("");
+          setIsDisabled(false);
+          setIsSuccessDialogBooking(false);
+          setIsChangedDatas(false);
+          const selected = new Date(selectedDate);
+          const year = selected.getFullYear();
+          const month = selected.getMonth();
+          const day = selected.getDate();
+          const hour = parseInt(selectedHour);
+          const minutes = selectedHour - parseInt(selectedHour);
+          const matchStartDate = new Date(year, month, day, hour, minutes * 60);
+          const matchEndDate = addHoursToDate(matchStartDate, selectedDuration);
+          const hourF = matchEndDate.getHours();
+          const minutesF = matchEndDate.getMinutes();
+          const collectionName = selectedBooking.is_pending ? "COURT_PENDING_BOOKINGS" : "COURT_BOOKINGS";
+          const bookingRef = await getFirestoreSubRef(club.uid, "CLUBS", selectedBooking.uid, collectionName);
+          var bookingSnap = await getDoc(bookingRef);
+          var bookingData = getOneBookingCalendar(bookingSnap, selectedBooking.is_pending);
+          const courtRef = await getFirestoreSubRef(club.uid, "CLUBS", selectedBooking.court_uid, "COURTS");
+          const courtData = await getFirestoreSubData(club.uid, "CLUBS", selectedBooking.court_uid, "COURTS");
+          const { first_time, last_time } = getFirstAndLastHourCourt(courtData);
+          var is_error = false;
+          var is_disabled = false;
+          var error_message = "";
+          if (selectedHour + selectedDuration > last_time) {
+            is_error = true;
+            is_disabled = true;
+            const mainMessage = `Cette plage horaire est en dehors des horaires d'ouverture : ${parseDoubleToHourInterval(first_time)}-${parseDoubleToHourInterval(last_time)} !`;
+            //error_message = `Cette plage horaire est déjà occupée : ${parseDoubleToHourInterval(time)}-${parseDoubleToHourInterval(time + 0.5)} !<br><br>\n\nVeuillez changer de plage horaire !`;
+            error_message = (
+              <>
+                {mainMessage}
+                <br />
+                Veuillez changer de plage horaire !
+              </>
+            )
+          }
+          if (!is_error && !is_disabled) {
+            var dayOfYear = getDayOfYear(matchStartDate);
+            let bookingTimeValueStart = hour + minutes;
+            let bookingTimeValueEnd = (matchEndDate.getHours() + (matchEndDate.getMinutes() / 60)) - 0.5;
+            for (let time = bookingTimeValueStart; time <= bookingTimeValueEnd; time += 0.5) {
+              const booked = await isBookedTime("COURT_BOOKINGS", club.uid, courtRef, year, dayOfYear, time);
+              const pending_booked = await isBookedTime("COURT_PENDING_BOOKINGS", club.uid, courtRef, year, dayOfYear, time);
+              if (booked || pending_booked) {
+                console.log("Is Time busy", time);
+                //console.log("This slot is already busy !");
+                is_error = true;
+                is_disabled = true;
+                const mainMessage = `Cette plage horaire est déjà occupée : ${parseDoubleToHourInterval(time)}-${parseDoubleToHourInterval(time + 0.5)} !`;
+                //error_message = `Cette plage horaire est déjà occupée : ${parseDoubleToHourInterval(time)}-${parseDoubleToHourInterval(time + 0.5)} !<br><br>\n\nVeuillez changer de plage horaire !`;
+                error_message = (
+                  <>
+                    {mainMessage}
+                    <br />
+                    Veuillez changer de plage horaire !
+                  </>
+                )
+                break;
+              } else {
+                console.log("Is Time NOT busy", time);
+              }
+              if (time == 24) {
+                time = 0;
+                dayOfYear++;
+              }
+            }
+          }
+          setIsSuccessDialogBooking(!is_disabled && !is_error);
+          setIsDisabled(is_disabled);
+          setIsErrorDialogBooking(is_error);
+          setErrorMessageDialogBooking(error_message);
+
+          setIsEditingDialogBooking(false);
+          console.log("ADDD hours", matchStartDate, matchEndDate);
+
+
+          await updateDoc(bookingRef, {
+            //match_start_date:matchStartDate,
+            //match_finished_date:matchEndDate,
+            //first_booking_time:selectedHour,
+            //last_booking_time:selectedHour + selectedDuration - 0.5,
+            //day_of_year:getDayOfYear(new Date(selectedDate)),
+            //description:selectedDescription,
+            //edit_date:new Date(),
+            //type:selectedType,
+            //year:new Date(new Date(selectedDate)).getFullYear()
+          });
+          bookingSnap = await getDoc(bookingRef);
+          bookingData = getOneBookingCalendar(bookingSnap, selectedBooking.is_pending);
+          //const bookingRef = await getFirestoreSubRef(club.uid, "CLUBS", selectedBooking.uid,selectedBooking.is_pending ? "COURT_PENDING_BOOKINGS" : "COURT_BOOKINGS");
+          if (!is_error) {
+            setIsReseting(true);
+          }
+          setSelectedBooking(bookingData);
+          console.log("WESH", bookingRef.id);
+
+          /*
+          const booked = await isBookedTime(
+            collectionName,
+            club.uid,
+            courtRef,
+            year,
+            getDayOfYear(matchStartDate),
+            selectedHour
+          );
+          */
+          //console.log("booked", booked);
         },  // Ajout de la fonction onClick ici
         //className: "btn-primary",  // Ajout d'une classe CSS
         //type: "button"
@@ -239,8 +413,20 @@ export default function CalendarComponent() {
           }
 
         }}
-        onChange={()=>{
-          //setS
+        onChange={(event) => {
+          const date = event.target.value;
+          /*
+          const selected = new Date(selectedDate);
+          const year = selected.getFullYear();
+          const month = selected.getMonth();
+          const day = selected.getDate();
+          const hour = parseInt(selectedHour);
+          const minutes = selectedHour - parseInt(selectedHour);
+          const matchStartDate = new Date(year, month, day, hour, minutes * 60);
+          const matchEndDate = addHoursToDate(matchStartDate, selectedDuration);
+          */
+          setSelectedDate(event.target.value);
+          //setIsEditingDialogBooking();
         }}
       />}
 
@@ -255,8 +441,21 @@ export default function CalendarComponent() {
         id="demo-simple-select"
         value={selectedHour}
         label="Start hour"
-        //onChange={handleChangeDay}
         sx={{ height: 40, width: '100%', color: 'text.primary' }}
+        onChange={(event) => {
+          const hour = event.target.value;
+          var editing = false;
+          if (selectedBooking) {
+            editing = hour !== selectedBooking.first_booking_time;
+          }
+          setSelectedHour(event.target.value);
+          console.log("time booking", selectedBooking.first_booking_time)
+          setIsChangedDatas(editing);
+          setIsDisabled(false);
+          setIsSuccessDialogBooking(false);
+          setIsErrorDialogBooking(false);
+          setIsWarningDialogBooking(false);
+        }}
       >
         {
           availableHours.sort((a, b) => a.value - b.value).map((hour, index) => {
@@ -272,6 +471,10 @@ export default function CalendarComponent() {
         label="Selet duration"
         //onChange={handleChangeDay}
         sx={{ height: 40, width: '100%', color: 'text.primary' }}
+        onChange={(event) => {
+          setSelectedDuration(event.target.value);
+
+        }}
       >
         {
           DURATIONS.sort((a, b) => a.value - b.value).map((hour, index) => {
@@ -287,6 +490,9 @@ export default function CalendarComponent() {
         label="Select type"
         //onChange={handleChangeDay}
         sx={{ height: 40, width: '100%', color: 'text.primary' }}
+        onChange={(event) => {
+          setSelectedType(event.target.value)
+        }}
       >
         {
           BOOKING_TYPES.map((type, index) => {
@@ -301,7 +507,7 @@ export default function CalendarComponent() {
         minRows={2} maxRows={10}
         sx={{
           width: '100%',
-          
+
           '& .MuiOutlinedInput-root': {
             border: 'none', // Supprime la bordure pour "outlined"
           },
@@ -315,6 +521,9 @@ export default function CalendarComponent() {
               outline: 'none', // Supprime le contour au focus
             },
           },
+        }}
+        onChange={(event) => {
+          setSelectedDescription(event.target.value)
         }}
       />}
 
@@ -388,6 +597,7 @@ export default function CalendarComponent() {
       </Select>}
       componentCalendar={club && <Calendar
         setShowDialogBooking={setShowDialogBooking}
+        setShowDialogReset={setShowDialogReset}
         selectedBooking={selectedBooking}
         setSelectedBooking={setSelectedBooking}
         setAvailableHours={setAvailableHours}
@@ -408,18 +618,30 @@ export default function CalendarComponent() {
         setIsLoading={setIsLoadingDialogBooking}
         //setIsLoadingDialogBooking={}
         courts={allCourts}
-        values={calendarValues}
+      //values={calendarValues}
       />}
       styleDialogEditBooking={{
         style: {
           display: showDialogBooking ? 'flex' : 'none'
         }
       }}
+      styleDialogResetBooking={{
+        style: {
+          display: showDialogReset ? 'flex' : 'none'
+        }
+      }}
+
       closeDialogUpdateBooking={{
         onClick: () => {
           setShowDialogBooking(false);
           setSelectedBooking(null);
           setSelectedTransaction(null);
+
+          setIsChangedDatas(false);
+          setIsDisabled(false);
+          setIsSuccessDialogBooking(false);
+          setIsErrorDialogBooking(false);
+          setIsWarningDialogBooking(false);
           console.log("dialog closed");
         },  // Ajout de la fonction onClick ici
         //className: "btn-primary",  // Ajout d'une classe CSS
@@ -431,7 +653,7 @@ export default function CalendarComponent() {
       </Stack>}
       actionUpdate={{
         onClick: () => {
-          console.log("updated");
+          alert("updated");
           /*
           setSelectedSite((prevState) => {
             //setSelectedSite(-1);

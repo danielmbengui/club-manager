@@ -40,7 +40,10 @@ export function addHoursToDate(date, nHours = 0) {
     return null; // Ou tout autre indication d'une erreur
   }
   const newDate = new Date(date.getTime());
+  const hours = parseInt(nHours);
+  const minutes = nHours - parseInt(nHours);
   newDate.setHours(newDate.getHours() + nHours);
+  //newDate.setMinutes(newDate.getMonth() + nHours);
   return newDate;
 }
 
@@ -80,6 +83,23 @@ export function getDateFromDayOfYear(dayOfYear, year) {
   // Crée une date le 1er janvier de l'année spécifiée
   const date = new Date(year, 0, dayOfYear);
   return date;
+}
+
+export function getDayOfYear(date) {
+  if (!(date instanceof Date)) {
+    throw new Error("Le paramètre doit être un objet Date.");
+  }
+
+  // Crée une date pour le 1er janvier de la même année
+  const startOfYear = new Date(date.getFullYear(), 0, 1);
+
+  // Calcule la différence en millisecondes entre la date et le 1er janvier
+  const diffInMs = date - startOfYear;
+
+  // Convertit la différence en jours
+  const dayOfYear = Math.floor(diffInMs / (1000 * 60 * 60 * 24)) + 1; // +1 car le 1er janvier = jour 1
+
+  return dayOfYear;
 }
 
 /**
@@ -123,6 +143,20 @@ export function getFirstAndLastDayOfWeek(year, weekNumber) {
     firstDay: firstDayOfWeek,
     lastDay: lastDayOfWeek,
   };
+}
+export function getStartAndEndOfDay(year, dayOfYear) {
+  // Créer une date au 1er janvier de l'année spécifiée
+  const startOfYear = new Date(year, 0, 1); // Mois = 0 car janvier est le mois 0 en JS
+
+  // Ajouter le nombre de jours pour obtenir le jour de l'année spécifié
+  const startOfDay = new Date(startOfYear);
+  startOfDay.setDate(startOfYear.getDate() + dayOfYear - 1);
+
+  // Créer une date pour la fin de la journée (23h59)
+  const endOfDay = new Date(startOfDay);
+  endOfDay.setHours(23, 59, 59, 999); // 23h59m59s999ms
+
+  return { startOfDay, endOfDay };
 }
 
 export function removeMinutesToDate(date, nMinutes = 0) {

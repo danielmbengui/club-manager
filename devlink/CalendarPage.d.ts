@@ -54,7 +54,6 @@ declare function CalendarPage(props: {
   isLoadingUpdateBooking?: Types.Visibility.VisibilityConditions;
   isNotLoadingUpdateBooking?: Types.Visibility.VisibilityConditions;
   componentProgressUpdateBooking?: Types.Devlink.Slot;
-  sEditing?: Types.Visibility.VisibilityConditions;
   isError?: Types.Visibility.VisibilityConditions;
   isSuccess?: Types.Visibility.VisibilityConditions;
   errorMessage?: React.ReactNode;
@@ -71,4 +70,13 @@ declare function CalendarPage(props: {
   selectTypeBooking?: Types.Devlink.Slot;
   textFieldDescription?: Types.Devlink.Slot;
   selectDuration?: Types.Devlink.Slot;
+  isEditing?: Types.Visibility.VisibilityConditions;
+  isDifferentDatas?: Types.Visibility.VisibilityConditions;
+  isDisabled?: Types.Visibility.VisibilityConditions;
+  isNotDisabled?: Types.Visibility.VisibilityConditions;
+  isReseting?: Types.Visibility.VisibilityConditions;
+  openResetingDialog?: Types.Devlink.RuntimeProps;
+  styleDialogResetBooking?: Types.Devlink.RuntimeProps;
+  closeResetingDialog?: Types.Devlink.RuntimeProps;
+  isLoadingReset?: Types.Visibility.VisibilityConditions;
 }): React.JSX.Element;

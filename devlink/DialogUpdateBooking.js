@@ -59,6 +59,10 @@ export function DialogUpdateBooking({
   selectTypeBooking,
   textFieldDescription,
   selectDuration,
+  isDifferentDatas = true,
+  isDisabled = true,
+  isNotDisabled = true,
+  openResetingDialog,
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -351,22 +355,25 @@ export function DialogUpdateBooking({
                         </_Builtin.Block>
                       </_Builtin.Block>
                     ) : null}
-                    {isEditing ? (
+                    {isDifferentDatas ? (
                       <_Builtin.Block
                         className="button-group court_form"
                         id="w-node-_75733d3e-bf53-ca85-3710-80bf23b3bb76-e1888206"
                         tag="div"
                       >
                         <ButtonDisabled
-                          isWarning={isWarning}
+                          isWarning={isDisabled}
                           text="Enregistrer"
                         />
                         <ButtonPrimary
                           action={update}
-                          isNotWarning={isNotWarning}
+                          isNotWarning={isNotDisabled}
                           text="Enregistrer"
                         />
-                        <ButtonRed action={actionReset} text="Réinitialiser" />
+                        <ButtonRed
+                          action={openResetingDialog}
+                          text="Réinitialiser"
+                        />
                       </_Builtin.Block>
                     ) : null}
                   </_Builtin.FormForm>

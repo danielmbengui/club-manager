@@ -4023,6 +4023,10 @@ figcaption {
   }
 }
 
+.page-wrapper.devlink {
+  position: relative;
+}
+
 .fs-styleguide_label {
   display: flex;
   padding: 0.25rem 0.75rem 0.3rem;
@@ -7955,7 +7959,7 @@ figcaption {
 }
 
 .booking_update_modal_component.devlink {
-  z-index: 1001;
+  z-index: 998;
 
   display: flex;
   width: 100%;
@@ -8100,6 +8104,15 @@ figcaption {
   }
 }
 
+.booking_delete_modal_component.devlink {
+  display: none;
+}
+
+.booking_delete_modal_component.devlink.reset {
+  z-index: 1000;
+  display: none;
+}
+
 .booking_delete_content-wrapper {
   position: relative;
   z-index: 100;
@@ -8164,6 +8177,10 @@ figcaption {
   color: var(--\<unknown\|relume-variable-color-neutral-2\>);
 }
 
+.booking_delete_close-button.devlink {
+  cursor: pointer;
+}
+
 .booking_delete_background-overlay {
   position: absolute;
   left: 0%;
@@ -8177,6 +8194,10 @@ figcaption {
   height: 100%;
 
   background-color: hsla(0, 0.00%, 0.00%, 0.25);
+}
+
+.booking_delete_background-overlay.devlink.reset-booking {
+  cursor: not-allowed;
 }
 
 .price_delete_modal_component {
@@ -10121,6 +10142,10 @@ figcaption {
 
 .container-update-booking.devlink {
   background-color: var(--error);
+}
+
+.div-block-53 {
+  position: relative;
 }
 
 

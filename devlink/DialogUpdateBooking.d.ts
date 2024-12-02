@@ -49,4 +49,8 @@ declare function DialogUpdateBooking(props: {
   selectTypeBooking?: Types.Devlink.Slot;
   textFieldDescription?: Types.Devlink.Slot;
   selectDuration?: Types.Devlink.Slot;
+  isDifferentDatas?: Types.Visibility.VisibilityConditions;
+  isDisabled?: Types.Visibility.VisibilityConditions;
+  isNotDisabled?: Types.Visibility.VisibilityConditions;
+  openResetingDialog?: Types.Devlink.RuntimeProps;
 }): React.JSX.Element;
