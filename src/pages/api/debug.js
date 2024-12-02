@@ -1,7 +1,7 @@
 export default function handler(req, res) {
     res.status(200).json({
-      apiKey: process.env.NEXT_PUBLIC_API_FIREBASE,
-      projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-      secretKey: process.env.GCP_PRIVATE_KEY ? 'Loaded' : 'Missing',
+      apiKey: process.env.GCP_PRIVATE_KEY,
+      projectId: process.env.GCP_CLIENT_EMAIL,
+      secretKey: process.env.GCP_PROJECT_ID ? 'Loaded' : 'Missing',
     });
   }
