@@ -21,10 +21,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { frFR } from '@mui/x-date-pickers/locales';
-import { getValue } from "firebase/remote-config";
-import { createSmartPadelBooking, deleteSmartPadelBooking, getSmartPadelApiKey, getSmartPadelBooking } from '@/functions/smartpadel';
-import DialogDeleteBookingCalendar from '@/components/calendar/DialogDeleteBookingCalendar';
-//import { SecretManagerServiceClient } from '@google-cloud/secret-manager';
+
 // Importation dynamique pour éviter les problèmes de SSR (Server-Side Rendering)
 const Calendar = dynamic(() => import("@/components/Calendar"), { ssr: false });
 const SITES = [];
@@ -174,17 +171,6 @@ export default function CalendarComponent({ remoteConfig }) {
       async function start() {
         await initSites(club.uid);
         await initCourts(club.uid, selectedSite);
-        const courtData = await getFirestoreSubData(club.uid, "CLUBS", "1z75sPYrBFrAFrkAZH5K", "COURTS");
-        const bookingData = {
-          uid: "DAN_TEEEST",
-          access_code: "1220",
-          match_start_date: new Date(2024, 11, 31, 15),
-          match_finished_date: new Date(2024, 11, 31, 20, 30)
-        };
-        //const resp = await createSmartPadelBooking(club, courtData, bookingData);
-        //const resp = await getSmartPadelBooking(club, courtData, bookingData);
-        //const resp = await deleteSmartPadelBooking(club, courtData, bookingData);
-        //alert(resp);
       }
       start();
     }

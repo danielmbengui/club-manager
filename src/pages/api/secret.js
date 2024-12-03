@@ -17,14 +17,19 @@ export default async function handler(req, res) {
 
   try {
     const secretName = 'VLSJINHIeATv4nVi7O4Y'; // Remplacez par votre nom de secret
-    const version = '27';
-    const name = `projects/${process.env.GCP_PROJECT_ID}/secrets/${secretName}/versions/${version}`;
+    const version = 'latest';
+    const name = `projects/${process.env.SECRET_MANAGER_PROJECT_ID}/secrets/${secretName}/versions/${version}`;
     
     const [accessResponse] = await client.accessSecretVersion({ name });
     const secretValue = accessResponse.payload.data.toString('utf8');
     const values = JSON.parse(secretValue);
-    const clubUid = values.clubUid;
-    res.status(200).json({ clubUid: clubUid});
+    const {clubName,qr_code_provider_list,payment_provider_list} = values;
+    //const qr_code_provider_list = credentials.data.qr_code_provider_list;
+      const result = qr_code_provider_list.find(item => item.name === provider);
+      const apiKeys = result.apiKeys;
+      const createUrl = result.createUrl;
+      const apiKey = apiKeys.find((item) => courtUid in item);
+    res.status(200).json({apiKey:apiKey[courtUid], createUrl});
   } catch (error) {
     console.error('Erreur lors de la récupération du secret :', error);
     res.status(500).json({ error: 'Erreur lors de la récupération du secret' });
