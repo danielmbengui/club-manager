@@ -13,6 +13,10 @@ export default function App({ Component, pageProps }) {
   //const { theme } = useTheme(); // Récupérer le thème clair/sombre
   //const muiTheme = getMuiTheme('light'); // Générer le thème MUI basé sur vos variables CSS
   return (<ThemeProvider>
-         <DevLinkProvider><AuthProvider><Component {...pageProps} /></AuthProvider></DevLinkProvider>
+    <DevLinkProvider>
+      <AuthProvider>
+        <Component remoteConfig={remoteConfig} {...pageProps} />
+      </AuthProvider>
+    </DevLinkProvider>
   </ThemeProvider>);
 }
