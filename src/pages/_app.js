@@ -1,15 +1,15 @@
-import "@/devlink/global.css";
-import "@/src/styles/globals.css";
-import "@/src/styles/calendar.css";
+import React, { useEffect, useState } from "react";
 import { DevLinkProvider } from "@/devlink/devlinkContext";
 import { AuthProvider } from "@/providers/AuthProvider";
 import { ThemeProvider, useTheme } from "@/contexts/ThemeProvider";
-import { useEffect, useState } from "react";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 //import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 //import { getMuiTheme } from "@/contexts/MuiTheme";
 import { getRemoteConfig, fetchAndActivate } from "firebase/remote-config";
 import { app } from "@/firebase";
-
+import "@/devlink/global.css";
+import "@/src/styles/globals.css";
+import "@/src/styles/calendar.css";
 
 export default function App({ Component, pageProps }) {
   const [remoteConfig, setRemoteConfig] = useState(null);
@@ -55,15 +55,17 @@ export default function App({ Component, pageProps }) {
         console.error("Erreur lors de l'activation du Remote Config :", error);
         setRemoteConfig(null);
       });
-   
+
   }, [])
   //const { theme } = useTheme(); // Récupérer le thème clair/sombre
   //const muiTheme = getMuiTheme('light'); // Générer le thème MUI basé sur vos variables CSS
-  return (<ThemeProvider>
-    <DevLinkProvider>
-      <AuthProvider>
-        <Component remoteConfig={remoteConfig} {...pageProps} />
-      </AuthProvider>
-    </DevLinkProvider>
-  </ThemeProvider>);
+  return (<SpeedInsights>
+    <ThemeProvider>
+      <DevLinkProvider>
+        <AuthProvider>
+          <Component remoteConfig={remoteConfig} {...pageProps} />
+        </AuthProvider>
+      </DevLinkProvider>
+    </ThemeProvider>
+  </SpeedInsights>);
 }

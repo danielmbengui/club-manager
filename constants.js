@@ -20,4 +20,5 @@ export const LINK_PAGE_BILLING = "/billing";
 export const LINK_PAGE_CLUB = "/club";
 export const LINK_PAGE_SETTINGS = "/settings";
 
-export const LINK_API_QR_PROVIDER = "/api/keys/qr_provider"
+export const LINK_API_QR_PROVIDER = "/api/keys/qr_provider";
+export const LINK_API_SMART_PADEL_CREATE_BOOKING= "/api/smartpadel/create";

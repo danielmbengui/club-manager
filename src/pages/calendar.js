@@ -65,8 +65,6 @@ export default function CalendarComponent({ remoteConfig }) {
   const [isWarningDialogBooking, setIsWarningDialogBooking] = useState(false);
   const [isResetingDialogBooking, setIsResetingDialogBooking] = useState(false);
 
-
-
   const [allSites, setAllSites] = useState([{ value: 0, name: "Tous" }]);
   const [selectedSite, setSelectedSite] = useState(0);
   const [allCourts, setAllCourts] = useState([{ value: 0, name: "Tous" }]);
@@ -172,7 +170,6 @@ export default function CalendarComponent({ remoteConfig }) {
     }
   }, [remoteConfig])
   useEffect(() => {
-
     if (club) {
       setClubName(club.name);
       setClubLogo(club.logo);
@@ -180,8 +177,14 @@ export default function CalendarComponent({ remoteConfig }) {
       async function start() {
         await initSites(club.uid);
         await initCourts(club.uid, selectedSite);
-        const resp = await createSmartPadelBooking(club.uid, "1z75sPYrBFrAFrkAZH5K", club.qr_code_provider);
-        //alert(resp);
+        const courtData = await getFirestoreSubData(club.uid, "CLUBS", "1z75sPYrBFrAFrkAZH5K", "COURTS");
+        const bookingData = {
+          uid:"DAN_TEEEST",
+          access_code:"1220",
+          match_start_date:new Date(2024,11,31,15),
+          match_finished_date:new Date(2024,11,31,20,30)};
+          //const resp = await createSmartPadelBooking(club, courtData, bookingData);
+          //alert(resp);
       }
       start();
     }
