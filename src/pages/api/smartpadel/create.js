@@ -1,5 +1,5 @@
 import axios from 'axios';
-const LINK_API_QR_PROVIDER = "http://localhost:3000/api/keys/qr_provider"
+const LINK_API_QR_PROVIDER = `${process.env.NEXT_PUBLIC_WEBSITE_LINK}/api/keys/qr_provider`;
 
 const getSmartPadelApiKey = async (clubUid, courtUid, provider) => {
     try {

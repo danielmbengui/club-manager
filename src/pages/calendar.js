@@ -183,7 +183,7 @@ export default function CalendarComponent({ remoteConfig }) {
           access_code:"1220",
           match_start_date:new Date(2024,11,31,15),
           match_finished_date:new Date(2024,11,31,20,30)};
-          //const resp = await createSmartPadelBooking(club, courtData, bookingData);
+          const resp = await createSmartPadelBooking(club, courtData, bookingData);
           //alert(resp);
       }
       start();
