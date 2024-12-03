@@ -49,6 +49,7 @@ export default async function handler(req, res) {
     try {
         // Récupérer les données et l'URL de la requête
         //const clubUid = "VLSJINHIeATv4nVi7O4Y";
+        console.log(LINK_API_QR_PROVIDER);
         const clubUid = req.body.clubUid;
         const courtUid = req.body.courtUid;
         const provider = req.body.provider;
