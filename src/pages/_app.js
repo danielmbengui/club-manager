@@ -4,6 +4,7 @@ import "@/src/styles/calendar.css";
 import { DevLinkProvider } from "@/devlink";
 import { AuthProvider } from "@/providers/AuthProvider";
 import { ThemeProvider, useTheme } from "@/contexts/ThemeProvider";
+import { useEffect, useState } from "react";
 //import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 //import { getMuiTheme } from "@/contexts/MuiTheme";
 
@@ -12,11 +13,13 @@ import { ThemeProvider, useTheme } from "@/contexts/ThemeProvider";
 export default function App({ Component, pageProps }) {
   //const { theme } = useTheme(); // Récupérer le thème clair/sombre
   //const muiTheme = getMuiTheme('light'); // Générer le thème MUI basé sur vos variables CSS
-  return (<ThemeProvider>
-    <DevLinkProvider>
-      <AuthProvider>
-        <Component remoteConfig={remoteConfig} {...pageProps} />
-      </AuthProvider>
-    </DevLinkProvider>
-  </ThemeProvider>);
+  return (<SpeedInsights>
+    <ThemeProvider>
+      <DevLinkProvider>
+        <AuthProvider>
+          <Component remoteConfig={remoteConfig} {...pageProps} />
+        </AuthProvider>
+      </DevLinkProvider>
+    </ThemeProvider>
+  </SpeedInsights>);
 }
