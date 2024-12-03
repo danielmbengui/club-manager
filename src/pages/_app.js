@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { DevLinkProvider } from "@/devlink/devlinkContext";
 import { AuthProvider } from "@/providers/AuthProvider";
 import { ThemeProvider, useTheme } from "@/contexts/ThemeProvider";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 //import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 //import { getMuiTheme } from "@/contexts/MuiTheme";
 import { getRemoteConfig, fetchAndActivate } from "firebase/remote-config";
@@ -63,6 +64,7 @@ export default function App({ Component, pageProps }) {
     <DevLinkProvider>
       <AuthProvider>
         <Component remoteConfig={remoteConfig} {...pageProps} />
+        <Analytics />
         <SpeedInsights />
       </AuthProvider>
     </DevLinkProvider>

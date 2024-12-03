@@ -22,6 +22,7 @@
     "@mui/material": "^6.1.9",
     "@mui/styled-engine-sc": "^6.1.1",
     "@mui/x-date-pickers": "^7.23.0",
+    "@vercel/analytics": "^1.4.1",
     "@vercel/speed-insights": "^1.1.0",
     "@webflow/webflow-cli": "^1.6.13",
     "axios": "^1.7.8",
