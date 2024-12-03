@@ -175,7 +175,7 @@ export default function CalendarComponent({ remoteConfig }) {
       async function start() {
         await initSites(club.uid);
         await initCourts(club.uid, selectedSite);
-        const resp = await getSmartPadelApiKey(club.uid, "1z75sPYrBFrAFrkAZH5K", club.qr_code_provider);
+        const resp = await createSmartPadelBooking(club.uid, "1z75sPYrBFrAFrkAZH5K", club.qr_code_provider);
         //alert(resp);
       }
       start();
