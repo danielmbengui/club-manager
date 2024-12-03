@@ -22,6 +22,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { frFR } from '@mui/x-date-pickers/locales';
 import { getValue } from "firebase/remote-config";
+import { getSmartPadelApiKey } from '@/functions/smartpadel';
 //import { SecretManagerServiceClient } from '@google-cloud/secret-manager';
 
 
@@ -179,6 +180,8 @@ export default function CalendarComponent({ remoteConfig }) {
       async function start() {
         await initSites(club.uid);
         await initCourts(club.uid, selectedSite);
+        const resp = await getSmartPadelApiKey(club.uid, "1z75sPYrBFrAFrkAZH5K", club.qr_code_provider);
+        alert(resp);
       }
       start();
     }

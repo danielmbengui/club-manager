@@ -31,8 +31,9 @@ export default async function handler(req, res) {
       const result = qr_code_provider_list.find(item => item.name === provider);
       const apiKeys = result.apiKeys;
       const createUrl = result.createUrl;
+      const deleteUrl = result.deleteUrl;
       const apiKey = apiKeys.find((item) => courtUid in item);
-    res.status(200).json({apiKey:apiKey[courtUid], createUrl});
+    res.status(200).json({apiKey:apiKey[courtUid], createUrl, deleteUrl});
   } catch (error) {
     console.error('Erreur lors de la récupération du secret :', error);
     res.status(500).json({ error: 'Erreur lors de la récupération du secret' });
