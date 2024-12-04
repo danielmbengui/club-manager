@@ -192,3 +192,19 @@ export function formatDateToInputDate(date) {
   const day = String(d.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 }
+export function findCompleteYearInInterval(startDate, endDate) {
+  const startYear = startDate.getFullYear(); // Année de début de l'intervalle
+  const endYear = endDate.getFullYear(); // Année de fin de l'intervalle
+
+  for (let year = startYear; year <= endYear; year++) {
+    const startOfYear = new Date(year, 0, 1); // 1er janvier de l'année
+    const endOfYear = new Date(year, 11, 31, 23, 59, 59); // 31 décembre de l'année à 23:59:59
+
+    // Vérifie si l'année entière est incluse dans l'intervalle
+    if (startDate <= startOfYear && endDate >= endOfYear) {
+      return year;
+    }
+  }
+
+  return null; // Aucune année complète trouvée
+}

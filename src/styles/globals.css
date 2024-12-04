@@ -56,6 +56,7 @@
   --text-darkmode: black;
   --card: #2bff00;
   --color--light-card: var(--card-light-darkmode);
+  --success:#3ce0a2;
 }
 
 @media (prefers-color-scheme: dark) {

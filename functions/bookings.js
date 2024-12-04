@@ -144,7 +144,7 @@ export async function getBookingListDashboard(querySnapshotBooking, is_from_app 
         }
     }
     */
-    console.log("second condition");
+    // console.log("second condition");
     return querySnapshotBooking.docs
         .map((bookingDoc) => {
             const { uid, user_info, transaction_ref, type, description, access_code, created_date, first_booking_time, last_booking_time, amount_paid, match_start_date, match_finished_date, club_ref, site_name, court_name, site_ref, court_ref, is_from_app: appFlag } = bookingDoc.data();
@@ -525,7 +525,6 @@ export function getTypeBookingStr(type, lang = "fr") {
     }
     return "Inconnu";
 }
-
 export async function isBookedTime(
     bookingId,
     collectionName,
@@ -536,7 +535,7 @@ export async function isBookedTime(
     time = 0
 ) {
     // Calculer le début et la fin du jour
-   // console.log("start function")
+    // console.log("start function")
     const { startOfDay, endOfDay } = getStartAndEndOfDay(year, dayOfYear);
 
     // Construire une requête pour les réservations du jour
@@ -573,7 +572,7 @@ export async function isBookedTime(
         //const start_date = addHoursToDate(startDate, jetlag);
         //const end_date = addHoursToDate(endDate, jetlag);
         const start_date = startDate;
-        const end_date =endDate;
+        const end_date = endDate;
 
         // Calculer les heures de début et de fin
         const hourStart = start_date.getHours();
@@ -583,7 +582,7 @@ export async function isBookedTime(
         const hourEnd = end_date.getHours();
         const minutesEnd = end_date.getMinutes();
         const bookingTimeValueEnd = hourEnd + minutesEnd / 60;
-       // console.log("WAAAAA", collectionName=="COURT_PENDING_BOOKINGS"?"pending":"confirmed" , booking.uid, start_date, time)
+        // console.log("WAAAAA", collectionName=="COURT_PENDING_BOOKINGS"?"pending":"confirmed" , booking.uid, start_date, time)
         // Vérifier si le temps demandé est dans la plage
         if (booking.uid != bookingId && time >= bookingTimeValueStart && time < bookingTimeValueEnd) {
             return true;

@@ -53,4 +53,5 @@ declare function DialogUpdateBooking(props: {
   isDisabled?: Types.Visibility.VisibilityConditions;
   isNotDisabled?: Types.Visibility.VisibilityConditions;
   openResetingDialog?: Types.Devlink.RuntimeProps;
+  openDialogDelete?: Types.Devlink.RuntimeProps;
 }): React.JSX.Element;

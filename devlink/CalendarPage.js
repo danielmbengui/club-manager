@@ -111,6 +111,13 @@ export function CalendarPage({
   styleDialogResetBooking = {},
   closeResetingDialog = {},
   isLoadingReset = true,
+  isDeleting = true,
+  isSuccessDeleting = true,
+  deleteBooking,
+  styleDialogDelete = {},
+  closeDialogDelete = {},
+  openDialogDelete = {},
+  isErrorDeleting = true,
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -168,6 +175,7 @@ export function CalendarPage({
         isDisabled={isDisabled}
         isNotDisabled={isNotDisabled}
         openResetingDialog={openResetingDialog}
+        openDialogDelete={openDialogDelete}
       />
       <DialogResetBooking
         actionReset={actionResetDialogUpdate}
@@ -176,7 +184,15 @@ export function CalendarPage({
         isLoading={isLoadingReset}
         componentProgress={componentProgress}
       />
-      <DialogDeleteBooking />
+      <DialogDeleteBooking
+        isDeleting={isDeleting}
+        isSuccessDeleting={isSuccessDeleting}
+        deleteBooking={deleteBooking}
+        componentProgress={componentProgress}
+        styleDialogDelete={styleDialogDelete}
+        close={closeDialogDelete}
+        isErrorDeleting={isErrorDeleting}
+      />
       <_Builtin.Block className="main-wrapper" tag="main">
         <_Builtin.Block className="page-wrapper div-block-53" tag="div">
           <_Builtin.HtmlEmbed

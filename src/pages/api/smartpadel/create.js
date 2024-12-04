@@ -1,44 +1,5 @@
 import axios from 'axios';
-const LINK_API_QR_PROVIDER = `${process.env.NEXT_PUBLIC_WEBSITE_LINK}/api/keys/qr_provider`;
-
-const getSmartPadelApiKey = async (clubUid, courtUid, provider) => {
-    try {
-        const response = await axios.get(LINK_API_QR_PROVIDER, {
-            params: {
-                provider,
-                courtUid,
-                clubUid,
-                //provider:'smartpadel',
-                //courtUid:'1z75sPYrBFrAFrkAZH5K',
-                //clubUid:'VLSJINHIeATv4nVi7O4Y',
-
-            }, // Paramètres GET
-        });
-        return response.data.apiKey;
-    } catch (err) {
-        console.error('Erreur lors de l\'appel de l\'API :', err);
-        return null;
-    }
-};
-const getSmartPadelCreateUrl = async (clubUid, courtUid, provider) => {
-    try {
-        const response = await axios.get(LINK_API_QR_PROVIDER, {
-            params: {
-                provider,
-                courtUid,
-                clubUid,
-                //provider:'smartpadel',
-                //courtUid:'1z75sPYrBFrAFrkAZH5K',
-                //clubUid:'VLSJINHIeATv4nVi7O4Y',
-
-            }, // Paramètres GET
-        });
-        return response.data.createUrl;
-    } catch (err) {
-        console.error('Erreur lors de l\'appel de l\'API :', err);
-        return null;
-    }
-};
+import { getSmartPadelApiKey, getSmartPadelCreateUrl } from './functions';
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
@@ -47,9 +8,6 @@ export default async function handler(req, res) {
     }
 
     try {
-        // Récupérer les données et l'URL de la requête
-        //const clubUid = "VLSJINHIeATv4nVi7O4Y";
-        console.log(LINK_API_QR_PROVIDER);
         const clubUid = req.body.clubUid;
         const courtUid = req.body.courtUid;
         const provider = req.body.provider;
@@ -108,8 +66,11 @@ export default async function handler(req, res) {
                 },
             }
         );
-        res.status(response.status).json(response.data);
-        res.status(200).json(req.body);
+        var isError = false;
+        if(response.status !== 200) {
+            isError = true;
+        }
+        res.status(response.status).json({is_error:isError,data:response.data});
     } catch (error) {
         console.error('Erreur proxy :', error.message);
         res.status(error.response?.status || 500).json({

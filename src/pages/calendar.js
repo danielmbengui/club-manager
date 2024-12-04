@@ -22,7 +22,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { frFR } from '@mui/x-date-pickers/locales';
 import { getValue } from "firebase/remote-config";
-import { createSmartPadelBooking, getSmartPadelApiKey } from '@/functions/smartpadel';
+import { createSmartPadelBooking, deleteSmartPadelBooking, getSmartPadelApiKey, getSmartPadelBooking } from '@/functions/smartpadel';
 //import { SecretManagerServiceClient } from '@google-cloud/secret-manager';
 
 
@@ -82,6 +82,8 @@ export default function CalendarComponent({ remoteConfig }) {
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [showDialogBooking, setShowDialogBooking] = useState(false);
   const [showDialogReset, setShowDialogReset] = useState(false);
+  
+  const [showDialogDelete, setShowDialogDelete] = useState(false);
 
 
   //const [countPendingBookings, setCountPendingBookings] = useState(0);
@@ -179,12 +181,15 @@ export default function CalendarComponent({ remoteConfig }) {
         await initCourts(club.uid, selectedSite);
         const courtData = await getFirestoreSubData(club.uid, "CLUBS", "1z75sPYrBFrAFrkAZH5K", "COURTS");
         const bookingData = {
-          uid:"DAN_TEEEST",
-          access_code:"1220",
-          match_start_date:new Date(2024,11,31,15),
-          match_finished_date:new Date(2024,11,31,20,30)};
-          //const resp = await createSmartPadelBooking(club, courtData, bookingData);
-          //alert(resp);
+          uid: "DAN_TEEEST",
+          access_code: "1220",
+          match_start_date: new Date(2024, 11, 31, 15),
+          match_finished_date: new Date(2024, 11, 31, 20, 30)
+        };
+        //const resp = await createSmartPadelBooking(club, courtData, bookingData);
+        //const resp = await getSmartPadelBooking(club, courtData, bookingData);
+        //const resp = await deleteSmartPadelBooking(club, courtData, bookingData);
+        //alert(resp);
       }
       start();
     }
@@ -257,6 +262,38 @@ export default function CalendarComponent({ remoteConfig }) {
       isNotWarning={true}
       //warningMessage={""}
       isLoadingReset={isResetingDialogBooking}
+
+      isSuccessDeleting={true}
+      isDeleting={true}
+      deleteBooking={{
+        onClick: async () => {
+          alert("delete booking");
+          //setShowDialogReset(true);
+          // Ajout de la fonction onClick ici
+        },
+      }}
+      styleDialogDelete={{
+        style: {
+          display: showDialogDelete ? 'flex' : 'none'
+        }
+      }}
+      closeDialogDelete={{
+        onClick: async () => {
+          //alert("delete booking");
+          setShowDialogDelete(false);
+          //setShowDialogReset(true);
+          // Ajout de la fonction onClick ici
+        },
+      }}
+      openDialogDelete={{
+        onClick: async () => {
+          //alert("delete booking");
+          setShowDialogDelete(true);
+          //setShowDialogReset(true);
+          // Ajout de la fonction onClick ici
+        },
+      }}
+      
       openResetingDialog={{
         onClick: async () => {
           //alert("open dialog RESET");
@@ -368,7 +405,6 @@ export default function CalendarComponent({ remoteConfig }) {
 
           setIsEditingDialogBooking(false);
           console.log("ADDD hours", matchStartDate, matchEndDate);
-
 
           await updateDoc(bookingRef, {
             match_start_date: matchStartDate,

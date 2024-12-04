@@ -8,7 +8,7 @@ import { collection, doc, getDoc, getDocs, query, where } from "firebase/firesto
 import { getFirstAndLastDayOfDay, getFirstAndLastDayOfMonth, getFirstAndLastDayOfYear, parseDoubleToHourInterval } from "@/functions";
 import { firestore } from "@/firebase";
 import { getBookingListCalendar, getOneBookingCalendar, getTypeBookingJson } from "@/functions/bookings";
-import { formatDateToInputDate, getFirstAndLastDayOfWeek, getWeek, removeMinutesToDate } from "@/functions/manage-time";
+import { findCompleteYearInInterval, formatDateToInputDate, getFirstAndLastDayOfWeek, getWeek, removeMinutesToDate } from "@/functions/manage-time";
 import { LastPage } from "@mui/icons-material";
 //import listPlugin from "@fullcalendar/list";
 import * as _interactions from "@/devlink/interactions";
@@ -282,8 +282,8 @@ const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialog
             setSelectedBooking(bookingData);
             const courtData = await getFirestoreSubData(clubUid, "CLUBS", bookingData.court_uid, "COURTS");
             const hours = createArrayDurationCourt(courtData);
-            const startHour = bookingData.match_start_date_D.getHours() + (bookingData.match_start_date_D.getMinutes()>0 ? bookingData.match_start_date_D.getMinutes / 60 : 0);
-            const endHour = bookingData.match_finished_date_D.getHours() + (bookingData.match_finished_date_D.getMinutes()>0 ? bookingData.match_finished_date_D.getMinutes / 60 : 0);
+            const startHour = bookingData.match_start_date_D.getHours() + (bookingData.match_start_date_D.getMinutes()>0 ? bookingData.match_start_date_D.getMinutes() / 60 : 0);
+            const endHour = bookingData.match_finished_date_D.getHours() + (bookingData.match_finished_date_D.getMinutes()>0 ? bookingData.match_finished_date_D.getMinutes() / 60 : 0);
             setAvailableHours(hours);
             setSelectedDate(formatDateToInputDate(bookingData.match_start_date_D));
             setSelectedHour(startHour);
@@ -325,7 +325,8 @@ const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialog
 
     const handleDatesSet = (info) => {
         // Récupérez les nouvelles dates de la vue
-        const startDate = new Date(info.startStr); // Début de la période visible (format ISO)
+        console.log(info);
+        var startDate = new Date(info.startStr); // Début de la période visible (format ISO)
         const endDate = removeMinutesToDate(new Date(info.endStr), 1); // Fin de la période visible (format ISO)
         const currentView = info.view.type; // Vue actuelle (ex : 'resourceTimeGridDay')
         var { firstDay, lastDay } = {};
@@ -358,10 +359,13 @@ const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialog
             setDay(0);
             setWeek(0);
             setMonth(0);
-            setYear(startDate.getFullYear());
+            const year = findCompleteYearInInterval(startDate, endDate);
+            //const startDayYear = findCompleteYearInInterval(startDate, endDate);
+            //const endDayYear = findCompleteYearInInterval(startDate, endDate);
+            setYear(year);
             //setYear(0);
-            firstDay = getFirstAndLastDayOfYear(startDate.getFullYear()).firstDay;
-            lastDay = getFirstAndLastDayOfYear(endDate.getFullYear()).lastDay;
+            firstDay = getFirstAndLastDayOfYear(year).firstDay;
+            lastDay = getFirstAndLastDayOfYear(year).lastDay;
             setInitialView("resourceTimeGridDay");
         } else {
             setDay(startDate.getDate());
@@ -378,7 +382,7 @@ const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialog
         //setYear(startDate.getFullYear());
         setFirstDay(firstDay);
         setLastDay(lastDay);
-        console.log(`Nouvelle période : ${new Date(startDate)} - ${endDate}`);
+        console.log(`Nouvelle période : ${firstDay} - ${lastDay}`);
         console.log(`Vue actuelle : ${currentView}`);
 
         // Vous pouvez ici recharger les événements pour cette période
@@ -386,7 +390,7 @@ const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialog
     };
 
     return (
-        <div style={{ margin: "20px" }}>
+        <div style={{ margin: "0px" }}>
             <FullCalendar
                 ref={calendarRef}
                 plugins={[resourceTimeGridPlugin, interactionPlugin, dayGridPlugin]}

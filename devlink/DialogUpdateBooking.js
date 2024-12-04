@@ -63,12 +63,14 @@ export function DialogUpdateBooking({
   isDisabled = true,
   isNotDisabled = true,
   openResetingDialog,
+  openDialogDelete = {},
 }) {
   _interactions.useInteractions(_interactionsData);
 
   return (
     <_Component
       className="booking_update_modal_component devlink"
+      data-w-id="d9cf1a34-cc1b-8ef7-ccee-e251e1888206"
       tag="div"
       {...styleDialogEditBooking}
     >
@@ -128,6 +130,7 @@ export function DialogUpdateBooking({
                 data-w-id="d9cf1a34-cc1b-8ef7-ccee-e251e1888211"
                 tag="div"
                 wized="delete_buttons"
+                {...openDialogDelete}
               >
                 <_Builtin.HtmlEmbed
                   className="icon-1x1-small"

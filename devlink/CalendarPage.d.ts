@@ -79,4 +79,11 @@ declare function CalendarPage(props: {
   styleDialogResetBooking?: Types.Devlink.RuntimeProps;
   closeResetingDialog?: Types.Devlink.RuntimeProps;
   isLoadingReset?: Types.Visibility.VisibilityConditions;
+  isDeleting?: Types.Visibility.VisibilityConditions;
+  isSuccessDeleting?: Types.Visibility.VisibilityConditions;
+  deleteBooking?: Types.Devlink.RuntimeProps;
+  styleDialogDelete?: Types.Devlink.RuntimeProps;
+  closeDialogDelete?: Types.Devlink.RuntimeProps;
+  openDialogDelete?: Types.Devlink.RuntimeProps;
+  isErrorDeleting?: Types.Visibility.VisibilityConditions;
 }): React.JSX.Element;
