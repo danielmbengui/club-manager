@@ -118,9 +118,12 @@ export function CalendarPage({
   closeDialogDelete = {},
   openDialogDelete = {},
   isErrorDeleting = true,
+<<<<<<< HEAD
   messageErrorDeleting = "Une erreur est survenue !",
   showButtonsDialogDelete = true,
   closeAllDialogs,
+=======
+>>>>>>> bb43e94 (add dialog delete booking)
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -188,6 +191,7 @@ export function CalendarPage({
         isLoading={isLoadingReset}
         componentProgress={componentProgress}
       />
+      <DialogDeleteBooking />
       <_Builtin.Block className="main-wrapper" tag="main">
         <_Builtin.Block className="page-wrapper div-block-53" tag="div">
           <_Builtin.HtmlEmbed

@@ -22,6 +22,10 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { frFR } from '@mui/x-date-pickers/locales';
 import { getValue } from "firebase/remote-config";
+<<<<<<< HEAD
+=======
+import { createSmartPadelBooking, getSmartPadelApiKey } from '@/functions/smartpadel';
+>>>>>>> bb43e94 (add dialog delete booking)
 //import { SecretManagerServiceClient } from '@google-cloud/secret-manager';
 
 
@@ -82,6 +86,8 @@ export default function CalendarComponent({ remoteConfig }) {
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [showDialogBooking, setShowDialogBooking] = useState(false);
   const [showDialogReset, setShowDialogReset] = useState(false);
+  
+  const [showDialogDelete, setShowDialogDelete] = useState(false);
 
   const [showDialogDelete, setShowDialogDelete] = useState(false);
 
@@ -175,7 +181,20 @@ export default function CalendarComponent({ remoteConfig }) {
       async function start() {
         await initSites(club.uid);
         await initCourts(club.uid, selectedSite);
+<<<<<<< HEAD
         const resp = await createSmartPadelBooking(club.uid, "1z75sPYrBFrAFrkAZH5K", club.qr_code_provider);
+=======
+        const courtData = await getFirestoreSubData(club.uid, "CLUBS", "1z75sPYrBFrAFrkAZH5K", "COURTS");
+        const bookingData = {
+          uid: "DAN_TEEEST",
+          access_code: "1220",
+          match_start_date: new Date(2024, 11, 31, 15),
+          match_finished_date: new Date(2024, 11, 31, 20, 30)
+        };
+        //const resp = await createSmartPadelBooking(club, courtData, bookingData);
+        //const resp = await getSmartPadelBooking(club, courtData, bookingData);
+        //const resp = await deleteSmartPadelBooking(club, courtData, bookingData);
+>>>>>>> bb43e94 (add dialog delete booking)
         //alert(resp);
       }
       start();
@@ -259,6 +278,7 @@ export default function CalendarComponent({ remoteConfig }) {
       isNotWarning={true}
       //warningMessage={""}
       isLoadingReset={isResetingDialogBooking}
+<<<<<<< HEAD
       /*
       isSuccessDeleting={isSuccessDeleting}
       isErrorDeleting={isErrorDeleting}
@@ -266,6 +286,41 @@ export default function CalendarComponent({ remoteConfig }) {
       isDeleting={isDeleting}
       showButtonsDialogDelete={!isDeleting && !isSuccessDeleting}
       deleteBooking={{
+=======
+
+      isSuccessDeleting={true}
+      isDeleting={true}
+      deleteBooking={{
+        onClick: async () => {
+          alert("delete booking");
+          //setShowDialogReset(true);
+          // Ajout de la fonction onClick ici
+        },
+      }}
+      styleDialogDelete={{
+        style: {
+          display: showDialogDelete ? 'flex' : 'none'
+        }
+      }}
+      closeDialogDelete={{
+        onClick: async () => {
+          //alert("delete booking");
+          setShowDialogDelete(false);
+          //setShowDialogReset(true);
+          // Ajout de la fonction onClick ici
+        },
+      }}
+      openDialogDelete={{
+        onClick: async () => {
+          //alert("delete booking");
+          setShowDialogDelete(true);
+          //setShowDialogReset(true);
+          // Ajout de la fonction onClick ici
+        },
+      }}
+      
+      openResetingDialog={{
+>>>>>>> bb43e94 (add dialog delete booking)
         onClick: async () => {
           setIsDeleting(true);
           setIsSuccessDeleting(false);
@@ -463,6 +518,28 @@ export default function CalendarComponent({ remoteConfig }) {
           setIsErrorDialogBooking(is_error);
           setErrorMessageDialogBooking(error_message);
           setIsEditingDialogBooking(false);
+<<<<<<< HEAD
+=======
+          console.log("ADDD hours", matchStartDate, matchEndDate);
+
+          await updateDoc(bookingRef, {
+            match_start_date:matchStartDate,
+            match_finished_date:matchEndDate,
+            first_booking_time:selectedHour,
+            last_booking_time:selectedHour + selectedDuration - 0.5,
+            day_of_year:getDayOfYear(new Date(selectedDate)),
+            description:selectedDescription,
+            edit_date:new Date(),
+            type:selectedType,
+            year:new Date(new Date(selectedDate)).getFullYear()
+          });
+          bookingSnap = await getDoc(bookingRef);
+          bookingData = getOneBookingCalendar(bookingSnap, selectedBooking.is_pending);
+          //const bookingRef = await getFirestoreSubRef(club.uid, "CLUBS", selectedBooking.uid,selectedBooking.is_pending ? "COURT_PENDING_BOOKINGS" : "COURT_BOOKINGS");
+          if (!is_error) {
+            setIsReseting(true);
+          }
+>>>>>>> bb43e94 (add dialog delete booking)
           setSelectedBooking(bookingData);
         },  // Ajout de la fonction onClick ici
       }}

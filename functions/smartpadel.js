@@ -1,4 +1,4 @@
-import { LINK_API_QR_PROVIDER, LINK_API_SMART_PADEL_CREATE_BOOKING } from "@/constants";
+import { LINK_API_QR_PROVIDER, LINK_API_SMART_PADEL_CREATE_BOOKING, LINK_API_SMART_PADEL_DELETE_BOOKING, LINK_API_SMART_PADEL_GET_BOOKING } from "@/constants";
 import axios from "axios";
 
 export const getSmartPadelApiKey = async (clubUid, courtUid, provider) => {
@@ -42,6 +42,7 @@ export const getSmartPadelCreateUrl = async (clubUid, courtUid, provider) => {
 
 export const createSmartPadelBooking = async (clubUid, courtUid, provider) => {
     try {
+<<<<<<< HEAD
         const API_KEY = await getSmartPadelApiKey(clubUid, courtUid, provider);
         const CREATE_URL = await getSmartPadelCreateUrl(clubUid, courtUid, provider);
         const bookingId = "DAAAN_TEST";
@@ -49,6 +50,9 @@ export const createSmartPadelBooking = async (clubUid, courtUid, provider) => {
         const endDate = new Date(2024, 11, 31, 22, 0);
         const accessCode = "1220";
         const smartPadelId = "1";
+=======
+        const { match_start_date, match_finished_date } = bookingData;
+>>>>>>> bb43e94 (add dialog delete booking)
 
         if (!API_KEY || !CREATE_URL) {
             throw new Error("API_KEY ou CREATE_URL est manquant");
@@ -86,10 +90,32 @@ export const createSmartPadelBooking = async (clubUid, courtUid, provider) => {
         console.log("Données à envoyer :", smart_padel_data);
 
         // Appeler l'API avec Axios
+<<<<<<< HEAD
         /*
         const response = await axios.post(
             `${CREATE_URL}${smartPadelId}/bookings`, // URL complète
             smart_padel_data, // Données JSON dans le corps
+=======
+
+        const response = await axios.post(
+            LINK_API_SMART_PADEL_CREATE_BOOKING, // URL complète
+            {
+                bookingUid: bookingData.uid,
+                clubUid: clubData.uid,
+                courtUid: courtData.uid,
+                provider: clubData.qr_code_provider,
+                startDateStr: match_start_date.toISOString(),
+                endDateStr: match_finished_date.toISOString(),
+                accessCode: bookingData.access_code,
+                smartPadelUid: courtData.smart_padel_id,
+                minBeforeDoor: courtData.min_before_door,
+                minAfterDoor: courtData.min_after_door,
+            }
+            /*
+            */
+            //smart_padel_data, // Données JSON dans le corps
+            /*
+>>>>>>> bb43e94 (add dialog delete booking)
             {
                 headers: {
                     Authorization: `Bearer ${API_KEY}`,
@@ -97,6 +123,7 @@ export const createSmartPadelBooking = async (clubUid, courtUid, provider) => {
                 },
             }
         );
+<<<<<<< HEAD
         */
         const response = await axios.post(
             '/api/proxy',
@@ -111,6 +138,10 @@ export const createSmartPadelBooking = async (clubUid, courtUid, provider) => {
                 },
             }
         );
+=======
+
+
+>>>>>>> bb43e94 (add dialog delete booking)
         console.log('Réponse de l’API :', response.data);
         const status = response.status;
 
@@ -135,5 +166,55 @@ export const createSmartPadelBooking = async (clubUid, courtUid, provider) => {
             is_error: true,
             message: error.message || "Erreur réseau",
         };
+    }
+};
+export const getSmartPadelBooking = async (clubData, courtData, bookingData) => {
+    try {
+        const response = await axios.post(
+            LINK_API_SMART_PADEL_GET_BOOKING, // URL complète
+            {
+                bookingUid: bookingData.uid,
+                clubUid: clubData.uid,
+                courtUid: courtData.uid,
+                provider: clubData.qr_code_provider,
+            }
+        );
+        console.log('Réponse de l’API :', response.data);
+        const status = response.status;
+        if (status === 200) {
+            console.log("Réservation récupérée avec succès !");
+            return "OK";
+        } else {
+            console.error("Erreur lors de la réservation :", response.data);
+            return "ERROR";
+        }
+    } catch (error) {
+        console.error("Erreur réseau ou interne :", error.message);
+        return "ERROR";
+    }
+};
+export const deleteSmartPadelBooking = async (clubData, courtData, bookingData) => {
+    try {
+        const response = await axios.post(
+            LINK_API_SMART_PADEL_DELETE_BOOKING, // URL complète
+            {
+                bookingUid: bookingData.uid,
+                clubUid: clubData.uid,
+                courtUid: courtData.uid,
+                provider: clubData.qr_code_provider,
+            }
+        );
+        console.log('Réponse de l’API :', response.data);
+        const status = response.status;
+        if (status === 200) {
+            console.log("Réservation supprimée avec succès !");
+            return "OK";
+        } else {
+            console.error("Erreur lors de la réservation :", response.data);
+            return "ERROR";
+        }
+    } catch (error) {
+        console.error("Erreur réseau ou interne :", error.message);
+        return "ERROR";
     }
 };

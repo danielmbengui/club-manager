@@ -7,6 +7,7 @@ declare function DialogDeleteBooking(props: {
   isDeleting?: Types.Visibility.VisibilityConditions;
   isSuccessDeleting?: Types.Visibility.VisibilityConditions;
   deleteBooking?: Types.Devlink.RuntimeProps;
+<<<<<<< HEAD
   close?: Types.Devlink.RuntimeProps;
   isErrorDeleting?: Types.Visibility.VisibilityConditions;
   messageError?: React.ReactNode;
@@ -20,4 +21,9 @@ declare function DialogDeleteBooking(props: {
   closeBooking?: Types.Devlink.RuntimeProps;
   continueProcess?: Types.Devlink.RuntimeProps;
   style?: Types.Devlink.RuntimeProps;
+=======
+  styleDialogDelete?: Types.Devlink.RuntimeProps;
+  close?: Types.Devlink.RuntimeProps;
+  isErrorDeleting?: Types.Visibility.VisibilityConditions;
+>>>>>>> bb43e94 (add dialog delete booking)
 }): React.JSX.Element;

@@ -27,6 +27,10 @@ export default async function handler(req, res) {
         if (!API_KEY || !GET_URL) {
             throw new Error("API_KEY ou CREATE_URL est manquant");
         }
+<<<<<<< HEAD
+=======
+        console.log("api", API_KEY, "url", GET_URL);
+>>>>>>> bb43e94 (add dialog delete booking)
         if (clubUid != "" && bookingUid != "") {
             const response = await axios.get(
                 //`https://api.smartpadel.es/api/v1/objects/${idCourt}/bookings`,
