@@ -273,7 +273,7 @@ export default function Home() {
                                     setSelectedTransaction(transactionData);
                                   }
                                   setIsLoading(false);
-                                  
+
                                 },  // Ajout de la fonction onClick ici
                                 //className: "btn-primary",  // Ajout d'une classe CSS
                                 //type: "button"
@@ -1081,16 +1081,12 @@ export default function Home() {
     async function start() {
       const queryPendingBooking = await getBookings(club, 0, 0, 0, 0, 0, true);
       const queryBooking = await getBookings(club, selectedSite, selectedCourt, day, monthParam, year, false);
-      console.log("Booking", queryBooking)
-      console.log("start funtion changeday")
       if (queryBooking && queryPendingBooking) {
-        console.log("query okay")
         const querySnapshotPendingBooking = await getDocs(queryPendingBooking);
         const querySnapshotBooking = await getDocs(queryBooking);
         const bookingPendingTotal = await getBookingListDashboard(querySnapshotPendingBooking, true, true);
         const bookingTotal = await getBookingListDashboard(querySnapshotBooking, true, false);
         setBookingList(bookingTotal.concat(bookingPendingTotal));
-        console.log("first result", bookingTotal[0])
         //const bookingsTotal = await getBookingListTotal(querySnapshotBooking);
         const result = await getTableBooking(bookingTotal.concat(bookingPendingTotal));
         setData(result);
@@ -1105,17 +1101,12 @@ export default function Home() {
     async function start() {
       const queryPendingBooking = await getBookings(club, 0, 0, 0, 0, 0, true);
       const queryBooking = await getBookings(club, selectedSite, selectedCourt, day, month, yearParam, false);
-      console.log("Booking", queryBooking)
-      console.log("start funtion changeday")
       if (queryBooking && queryPendingBooking) {
-        console.log("query okay")
         const querySnapshotPendingBooking = await getDocs(queryPendingBooking);
         const querySnapshotBooking = await getDocs(queryBooking);
         const bookingPendingTotal = await getBookingListDashboard(querySnapshotPendingBooking, true, true);
         const bookingTotal = await getBookingListDashboard(querySnapshotBooking, true, false);
         setBookingList(bookingTotal.concat(bookingPendingTotal));
-        console.log("first result", bookingTotal[0])
-        //const bookingsTotal = await getBookingListTotal(querySnapshotBooking);
         const result = await getTableBooking(bookingTotal.concat(bookingPendingTotal));
         setData(result);
       }
@@ -1137,17 +1128,12 @@ export default function Home() {
     async function start() {
       const queryPendingBooking = await getBookings(club, 0, 0, 0, 0, 0, true);
       const queryBooking = await getBookings(club, newSite, newCourt, day, month, year, false);
-      console.log("Booking", queryBooking)
-      console.log("start funtion changeday")
       if (queryBooking && queryPendingBooking) {
-        console.log("query okay")
         const querySnapshotPendingBooking = await getDocs(queryPendingBooking);
         const querySnapshotBooking = await getDocs(queryBooking);
         const bookingPendingTotal = await getBookingListDashboard(querySnapshotPendingBooking, true, true);
         const bookingTotal = await getBookingListDashboard(querySnapshotBooking, true, false);
         setBookingList(bookingTotal.concat(bookingPendingTotal));
-        console.log("first result", bookingTotal[0])
-        //const bookingsTotal = await getBookingListTotal(querySnapshotBooking);
         const result = await getTableBooking(bookingTotal.concat(bookingPendingTotal));
         setData(result);
       }
@@ -1161,17 +1147,12 @@ export default function Home() {
     async function start() {
       const queryPendingBooking = await getBookings(club, 0, 0, 0, 0, 0, true);
       const queryBooking = await getBookings(club, selectedSite, newCourt, day, month, year, false);
-      console.log("Booking", queryBooking)
-      console.log("start funtion changeday")
       if (queryBooking) {
-        console.log("query okay")
         const querySnapshotPendingBooking = await getDocs(queryPendingBooking);
         const querySnapshotBooking = await getDocs(queryBooking);
         const bookingPendingTotal = await getBookingListDashboard(querySnapshotPendingBooking, true, true);
         const bookingTotal = await getBookingListDashboard(querySnapshotBooking, true, false);
         setBookingList(bookingTotal.concat(bookingPendingTotal));
-        console.log("first result", bookingTotal[0])
-        //const bookingsTotal = await getBookingListTotal(querySnapshotBooking);
         const result = await getTableBooking(bookingTotal.concat(bookingPendingTotal));
         setData(result);
       }
@@ -1290,7 +1271,7 @@ export default function Home() {
         clientName={selectedBooking ? selectedBooking.name : ""}
         clientPhone={selectedBooking ? selectedBooking.phone : ""}
         clientEmail={selectedBooking ? selectedBooking.email : ""}
-        bookingType={selectedBooking ? getTypeBookingStr(selectedBooking.type): ""}
+        bookingType={selectedBooking ? getTypeBookingStr(selectedBooking.type) : ""}
         bookingSite={selectedBooking ? selectedBooking.site_name : ""}
         bookingCourt={selectedBooking ? selectedBooking.court_name : ""}
         bookingMatchDate={selectedBooking ? selectedBooking.match_date : ""}
@@ -1327,23 +1308,9 @@ export default function Home() {
           onClick: () => {
             const sorting = selectedSorting;
             const desc = selectedDesc;
-            //const allBookings = sortBookingList([...bookingList], sorting, desc);
-              //setBookingList(allBookings);
-              setSeletedBooking(null);
-              setSelectedTransaction(null);
-              setShowDialogBooking(false);
-
-              console.log("close dialog");
-            /*
-            const timeOut = setTimeout(() => {
-              
-            }, 1000);
-            return () => {
-              if (timeOut) {
-                clearTimeout(timeOut);
-              }
-            };
-            */
+            setSeletedBooking(null);
+            setSelectedTransaction(null);
+            setShowDialogBooking(false);
           },  // Ajout de la fonction onClick ici
           //className: "btn-primary",  // Ajout d'une classe CSS
           //type: "button"
@@ -1498,17 +1465,12 @@ export default function Home() {
             async function start() {
               const queryPendingBooking = await getBookings(club, 0, 0, 0, 0, 0, true);
               const queryBooking = await getBookings(club, selectedSite, selectedCourt, day, month, year, false);
-              // console.log("Booking", queryBooking)
-              // console.log("start funtion changeday")
               if (queryBooking && queryPendingBooking) {
-                console.log("query okay")
                 const querySnapshotPendingBooking = await getDocs(queryPendingBooking);
                 const querySnapshotBooking = await getDocs(queryBooking);
                 const pendingBookingTotal = await getBookingListDashboard(querySnapshotPendingBooking, true, true);
                 const bookingTotal = await getBookingListDashboard(querySnapshotBooking, true, false);
                 setBookingList(bookingTotal.concat(pendingBookingTotal));
-                console.log("first result", bookingTotal[0])
-                //const bookingsTotal = await getBookingListTotal(querySnapshotBooking);
                 const result = await getTableBooking(bookingTotal.concat(pendingBookingTotal));
                 setData(result);
               }

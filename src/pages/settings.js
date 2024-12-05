@@ -74,13 +74,11 @@ export default function Settings() {
   const handleLogout = async () => {
     try {
       await logout();
-      console.log("disconnect");
     } catch (error) {
       console.error('Login failed:', error);
     }
   };
   const handleChangeIsEditing = (club, limitDays, limitBeforeBooking, limitBeforeCanel, limitAtivesBooking) => {
-    //console.log("value limit days bookings", event.target.value);
     if (club.limitDaysBookings != limitDays ||
       club.limitHoursBeforeBooking != limitBeforeBooking ||
       club.limitHoursBeforeCancel != limitBeforeCanel ||
@@ -91,7 +89,6 @@ export default function Settings() {
     }
   };
   const handleChangeIsWarning = (limitBeforeBooking, limitBeforeCancel) => {
-    //console.log("value limit days bookings", event.target.value);
     var warning = false;
     var message = "";
     if (limitBeforeBooking == 0) {
@@ -107,21 +104,18 @@ export default function Settings() {
   };
 
   const handleChangeLimitDaysBookings = (event) => {
-    console.log("value limit days bookings", event.target.value)
     setLimitDaysBookings(event.target.value);
     setIsSucess(false);
     handleChangeIsEditing(club, event.target.value, limitHoursBeforeBooking, limitHoursBeforeCancel, limitActivesBookings);
     handleChangeIsWarning(limitHoursBeforeBooking, limitHoursBeforeCancel);
   };
   const handleChangeLimitActivesBookings = (event) => {
-    console.log("value limit days bookings", event.target.value)
     setLimitActivesBookings(event.target.value);
     setIsSucess(false);
     handleChangeIsEditing(club, limitDaysBookings, limitHoursBeforeBooking, limitHoursBeforeCancel, event.target.value);
     handleChangeIsWarning(limitHoursBeforeBooking, limitHoursBeforeCancel);
   };
   const handleChangeLimitHoursBeforeBooking_H = (event) => {
-    console.log("value limit days bookings", event.target.value);
     const hoursBefore = event.target.value;
     const limitHoursBeforeBookingParam = hoursBefore + (limitHoursBeforeBooking_M / 60);
     setLimitHoursBeforeBooking_H(hoursBefore);
@@ -129,10 +123,8 @@ export default function Settings() {
     setIsSucess(false);
     handleChangeIsEditing(club, limitDaysBookings, limitHoursBeforeBookingParam, limitHoursBeforeCancel, limitActivesBookings);
     handleChangeIsWarning(limitHoursBeforeBookingParam, limitHoursBeforeCancel);
-    console.log("New limit before booking", limitHoursBeforeBookingParam);
   };
   const handleChangeLimitHoursBeforeBooking_M = (event) => {
-    console.log("value limit days bookings", event.target.value)
     const minutesBefore = event.target.value;
     const limitHoursBeforeBookingParam = limitHoursBeforeBooking_H + (minutesBefore / 60);
     setLimitHoursBeforeBooking_M(minutesBefore);
@@ -140,11 +132,9 @@ export default function Settings() {
     setIsSucess(false);
     handleChangeIsEditing(club, limitDaysBookings, limitHoursBeforeBookingParam, limitHoursBeforeCancel, limitActivesBookings);
     handleChangeIsWarning(limitHoursBeforeBookingParam, limitHoursBeforeCancel);
-    console.log("New limit before booking", limitHoursBeforeBookingParam);
   };
 
   const handleChangeLimitHoursBeforeCancel_D = (event) => {
-    console.log("value limit days bookings", event.target.value);
     const daysBefore = event.target.value;
     const limitHoursBeforeCancelParam = (daysBefore * 24) + limitHoursBeforeCancel_H + (limitHoursBeforeCancel_M / 60);
     setLimitHoursBeforeCancel_D(daysBefore);
@@ -152,10 +142,8 @@ export default function Settings() {
     setIsSucess(false);
     handleChangeIsEditing(club, limitDaysBookings, limitHoursBeforeBooking, limitHoursBeforeCancelParam, limitActivesBookings);
     handleChangeIsWarning(limitHoursBeforeBooking, limitHoursBeforeCancelParam);
-    console.log("New limit before booking", limitHoursBeforeCancelParam);
   };
   const handleChangeLimitHoursBeforeCancel_H = (event) => {
-    console.log("value limit days bookings", event.target.value);
     const hoursBefore = event.target.value;
     //const limitHoursBeforeCancel = hoursBefore + (limitHoursBeforeBooking_M / 60);
     const limitHoursBeforeCancelParam = (limitHoursBeforeCancel_D * 24) + hoursBefore + (limitHoursBeforeCancel_M / 60);
@@ -164,10 +152,8 @@ export default function Settings() {
     setIsSucess(false);
     handleChangeIsEditing(club, limitDaysBookings, limitHoursBeforeBooking, limitHoursBeforeCancelParam, limitActivesBookings);
     handleChangeIsWarning(limitHoursBeforeBooking, limitHoursBeforeCancelParam);
-    console.log("New limit before booking", limitHoursBeforeCancel);
   };
   const handleChangeLimitHoursBeforeCancel_M = (event) => {
-    console.log("value limit days bookings", event.target.value)
     const minutesBefore = event.target.value;
     // const limitHoursBeforeCancel = limitHoursBeforeBooking_H + (minutesBefore / 60);
     const limitHoursBeforeCancelParam = (limitHoursBeforeCancel_D * 24) + limitHoursBeforeCancel_H + (minutesBefore / 60);
@@ -176,7 +162,6 @@ export default function Settings() {
     setIsSucess(false);
     handleChangeIsEditing(club, limitDaysBookings, limitHoursBeforeBooking, limitHoursBeforeCancelParam, limitActivesBookings);
     handleChangeIsWarning(limitHoursBeforeBooking, limitHoursBeforeCancelParam);
-    console.log("New limit before booking", limitHoursBeforeCancel);
   };
   useEffect(() => {
     if (club) {
