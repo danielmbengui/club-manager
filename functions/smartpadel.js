@@ -43,6 +43,7 @@ export const getSmartPadelCreateUrl = async (clubUid, courtUid, provider) => {
 export const createSmartPadelBooking = async (clubUid, courtUid, provider) => {
     try {
 <<<<<<< HEAD
+<<<<<<< HEAD
         const API_KEY = await getSmartPadelApiKey(clubUid, courtUid, provider);
         const CREATE_URL = await getSmartPadelCreateUrl(clubUid, courtUid, provider);
         const bookingId = "DAAAN_TEST";
@@ -97,6 +98,9 @@ export const createSmartPadelBooking = async (clubUid, courtUid, provider) => {
             smart_padel_data, // Données JSON dans le corps
 =======
 
+=======
+        const { match_start_date_D, match_finished_date_D } = bookingData;
+>>>>>>> 1bc3946 (last version to be sure)
         const response = await axios.post(
             LINK_API_SMART_PADEL_CREATE_BOOKING, // URL complète
             {
@@ -104,8 +108,8 @@ export const createSmartPadelBooking = async (clubUid, courtUid, provider) => {
                 clubUid: clubData.uid,
                 courtUid: courtData.uid,
                 provider: clubData.qr_code_provider,
-                startDateStr: match_start_date.toISOString(),
-                endDateStr: match_finished_date.toISOString(),
+                startDateStr: match_start_date_D.toISOString(),
+                endDateStr: match_finished_date_D.toISOString(),
                 accessCode: bookingData.access_code,
                 smartPadelUid: courtData.smart_padel_id,
                 minBeforeDoor: courtData.min_before_door,
@@ -123,6 +127,7 @@ export const createSmartPadelBooking = async (clubUid, courtUid, provider) => {
                 },
             }
         );
+<<<<<<< HEAD
 <<<<<<< HEAD
         */
         const response = await axios.post(
@@ -143,9 +148,11 @@ export const createSmartPadelBooking = async (clubUid, courtUid, provider) => {
 
 >>>>>>> bb43e94 (add dialog delete booking)
         console.log('Réponse de l’API :', response.data);
+=======
+>>>>>>> 1bc3946 (last version to be sure)
         const status = response.status;
-
         if (status === 200) {
+<<<<<<< HEAD
             console.log("Réservation créée avec succès !");
             return {
                 external_id: bookingId,
@@ -166,6 +173,23 @@ export const createSmartPadelBooking = async (clubUid, courtUid, provider) => {
             is_error: true,
             message: error.message || "Erreur réseau",
         };
+=======
+            return {
+                is_error: false,
+                message: "Réservation crée avec succès !"
+            };
+        } else {
+            return {
+                is_error: true,
+                message: "Le booking n'a pas été crée chez Smart Padel !"
+            };
+        }
+    } catch (error) {
+        return {
+            is_error: true,
+            message: "Erreur réseau ou interne ! Veuillez réssayer plus tard !"
+        };;
+>>>>>>> 1bc3946 (last version to be sure)
     }
 };
 export const getSmartPadelBooking = async (clubData, courtData, bookingData) => {
@@ -179,17 +203,13 @@ export const getSmartPadelBooking = async (clubData, courtData, bookingData) => 
                 provider: clubData.qr_code_provider,
             }
         );
-        console.log('Réponse de l’API :', response.data);
         const status = response.status;
         if (status === 200) {
-            console.log("Réservation récupérée avec succès !");
             return "OK";
         } else {
-            console.error("Erreur lors de la réservation :", response.data);
             return "ERROR";
         }
     } catch (error) {
-        console.error("Erreur réseau ou interne :", error.message);
         return "ERROR";
     }
 };
@@ -204,17 +224,23 @@ export const deleteSmartPadelBooking = async (clubData, courtData, bookingData) 
                 provider: clubData.qr_code_provider,
             }
         );
-        console.log('Réponse de l’API :', response.data);
         const status = response.status;
         if (status === 200) {
-            console.log("Réservation supprimée avec succès !");
-            return "OK";
+            return {
+                is_error: false,
+                message: "Réservation supprimée avec succès !"
+            };
         } else {
-            console.error("Erreur lors de la réservation :", response.data);
-            return "ERROR";
+            return {
+                is_error: true,
+                message: "Ce booking n'existe pas chez Smart Padel !"
+            };
         }
     } catch (error) {
         console.error("Erreur réseau ou interne :", error.message);
-        return "ERROR";
+        return {
+            is_error: true,
+            message: "Erreur réseau ou interne ! Veuillez réssayer plus tard !"
+        };;
     }
 };

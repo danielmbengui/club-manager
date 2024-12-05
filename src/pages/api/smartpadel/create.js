@@ -29,7 +29,6 @@ export default async function handler(req, res) {
         if (!API_KEY || !CREATE_URL) {
             throw new Error("API_KEY ou CREATE_URL est manquant");
         }
-        console.log(API_KEY, "url", CREATE_URL);
         const smart_padel_data = {
             time: {
                 from: startDate.toISOString(),

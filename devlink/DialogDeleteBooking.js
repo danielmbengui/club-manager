@@ -20,6 +20,7 @@ export function DialogDeleteBooking({
   isSuccessDeleting = true,
   deleteBooking,
 <<<<<<< HEAD
+<<<<<<< HEAD
   close = {},
   isErrorDeleting = true,
   messageError = "Une erreur est survenue !",
@@ -38,6 +39,21 @@ export function DialogDeleteBooking({
   close = {},
   isErrorDeleting = true,
 >>>>>>> bb43e94 (add dialog delete booking)
+=======
+  close = {},
+  isErrorDeleting = true,
+  messageError = "Une erreur est survenue !",
+  showButtons = true,
+  messageWarning = "Attention une fois supprimée, la réservation ne peut plus être récupérée !",
+  messageSuccess = "Réservation supprimée avec succès !",
+  messageWait = "Patientez svp",
+  textRemove = "Supprimer",
+  textCancel = "Annuler",
+  textContinue = "Continuer",
+  closeBooking = {},
+  continueProcess,
+  style = {},
+>>>>>>> 1bc3946 (last version to be sure)
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -46,10 +62,14 @@ export function DialogDeleteBooking({
       className="booking_delete_modal_component devlink delete"
       tag="div"
 <<<<<<< HEAD
+<<<<<<< HEAD
       {...style}
 =======
       {...styleDialogDelete}
 >>>>>>> bb43e94 (add dialog delete booking)
+=======
+      {...style}
+>>>>>>> 1bc3946 (last version to be sure)
     >
       <_Builtin.Block className="booking_delete_content-wrapper" tag="div">
         <_Builtin.Block
@@ -68,12 +88,16 @@ export function DialogDeleteBooking({
             />
             <_Builtin.Block className="modal_header_title" tag="div">
 <<<<<<< HEAD
+<<<<<<< HEAD
               {messageWarning}
 =======
               {
                 "Attention une fois supprimée, la réservation ne peut plus être récupérée !"
               }
 >>>>>>> bb43e94 (add dialog delete booking)
+=======
+              {messageWarning}
+>>>>>>> 1bc3946 (last version to be sure)
             </_Builtin.Block>
             {isSuccessDeleting ? (
               <_Builtin.Block
@@ -88,10 +112,14 @@ export function DialogDeleteBooking({
                 />
                 <_Builtin.Block className="success-message_title" tag="div">
 <<<<<<< HEAD
+<<<<<<< HEAD
                   {messageSuccess}
 =======
                   {"la réservation a bien été supprimée ! "}
 >>>>>>> bb43e94 (add dialog delete booking)
+=======
+                  {messageSuccess}
+>>>>>>> 1bc3946 (last version to be sure)
                 </_Builtin.Block>
               </_Builtin.Block>
             ) : null}
@@ -108,10 +136,14 @@ export function DialogDeleteBooking({
                   </_Builtin.Block>
                 </_Builtin.Block>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <_Builtin.Block tag="div">{messageWait}</_Builtin.Block>
 =======
                 <_Builtin.Block tag="div">{"patientez svp"}</_Builtin.Block>
 >>>>>>> bb43e94 (add dialog delete booking)
+=======
+                <_Builtin.Block tag="div">{messageWait}</_Builtin.Block>
+>>>>>>> 1bc3946 (last version to be sure)
               </_Builtin.Block>
             ) : null}
             {isErrorDeleting ? (
@@ -123,10 +155,14 @@ export function DialogDeleteBooking({
               >
                 <_Builtin.Block tag="div" wized="error_message">
 <<<<<<< HEAD
+<<<<<<< HEAD
                   {messageError}
 =======
                   {"Une erreur est survenue !"}
 >>>>>>> bb43e94 (add dialog delete booking)
+=======
+                  {messageError}
+>>>>>>> 1bc3946 (last version to be sure)
                 </_Builtin.Block>
               </_Builtin.Block>
             ) : null}
@@ -151,6 +187,9 @@ export function DialogDeleteBooking({
           />
         </_Builtin.Block>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1bc3946 (last version to be sure)
         {showButtons ? (
           <_Builtin.Block
             className="button-group court_form"
@@ -178,6 +217,7 @@ export function DialogDeleteBooking({
             />
           </_Builtin.Block>
         ) : null}
+<<<<<<< HEAD
 =======
         <_Builtin.Block
           className="button-group court_form"
@@ -192,6 +232,8 @@ export function DialogDeleteBooking({
           <ButtonRed action={close} text="Annuler" />
         </_Builtin.Block>
 >>>>>>> bb43e94 (add dialog delete booking)
+=======
+>>>>>>> 1bc3946 (last version to be sure)
       </_Builtin.Block>
       <_Builtin.Block
         className="booking_delete_background-overlay devlink"
