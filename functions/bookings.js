@@ -70,6 +70,73 @@ export async function getBookingListDashboard(querySnapshotBooking, is_from_app 
             };
         });
     }
+    /*
+    for (const snap of querySnapshotBooking.docs) {
+        const booking = snap.data();
+        
+        const clubRef = doc(firestore, "CLUBS", booking.club_ref.id);
+        const bookingRef = doc((collection(clubRef, "COURT_BOOKINGS")), booking.uid);
+        if (!booking.hasOwnProperty('site_name')) {
+            console.log("no site", booking.uid)
+            const siteSnap = await getDoc(booking.site_ref);
+            if (siteSnap.exists()) {
+                const siteData = siteSnap.data();
+                await updateDoc(bookingRef, {
+                    site_name: siteData.name,          // Nouvelle valeur pour 'age
+                });
+            }
+        }
+        if (!booking.hasOwnProperty('court_name')) {
+            console.log("no court", booking.uid)
+            const courtSnap = await getDoc(booking.court_ref);
+            if (courtSnap.exists()) {
+                const courtData = courtSnap.data();
+                await updateDoc(bookingRef, {
+                    court_name: courtData.name_or_number,          // Nouvelle valeur pour 'age
+                });
+            }
+        }
+        if (booking.transaction_ref) {
+            const transactionRef = doc((collection(clubRef, "COURT_TRANSACTIONS")), booking.transaction_ref.id);
+            const transactionSnap = await getDoc(booking.transaction_ref);
+            console.log("transaction OKAY", transactionRef.id);
+            
+            if (transactionSnap.exists()) {
+                const transactionData = transactionSnap.data();
+                //const siteRef = doc(collection(clubRef, "SITES"), site);
+                if (!transactionData.hasOwnProperty('site_name')) {
+                    console.log("no site", booking.uid)
+                    const siteSnap = await getDoc(transactionData.site_ref);
+                    if (siteSnap.exists()) {
+                        const siteData = siteSnap.data();
+                        await updateDoc(transactionRef, {
+                            site_name: siteData.name,          // Nouvelle valeur pour 'age
+                        });
+                    }
+                }
+                if (!transactionData.hasOwnProperty('court_name')) {
+                    console.log("no court", booking.uid)
+                    const courtSnap = await getDoc(transactionData.court_ref);
+                    if (courtSnap.exists()) {
+                        const courtData = courtSnap.data();
+                        await updateDoc(transactionRef, {
+                            court_name: courtData.name_or_number,          // Nouvelle valeur pour 'age
+                        });
+                    }
+                }
+                if (!transactionData.hasOwnProperty('payment_provider')) {
+                    console.log("no payment_provider", booking.uid)
+                    await updateDoc(transactionRef, {
+                        payment_provider: "datatrans",          // Nouvelle valeur pour 'age
+                    });
+                }
+            } else {
+                await deleteDoc(transactionRef);
+            }
+        }
+    }
+    */
+    // console.log("second condition");
     return querySnapshotBooking.docs
         .map((bookingDoc) => {
             const { uid, user_info, transaction_ref, type, description, access_code, created_date, first_booking_time, last_booking_time, amount_paid, match_start_date, match_finished_date, club_ref, site_name, court_name, site_ref, court_ref, is_from_app: appFlag } = bookingDoc.data();
@@ -108,6 +175,7 @@ export async function getBookingListDashboard(querySnapshotBooking, is_from_app 
         .filter(Boolean); // Supprime les valeurs undefined
 }
 export async function getBookingListCalendar(querySnapshotBooking, is_pending = false) {
+    console.log("second ondition")
     return querySnapshotBooking.docs
         .map((bookingDoc) => {
             const { uid, user_info, transaction_ref, type, description, access_code, created_date, first_booking_time, last_booking_time, amount_paid, match_start_date, match_finished_date, club_ref, site_name, court_name, site_ref, court_ref, is_from_app: appFlag } = bookingDoc.data();
@@ -226,6 +294,8 @@ export async function getCountBookingsPlayPad(querySnapshotBooking) {
         if (booking.is_from_app) {
             countBoookingsPlayPad++;
         }
+        // doc.data() is never undefined for query doc snapshots
+        //console.log(doc.id, " => ", doc.data());
     });
 
     return countBoookingsPlayPad;
@@ -242,6 +312,8 @@ export async function getRateBookingsPlayPad(querySnapshotBooking) {
             countBoookingsPlayPad++;
         }
         countBoookingsTotal++;
+        // doc.data() is never undefined for query doc snapshots
+        //console.log(doc.id, " => ", doc.data());
     });
 
     return countBoookingsTotal > 0 ? countBoookingsPlayPad * 100 / countBoookingsTotal : 0;
@@ -255,6 +327,8 @@ export async function getRateBookingsClub(querySnapshotBooking) {
             countBoookingsPlayPad++;
         }
         countBoookingsTotal++;
+        // doc.data() is never undefined for query doc snapshots
+        //console.log(doc.id, " => ", doc.data());
     });
 
     return countBoookingsTotal > 0 ? countBoookingsPlayPad * 100 / countBoookingsTotal : 0;
@@ -265,10 +339,45 @@ export async function getRateHoursPlayPad(querySnapshotBooking) {
     for (const docData of querySnapshotBooking.docs) {
         const booking = docData.data();
         const addValue = booking.last_booking_time - booking.first_booking_time + 0.5;
+        /*
+        const match_start_timestamp = booking.match_start_date;
+        const match_finish_timestamp = booking.match_finished_date;
+        const clubRef = doc(firestore, "CLUBS", booking.club_ref.id);
+        if (!booking.hasOwnProperty('last_booking_time')) {
+            const bookingRef = doc(collection(clubRef, "COURT_BOOKINGS"), booking.uid);
+            console.log("no last time", booking.uid)
+            const jetlag = isSummerTime(new Date(match_finish_timestamp.seconds * 1000)) ? 2 : 1;
+            var start_date = new Date(match_finish_timestamp.seconds * 1000);
+            //const eligibleDate = addHoursToDate(new Date(), jetlag + hourCancelMatch);
+            const matchDate = addHoursToDate(start_date, jetlag);
+            const hours = start_date.getHours();
+            const minutes = start_date.getMinutes();
+            await updateDoc(bookingRef, {
+                last_booking_time: (hours + (minutes > 0 ? minutes / 60 : 0)) > 0 ? (hours + (minutes > 0 ? minutes / 60 : 0)) - 0.5 : 0,
+                //site_uid: courtData.site_uid,
+            });
+        }
+        if (!booking.hasOwnProperty('first_booking_time')) {
+            const bookingRef = doc(collection(clubRef, "COURT_BOOKINGS"), booking.uid);
+            const jetlag = isSummerTime(new Date(match_start_timestamp.seconds * 1000)) ? 2 : 1;
+            var start_date = new Date(match_start_timestamp.seconds * 1000);
+            //const eligibleDate = addHoursToDate(new Date(), jetlag + hourCancelMatch);
+            const matchDate = addHoursToDate(start_date, jetlag);
+            const hours = start_date.getHours();
+            const minutes = start_date.getMinutes();
+            console.log("no frist time", booking.uid, start_date, hours, minutes);
+            await updateDoc(bookingRef, {
+                first_booking_time: hours + (minutes > 0 ? minutes / 60 : 0),
+                //site_uid: courtData.site_uid,
+            });
+        }
+        */
         if (booking.is_from_app) {
             countBoookingsPlayPad += addValue;
         }
         countBoookingsTotal += addValue;
+        // doc.data() is never undefined for query doc snapshots
+        //console.log(doc.id, " => ", doc.data());
     }
 
     return countBoookingsTotal > 0 ? countBoookingsPlayPad * 100 / countBoookingsTotal : 0;
@@ -284,6 +393,8 @@ export async function getRateHoursClub(querySnapshotBooking) {
             countBoookingsPlayPad += addValue;
         }
         countBoookingsTotal += addValue;
+        // doc.data() is never undefined for query doc snapshots
+        //console.log(doc.id, " => ", doc.data());
     });
 
     return countBoookingsTotal > 0 ? countBoookingsPlayPad * 100 / countBoookingsTotal : 0;
@@ -298,6 +409,9 @@ export async function getCountHoursPlayPad(querySnapshotBooking) {
 
             countBoookingsHoursPlayPad += addValue;
         }
+        // countBoookingsTotal += addValue;
+        // doc.data() is never undefined for query doc snapshots
+        //console.log(doc.id, " => ", doc.data());
     });
 
     return countBoookingsHoursPlayPad;
@@ -314,7 +428,7 @@ export async function getCountHoursClub(querySnapshotBooking) {
         }
         // countBoookingsTotal += addValue;
         // doc.data() is never undefined for query doc snapshots
-        //doc.id, " => ", doc.data());
+        //console.log(doc.id, " => ", doc.data());
     });
 
     return countBoookingsHoursClub;
@@ -330,7 +444,11 @@ export async function getCountUsersPlayPad(querySnapshotBooking) {
         //const addValue = booking.last_booking_time - booking.first_booking_time + 0.5;
         if (booking.is_from_app) {
             arrayUsers.push(userInfo);
+            //countBoookingsHoursPlayPad += addValue;
         }
+        // countBoookingsTotal += addValue;
+        // doc.data() is never undefined for query doc snapshots
+        //console.log(doc.id, " => ", doc.data());
     });
     const uniqueUsers = arrayUsers.filter(
         (user, index, self) => index === self.findIndex((u) => u.email === user.email)
@@ -351,6 +469,9 @@ export async function getCountUsersClub(querySnapshotBooking) {
             arrayUsers.push(userInfo);
             //countBoookingsHoursPlayPad += addValue;
         }
+        // countBoookingsTotal += addValue;
+        // doc.data() is never undefined for query doc snapshots
+        //console.log(doc.id, " => ", doc.data());
     });
     const uniqueUsers = arrayUsers.filter(
         (user, index, self) => index === self.findIndex((u) => {
@@ -405,6 +526,8 @@ export async function isBookedTime(
     dayOfYear,
     time = 0
 ) {
+    // Calculer le début et la fin du jour
+    // console.log("start function")
     const { startOfDay, endOfDay } = getStartAndEndOfDay(year, dayOfYear);
 
     // Construire une requête pour les réservations du jour
@@ -451,9 +574,13 @@ export async function isBookedTime(
         const hourEnd = end_date.getHours();
         const minutesEnd = end_date.getMinutes();
         const bookingTimeValueEnd = hourEnd + minutesEnd / 60;
+        // console.log("WAAAAA", collectionName=="COURT_PENDING_BOOKINGS"?"pending":"confirmed" , booking.uid, start_date, time)
+        // Vérifier si le temps demandé est dans la plage
         if (booking.uid != bookingId && time >= bookingTimeValueStart && time < bookingTimeValueEnd) {
             return true;
         }
     }
+    //console.log("finish function")
+    // Pas de réservation trouvée pour l'heure donnée
     return false;
 }
