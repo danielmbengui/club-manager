@@ -7970,7 +7970,7 @@ figcaption {
 .booking_update_modal_component.devlink {
   z-index: 998;
 
-  display: none;
+  display: flex;
   width: 100%;
   height: 100%;
   flex-direction: column;

@@ -10,10 +10,14 @@ import SwitchTheme from '@/components/SwitchTheme';
 import Image from 'next/image';
 import { firestore } from '@/firebase';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { collection, deleteDoc, doc, getDoc, getDocs, loadBundle, query, updateDoc, where } from 'firebase/firestore';
 =======
 import { collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 >>>>>>> 1bc3946 (last version to be sure)
+=======
+import { collection, deleteDoc, doc, getDoc, getDocs, loadBundle, query, updateDoc, where } from 'firebase/firestore';
+>>>>>>> be214d3 (new version)
 import { formatCurrency, getFirstAndLastDayOfDay, getFirstAndLastDayOfMonth, getFirstAndLastDayOfYear, parseDoubleToHourInterval } from '@/functions';
 import { getBookingListCalendar, getOneBookingCalendar, getTypeBookingJson, getTypeBookingStr, isBookedTime } from '@/functions/bookings';
 import { useThemeMode } from '@/contexts/ThemeProvider';
@@ -33,11 +37,12 @@ import { createSmartPadelBooking, getSmartPadelApiKey } from '@/functions/smartp
 >>>>>>> bb43e94 (add dialog delete booking)
 =======
 import { createSmartPadelBooking, deleteSmartPadelBooking, getSmartPadelApiKey, getSmartPadelBooking } from '@/functions/smartpadel';
+<<<<<<< HEAD
 >>>>>>> 1bc3946 (last version to be sure)
+=======
+import DialogDelete from '@/components/calendar/DialogDelete';
+>>>>>>> be214d3 (new version)
 //import { SecretManagerServiceClient } from '@google-cloud/secret-manager';
-
-
-
 // Importation dynamique pour éviter les problèmes de SSR (Server-Side Rendering)
 const Calendar = dynamic(() => import("@/components/Calendar"), { ssr: false });
 const SITES = [];
@@ -95,11 +100,7 @@ export default function CalendarComponent({ remoteConfig }) {
   const [showDialogBooking, setShowDialogBooking] = useState(false);
   const [showDialogReset, setShowDialogReset] = useState(false);
 
-  const [showDialogDelete, setShowDialogDelete] = useState(true);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [isSuccessDeleting, setIsSuccessDeleting] = useState(false);
-  const [isErrorDeleting, setIsErrorDeleting] = useState(false);
-  const [messageErrorDeleting, setMessageErrorDeleting] = useState(false);
+  const [showDialogDelete, setShowDialogDelete] = useState(false);
 
   const [showDialogDelete, setShowDialogDelete] = useState(false);
 
@@ -258,6 +259,7 @@ export default function CalendarComponent({ remoteConfig }) {
     <title>{`${TITLE_WEB_APP} | ${TITLE_PAGE_CALENDAR}`}</title>
   </Head>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <DialogDeleteBookingCalendar
       club={club}
       booking={selectedBooking}
@@ -272,6 +274,17 @@ export default function CalendarComponent({ remoteConfig }) {
       isVisible={showDialogDelete}
       setIsVisible={setShowDialogDelete}
 >>>>>>> 1bc3946 (last version to be sure)
+=======
+    <DialogDeleteBookingCalendar
+      club={club}
+      booking={selectedBooking}
+      isVisible={showDialogDelete}
+      setIsVisible={setShowDialogDelete}
+      setShowDialogReset={setShowDialogReset}
+      setShowDialogBooking={setShowDialogBooking}
+      setSelectedBooking={setSelectedBooking}
+      setIsReseting={setIsReseting}
+>>>>>>> be214d3 (new version)
     />
     <CalendarPage
       titlePage={TITLE_PAGE_CALENDAR}
@@ -301,6 +314,7 @@ export default function CalendarComponent({ remoteConfig }) {
       //warningMessage={""}
       isLoadingReset={isResetingDialogBooking}
 <<<<<<< HEAD
+<<<<<<< HEAD
       /*
       isSuccessDeleting={isSuccessDeleting}
       isErrorDeleting={isErrorDeleting}
@@ -310,6 +324,9 @@ export default function CalendarComponent({ remoteConfig }) {
       deleteBooking={{
 =======
 
+=======
+      /*
+>>>>>>> be214d3 (new version)
       isSuccessDeleting={isSuccessDeleting}
       isErrorDeleting={isErrorDeleting}
       messageErrorDeleting={messageErrorDeleting}
@@ -353,6 +370,8 @@ export default function CalendarComponent({ remoteConfig }) {
           display: showDialogDelete ? 'flex' : 'none'
         }
       }}
+      */
+      /*
       closeDialogDelete={{
         onClick: async () => {
           //alert("delete booking");
@@ -365,8 +384,11 @@ export default function CalendarComponent({ remoteConfig }) {
           // Ajout de la fonction onClick ici
         },
       }}
+      */
+
+      
       openDialogDelete={{
-        onClick: async () => {
+        onClick: () => {
           //alert("delete booking");
           setShowDialogDelete(true);
           setShowDialogReset(false);
@@ -374,7 +396,6 @@ export default function CalendarComponent({ remoteConfig }) {
           // Ajout de la fonction onClick ici
         },
       }}
-
       openResetingDialog={{
 <<<<<<< HEAD
 >>>>>>> bb43e94 (add dialog delete booking)
@@ -460,6 +481,7 @@ export default function CalendarComponent({ remoteConfig }) {
           //alert("RESET");
           await resetBooking();
 <<<<<<< HEAD
+<<<<<<< HEAD
         },
       }}
       closeAllDialogs={{
@@ -476,6 +498,9 @@ export default function CalendarComponent({ remoteConfig }) {
         //className: "btn-primary",  // Ajout d'une classe CSS
         //type: "button"
 >>>>>>> 1bc3946 (last version to be sure)
+=======
+        },
+>>>>>>> be214d3 (new version)
       }}
       closeAllDialogs={{
         onClick: () => {
@@ -487,7 +512,6 @@ export default function CalendarComponent({ remoteConfig }) {
           setIsReseting(false);
         }
       }}
-
       updateBooking={{
         onClick: async () => {
           /*
