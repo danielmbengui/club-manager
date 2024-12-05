@@ -48,8 +48,6 @@ export default function App({ Component, pageProps }) {
     }
     fetchAndActivate(remoteConfig)
       .then(() => {
-        //const val = getValue(remoteConfig, "urlGetKeys");
-        //console.log("Valeur récupérée :", val.asString());
         setRemoteConfig(remoteConfig);
       })
       .catch((error) => {

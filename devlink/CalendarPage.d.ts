@@ -86,4 +86,7 @@ declare function CalendarPage(props: {
   closeDialogDelete?: Types.Devlink.RuntimeProps;
   openDialogDelete?: Types.Devlink.RuntimeProps;
   isErrorDeleting?: Types.Visibility.VisibilityConditions;
+  messageErrorDeleting?: React.ReactNode;
+  showButtonsDialogDelete?: Types.Visibility.VisibilityConditions;
+  closeAllDialogs?: Types.Devlink.RuntimeProps;
 }): React.JSX.Element;

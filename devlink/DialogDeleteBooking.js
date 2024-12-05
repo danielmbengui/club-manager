@@ -15,9 +15,19 @@ export function DialogDeleteBooking({
   isDeleting = true,
   isSuccessDeleting = true,
   deleteBooking,
-  styleDialogDelete = {},
   close = {},
   isErrorDeleting = true,
+  messageError = "Une erreur est survenue !",
+  showButtons = true,
+  messageWarning = "Attention une fois supprimée, la réservation ne peut plus être récupérée !",
+  messageSuccess = "Réservation supprimée avec succès !",
+  messageWait = "Patientez svp",
+  textRemove = "Supprimer",
+  textCancel = "Annuler",
+  textContinue = "Continuer",
+  closeBooking = {},
+  continueProcess,
+  style = {},
 }) {
   _interactions.useInteractions(_interactionsData);
 
@@ -25,7 +35,7 @@ export function DialogDeleteBooking({
     <_Component
       className="booking_delete_modal_component devlink delete"
       tag="div"
-      {...styleDialogDelete}
+      {...style}
     >
       <_Builtin.Block className="booking_delete_content-wrapper" tag="div">
         <_Builtin.Block
@@ -43,9 +53,7 @@ export function DialogDeleteBooking({
               value="%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22auto%22%20height%3D%22auto%22%20x%3D%220%22%20y%3D%220%22%20viewBox%3D%220%200%2064%2064%22%20style%3D%22enable-background%3Anew%200%200%20512%20512%22%20xml%3Aspace%3D%22preserve%22%20class%3D%22%22%3E%3Cg%3E%3Cpath%20fill%3D%22%23ffc048%22%20d%3D%22M32%203.4A28.59%2028.59%200%200%200%203.4%2032%2028.59%2028.59%200%200%200%2032%2060.6%2028.59%2028.59%200%200%200%2060.6%2032%2028.59%2028.59%200%200%200%2032%203.4zm0%2049.2a4.32%204.32%200%201%201%204.31-4.31A4.32%204.32%200%200%201%2032%2052.6zM37.23%2017%2035.6%2039a.6.6%200%200%201-.6.56h-6a.6.6%200%200%201-.6-.56l-1.63-22a5.24%205.24%200%201%201%2010.46%200z%22%20data-name%3D%22Layer%2035%22%20opacity%3D%221%22%20data-original%3D%22%23ffc048%22%20class%3D%22%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"
             />
             <_Builtin.Block className="modal_header_title" tag="div">
-              {
-                "Attention une fois supprimée, la réservation ne peut plus être récupérée !"
-              }
+              {messageWarning}
             </_Builtin.Block>
             {isSuccessDeleting ? (
               <_Builtin.Block
@@ -59,7 +67,7 @@ export function DialogDeleteBooking({
                   value="%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22auto%22%20height%3D%22auto%22%20x%3D%220%22%20y%3D%220%22%20viewBox%3D%220%200%20408.576%20408.576%22%20style%3D%22enable-background%3Anew%200%200%20512%20512%22%20xml%3Aspace%3D%22preserve%22%20class%3D%22%22%3E%3Cg%3E%3Cpath%20d%3D%22M204.288%200C91.648%200%200%2091.648%200%20204.288s91.648%20204.288%20204.288%20204.288%20204.288-91.648%20204.288-204.288S316.928%200%20204.288%200zm114.176%20150.528-130.56%20129.536c-7.68%207.68-19.968%208.192-28.16.512L90.624%20217.6c-8.192-7.68-8.704-20.48-1.536-28.672%207.68-8.192%2020.48-8.704%2028.672-1.024l54.784%2050.176L289.28%20121.344c8.192-8.192%2020.992-8.192%2029.184%200s8.192%2020.992%200%2029.184z%22%20fill%3D%22currentColor%22%20opacity%3D%221%22%20data-original%3D%22%23000000%22%20class%3D%22%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"
                 />
                 <_Builtin.Block className="success-message_title" tag="div">
-                  {"la réservation a bien été supprimée ! "}
+                  {messageSuccess}
                 </_Builtin.Block>
               </_Builtin.Block>
             ) : null}
@@ -75,7 +83,7 @@ export function DialogDeleteBooking({
                     {componentProgress}
                   </_Builtin.Block>
                 </_Builtin.Block>
-                <_Builtin.Block tag="div">{"patientez svp"}</_Builtin.Block>
+                <_Builtin.Block tag="div">{messageWait}</_Builtin.Block>
               </_Builtin.Block>
             ) : null}
             {isErrorDeleting ? (
@@ -86,7 +94,7 @@ export function DialogDeleteBooking({
                 wized-cloak=""
               >
                 <_Builtin.Block tag="div" wized="error_message">
-                  {"Une erreur est survenue !"}
+                  {messageError}
                 </_Builtin.Block>
               </_Builtin.Block>
             ) : null}
@@ -110,18 +118,33 @@ export function DialogDeleteBooking({
             src="https://cdn.prod.website-files.com/64ad6274d8c64f92f123999e/65e59514710bba7047bd50df_icon_close-modal.svg"
           />
         </_Builtin.Block>
-        <_Builtin.Block
-          className="button-group court_form"
-          id="w-node-_6db60f1d-1c7b-db5d-af58-a6db923d26d0-69c11cab"
-          tag="div"
-        >
-          <ButtonPrimary
-            action={deleteBooking}
-            text="Supprimer"
-            isNotWarning={true}
-          />
-          <ButtonRed action={close} text="Annuler" />
-        </_Builtin.Block>
+        {showButtons ? (
+          <_Builtin.Block
+            className="button-group court_form"
+            id="w-node-_6db60f1d-1c7b-db5d-af58-a6db923d26d0-69c11cab"
+            tag="div"
+          >
+            <ButtonPrimary
+              action={deleteBooking}
+              text={textRemove}
+              isNotWarning={true}
+            />
+            <ButtonRed action={close} text={textCancel} />
+          </_Builtin.Block>
+        ) : null}
+        {isSuccessDeleting ? (
+          <_Builtin.Block
+            className="button-group court_form"
+            id="w-node-a31373cf-536b-de8a-3969-c7e5b8865e82-69c11cab"
+            tag="div"
+          >
+            <ButtonPrimary
+              action={continueProcess}
+              text={textContinue}
+              isNotWarning={true}
+            />
+          </_Builtin.Block>
+        ) : null}
       </_Builtin.Block>
       <_Builtin.Block
         className="booking_delete_background-overlay devlink"

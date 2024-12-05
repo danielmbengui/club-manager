@@ -21,7 +21,6 @@ export function AuthProvider({ children }) {
                 setUser({ connected: false, is_connecting: true, is_team_member: false, is_error: false });
                 const q1 = query(collection(firestore, COLLECTION_USERS_CLUB), where("email", "==", firebaseUser.email));
                 const getUser = onSnapshot(q1, (querySnapshot) => {
-                    //console.log("Current cities in CA: ", cities.join(", "));
                     if (querySnapshot.size > 0) {
                         let updatedUser = querySnapshot.docs[0].data();
                         updatedUser = {
@@ -34,7 +33,6 @@ export function AuthProvider({ children }) {
                         setUser(updatedUser);
                         if (updatedUser && updatedUser.club_ref && updatedUser.club_ref.id) {
                             const getClub = onSnapshot(doc(firestore, COLLECTION_CLUBS, updatedUser.club_ref.id), (doc) => {
-                                console.log("Current data: ", doc.data());
                                 setClub(doc.data());
                             });
                             return () => getClub();
@@ -65,68 +63,6 @@ export function AuthProvider({ children }) {
     }, [auth]);
     const firebaseUser = auth.currentUser;
     useEffect(() => {
-        /*
-        const userStorage = localStorage.getItem('user');
-        if (userStorage) {
-            localStorage.setItem('user', JSON.stringify(user));
-            setUser(userStorage);
-        } else {
-            var user = { connected: false, is_connecting: true, is_team_member: false, is_error: false };
-            setUser(user);
-            if (firebaseUser) {
-                console.log("email", firebaseUser.email);
-                const q1 = query(collection(firestore, COLLECTION_USERS_CLUB), where("email", "==", firebaseUser.email));
-                onSnapshot(q1, (querySnapshot) => {
-
-                    //console.log("Current cities in CA: ", cities.join(", "));
-                    if (querySnapshot.size > 0) {
-                        user = querySnapshot.docs[0].data();
-                        querySnapshot.docChanges().forEach((change) => {
-                            if (change.type === "added" || change.type === "modified") {
-                                console.log("Update city: ", change.doc.data());
-                                user = change.doc.data();
-                                user.connected = true;
-                                user.is_team_member = true;
-                                user.is_connecting = false;
-                                user.is_error = false;
-                            }
-                            if (change.type === "removed") {
-                                console.log("Removed city: ", change.doc.data());
-                                user = { connected: false, is_connecting: false, is_team_member: false, is_error: false };
-                            }
-                        });
-
-                        setUser(user);
-
-                        if (user && user.club_ref && user.club_ref.id) {
-                            const getClub = onSnapshot(doc(firestore, COLLECTION_CLUBS, user.club_ref.id), (doc) => {
-                                console.log("Current data: ", doc.data());
-                                setClub(doc.data());
-                            });
-                            return () => getClub();
-                        }
-                        //localStorage.setItem('user', JSON.stringify(user));
-                    } else {
-                        user.connected = false;
-                        user.is_team_member = false;
-                        user.is_connecting = false;
-                        setUser(user);
-                        setClub(null);
-                        //user.connected && !user.is_team_member
-                    }
-                });
-            } else {
-                user.connected = false;
-                user.is_team_member = false;
-                user.is_connecting = false;
-                user.is_error = false;
-                setUser(user);
-                setClub(null);
-                //localStorage.removeItem('user');
-                console.log("NO USER");
-            }
-        }
-        */
     }, [firebaseUser]);
 
     const login = async (event, email, password) => {
@@ -144,37 +80,7 @@ export function AuthProvider({ children }) {
         await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
             // Signed in 
             user = userCredential.user;
-            console.log("USER OK", user);
-            console.log("email", userCredential.user.email);
-            /*
-            const q1 = query(collection(firestore, COLLECTION_USERS_CLUB), where("email", "==", userCredential.user.email));
-            const getUser = onSnapshot(q1, (querySnapshot) => {
-                //console.log("Current cities in CA: ", cities.join(", "));
-                if (querySnapshot.size > 0) {
-                    let updatedUser = querySnapshot.docs[0].data();
-                    updatedUser = {
-                        ...updatedUser,
-                        connected: true,
-                        is_team_member: true,
-                        is_connecting: false,
-                        is_error: false
-                    };
-                    setUser(updatedUser);
-                    if (updatedUser && updatedUser.club_ref && updatedUser.club_ref.id) {
-                        const getClub = onSnapshot(doc(firestore, COLLECTION_CLUBS, updatedUser.club_ref.id), (doc) => {
-                            console.log("Current data: ", doc.data());
-                            setClub(doc.data());
-                        });
-                        return () => getClub();
-                    }
-                } else {
-                    setUser({ connected: false, is_connecting: false, is_team_member: false, is_error: true });
-                    setClub(null);
-                }
-            });
-            return () => getUser();
-            */
-            // ...
+
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
@@ -183,21 +89,8 @@ export function AuthProvider({ children }) {
             user.is_team_member = false;
             user.is_connecting = false;
             user.is_error = true;
-            //setUser(user);
             setUser({ connected: false, is_connecting: false, is_team_member: false, is_error: true });
             setClub(null);
-            /*
-            setUser((prevUser) => ({
-                ...prevUser,
-                connected: false,
-                is_team_member: false,
-                is_connecting: false,
-                is_error: true,
-                // autres données
-            }));
-            */
-            //setClub(null);
-            console.log("USER NOT OK", user);
         });
     };
 

@@ -7,12 +7,15 @@ const _interactionsData = JSON.parse(
   '{"events":{"e-58":{"id":"e-58","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-18","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-59"}},"mediaQueries":["main","medium","small","tiny"],"target":{"id":"f5042c24-a29c-1363-af4c-8423d7c4b44b","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"f5042c24-a29c-1363-af4c-8423d7c4b44b","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1644221544943},"e-60":{"id":"e-60","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-18","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-61"}},"mediaQueries":["main","medium","small","tiny"],"target":{"id":"f5042c24-a29c-1363-af4c-8423d7c4b455","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"f5042c24-a29c-1363-af4c-8423d7c4b455","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1644221544943},"e-112":{"id":"e-112","name":"","animationType":"custom","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-18","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-113"}},"mediaQueries":["main","medium","small","tiny"],"target":{"id":"f5042c24-a29c-1363-af4c-8423d7c4b444","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"f5042c24-a29c-1363-af4c-8423d7c4b444","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1710102737489},"e-128":{"id":"e-128","name":"","animationType":"custom","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-17","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-129"}},"mediaQueries":["main","medium","small","tiny"],"target":{"id":"65edcb06e424209e95092c7e|8e94016a-c7d4-0780-f5b2-294124c1a9f3","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"65edcb06e424209e95092c7e|8e94016a-c7d4-0780-f5b2-294124c1a9f3","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1710344043187},"e-132":{"id":"e-132","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-18","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-133"}},"mediaQueries":["main","medium","small","tiny"],"target":{"id":"65edcb06e424209e95092c7e|7fda47d0-f4cf-6282-d4cf-e47070fcbbc0","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"65edcb06e424209e95092c7e|7fda47d0-f4cf-6282-d4cf-e47070fcbbc0","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1715129144660},"e-202":{"id":"e-202","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-17","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-203"}},"mediaQueries":["main","medium","small","tiny"],"target":{"id":"65edcb06e424209e95092c82|a148da71-d234-a09b-9c07-ecab537a0512","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"65edcb06e424209e95092c82|a148da71-d234-a09b-9c07-ecab537a0512","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1722643423399},"e-262":{"id":"e-262","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-17","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-309"}},"mediaQueries":["main","medium","small","tiny"],"target":{"id":"3bf6ef48-906c-6954-3b84-47cb5cf21b17","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"3bf6ef48-906c-6954-3b84-47cb5cf21b17","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1727734053325},"e-278":{"id":"e-278","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-17","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-279"}},"mediaQueries":["main","medium","small","tiny"],"target":{"id":"cd5dc5ca-f5d4-aeec-6107-f3c88afbc692","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[{"id":"cd5dc5ca-f5d4-aeec-6107-f3c88afbc692","appliesTo":"ELEMENT","styleBlockIds":[]}],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1727736126886},"e-358":{"id":"e-358","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-54","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-359"}},"mediaQueries":["main","medium","small","tiny"],"target":{"id":"2dea28b3-cd22-fc47-2d9a-910ec89f8141","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1733356899744},"e-360":{"id":"e-360","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-54","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-361"}},"mediaQueries":["main","medium","small","tiny"],"target":{"id":"2dea28b3-cd22-fc47-2d9a-910ec89f8143","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1733356899744},"e-362":{"id":"e-362","name":"","animationType":"preset","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-54","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-363"}},"mediaQueries":["main","medium","small","tiny"],"target":{"id":"2dea28b3-cd22-fc47-2d9a-910ec89f813a","appliesTo":"ELEMENT","styleBlockIds":[]},"targets":[],"config":{"loop":false,"playInReverse":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1733356899744}},"actionLists":{"a-18":{"id":"a-18","title":"Booking Add Modal [Close]","actionItemGroups":[{"actionItems":[{"id":"a-18-n","actionTypeId":"TRANSFORM_MOVE","config":{"delay":0,"easing":"outQuad","duration":500,"target":{"selector":".booking_add_modal_content-wrapper","selectorGuids":["1c7b8a9c-e3ea-e17e-b62b-25f5683bd7d5"]},"xValue":100,"xUnit":"%","yUnit":"PX","zUnit":"PX"}},{"id":"a-18-n-2","actionTypeId":"STYLE_OPACITY","config":{"delay":0,"easing":"ease","duration":500,"target":{"selector":".booking_add_modal_background-overlay","selectorGuids":["1c7b8a9c-e3ea-e17e-b62b-25f5683bd7d9"]},"value":0,"unit":""}}]},{"actionItems":[{"id":"a-18-n-3","actionTypeId":"GENERAL_DISPLAY","config":{"delay":0,"easing":"","duration":0,"target":{"selector":".booking_add_modal_component","selectorGuids":["1c7b8a9c-e3ea-e17e-b62b-25f5683bd7d4"]},"value":"none"}}]}],"useFirstGroupAsInitialState":false,"createdOn":1644220869174},"a-17":{"id":"a-17","title":"Booking Add Modal [Open]","actionItemGroups":[{"actionItems":[{"id":"a-17-n","actionTypeId":"GENERAL_DISPLAY","config":{"delay":0,"easing":"","duration":0,"target":{"selector":".booking_add_modal_component","selectorGuids":["1c7b8a9c-e3ea-e17e-b62b-25f5683bd7d4"]},"value":"none"}},{"id":"a-17-n-2","actionTypeId":"TRANSFORM_MOVE","config":{"delay":0,"easing":"","duration":500,"target":{"selector":".booking_add_modal_content-wrapper","selectorGuids":["1c7b8a9c-e3ea-e17e-b62b-25f5683bd7d5"]},"xValue":100,"xUnit":"%","yUnit":"PX","zUnit":"PX"}},{"id":"a-17-n-3","actionTypeId":"STYLE_OPACITY","config":{"delay":0,"easing":"","duration":500,"target":{"selector":".booking_add_modal_background-overlay","selectorGuids":["1c7b8a9c-e3ea-e17e-b62b-25f5683bd7d9"]},"value":0,"unit":""}}]},{"actionItems":[{"id":"a-17-n-4","actionTypeId":"GENERAL_DISPLAY","config":{"delay":0,"easing":"","duration":0,"target":{"selector":".booking_add_modal_component","selectorGuids":["1c7b8a9c-e3ea-e17e-b62b-25f5683bd7d4"]},"value":"flex"}},{"id":"a-17-n-5","actionTypeId":"TRANSFORM_MOVE","config":{"delay":0,"easing":"outQuad","duration":500,"target":{"selector":".booking_add_modal_content-wrapper","selectorGuids":["1c7b8a9c-e3ea-e17e-b62b-25f5683bd7d5"]},"xValue":0,"xUnit":"%","yUnit":"PX","zUnit":"PX"}},{"id":"a-17-n-6","actionTypeId":"STYLE_OPACITY","config":{"delay":0,"easing":"ease","duration":500,"target":{"selector":".booking_add_modal_background-overlay","selectorGuids":["1c7b8a9c-e3ea-e17e-b62b-25f5683bd7d9"]},"value":1,"unit":""}}]}],"useFirstGroupAsInitialState":true,"createdOn":1644220869174},"a-54":{"id":"a-54","title":"Booking Add Modal [Close] 2","actionItemGroups":[{"actionItems":[{"id":"a-54-n","actionTypeId":"TRANSFORM_MOVE","config":{"delay":0,"easing":"outQuad","duration":500,"target":{"selector":".booking_add_modal_content-wrapper","selectorGuids":["1c7b8a9c-e3ea-e17e-b62b-25f5683bd7d5"]},"xValue":100,"xUnit":"%","yUnit":"PX","zUnit":"PX"}},{"id":"a-54-n-2","actionTypeId":"STYLE_OPACITY","config":{"delay":0,"easing":"ease","duration":500,"target":{"selector":".booking_add_modal_background-overlay","selectorGuids":["1c7b8a9c-e3ea-e17e-b62b-25f5683bd7d9"]},"value":0,"unit":""}}]},{"actionItems":[{"id":"a-54-n-3","actionTypeId":"GENERAL_DISPLAY","config":{"delay":0,"easing":"","duration":0,"target":{"selector":".booking_add_modal_component","selectorGuids":["1c7b8a9c-e3ea-e17e-b62b-25f5683bd7d4"]},"value":"none"}}]}],"useFirstGroupAsInitialState":false,"createdOn":1644220869174}},"site":{"mediaQueries":[{"key":"main","min":992,"max":10000},{"key":"medium","min":768,"max":991},{"key":"small","min":480,"max":767},{"key":"tiny","min":0,"max":479}]}}'
 );
 
-export function ModalAddBooking({ as: _Component = _Builtin.Block }) {
+export function DialogCreateBooking({ as: _Component = _Builtin.Block }) {
   _interactions.useInteractions(_interactionsData);
 
   return (
-    <_Component className="booking_add_modal_component" tag="div">
-      <_Builtin.Block className="booking_add_modal_content-wrapper" tag="div">
+    <_Component className="booking_add_modal_component devlink" tag="div">
+      <_Builtin.Block
+        className="booking_add_modal_content-wrapper devlink"
+        tag="div"
+      >
         <_Builtin.FormWrapper
           className="modal_form-block"
           wized="popup_form_block"
@@ -40,12 +43,12 @@ export function ModalAddBooking({ as: _Component = _Builtin.Block }) {
             </_Builtin.Block>
             <_Builtin.Block
               className="modal_content add_booking"
-              id="w-node-cbda13e9-cdeb-6642-3df9-6a480fc51495-d7c4b409"
+              id="w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f80cf-c89f80c4"
               tag="div"
             >
               <_Builtin.Block
                 className="modal_content-left"
-                id="w-node-cf457fb5-b129-6df5-3a47-6580685cb150-d7c4b409"
+                id="w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f80d0-c89f80c4"
                 tag="div"
               >
                 <_Builtin.Block className="modal-title" tag="div">
@@ -53,12 +56,12 @@ export function ModalAddBooking({ as: _Component = _Builtin.Block }) {
                 </_Builtin.Block>
                 <_Builtin.Block
                   className="form_flex"
-                  id="w-node-b857fb49-fdc0-dca9-ac22-3a8af1f1f346-d7c4b409"
+                  id="w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f80d3-c89f80c4"
                   tag="div"
                 >
                   <_Builtin.Block
                     className="form_control"
-                    id="w-node-f5042c24-a29c-1363-af4c-8423d7c4b414-d7c4b409"
+                    id="w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f80d4-c89f80c4"
                     tag="div"
                   >
                     <_Builtin.Block className="form_flex" tag="div">
@@ -70,22 +73,22 @@ export function ModalAddBooking({ as: _Component = _Builtin.Block }) {
                       </_Builtin.Block>
                       <_Builtin.FormBlockLabel
                         className="form_field-label"
-                        htmlFor="open_hour-3"
+                        htmlFor="open_hour"
                       >
                         {"Nom ou Entreprise "}
                       </_Builtin.FormBlockLabel>
                     </_Builtin.Block>
                     <_Builtin.FormTextInput
                       className="form_input"
-                      autoFocus={false}
+                      name="add_name-2"
                       maxLength={256}
-                      name="add_name"
-                      data-name="add_name"
-                      type="text"
+                      data-name="Add Name 2"
                       disabled={false}
+                      type="text"
                       required={true}
+                      autoFocus={false}
                       wized="add_name"
-                      id="add_name"
+                      id="add_name-2"
                     />
                   </_Builtin.Block>
                   <_Builtin.Block className="form_control" tag="div">
@@ -105,21 +108,21 @@ export function ModalAddBooking({ as: _Component = _Builtin.Block }) {
                     </_Builtin.Block>
                     <_Builtin.FormTextInput
                       className="form_input"
-                      autoFocus={false}
+                      name="add_phone-2"
                       maxLength={256}
-                      name="add_phone"
-                      data-name="add_phone"
-                      type="text"
+                      data-name="Add Phone 2"
                       disabled={false}
+                      type="text"
                       required={false}
+                      autoFocus={false}
                       wized="add_phone"
-                      id="add_phone"
+                      id="add_phone-2"
                     />
                   </_Builtin.Block>
                 </_Builtin.Block>
                 <_Builtin.Block
                   className="form_control"
-                  id="w-node-_40ac5afe-4c30-8c90-f6ef-12e9b4a46873-d7c4b409"
+                  id="w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f80e2-c89f80c4"
                   tag="div"
                 >
                   <_Builtin.Block className="form_flex" tag="div">
@@ -138,15 +141,15 @@ export function ModalAddBooking({ as: _Component = _Builtin.Block }) {
                   </_Builtin.Block>
                   <_Builtin.FormTextInput
                     className="form_input"
-                    autoFocus={false}
+                    name="add_email-2"
                     maxLength={256}
-                    name="add_email"
-                    data-name="add_email"
-                    type="text"
+                    data-name="Add Email 2"
                     disabled={false}
+                    type="text"
                     required={false}
+                    autoFocus={false}
                     wized="add_email"
-                    id="add_email"
+                    id="add_email-2"
                   />
                 </_Builtin.Block>
               </_Builtin.Block>
@@ -157,7 +160,7 @@ export function ModalAddBooking({ as: _Component = _Builtin.Block }) {
                 </_Builtin.Block>
                 <_Builtin.Block
                   className="form_control"
-                  id="w-node-f5042c24-a29c-1363-af4c-8423d7c4b41b-d7c4b409"
+                  id="w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f80ed-c89f80c4"
                   tag="div"
                 >
                   <_Builtin.Block className="form_flex" tag="div">
@@ -169,7 +172,7 @@ export function ModalAddBooking({ as: _Component = _Builtin.Block }) {
                     </_Builtin.Block>
                     <_Builtin.FormBlockLabel
                       className="form_field-label"
-                      htmlFor="open_hour-3"
+                      htmlFor="open_hour"
                     >
                       {"Court"}
                     </_Builtin.FormBlockLabel>
@@ -214,12 +217,17 @@ export function ModalAddBooking({ as: _Component = _Builtin.Block }) {
                       </_Builtin.Block>
                       <_Builtin.FormBlockLabel
                         className="form_field-label"
-                        htmlFor="open_hour-3"
+                        htmlFor="open_hour"
                       >
                         {"Date"}
                       </_Builtin.FormBlockLabel>
                     </_Builtin.Block>
-                    <_Builtin.NotSupported _atom="DOM" />
+                    <_Builtin.Block
+                      className="container-update-booking devlink"
+                      tag="div"
+                    >
+                      <_Builtin.Block tag="div" />
+                    </_Builtin.Block>
                   </_Builtin.Block>
                   <_Builtin.Block className="form_control" tag="div">
                     <_Builtin.Block className="form_flex" tag="div">
@@ -231,165 +239,17 @@ export function ModalAddBooking({ as: _Component = _Builtin.Block }) {
                       </_Builtin.Block>
                       <_Builtin.FormBlockLabel
                         className="form_field-label"
-                        htmlFor="open_hour-3"
+                        htmlFor="open_hour"
                       >
                         {"Heure"}
                       </_Builtin.FormBlockLabel>
                     </_Builtin.Block>
-                    <_Builtin.FormSelect
-                      className="form_select"
-                      name="field"
-                      required={true}
-                      multiple={false}
-                      wized="add_booking_start"
-                      id="field-5"
-                      options={[
-                        {
-                          t: "heure",
-                          v: "--",
-                        },
-                        {
-                          t: "06h30",
-                          v: "6.5",
-                        },
-                        {
-                          t: "07h00",
-                          v: "7",
-                        },
-                        {
-                          t: "07h30",
-                          v: "7.5",
-                        },
-                        {
-                          t: "08h00",
-                          v: "8",
-                        },
-                        {
-                          t: "08h30",
-                          v: "8.5",
-                        },
-                        {
-                          t: "09h00",
-                          v: "9",
-                        },
-                        {
-                          t: "09h30",
-                          v: "9.5",
-                        },
-                        {
-                          t: "10h00",
-                          v: "10",
-                        },
-                        {
-                          t: "10h30",
-                          v: "10.5",
-                        },
-                        {
-                          t: "11h00",
-                          v: "11",
-                        },
-                        {
-                          t: "11h30",
-                          v: "11.5",
-                        },
-                        {
-                          t: "12h00",
-                          v: "12",
-                        },
-                        {
-                          t: "12h30",
-                          v: "12.5",
-                        },
-                        {
-                          t: "13h00",
-                          v: "13",
-                        },
-                        {
-                          t: "13h30",
-                          v: "13.5",
-                        },
-                        {
-                          t: "14h00",
-                          v: "14",
-                        },
-                        {
-                          t: "14h30",
-                          v: "14.5",
-                        },
-                        {
-                          t: "15h00",
-                          v: "15",
-                        },
-                        {
-                          t: "15h30",
-                          v: "15.5",
-                        },
-                        {
-                          t: "16h00",
-                          v: "16",
-                        },
-                        {
-                          t: "16h30",
-                          v: "16.5",
-                        },
-                        {
-                          t: "17h00",
-                          v: "17",
-                        },
-                        {
-                          t: "17h30",
-                          v: "17.5",
-                        },
-                        {
-                          t: "18h00",
-                          v: "18",
-                        },
-                        {
-                          t: "18h30",
-                          v: "18.5",
-                        },
-                        {
-                          t: "19h00",
-                          v: "19",
-                        },
-                        {
-                          t: "19h30",
-                          v: "19.5",
-                        },
-                        {
-                          t: "20h00",
-                          v: "20",
-                        },
-                        {
-                          t: "20h30",
-                          v: "20.5",
-                        },
-                        {
-                          t: "21h00",
-                          v: "21",
-                        },
-                        {
-                          t: "21h30",
-                          v: "21.5",
-                        },
-                        {
-                          t: "22h00",
-                          v: "22",
-                        },
-                        {
-                          t: "22h30",
-                          v: "22.5",
-                        },
-                        {
-                          t: "23h00",
-                          v: "23",
-                        },
-                        {
-                          t: "23h30",
-                          v: "23.5",
-                        },
-                      ]}
-                    />
+                    <_Builtin.Block
+                      className="container-update-booking devlink"
+                      tag="div"
+                    >
+                      <_Builtin.Block tag="div" />
+                    </_Builtin.Block>
                   </_Builtin.Block>
                   <_Builtin.Block className="form_control" tag="div">
                     <_Builtin.Block className="form_flex" tag="div">
@@ -406,69 +266,12 @@ export function ModalAddBooking({ as: _Component = _Builtin.Block }) {
                         {"Durée"}
                       </_Builtin.FormBlockLabel>
                     </_Builtin.Block>
-                    <_Builtin.FormSelect
-                      className="form_select"
-                      name="add_booking_start-5"
-                      data-name="Add Booking Start 5"
-                      required={true}
-                      multiple={false}
-                      wized="add_booking_end"
-                      id="add_booking_start-5"
-                      options={[
-                        {
-                          t: "temps",
-                          v: "--",
-                        },
-                        {
-                          t: "30min",
-                          v: "0.5",
-                        },
-                        {
-                          t: "1h00",
-                          v: "1",
-                        },
-                        {
-                          t: "1h30",
-                          v: "1.5",
-                        },
-                        {
-                          t: "2h",
-                          v: "2",
-                        },
-                        {
-                          t: "2h30",
-                          v: "2.5",
-                        },
-                        {
-                          t: "3h00",
-                          v: "3",
-                        },
-                        {
-                          t: "3h30",
-                          v: "3.5",
-                        },
-                        {
-                          t: "4h00",
-                          v: "4",
-                        },
-                        {
-                          t: "4h30",
-                          v: "4.5",
-                        },
-                        {
-                          t: "5h00",
-                          v: "5",
-                        },
-                        {
-                          t: "5h30",
-                          v: "5.5",
-                        },
-                        {
-                          t: "6h00",
-                          v: "6",
-                        },
-                      ]}
-                    />
+                    <_Builtin.Block
+                      className="container-update-booking devlink"
+                      tag="div"
+                    >
+                      <_Builtin.Block tag="div" />
+                    </_Builtin.Block>
                   </_Builtin.Block>
                 </_Builtin.Block>
                 <_Builtin.Block className="form_flex" tag="div">
@@ -482,39 +285,22 @@ export function ModalAddBooking({ as: _Component = _Builtin.Block }) {
                       </_Builtin.Block>
                       <_Builtin.FormBlockLabel
                         className="form_field-label"
-                        htmlFor="open_hour-2"
+                        htmlFor="open_hour"
                       >
                         {"Type évènements"}
                       </_Builtin.FormBlockLabel>
                     </_Builtin.Block>
-                    <_Builtin.FormSelect
-                      className="form_select"
-                      name="type"
-                      data-name="type"
-                      required={true}
-                      multiple={false}
-                      wized="add_type"
-                      id="type"
-                      options={[
-                        {
-                          t: "Leçons",
-                          v: "Lesson",
-                        },
-                        {
-                          t: "Entrainement",
-                          v: "Training",
-                        },
-                        {
-                          t: "Tournoi",
-                          v: "Tournament",
-                        },
-                      ]}
-                    />
+                    <_Builtin.Block
+                      className="container-update-booking devlink"
+                      tag="div"
+                    >
+                      <_Builtin.Block tag="div" />
+                    </_Builtin.Block>
                   </_Builtin.Block>
                 </_Builtin.Block>
                 <_Builtin.Block
                   className="form_flex"
-                  id="w-node-_11d0c344-5b7b-39e5-4ca2-f48b97b82eb3-d7c4b409"
+                  id="w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f8116-c89f80c4"
                   tag="div"
                 >
                   <_Builtin.Block className="form_control" tag="div">
@@ -598,21 +384,17 @@ export function ModalAddBooking({ as: _Component = _Builtin.Block }) {
                     </_Builtin.Block>
                     <_Builtin.FormBlockLabel
                       className="form_field-label"
-                      htmlFor="open_hour-3"
+                      htmlFor="open_hour"
                     >
                       {"Note Interne"}
                     </_Builtin.FormBlockLabel>
                   </_Builtin.Block>
-                  <_Builtin.FormTextarea
-                    className="form_input is-text-area"
-                    name="add_notes"
-                    maxLength={5000}
-                    data-name="add_notes"
-                    required={false}
-                    autoFocus={false}
-                    wized="add_notes"
-                    id="add_notes"
-                  />
+                  <_Builtin.Block
+                    className="container-update-booking devlink"
+                    tag="div"
+                  >
+                    <_Builtin.Block tag="div" />
+                  </_Builtin.Block>
                 </_Builtin.Block>
               </_Builtin.Block>
             </_Builtin.Block>
@@ -652,12 +434,12 @@ export function ModalAddBooking({ as: _Component = _Builtin.Block }) {
             </_Builtin.Block>
             <_Builtin.Block
               className="button-group court_form"
-              id="w-node-f5042c24-a29c-1363-af4c-8423d7c4b442-d7c4b409"
+              id="w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f8138-c89f80c4"
               tag="div"
             >
               <_Builtin.FormButton
                 className="button is-small"
-                id="w-node-f5042c24-a29c-1363-af4c-8423d7c4b443-d7c4b409"
+                id="w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f8139-c89f80c4"
                 type="submit"
                 value="Enregistrer"
                 data-wait="Please wait..."
@@ -665,8 +447,8 @@ export function ModalAddBooking({ as: _Component = _Builtin.Block }) {
               />
               <_Builtin.FormButton
                 className="button is-small is-red"
-                id="w-node-f5042c24-a29c-1363-af4c-8423d7c4b444-d7c4b409"
-                data-w-id="f5042c24-a29c-1363-af4c-8423d7c4b444"
+                id="w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f813a-c89f80c4"
+                data-w-id="2dea28b3-cd22-fc47-2d9a-910ec89f813a"
                 type="submit"
                 value="Annuler"
                 data-wait="Please wait..."
@@ -687,7 +469,7 @@ export function ModalAddBooking({ as: _Component = _Builtin.Block }) {
         </_Builtin.FormWrapper>
         <_Builtin.Link
           className="booking_add_modal_close-button"
-          data-w-id="f5042c24-a29c-1363-af4c-8423d7c4b44b"
+          data-w-id="2dea28b3-cd22-fc47-2d9a-910ec89f8141"
           button={false}
           block="inline"
           options={{
@@ -702,7 +484,7 @@ export function ModalAddBooking({ as: _Component = _Builtin.Block }) {
       </_Builtin.Block>
       <_Builtin.Block
         className="booking_add_modal_background-overlay"
-        data-w-id="f5042c24-a29c-1363-af4c-8423d7c4b455"
+        data-w-id="2dea28b3-cd22-fc47-2d9a-910ec89f8143"
         tag="div"
       />
     </_Component>

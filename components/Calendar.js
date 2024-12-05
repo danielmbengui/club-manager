@@ -22,8 +22,8 @@ const _interactionsData = JSON.parse(
 const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialogReset,setSelectedType, setSelectedDate, setSelectedDescription,clubUid, setIsLoading, siteUid = 0, courtUid = 0, setCountBookings, setCountPendingBookings, setShowDialogBooking, setAvailableHours,setSelectedHour,setSelectedBooking, setSelectedTransaction }) => {
     _interactions.useInteractions(_interactionsData);
     const calendarRef = useRef(null);
+    const today = new Date(2024,11,31);
     //const today = new Date();
-    const today = new Date();
     const [firstDay, setFirstDay] = useState(getFirstAndLastDayOfDay(today.getDate(), today.getMonth(), today.getFullYear()).firstDay);
     const [lastDay, setLastDay] = useState(getFirstAndLastDayOfDay(today.getDate(), today.getMonth(), today.getFullYear()).lastDay);
     const [week, setWeek] = useState(0);
@@ -109,7 +109,6 @@ const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialog
         }
         newCourts = newCourts.sort((a, b) => { return a.title.localeCompare(b.title) });
         setResources(newCourts);
-        console.log("courts", newCourts);
         const pendingQueryBooking = getQueryBookingStats(clubRef, site, court, firstDay, lastDay, true);
         const pendingQuerySnapshotBooking = await getDocs(pendingQueryBooking);
         const pendingCalendarBooking = await getBookingListCalendar(pendingQuerySnapshotBooking, true);
@@ -120,8 +119,6 @@ const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialog
         var countBookings = 0;
         var countPendingBookings = 0;
         for (let booking of calendarBooking.concat(pendingCalendarBooking)) {
-            //const court = snapshotCourt.data();
-            //console.log("court", booking);
             if (booking.is_pending) {
                 countPendingBookings++;
             } else {
@@ -142,7 +139,6 @@ const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialog
         setEvents(newBookings);
         setCountBookings(countBookings);
         setCountPendingBookings(countPendingBookings);
-        console.log("bookings", newBookings);
     }
     useEffect(() => {
         if (isReseting) {
@@ -150,10 +146,11 @@ const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialog
             setIsLoading(true);
             //firstDay = getFirstAndLastDayOfDay(day, month - 1, year).firstDay;
             //          lastDay = getFirstAndLastDayOfDay(day, month - 1, year).lastDay;
-            init(siteUid, courtUid, firstDay, lastDay);
+            async function start() {
+                await init(siteUid, courtUid, firstDay, lastDay);
+            }
+            start();
             const isResource = courtUid === 0;
-            console.log("isResourceView recalculé :", isResource);
-            console.log("courtUid :", courtUid, "resources.length :", resources.length);
 
             setRightToolbar(
                 isResource
@@ -162,7 +159,6 @@ const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialog
             );
             setIsResourceView(isResource);
             setInitialView(isResource ? "resourceTimeGridDay" : "timeGridDay");
-            //console.log("day change", week)
             setIsLoading(false);
             setIsReseting(false);
         }
@@ -173,8 +169,6 @@ const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialog
         //          lastDay = getFirstAndLastDayOfDay(day, month - 1, year).lastDay;
         init(siteUid, courtUid, firstDay, lastDay);
         const isResource = courtUid === 0;
-        console.log("isResourceView recalculé :", isResource);
-        console.log("courtUid :", courtUid, "resources.length :", resources.length);
 
         setRightToolbar(
             isResource
@@ -182,29 +176,20 @@ const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialog
                 : "resourceTimeGridDay,resourceTimeGridWeek,dayGridMonth,year"
         );
         setIsResourceView(isResource);
-        //setInitialView("resourceTimeGridDay");
-        //console.log("day change", week)
         setIsLoading(false);
     }, [firstDay, lastDay, day, week, month, year]);
     useEffect(() => {
         setIsLoading(true);
         init(siteUid, courtUid, firstDay, lastDay);
-        //console.log("site change", siteUid, "court change", courtUid);
         const isResource = courtUid === 0;
-        console.log("isResourceView recalculé :", isResource);
-        console.log("courtUid :", courtUid, "resources.length :", resources.length);
-
         setRightToolbar(
             isResource
                 ? "resourceTimeGridDay,resourceTimeGridWeek"
                 : "resourceTimeGridDay,resourceTimeGridWeek,dayGridMonth,year"
         );
         if (isResource) {
-            //goToDate(new Date());
             setIsResourceView(isResource);
             setInitialView("resourceTimeGridDay");
-            //simulateDatesSet("resourceTimeGridDay");
-
         }
 
         //setInitialView("resourceTimeGridDay");
@@ -216,18 +201,12 @@ const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialog
         setEvents([]);
         init(siteUid, courtUid, firstDay, lastDay);
         const isResource = courtUid === 0;
-        console.log("isResourceView recalculé :", isResource);
-        console.log("courtUid :", courtUid, "resources.length :", resources.length);
-
         setRightToolbar(
             isResource
                 ? "resourceTimeGridDay,resourceTimeGridWeek"
                 : "resourceTimeGridDay,resourceTimeGridWeek,dayGridMonth,year"
         );
         setIsResourceView(isResource);
-        //setInitialView(isResource ? "resourceTimeGridDay" : "timeGridDay");
-        //setInitialView("resourceTimeGridDay");
-        console.log("site change", siteUid);
         setIsLoading(false);
     };
 
@@ -293,39 +272,19 @@ const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialog
             //const {first_time, last_time} = getFirstAndLastHourCourt(courtData);
             //const {first_duration, last_duration} = getFirstAndLastDurationCourt(courtData);
             //
-            //console.log("AAAAAAA court", courtData.name_or_number, "shedule", first_time, last_time, first_duration, last_duration);
-            console.log("AAAAAAA court", courtData.name_or_number, "Why", getDurationsCourt(courtData));
             if(bookingData.transaction_uid != "") {
                 const transactionCollection = isPending ? "COURT_PENDING_TRANSACTIONS" : "COURT_TRANSACTIONS";
                 var transactionRef = doc((collection(clubRef, transactionCollection)), bookingData.transaction_uid);
                 var transactionSnap = await getDoc(transactionRef);
                 const transactionData = getOneTransactionCalendar(transactionSnap, isPending);
-                console.log("TRAAAAAAA", transactionData);
                 setSelectedTransaction(transactionData);
             }
             setIsLoading(false);
-            
-            //
-            //console.log("WEEEEEEEEEEESH", bookingData)
         }
-        init();
-        /*
-        alert('clik')
-        // Par exemple, afficher un message ou lancer une action personnalisée
-        
-        alert(`Vous avez cliqué sur l'événement : 
-- ID : ${id}
-- Titre : ${title}
-- Début : ${new Date(start).toLocaleString()}
-- Fin : ${new Date(end).toLocaleString()}`);
-*/
-
-            
+        init();      
     };
 
     const handleDatesSet = (info) => {
-        // Récupérez les nouvelles dates de la vue
-        console.log(info);
         var startDate = new Date(info.startStr); // Début de la période visible (format ISO)
         const endDate = removeMinutesToDate(new Date(info.endStr), 1); // Fin de la période visible (format ISO)
         const currentView = info.view.type; // Vue actuelle (ex : 'resourceTimeGridDay')
@@ -381,12 +340,6 @@ const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialog
         //setMonth(startDate.getMonth() + 1);
         //setYear(startDate.getFullYear());
         setFirstDay(firstDay);
-        setLastDay(lastDay);
-        console.log(`Nouvelle période : ${firstDay} - ${lastDay}`);
-        console.log(`Vue actuelle : ${currentView}`);
-
-        // Vous pouvez ici recharger les événements pour cette période
-        // Exemple : fetchEvents(startDate, endDate);
     };
 
     return (

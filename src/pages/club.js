@@ -64,7 +64,6 @@ export default function Club() {
   const handleLogout = async () => {
     try {
       await logout();
-      console.log("disconnect");
     } catch (error) {
       console.error('Login failed:', error);
     }
@@ -92,14 +91,11 @@ export default function Club() {
       setOpeningStandard(club.booking_opening_standard);
       setOpeningWeek(club.booking_opening_week_days);
       setOpeningSpecial(club.booking_opening_special_days);
-      console.log("WEEEEESH", club.booking_opening_standard);
-      //const clubRef = doc(firestore, court);
       setEditClubName(club.name);
       setEditClubAddress(clubAddress.fullAddress);
       setEditClubPhone(clubContact.phones[0] ?? "");
       setEditClubMail(clubContact.mails[0] ?? "");
       setEditClubWebsite(clubContact.websites[0] ?? "");
-      //setSites(getSiteList(clubRef));
     }
   }, [club]);
   useEffect(() => {
@@ -111,7 +107,6 @@ export default function Club() {
         
         setSites(list);
         setCourts(courtList);
-        console.log("ADDDDD", await getGoogleMapAddress("Rue Croix du levant 20"))
       }
       start();
     }

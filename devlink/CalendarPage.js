@@ -3,9 +3,9 @@ import React from "react";
 import * as _Builtin from "./_Builtin";
 import * as _interactions from "./interactions";
 import { GlobalStyles } from "./GlobalStyles";
+import { DialogCreateBooking } from "./DialogCreateBooking";
 import { DialogUpdateBooking } from "./DialogUpdateBooking";
 import { DialogResetBooking } from "./DialogResetBooking";
-import { DialogDeleteBooking } from "./DialogDeleteBooking";
 import { SidebarDevlink } from "./SidebarDevlink";
 import { DevLinkNavBarSwitchTheme } from "./DevLinkNavBarSwitchTheme";
 import { ButtonPrimary } from "./ButtonPrimary";
@@ -118,12 +118,16 @@ export function CalendarPage({
   closeDialogDelete = {},
   openDialogDelete = {},
   isErrorDeleting = true,
+  messageErrorDeleting = "Une erreur est survenue !",
+  showButtonsDialogDelete = true,
+  closeAllDialogs,
 }) {
   _interactions.useInteractions(_interactionsData);
 
   return (
     <_Component className="page-wrapper devlink" tag="div">
       <GlobalStyles />
+      <DialogCreateBooking />
       <DialogUpdateBooking
         editable={editable}
         close={closeDialogUpdateBooking}
@@ -183,15 +187,6 @@ export function CalendarPage({
         close={closeResetingDialog}
         isLoading={isLoadingReset}
         componentProgress={componentProgress}
-      />
-      <DialogDeleteBooking
-        isDeleting={isDeleting}
-        isSuccessDeleting={isSuccessDeleting}
-        deleteBooking={deleteBooking}
-        componentProgress={componentProgress}
-        styleDialogDelete={styleDialogDelete}
-        close={closeDialogDelete}
-        isErrorDeleting={isErrorDeleting}
       />
       <_Builtin.Block className="main-wrapper" tag="main">
         <_Builtin.Block className="page-wrapper div-block-53" tag="div">

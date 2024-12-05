@@ -7626,6 +7626,10 @@ figcaption {
   }
 }
 
+.booking_add_modal_component.devlink {
+  display: none;
+}
+
 .booking_add_modal_content-wrapper {
   position: absolute;
 
@@ -7664,6 +7668,11 @@ figcaption {
     padding-bottom: 7rem;
     padding-left: 2rem;
   }
+}
+
+.booking_add_modal_content-wrapper.devlink {
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .modal_form-block {
@@ -8114,7 +8123,7 @@ figcaption {
 }
 
 .booking_delete_modal_component.devlink.delete {
-  display: none;
+  display: flex;
 }
 
 .booking_delete_content-wrapper {
@@ -10561,4 +10570,44 @@ figcaption {
   justify-self: center;
 }
  #w-node-_6db60f1d-1c7b-db5d-af58-a6db923d26d0-69c11cab {
+}
+#w-node-a31373cf-536b-de8a-3969-c7e5b8865e82-69c11cab {
+}
+ #w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f80cf-c89f80c4 {
+  grid-row-start: span 1;
+  grid-row-end: span 1;
+  grid-column-start: span 1;
+  grid-column-end: span 1;
+}
+#w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f80d0-c89f80c4 {
+}
+#w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f80d3-c89f80c4 {
+}
+#w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f80d4-c89f80c4 {
+}
+#w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f80e2-c89f80c4 {
+  grid-row-start: span 1;
+  grid-row-end: span 1;
+  grid-column-start: span 1;
+  grid-column-end: span 1;
+}
+#w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f80ed-c89f80c4 {
+  grid-row-start: span 1;
+  grid-row-end: span 1;
+  grid-column-start: span 1;
+  grid-column-end: span 1;
+}
+#w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f8116-c89f80c4 {
+}
+#w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f8138-c89f80c4 {
+  grid-row-start: span 1;
+  grid-row-end: span 1;
+  grid-column-start: span 1;
+  grid-column-end: span 1;
+}
+#w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f8139-c89f80c4 {
+  justify-self: center;
+}
+#w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f813a-c89f80c4 {
+  justify-self: center;
 }

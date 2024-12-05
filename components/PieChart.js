@@ -12,7 +12,6 @@ const PieChart = ({ playpadRate, clubRate, clubName }) => {
   //const { theme } = useTheme();
   const { theme } = useThemeMode();
   const {primary, primaryShadowChart, text} = theme.palette;
-  console.log("THEME", theme)
   const data = {
     labels: ['PlayPad', clubName],
     datasets: [

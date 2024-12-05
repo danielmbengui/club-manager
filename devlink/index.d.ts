@@ -25,6 +25,7 @@ export * from "./ClubPage";
 export * from "./DashboardPage";
 export * from "./DevLinkNavBarSwitchTheme";
 export * from "./DevLinkProvider";
+export * from "./DialogCreateBooking";
 export * from "./DialogDeleteBooking";
 export * from "./DialogResetBooking";
 export * from "./DialogUpdateBooking";

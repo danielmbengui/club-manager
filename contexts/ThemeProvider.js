@@ -17,8 +17,6 @@ const useThemeColors = (themeMode) => {
   });
 
   useEffect(() => {
-    
-    console.log("thme", themeMode)
     const root = document.documentElement;
     document.documentElement.className = themeMode; // Applique la classe du thème
     const computedStyles = getComputedStyle(root);
@@ -43,7 +41,6 @@ export const ThemeProvider = ({ children }) => {
   const themeColors = useThemeColors(themeMode);
   useEffect(() => {
     const theme = localStorage.getItem("theme"); // Récupère la donnée du localStorage
-    console.log("thme", theme)
         if (theme) {
           setThemeMode(theme); // Met à jour l'état avec la donnée stockée
         } else {

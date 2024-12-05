@@ -14,7 +14,6 @@ export default function Dashboard() {
   const handleLogout = async () => {
     try {
       await logout();
-      console.log("disconnect");
     } catch (error) {
       console.error('Login failed:', error);
     }

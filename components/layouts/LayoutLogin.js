@@ -16,7 +16,6 @@ export default function LayoutLogin({ as: _Component = _Builtin.Block, title, co
     const [globalUser, setGlobalUser] = useState(user);
     const year = new Date().getFullYear();
     useEffect(() => {
-        //console.log("user change", user)
         setGlobalUser(user);
         setIsError(user.is_error);
     }, [user])
@@ -28,19 +27,14 @@ export default function LayoutLogin({ as: _Component = _Builtin.Block, title, co
         }
     };
     const handleChangeEmail = (event) => {
-        console.log('email changed !', event.target.value);
         setEmail(event.target.value);
     };
     const handleChangePassword = (event) => {
-        console.log('password changed !', event.target.value);
         setPassword(event.target.value);
     };
     const handleClick = async (event) => {
-        console.log('Bouton cliqué !');
         async function launch() {
             await handleLogin(event);
-            //console.log("user result", user);
-            //setIsError(user.is_error ?? false);
         }
         launch();
     };

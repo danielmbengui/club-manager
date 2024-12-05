@@ -212,12 +212,10 @@ export default function Home() {
         </thead>
         <tbody {...getTableBodyProps()} className='table_body' >
           {rows.map((row, index) => {
-            //console.log("row", row)
 
             prepareRow(row);
             const { key, ...rest } = row.getRowProps(); // Extraire `key`
             const colorBackground = row.cells[7].value == "En attente" ? 'var(--warning-devlink)' : '';
-            //const colorText = row.cells[7].value == "En attente" ? themeMode == 'light' ? 'white' : 'black' : 'var(--text-primary-devlink)';
             const colorText = row.cells[7].value == "En attente" ? 'black' : 'var(--text-primary-devlink)';
             return (
               <tr key={key} {...rest} style={{ borderCollapse: 'collapse', background: colorBackground }} className='table_row' >
@@ -264,7 +262,6 @@ export default function Home() {
                                     bookingRef = doc((collection(clubRef, "COURT_BOOKINGS")), id);
                                     bookingSnap = await getDoc(bookingRef);
                                   }
-                                  console.log("AAAAAAA", bookingSnap.exists())
                                   //const bookingData = bookingSnap.data();
                                   const bookingData = getOneBookingCalendar(bookingSnap, isPending);
                                   setSeletedBooking(bookingData);
@@ -273,11 +270,9 @@ export default function Home() {
                                     var transactionRef = doc((collection(clubRef, transactionCollection)), bookingData.transaction_uid);
                                     var transactionSnap = await getDoc(transactionRef);
                                     const transactionData = getOneTransactionCalendar(transactionSnap, isPending);
-                                    console.log("TRAAAAAAA", transactionData);
                                     setSelectedTransaction(transactionData);
                                   }
                                   setIsLoading(false);
-                                  //console.log("booking", bookingData);
                                   
                                 },  // Ajout de la fonction onClick ici
                                 //className: "btn-primary",  // Ajout d'une classe CSS
@@ -312,19 +307,9 @@ export default function Home() {
     const allBookings = sortBookingList([...bookingList], selectedSorting, selectedDesc);
     //setBookingList(allBookings);
     setBookingList(allBookings);
-    console.log("sort", selectedSorting, "desc", selectedDesc);
   }, [selectedSorting, selectedDesc]); // Recalcule uniquement si bookingList change
 
 
-  /*
-    const data = useMemo(
-      () => [
-        { client: 'John Doe', date: '2023-11-15', site: "Site 1", terrain: 'Court A', temps: '1h', prix: "CHF 60.00", statut: "En attente", actions: "Infos" },
-        { client: 'Jane Smith', date: '2023-11-16', site: "Site 2", terrain: 'Court B', temps: '2h', prix: "CHF 54.00", statut: "Confirmé", actions: "Infos" },
-      ],
-      []
-    );
-    */
   async function getTableBooking(bookingList) {
     const bookings = [];
     for (let booking of bookingList) {
@@ -332,7 +317,6 @@ export default function Home() {
       const createdDate = new Date(createdDateTimestamp.seconds * 1_000);
       const matchDateTimestamp = booking.match_date;
       const matchDate = new Date(matchDateTimestamp.seconds * 1_000);
-      //console.log("Date wesh", createdDate)
       bookings.push({
         //key: booking.uid,
         [SORT_UID]: booking.uid,
@@ -403,7 +387,6 @@ export default function Home() {
   const handleLogout = async () => {
     try {
       await logout();
-      console.log("disconnect");
     } catch (error) {
       console.error('Login failed:', error);
     }
@@ -418,7 +401,6 @@ export default function Home() {
     const querySnapshotSites = await getDocs(querySite);
     for (let snapshotSite of querySnapshotSites.docs) {
       const site = snapshotSite.data();
-      console.log("site", site.name);
       SITES.push({ value: site.uid, name: site.name });
     }
     setTitleBarChart("Par site");
@@ -433,7 +415,6 @@ export default function Home() {
     }
     setBackgroundBarChart(initBackgrounds);
     setBordersBarChart(initBorders);
-    console.log("size", querySnapshotSites.size)
   }
   async function initCourts(club, site = 0, court = 0, month = 0, year = 2024) {
     const clubRef = doc(firestore, "CLUBS", club.uid);
@@ -453,12 +434,10 @@ export default function Home() {
     var newCourts = [];
     for (let snapshotCourt of querySnapshotCourts.docs) {
       const court = snapshotCourt.data();
-      console.log("court", court.name_or_number);
       newCourts.push({ value: court.uid, name: court.name_or_number });
     }
     COURTS = newCourts.sort((a, b) => a.name.localeCompare(b.name));
     COURTS.unshift({ value: 0, name: "Tous" });
-    //COURTS = COURTS.concat(newCourts);
   }
   function initDays(month = 0, year = 0) {
     const newTab = getDaysInMonth(month, year);
@@ -915,17 +894,9 @@ export default function Home() {
     return queryTransaction;
   }
   async function getBookings(club, site = 0, court = 0, day = 0, month = 0, year = 2024, pending = false) {
-    console.log("try get bookings");
-    //const { firstDay, lastDay } = getFirstAndLastDayOfMonth(year, month - 1);
     const clubRef = doc(firestore, "CLUBS", club.uid);
-    //setSitesClub();
-    //let queryBooking;
-    //let queryBookingStats;
-    //let queryTransaction;
-
     setIsLoading(true);
     let indexLabelsLineChart = -1;
-
     if (day != 0) {
       setLabelsLineChart(Array.from({ length: 24 }, () => { indexLabelsLineChart++; return `${parseDoubleToHourChartInterval(indexLabelsLineChart)} - ${parseDoubleToHourChartInterval(indexLabelsLineChart + 1)}`; }))
     } else if (month != 0) {
@@ -981,17 +952,7 @@ export default function Home() {
         getCountBookingsClub(querySnapshotBookingStats),
         getCountBookingsPlayPad(querySnapshotBookingStats),
         getCountBookingsTotal(querySnapshotBookingStats),
-        //getBookingListDashboard(querySnapshotBooking)
-
-
-
-        //countBookingsPlayPad(club.uid, month, year),
       ]);
-    //console.log("Result", bookingsTotal)
-
-
-    // fetchData();
-
     const chartBarLabels = [];
     const chartBarValues = [];
     if (site == 0) {
@@ -1066,15 +1027,10 @@ export default function Home() {
         //setMonth(event.target.value);
         setYear(currentYear);
       }
-      //getBookings(club, selectedSite, selectedCourt, day, month, currentYear);
       async function start() {
         const queryPendingBooking = await getBookings(club, 0, 0, 0, 0, 0, true);
         const queryBooking = await getBookings(club, selectedSite, selectedCourt, day, month, year, false);
-
-        console.log("Booking", queryBooking)
-        console.log("start funtion changeday")
         if (queryBooking && queryPendingBooking) {
-          console.log("query okay")
           const querySnapshotPendingBooking = await getDocs(queryPendingBooking);
           const querySnapshotBooking = await getDocs(queryBooking);
           const pendingBookingTotal = await getBookingListDashboard(querySnapshotPendingBooking, true, true);
@@ -1082,8 +1038,6 @@ export default function Home() {
           const allBookings = bookingTotal.concat(pendingBookingTotal);
           //allBookings = allBookings.sort((a, b) => b.created_date.localeCompare(a.created_date));
           setBookingList(sortBookingList(allBookings, selectedSorting, selectedDesc));
-          console.log("first result", bookingTotal[0])
-          //const bookingsTotal = await getBookingListTotal(querySnapshotBooking);
           const result = await getTableBooking(allBookings);
           setData(result);
         }
@@ -1092,10 +1046,7 @@ export default function Home() {
     }
   }, [club]);
   const handleChangeDay = (event) => {
-    //initDays(event.target.value, currentYear);
-    //setMonth(event.target.value);
     var dayParam = event.target.value;
-    //setYear(currentYear);
     if (dayParam == 0) {
       setDisabledAllMonth(false);
     }
@@ -1103,17 +1054,12 @@ export default function Home() {
     async function start() {
       const queryPendingBooking = await getBookings(club, 0, 0, 0, 0, 0, true);
       const queryBooking = await getBookings(club, selectedSite, selectedCourt, dayParam, month, year, false);
-      // console.log("Booking", queryBooking)
-      // console.log("start funtion changeday")
       if (queryBooking && queryPendingBooking) {
-        console.log("query okay")
         const querySnapshotPendingBooking = await getDocs(queryPendingBooking);
         const querySnapshotBooking = await getDocs(queryBooking);
         const pendingBookingTotal = await getBookingListDashboard(querySnapshotPendingBooking, true, true);
         const bookingTotal = await getBookingListDashboard(querySnapshotBooking, true, false);
         setBookingList(bookingTotal.concat(pendingBookingTotal));
-        console.log("first result", bookingTotal[0])
-        //const bookingsTotal = await getBookingListTotal(querySnapshotBooking);
         const result = await getTableBooking(bookingTotal.concat(pendingBookingTotal));
         setData(result);
       }
