@@ -3,15 +3,9 @@ const LINK_API_QR_PROVIDER = `${process.env.NEXT_PUBLIC_WEBSITE_LINK}/api/keys/q
 
 export const getSmartPadelApiKey = async (clubUid, courtUid, provider) => {
     try {
-        const response = await axios.get(LINK_API_QR_PROVIDER, {
+        const response = await axios.post(LINK_API_QR_PROVIDER, {
             params: {
-                provider,
-                courtUid,
-                clubUid,
-                //provider:'smartpadel',
-                //courtUid:'1z75sPYrBFrAFrkAZH5K',
-                //clubUid:'VLSJINHIeATv4nVi7O4Y',
-
+                
             }, // Paramètres GET
         });
         return response.data.apiKey;
