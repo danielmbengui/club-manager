@@ -4,7 +4,6 @@ import Head from "next/head";
 import { TITLE_PAGE_CALENDAR, TITLE_PAGE_MANAGE, TITLE_WEB_APP } from "@/constants";
 import { useAuth } from "@/providers/AuthProvider";
 import LayoutLoading from '@/components/layouts/LayoutLoading';
-
 export default function Manage() {
   const { login, user, logout, club } = useAuth();
   const [clubName, setClubName] = useState('');
