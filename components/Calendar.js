@@ -24,10 +24,6 @@ const Calendar = ({ isReseting, setIsReseting, setSelectedDuration,setShowDialog
     const calendarRef = useRef(null);
     const today = new Date(2024,11,31);
     //const today = new Date();
-<<<<<<< HEAD
-=======
-    const today = new Date();
->>>>>>> 1bc3946 (last version to be sure)
     const [firstDay, setFirstDay] = useState(getFirstAndLastDayOfDay(today.getDate(), today.getMonth(), today.getFullYear()).firstDay);
     const [lastDay, setLastDay] = useState(getFirstAndLastDayOfDay(today.getDate(), today.getMonth(), today.getFullYear()).lastDay);
     const [week, setWeek] = useState(0);
