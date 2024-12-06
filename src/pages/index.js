@@ -273,11 +273,6 @@ export default function Home() {
                                     setSelectedTransaction(transactionData);
                                   }
                                   setIsLoading(false);
-<<<<<<< HEAD
-
-=======
-                                  
->>>>>>> 1bc3946 (last version to be sure)
                                 },  // Ajout de la fonction onClick ici
                                 //className: "btn-primary",  // Ajout d'une classe CSS
                                 //type: "button"
