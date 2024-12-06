@@ -27,10 +27,6 @@ export const getSmartPadelCreateUrl = async (clubUid, courtUid, provider) => {
                 provider,
                 courtUid,
                 clubUid,
-                //provider:'smartpadel',
-                //courtUid:'1z75sPYrBFrAFrkAZH5K',
-                //clubUid:'VLSJINHIeATv4nVi7O4Y',
-
             }, // Paramètres GET
         });
         return response.data.createUrl;
@@ -57,17 +53,6 @@ export const createSmartPadelBooking = async (clubData, courtData, bookingData) 
                 minBeforeDoor: courtData.min_before_door,
                 minAfterDoor: courtData.min_after_door,
             }
-            /*
-            */
-            //smart_padel_data, // Données JSON dans le corps
-            /*
-            {
-                headers: {
-                    Authorization: `Bearer ${API_KEY}`,
-                    "Content-Type": "application/json",
-                },
-            }
-            */
         );
         const status = response.status;
         if (status === 200) {
