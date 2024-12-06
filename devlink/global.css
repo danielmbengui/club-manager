@@ -8123,15 +8123,7 @@ figcaption {
 }
 
 .booking_delete_modal_component.devlink.delete {
-<<<<<<< HEAD
-<<<<<<< HEAD
   display: flex;
-=======
-  display: none;
->>>>>>> bb43e94 (add dialog delete booking)
-=======
-  display: flex;
->>>>>>> 1bc3946 (last version to be sure)
 }
 
 .booking_delete_content-wrapper {
@@ -10578,10 +10570,6 @@ figcaption {
   justify-self: center;
 }
  #w-node-_6db60f1d-1c7b-db5d-af58-a6db923d26d0-69c11cab {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 1bc3946 (last version to be sure)
 }
 #w-node-a31373cf-536b-de8a-3969-c7e5b8865e82-69c11cab {
 }
@@ -10622,9 +10610,4 @@ figcaption {
 }
 #w-node-_2dea28b3-cd22-fc47-2d9a-910ec89f813a-c89f80c4 {
   justify-self: center;
-<<<<<<< HEAD
-=======
->>>>>>> bb43e94 (add dialog delete booking)
-=======
->>>>>>> 1bc3946 (last version to be sure)
 }

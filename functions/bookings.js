@@ -70,7 +70,6 @@ export async function getBookingListDashboard(querySnapshotBooking, is_from_app 
             };
         });
     }
-<<<<<<< HEAD
     /*
     for (const snap of querySnapshotBooking.docs) {
         const booking = snap.data();
@@ -137,13 +136,7 @@ export async function getBookingListDashboard(querySnapshotBooking, is_from_app 
         }
     }
     */
-<<<<<<< HEAD
     console.log("second ondition")
-=======
-    // console.log("second condition");
->>>>>>> bb43e94 (add dialog delete booking)
-=======
->>>>>>> 1bc3946 (last version to be sure)
     return querySnapshotBooking.docs
         .map((bookingDoc) => {
             const { uid, user_info, transaction_ref, type, description, access_code, created_date, first_booking_time, last_booking_time, amount_paid, match_start_date, match_finished_date, club_ref, site_name, court_name, site_ref, court_ref, is_from_app: appFlag } = bookingDoc.data();

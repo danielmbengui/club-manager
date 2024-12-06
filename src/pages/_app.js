@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }) {
   return (    <ThemeProvider>
     <DevLinkProvider>
       <AuthProvider>
-        <Component remoteConfig={remoteConfig} {...pageProps} />
+        <Component {...pageProps} />
       </AuthProvider>
     </DevLinkProvider>
   </ThemeProvider>);
